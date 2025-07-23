@@ -4,6 +4,7 @@ import { UsuarioService } from '../../services/usuario/usuario.service';
 
 @Component({
   selector: 'app-login',
+  standalone: true,
   imports: [RouterModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
