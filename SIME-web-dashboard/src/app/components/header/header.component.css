@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+:host {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 32px 48px;
+    background-color: #fff;
+    max-width: 100vw;
+    margin-left: 20vw; /* Ajustado para o tamanho da sidebar */
+}
+
+#titulo-pagina {
+    color: #44A1A0;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: bold;
+    font-family: 'Instrument Sans', sans-serif;
+}
+
+.acoes {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+#icone-perfil {
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+}
+
+#icone-notificacao {
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+}
+
+.perfil {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+#titulo-perfil {
+    font-size: 1.3rem;
+}
