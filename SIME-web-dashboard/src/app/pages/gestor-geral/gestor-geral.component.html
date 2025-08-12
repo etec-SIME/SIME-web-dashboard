@@ -1,0 +1,14 @@
+<h2>Lista Chamados</h2>
+
+<ng-container *ngIf="carregado; else carregando">
+    <div *ngFor="let c of chamados" class="card">
+        <p><strong>ID:</strong> {{c.idChamado}}</p>
+        <p><strong>Data:</strong> {{c.dtAberturaChamado}}</p>
+        <p><strong>Título:</strong> {{c.tituloChamado}}</p>
+        <br>
+    </div>
+</ng-container>
+
+<ng-template #carregando>
+    <p>Carregando chamados...</p>
+</ng-template>
