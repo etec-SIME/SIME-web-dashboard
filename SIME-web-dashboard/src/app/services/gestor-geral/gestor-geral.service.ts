@@ -15,9 +15,10 @@ export class GestorGeralService {
   }
 
   definirPrioridadeChamado(rmGestor: string, idChamado: number, novaPrioridade: PrioridadeChamadoEnum): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/gestores/${rmGestor}/chamados/${idChamado}/prioridade`, {},
-      {params: {novaPrioridade}}
-    )
+    return this.http.put<void>(`${this.apiUrl}/gestores/${rmGestor}/chamados/${idChamado}/prioridade`,
+      {},
+      { params: { novaPrioridade: novaPrioridade.toString() }}
+    );
   }
 
   aceitarChamado(rmGestor: string, idChamado: number): Observable<void>{

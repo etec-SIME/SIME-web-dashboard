@@ -1,3 +1,4 @@
+import { PrioridadeChamadoEnum } from './../../models/enums/prioridade-chamado-enum';
 import { Component, OnInit } from '@angular/core';
 import { chamadoProjection } from '../../DTOs/Projections/chamadoProjection';
 import { CommonModule } from '@angular/common';
@@ -9,11 +10,19 @@ import { GestorGeralService } from '../../services/gestor-geral/gestor-geral.ser
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './gestor-geral.component.html',
-  styleUrl: './gestor-geral.component.css'
+  styleUrls: ['./gestor-geral.component.css']
 })
 export class GestorGeralComponent implements OnInit{
 
+  PrioridadeChamadoEnum = PrioridadeChamadoEnum;
+
   chamados: chamadoProjection[] = [];
+
+  prioridades: PrioridadeChamadoEnum[] = [
+    PrioridadeChamadoEnum.BaixaPrioridade,
+    PrioridadeChamadoEnum.MediaPrioridade,
+    PrioridadeChamadoEnum.AltaPrioridade
+  ];
 
   constructor(private gestorGeralService: GestorGeralService){}
 
@@ -24,6 +33,10 @@ export class GestorGeralComponent implements OnInit{
       this.chamados = resp,
       this.carregado = true;
     });
+  }
+
+  editarPrioridade(rmGestor: string, idChamado: number, novaPrioidade: PrioridadeChamadoEnum){
+    this.gestorGeralService.definirPrioridadeChamado(rmGestor, idChamado, novaPrioidade).subscribe();
   }
 
 }

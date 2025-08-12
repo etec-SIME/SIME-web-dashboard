@@ -1,11 +1,13 @@
+import { PrioridadeChamadoEnum } from "../../models/enums/prioridade-chamado-enum";
+
 export interface chamadoProjection {
-    idChamado: string;
-    prioridadeChamado: string,
-    statusChamado: string, 
+    idChamado: number;
+    prioridadeChamado: PrioridadeChamadoEnum,
+    statusChamado: string,
     dtAberturaChamado: Date,
     descChamado: string,
     dtConclusaoChamado: Date,
-    imgChamado: string, 
+    imgChamado: string,
     localChamado: string,
     tituloChamado: string,
     rmUsuario: string,

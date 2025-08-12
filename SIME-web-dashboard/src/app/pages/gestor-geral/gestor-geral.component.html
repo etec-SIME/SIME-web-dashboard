@@ -1,3 +1,5 @@
+<a routerLink="/">Voltar</a>
+
 <h2>Lista Chamados</h2>
 
 <ng-container *ngIf="carregado; else carregando">
@@ -5,6 +7,9 @@
         <p><strong>ID:</strong> {{c.idChamado}}</p>
         <p><strong>Data:</strong> {{c.dtAberturaChamado}}</p>
         <p><strong>Título:</strong> {{c.tituloChamado}}</p>
+        <p><strong>Prioridade:</strong> {{c.prioridadeChamado}}</p>
+        <button (click)="editarPrioridade('123456', c.idChamado, prioridades[2])">Editar Prioridade</button>
+        <br>
         <br>
     </div>
 </ng-container>

@@ -4,6 +4,7 @@ import { ChamadoService } from '../../services/chamado/chamado.service';
 
 @Component({
   selector: 'app-dashboard',
+  standalone: true,
   imports: [RouterModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
