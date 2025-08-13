@@ -1,3 +1,4 @@
+import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha.component';
 import { Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
@@ -7,11 +8,12 @@ import { ChamadosPendentesComponent } from './pages/chamados-pendentes/chamados-
 import { HomeComponent } from './pages/home/home.component';
 
 export const routes: Routes = [
-    { path: '', component: LoginComponent },
+    { path: '', component: RecuperarSenhaComponent },
     { path: 'home', component: HomeComponent },
     { path: 'dashboard', component: DashboardComponent },
     { path: 'funcionarios', component: FuncionariosComponent },
     { path: 'chamados-pendentes', component: ChamadosPendentesComponent },
     { path: 'chamados-concluidos', component: ChamadosConcluidosComponent },
+    //{ path: 'recuperar-senha', component: RecuperarSenhaComponent},
     { path: '**', redirectTo: '' }
 ];
