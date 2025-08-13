@@ -4,6 +4,7 @@ export interface usuario {
     chamadosConcluidos: string;
     idTipoPerfil: number;
     senhaUsuario: string;
+    cpfUsuario: string
     codEscola: string;
     emailUsuario: string;
     nomeUsuario: string;

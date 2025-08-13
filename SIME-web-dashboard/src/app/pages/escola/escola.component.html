@@ -1,0 +1,43 @@
+<!-- TESTE -->
+
+<ng-container *ngIf="carregado; else carregando" >
+  <div *ngIf="escolas.length > 0; else nenhum">
+    <div *ngFor="let e of escolas" class="card">
+      <p><strong>Nome: </strong> {{ e.nomeEscola}}</p>
+      <p><strong>Código: </strong> {{ e.codEscola }}</p>
+      <p><strong>Endereço: </strong> {{ e.numEnderecoEscola }}</p>
+      <p><strong>CEP: </strong> {{ e.cepEscola }}</p>
+      <p><strong>CNPJ: </strong> {{ e.cnpjEscola }}</p>
+    </div>
+  </div>
+</ng-container>
+
+
+<ng-container *ngIf="carregado; else carregando" >
+  <div *ngIf="ambientes.length > 0; else nenhum">
+    <div *ngFor="let a of ambientes" class="card">
+      <p><strong>Nome: </strong> {{ a.nomeAmbiente}}</p>
+      <p><strong>Descrição: </strong> {{ a.descricaoAmbiente}}</p>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="carregado; else carregando" >
+  <div *ngIf="departamentos.length > 0; else nenhum">
+    <div *ngFor="let d of departamentos" class="card">
+      <p><strong>Nome: </strong> {{ d.nomeDepartamento}}</p>
+      <p><strong>Descrição: </strong> {{ d.descricaoDepartamento}}</p>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #nenhum>
+  <p>Nenhuma escola encontrado.</p>
+</ng-template>
+
+<ng-template #carregando>
+  <p>Carregando escolas...</p>
+</ng-template>
+
+
+

@@ -6,6 +6,6 @@ export interface departamento{
   nomeDepartamento: string;
   descricaoDepartamento: string
 
-  tipoChamadoList: tipoChamado[]
-  usuarioList: usuario[]
+  //tipoChamadoList: tipoChamado[]
+  //usuarioList: usuario[]
 }
