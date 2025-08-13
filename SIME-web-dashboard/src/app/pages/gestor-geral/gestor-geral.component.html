@@ -2,18 +2,29 @@
 
 <h2>Lista Chamados</h2>
 
-<ng-container *ngIf="carregado; else carregando">
-    <div *ngFor="let c of chamados" class="card">
-        <p><strong>ID:</strong> {{c.idChamado}}</p>
-        <p><strong>Data:</strong> {{c.dtAberturaChamado}}</p>
-        <p><strong>Título:</strong> {{c.tituloChamado}}</p>
-        <p><strong>Prioridade:</strong> {{c.prioridadeChamado}}</p>
-        <button (click)="editarPrioridade('123456', c.idChamado, prioridades[2])">Editar Prioridade</button>
-        <br>
-        <br>
-    </div>
-</ng-container>
+<button (click)="exibeBtnsPrioridade()">Editar prioridade</button>
 
-<ng-template #carregando>
-    <p>Carregando chamados...</p>
-</ng-template>
+@for(c of chamados; track c.idChamado){
+    <br>
+    <div id="chamados">
+       <div id="chamado">
+            <p><strong>ID:</strong> {{c.idChamado}}</p>
+            <p><strong>Data:</strong> {{c.dtAberturaChamado}}</p>
+            <p><strong>Título:</strong> {{c.tituloChamado}}</p>
+            <p><strong>Status:</strong> {{c.statusChamado}}</p>
+            <p><strong>Prioridade:</strong> {{c.prioridadeChamado}}</p>
+            @if(exibe){
+                <div id="btns-prioridade">
+                    <button (click)="editarPrioridade('123456', c.idChamado, prioridades[0])">Baixa prioridade</button>
+                    <button (click)="editarPrioridade('123456', c.idChamado, prioridades[1])">Média prioridade</button>
+                    <button (click)="editarPrioridade('123456', c.idChamado, prioridades[2])">Alta prioridade</button>
+                </div>
+                <br>
+            }
+            <div id="btns-status">
+                <button (click)="aceitarChamado('123456', c.idChamado)">Aceitar</button>
+                <button (click)="recusarChamado('123456', c.idChamado, 'Teste funfou')">Recusar</button>
+            </div>
+       </div>
+    </div>
+}

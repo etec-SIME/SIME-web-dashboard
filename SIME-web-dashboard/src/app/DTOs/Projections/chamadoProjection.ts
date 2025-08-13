@@ -1,9 +1,10 @@
 import { PrioridadeChamadoEnum } from "../../models/enums/prioridade-chamado-enum";
+import { StatusChamadoEnum } from "../../models/enums/status-chamado-enum";
 
 export interface chamadoProjection {
     idChamado: number;
     prioridadeChamado: PrioridadeChamadoEnum,
-    statusChamado: string,
+    statusChamado: StatusChamadoEnum,
     dtAberturaChamado: Date,
     descChamado: string,
     dtConclusaoChamado: Date,

@@ -22,11 +22,13 @@ export class GestorGeralService {
   }
 
   aceitarChamado(rmGestor: string, idChamado: number): Observable<void>{
-    return this.http.put<void>(`${this.apiUrl}/gestores/${rmGestor}/chamados/${idChamado}/aceitar`, {})
+    return this.http.put<void>(`${this.apiUrl}/gestores/${rmGestor}/chamados/${idChamado}/aceitar`, {});
   }
 
-  recusarChamado(idChamado: number, msgRecusa: string): Observable<string> {
-    return this.http.delete<string>(`${this.apiUrl}/gestores/{rmGestor}/chamados/{idChamado}/recusar`);
+  recusarChamado(rmGestor:string, idChamado: number, msgRecusa: string): Observable<string> {
+    return this.http.delete<string>(`${this.apiUrl}/gestores/${rmGestor}/chamados/${idChamado}/recusar`, 
+      {body: msgRecusa}
+    );
   }
 
 }

@@ -4,6 +4,7 @@ import { chamadoProjection } from '../../DTOs/Projections/chamadoProjection';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { GestorGeralService } from '../../services/gestor-geral/gestor-geral.service';
+import { StatusChamadoEnum, StatusChamadoEnumDescricao } from '../../models/enums/status-chamado-enum';
 
 @Component({
   selector: 'app-gestor-geral',
@@ -24,9 +25,10 @@ export class GestorGeralComponent implements OnInit{
     PrioridadeChamadoEnum.AltaPrioridade
   ];
 
-  constructor(private gestorGeralService: GestorGeralService){}
-
   carregado: boolean = false;
+  exibe: boolean = false;
+
+  constructor(private gestorGeralService: GestorGeralService){}
 
   ngOnInit(): void {
     this.gestorGeralService.getAllChamados().subscribe((resp) => {
@@ -35,8 +37,24 @@ export class GestorGeralComponent implements OnInit{
     });
   }
 
+  exibeBtnsPrioridade(){
+    this.exibe = !this.exibe;
+  }
+
   editarPrioridade(rmGestor: string, idChamado: number, novaPrioidade: PrioridadeChamadoEnum){
     this.gestorGeralService.definirPrioridadeChamado(rmGestor, idChamado, novaPrioidade).subscribe();
+    location.reload();
+  }
+
+  aceitarChamado(rmGestor: string, idChamado: number){
+    this.gestorGeralService.aceitarChamado(rmGestor, idChamado).subscribe();
+    location.reload();
+  }
+
+  recusarChamado(rmGestor: string, idChamado:number, msgRecusa: string){
+    this.gestorGeralService.recusarChamado(rmGestor, idChamado, msgRecusa).subscribe();
+    alert("Mensagem de recusa: " + msgRecusa);
+    location.reload();
   }
 
 }
