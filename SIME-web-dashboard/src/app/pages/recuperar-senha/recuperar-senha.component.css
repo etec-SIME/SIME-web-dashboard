@@ -1,14 +1,47 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-*{
-  background-color: #44A1A0;
- }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
- h1{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color:#ffffff;
-  font-family: "Montserrat";
-  font-size: 8vh;
+body {
+  background-color: #44A1A0;
+  position: relative; /* Fundamental para o posicionamento absoluto */
+  min-height: 100vh;
+  overflow: hidden; /* Previne barras de rolagem indesejadas */
+}
+
+/* Imagem no canto superior direito */
+.forma {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 150px; /* Ajuste conforme necessário */
+  height: auto;
+  z-index: 1;
+}
+
+/* Imagem no canto inferior esquerdo */
+.circulo {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200px; /* Ajuste conforme necessário */
+  height: auto;
+  z-index: 1;
+}
+
+h1 {
+  position: absolute;
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 450;
+  font-size: 7vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2; /* Garante que o texto fique acima das imagens */
+  white-space: nowrap; /* Evita quebra de linha */
 }
