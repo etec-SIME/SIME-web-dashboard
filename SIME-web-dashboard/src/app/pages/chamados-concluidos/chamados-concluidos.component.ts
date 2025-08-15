@@ -9,17 +9,17 @@ import { FuncionarioService } from '../../services/funcionario/funcionario.servi
   templateUrl: './chamados-concluidos.component.html',
   styleUrl: './chamados-concluidos.component.css'
 })
-export class ChamadosConcluidosComponent implements OnInit{
+export class ChamadosConcluidosComponent {
 
-  chamadosConcluidos: chamadoProjection[] = [];
+  // chamadosConcluidos: chamadoProjection[] = [];
 
-  constructor(private funcionarioService: FuncionarioService) {}
+  // constructor(private funcionarioService: FuncionarioService) {}
 
-  ngOnInit(): void {
-    this.funcionarioService.getAllChamadosConcluidos().subscribe((resp) => {
-      console.log('Chamados concluidos:', resp);
-      this.chamadosConcluidos = resp;
-    });
-  }
+  // ngOnInit(): void {
+  //   this.funcionarioService.getAllChamadosConcluidos().subscribe((resp) => {
+  //     console.log('Chamados concluidos:', resp);
+  //     this.chamadosConcluidos = resp;
+  //   });
+  // }
   
 }

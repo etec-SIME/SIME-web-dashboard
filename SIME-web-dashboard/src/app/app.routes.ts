@@ -5,16 +5,16 @@ import { FuncionariosComponent } from './pages/funcionarios/funcionarios.compone
 import { ChamadosConcluidosComponent } from './pages/chamados-concluidos/chamados-concluidos.component';
 import { ChamadosPendentesComponent } from './pages/chamados-pendentes/chamados-pendentes.component';
 import { HomeComponent } from './pages/home/home.component';
-import { LayoutComponent } from './layout/layout.component';
+import { LayoutComponent } from './components/layout/layout.component';
 
 export const routes: Routes = [
     { path: '', component: LayoutComponent,
       children: [
         { path: 'chamados-pendentes', component: ChamadosPendentesComponent, data: { titulo: 'Chamados Pendentes' } },
         { path: 'chamados-concluidos', component: ChamadosConcluidosComponent, data: { titulo: 'Chamados Concluídos' } },
+        { path: 'home', component: HomeComponent, data: { titulo: 'Home - Locais' } },	
       ]
     },
-    { path: 'home', component: HomeComponent },
     { path: 'dashboard', component: DashboardComponent },
     { path: 'funcionarios', component: FuncionariosComponent },
     { path: '**', redirectTo: '' }
