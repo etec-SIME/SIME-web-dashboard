@@ -1,0 +1,5 @@
+.layout {
+    display: grid;
+    grid-template-columns: minmax(200px, 20vw) auto;
+    gap: 3rem;
+}
