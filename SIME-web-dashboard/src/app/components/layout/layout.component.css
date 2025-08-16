@@ -1,5 +1,5 @@
 .layout {
     display: grid;
-    grid-template-columns: minmax(200px, 20vw) auto;
+    grid-template-columns: minmax(200px, 20vw) auto 3vw;
     gap: 3rem;
 }
