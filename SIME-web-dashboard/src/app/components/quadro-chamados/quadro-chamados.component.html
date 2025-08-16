@@ -1,40 +1,49 @@
 <div class="prioridades">
     <!-- Alta -->
     <div class="coluna">
-        <h3>Alta Prioridade 🔴</h3>
+        <h3>
+            Alta Prioridade 
+            <img [src]="imgAlta" alt="Alta Prioridade">
+        </h3>
         @for (chamado of chamadosAlta; track chamado.id) {
-        <app-chamado-card
-            [data]="chamado.data"
-            [descricao]="chamado.descricao"
-            [local]="chamado.local"
-            prioridade="Alta">
-        </app-chamado-card>
+            <app-chamado-card
+                [data]="chamado.data"
+                [descricao]="chamado.descricao"
+                [local]="chamado.local"
+                prioridade="Alta">
+            </app-chamado-card>
         }
     </div>
 
     <!-- Média -->
     <div class="coluna">
-        <h3>Média Prioridade 🟠</h3>
+        <h3>
+            Média Prioridade
+            <img [src]="imgMedia" alt="Média Prioridade">
+        </h3>
         @for (chamado of chamadosMedia; track chamado.id) {
-        <app-chamado-card
-            [data]="chamado.data"
-            [descricao]="chamado.descricao"
-            [local]="chamado.local"
-            prioridade="Média">
-        </app-chamado-card>
+            <app-chamado-card
+                [data]="chamado.data"
+                [descricao]="chamado.descricao"
+                [local]="chamado.local"
+                prioridade="Média">
+            </app-chamado-card>
         }
     </div>
 
     <!-- Baixa -->
     <div class="coluna">
-        <h3>Baixa Prioridade 🟡</h3>
+        <h3>
+            Baixa Prioridade
+            <img [src]="imgBaixa" alt="Baixa Prioridade">
+        </h3>
         @for (chamado of chamadosBaixa; track chamado.id) {
-        <app-chamado-card
-            [data]="chamado.data"
-            [descricao]="chamado.descricao"
-            [local]="chamado.local"
-            prioridade="Baixa">
-        </app-chamado-card>
+            <app-chamado-card
+                [data]="chamado.data"
+                [descricao]="chamado.descricao"
+                [local]="chamado.local"
+                prioridade="Baixa">
+            </app-chamado-card>
         }
     </div>
 </div>

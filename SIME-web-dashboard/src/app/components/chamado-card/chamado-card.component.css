@@ -1,8 +1,31 @@
-.card {
+.btn-card {
+    font-family: var(--font-instrument-sans);
+    font-weight: var(--fw-semibold);
+
     display: flex;
     flex-direction: column;
+
+    width: 100%;
     padding: 16px 0px 20px 20px;
     gap: 10px;
-    background-color: aqua;
+
+    border: 1px solid rgba(0, 0, 0, 0.27);
     border-radius: 0.8rem;
+    background-color: #fff;
+
+    text-align: justify;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-card:hover {
+    background-color: rgba(199, 234, 234, 0.5); /* hover no botão inteiro */
+}
+
+#card-date {
+    font-weight: var(--fw-regular);
+}
+
+#card-title {
+    font-size: clamp(10px, 1.2vw, 24px);
 }
