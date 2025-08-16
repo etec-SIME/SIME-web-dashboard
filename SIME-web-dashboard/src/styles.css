@@ -89,3 +89,9 @@
     --fw-semibold: 600;
     --fw-bold: 700;
 }
+
+/* Estilo global */
+body {
+    font-family: var(--font-instrument-sans);
+    font-weight: var(--fw-semibold);
+}
