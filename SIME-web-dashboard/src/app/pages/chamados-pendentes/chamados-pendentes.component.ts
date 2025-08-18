@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { chamadoProjection } from '../../DTOs/Projections/chamadoProjection';
+import { chamadoProjection } from '../../DTOs/Projections/ChamadoProjection';
 import { FuncionarioService } from '../../services/funcionario/funcionario.service';
 import { QuadroChamadosComponent } from '../../components/quadro-chamados/quadro-chamados.component';
+import { ChamadoCardDTO } from '../../DTOs/ChamadoCardDTO';
+import { ChamadoService } from '../../services/chamado/Chamado.service';
 
 @Component({
   selector: 'app-chamados-pendentes',
@@ -11,18 +13,29 @@ import { QuadroChamadosComponent } from '../../components/quadro-chamados/quadro
 })
 export class ChamadosPendentesComponent {
 
-  chamadosAlta = [
-    { data: '06/05/25', descricao: 'Computador quebrado', local: 'Lab. 2' }
-  ];
+  chamadosAlta: ChamadoCardDTO[] = [];
+  chamadosMedia: ChamadoCardDTO[] = [];
+  chamadosBaixa: ChamadoCardDTO[] = [];
+  
+  constructor(private chamadoService: ChamadoService) {}
 
-  chamadosMedia = [
-    { data: '00/00/00', descricao: 'Nome', local: 'Local' }
-  ];
+  ngOnInit(): void {
+    this.carregarChamados();
+  }
 
-  chamadosBaixa = [
-    { data: '00/00/00', descricao: 'Nome', local: 'Local' }
-  ];
+  carregarChamados(): void {
+    this.chamadoService.getChamadosByPrioridade('ALTA_PRIORIDADE')
+      .subscribe(res => {
+        this.chamadosAlta = res;
+        console.log('Chamados recebidos: ', res);
+      });
 
+    this.chamadoService.getChamadosByPrioridade('MEDIA_PRIORIDADE')
+      .subscribe(res => this.chamadosMedia = res);
+
+    this.chamadoService.getChamadosByPrioridade('BAIXA_PRIORIDADE')
+      .subscribe(res => this.chamadosBaixa = res);
+  }
 
   //implements OnInit {
   // chamadosConcluidos: chamadoProjection[] = [];

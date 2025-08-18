@@ -5,12 +5,11 @@
             Alta Prioridade 
             <img [src]="imgAlta" alt="Alta Prioridade">
         </h3>
-        @for (chamado of chamadosAlta; track chamado.id) {
+        @for (chamado of chamadosAlta; track chamado.idChamado) {
             <app-chamado-card
-                [data]="chamado.data"
-                [descricao]="chamado.descricao"
-                [local]="chamado.local"
-                prioridade="Alta">
+                [data]="chamado.dtAberturaChamado"
+                [descricao]="chamado.descChamado"
+                [local]="chamado.localChamado">
             </app-chamado-card>
         }
     </div>
@@ -21,12 +20,11 @@
             Média Prioridade
             <img [src]="imgMedia" alt="Média Prioridade">
         </h3>
-        @for (chamado of chamadosMedia; track chamado.id) {
+        @for (chamado of chamadosMedia; track chamado.idChamado) {
             <app-chamado-card
-                [data]="chamado.data"
-                [descricao]="chamado.descricao"
-                [local]="chamado.local"
-                prioridade="Média">
+                [data]="chamado.dtAberturaChamado"
+                [descricao]="chamado.descChamado"
+                [local]="chamado.localChamado">
             </app-chamado-card>
         }
     </div>
@@ -37,12 +35,11 @@
             Baixa Prioridade
             <img [src]="imgBaixa" alt="Baixa Prioridade">
         </h3>
-        @for (chamado of chamadosBaixa; track chamado.id) {
+        @for (chamado of chamadosBaixa; track chamado.idChamado) {
             <app-chamado-card
-                [data]="chamado.data"
-                [descricao]="chamado.descricao"
-                [local]="chamado.local"
-                prioridade="Baixa">
+                [data]="chamado.dtAberturaChamado"
+                [descricao]="chamado.descChamado"
+                [local]="chamado.localChamado">
             </app-chamado-card>
         }
     </div>

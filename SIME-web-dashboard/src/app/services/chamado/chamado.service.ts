@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { chamado } from '../../models/chamado';
-import { chamadoRequestDTO } from '../../DTOs/chamadoRequestDTO';
+import { ChamadoCardDTO } from '../../DTOs/ChamadoCardDTO';
+import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
+import { Chamado } from '../../models/Chamado';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,15 @@ export class ChamadoService {
   
   constructor( private http: HttpClient ) { }
 
-  getAllChamados(): Observable<chamado[]> {
-    return this.http.get<chamado[]>(this.apiUrl);
+  getAllChamados(): Observable<Chamado[]> {
+    return this.http.get<Chamado[]>(this.apiUrl);
   }
 
-  criarChamado(rmUsuario: string, dto: chamadoRequestDTO): Observable<any> { 
+  getChamadosByPrioridade(prioridade: 'ALTA_PRIORIDADE' | 'MEDIA_PRIORIDADE' | 'BAIXA_PRIORIDADE'): Observable<ChamadoCardDTO[]> {
+    return this.http.get<ChamadoCardDTO[]>(`${this.apiUrl}/prioridade?prioridade=${prioridade}`);
+  }
+  
+  criarChamado(rmUsuario: string, dto: ChamadoRequestDTO): Observable<any> { 
     return this.http.post<any>(`${this.apiUrl}/${rmUsuario}/chamado`, dto);
   }
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ChamadoService } from '../../services/chamado/chamado.service';
-import { chamadoRequestDTO } from '../../DTOs/chamadoRequestDTO';
+import { ChamadoService } from '../../services/chamado/Chamado.service';
+import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 
 @Component({
@@ -23,7 +23,7 @@ export class DashboardComponent {
   }
 
   criarChamado() {
-    const dto: chamadoRequestDTO = {
+    const dto: ChamadoRequestDTO = {
       tituloChamado: "Problema no projetor",
       descChamado: "O projetor da sala 101 não está ligando",
       localChamado: "Sala 101",
