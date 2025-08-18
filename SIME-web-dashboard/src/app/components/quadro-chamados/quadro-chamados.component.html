@@ -2,15 +2,17 @@
     <!-- Alta -->
     <div class="coluna">
         <h3>
-            Alta Prioridade 
+            Alta Prioridade
             <img [src]="imgAlta" alt="Alta Prioridade">
         </h3>
         @for (chamado of chamadosAlta; track chamado.idChamado) {
+          <div class="chamado-wrapper">
             <app-chamado-card
                 [data]="chamado.dtAberturaChamado"
                 [descricao]="chamado.descChamado"
                 [local]="chamado.localChamado">
             </app-chamado-card>
+          </div>
         }
     </div>
 

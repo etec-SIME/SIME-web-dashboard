@@ -5,10 +5,13 @@
     margin-top: 5vh;
 }
 
-app-chamado-card :hover {
-    background-color: rgb(199, 234, 234, 0.5); 
+.chamado-wrapper:not(:last-child) {
+  margin-bottom: 25px;
 }
 
+app-chamado-card :hover {
+    background-color: rgb(199, 234, 234, 0.5);
+}
 
 h3 {
     display: flex;

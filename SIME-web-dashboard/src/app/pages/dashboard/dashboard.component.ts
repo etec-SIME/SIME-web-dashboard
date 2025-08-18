@@ -1,3 +1,4 @@
+import { Chamado } from './../../models/Chamado';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ChamadoService } from '../../services/chamado/Chamado.service';
@@ -31,10 +32,10 @@ export class DashboardComponent {
       tipoChamado: "Problema Técnico",
       imgChamado: "base64ouURLdaImagem"
     };
-    
+
     this.chamadoService.criarChamado('123456', dto).subscribe({
       next: (res) => {
-        console.log('Resposta do backend:', res); 
+        console.log('Resposta do backend:', res);
       },
       error: (err) => {
         console.error('Erro ao criar chamado:', err);

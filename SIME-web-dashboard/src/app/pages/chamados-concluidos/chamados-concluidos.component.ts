@@ -25,13 +25,13 @@ export class ChamadosConcluidosComponent {
   }
 
   carregarChamados(): void {
-    this.chamadoService.getChamadosByPrioridade('ALTA_PRIORIDADE')
+    this.chamadoService.getChamadosByPrioridadeAndStatus('ALTA_PRIORIDADE', 'CONCLUIDO')
       .subscribe(res => this.chamadosAlta = res);
 
-    this.chamadoService.getChamadosByPrioridade('MEDIA_PRIORIDADE')
+    this.chamadoService.getChamadosByPrioridadeAndStatus('MEDIA_PRIORIDADE', 'CONCLUIDO')
       .subscribe(res => this.chamadosMedia = res);
 
-    this.chamadoService.getChamadosByPrioridade('BAIXA_PRIORIDADE')
+    this.chamadoService.getChamadosByPrioridadeAndStatus('BAIXA_PRIORIDADE', 'CONCLUIDO')
       .subscribe(res => this.chamadosBaixa = res);
   }
 
@@ -45,5 +45,5 @@ export class ChamadosConcluidosComponent {
   //     this.chamadosConcluidos = resp;
   //   });
   // }
-  
+
 }

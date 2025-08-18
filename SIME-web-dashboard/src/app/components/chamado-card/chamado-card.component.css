@@ -6,7 +6,7 @@
     flex-direction: column;
 
     width: 100%;
-    padding: 16px 0px 20px 20px;
+    padding: 16px 67px 20px 20px;
     gap: 10px;
 
     border: 1px solid rgba(0, 0, 0, 0.27);
@@ -14,6 +14,7 @@
     background-color: #fff;
 
     text-align: justify;
+    text-wrap: nowrap;
     cursor: pointer;
     transition: background-color 0.3s;
 }
@@ -23,9 +24,13 @@
 }
 
 #card-date {
-    font-weight: var(--fw-regular);
+  font-weight: var(--fw-regular);
+  font-size: clamp(8px, 0.8vw, 16px);
 }
 
 #card-title {
     font-size: clamp(10px, 1.2vw, 24px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

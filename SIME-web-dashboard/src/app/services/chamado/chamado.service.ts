@@ -10,7 +10,7 @@ import { Chamado } from '../../models/Chamado';
 })
 export class ChamadoService {
   private apiUrl = 'http://localhost:8080/chamados';
-  
+
   constructor( private http: HttpClient ) { }
 
   getAllChamados(): Observable<Chamado[]> {
@@ -20,8 +20,12 @@ export class ChamadoService {
   getChamadosByPrioridade(prioridade: 'ALTA_PRIORIDADE' | 'MEDIA_PRIORIDADE' | 'BAIXA_PRIORIDADE'): Observable<ChamadoCardDTO[]> {
     return this.http.get<ChamadoCardDTO[]>(`${this.apiUrl}/prioridade?prioridade=${prioridade}`);
   }
-  
-  criarChamado(rmUsuario: string, dto: ChamadoRequestDTO): Observable<any> { 
+
+  getChamadosByPrioridadeAndStatus(prioridade: 'ALTA_PRIORIDADE' | 'MEDIA_PRIORIDADE' | 'BAIXA_PRIORIDADE', status: 'CONCLUIDO'): Observable<ChamadoCardDTO[]> {
+    return this.http.get<ChamadoCardDTO[]>(`${this.apiUrl}/prioridade?prioridade=${prioridade}&status=${status}`);
+  }
+
+  criarChamado(rmUsuario: string, dto: ChamadoRequestDTO): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/${rmUsuario}/chamado`, dto);
   }
 }
