@@ -18,7 +18,7 @@ body {
   position: absolute;
   top: 0;
   right: 0;
-  width: 150px; /* Ajuste conforme necessário */
+  width: 110vh; /* Ajuste o tamanho*/
   height: auto;
   z-index: 1;
 }
@@ -28,7 +28,7 @@ body {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 200px; /* Ajuste conforme necessário */
+  width: 120vh; /* Ajuste conforme necessário */
   height: auto;
   z-index: 1;
 }

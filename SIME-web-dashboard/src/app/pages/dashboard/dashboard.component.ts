@@ -7,7 +7,7 @@ import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [RouterModule, SidebarComponent],
+  imports: [RouterModule , SidebarComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
@@ -31,10 +31,10 @@ export class DashboardComponent {
       tipoChamado: "Problema Técnico",
       imgChamado: "base64ouURLdaImagem"
     };
-    
+
     this.chamadoService.criarChamado('123456', dto).subscribe({
       next: (res) => {
-        console.log('Resposta do backend:', res); 
+        console.log('Resposta do backend:', res);
       },
       error: (err) => {
         console.error('Erro ao criar chamado:', err);
