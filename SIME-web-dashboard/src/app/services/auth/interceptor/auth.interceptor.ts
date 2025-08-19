@@ -5,7 +5,7 @@ import { PLATFORM_ID, inject } from '@angular/core';
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   // Obtém a referência ao PLATFORM_ID usando inject()
   const platformId = inject(PLATFORM_ID);
-  
+
   let token: string | null = null;
 
   // Só acessa localStorage se estiver rodando no navegador
@@ -21,7 +21,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     });
     return next(authReq);
   }
-  
+
   return next(req);
 };
 

@@ -12,6 +12,5 @@ export const routes: Routes = [
     { path: 'funcionarios', component: FuncionariosComponent },
     { path: 'chamados-pendentes', component: ChamadosPendentesComponent },
     { path: 'chamados-concluidos', component: ChamadosConcluidosComponent },
-    { path: 'escolas', component: EscolaComponent},
     { path: '**', redirectTo: '' }
 ];
