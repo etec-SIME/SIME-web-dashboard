@@ -1,5 +1,4 @@
 *{
-    font-family: 'Plus Jakarta Sans', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -7,23 +6,16 @@
 
 .home-layout {
   display: flex;
+  flex-direction: row;
   height: 100vh;
   width: 100vw;
-}
-
-app-sidebar {
-  flex-shrink: 1;
- /*display: block;*/
-  /*height: 100vh;*/
 }
 
 /* Segunda parte da tela */
 
 .home-content {
-  flex: 1;
   background-color: white;
-  margin-left: 4vw;
-  margin-top: 7vh
+  margin-right: clamp(90px, 30vw, 200px); /* Vou alterar quando criar os cards */
 }
 
 h1{
@@ -33,6 +25,7 @@ h1{
 }
 
 .filtrar{
+  font-family: var(--font-instrument-sans);
   display: flex;
   align-items: center;
   gap: 5vw;
@@ -40,8 +33,8 @@ h1{
 }
 
 .filtrar > p { /* estiliza apenas o parágrafo filho direto de "filtrar"*/
-  font-weight: bold;
-  font-size: 1.25vw;
+  font-size: clamp(13px, 1.25vw, 20px);
+  font-weight: var(--fw-medium);
 }
 
 .filtrar.opcoes{
@@ -51,15 +44,15 @@ h1{
 }
 
 .opcao {
+  font-weight: var(--fw-semibold);
   padding: 0.35vw 2vw;
   background-color: #EEEEEE;
   color: black;
-  font-size: 1vw;
-  font-weight: bold;
+  font-size: clamp(12px, 1vw, 20px);
   border-radius: 2vw;
   border: 0;
   cursor: pointer;
-  user-select: none; /* Não peemite a seleção da palavra, útil para botões */
+  user-select: none; /* Não permite a seleção da palavra, útil para botões */
   transition: background-color 0.3s ease;
 }
 

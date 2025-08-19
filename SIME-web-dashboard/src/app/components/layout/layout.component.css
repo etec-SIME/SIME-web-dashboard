@@ -1,0 +1,8 @@
+.layout {
+    display: grid;
+    grid-template-columns: clamp(200px, 18vw, 20vw) auto 3vw;
+}
+
+.content {
+    margin-left: 3rem;
+}
