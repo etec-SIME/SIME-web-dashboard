@@ -23,14 +23,55 @@ body {
   z-index: 1;
 }
 
-/* Imagem no canto inferior esquerdo */
+/* Imagem no canto inferior esquerdo
 .circulo {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 120vh; /* Ajuste conforme necessário */
+  width: 120vh; - Ajuste conforme necessário
   height: auto;
   z-index: 1;
+}*/
+
+.container {
+ display: flex;
+ justify-content: center; /* Alinha horizontalmente */
+}
+
+.primeiro{
+  background-color: #499D9C;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-top-left-radius: 60vh;
+  border-top-right-radius: 60vh;
+  height: 60vh;
+  width: 110vh;
+  z-index: 1;
+}
+
+.segundo{
+  background-color: #46A1A0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-top-left-radius: 60vh;
+  border-top-right-radius: 60vh;
+  height: 55vh;
+  width: 100vh;
+  z-index: 2;
+}
+
+.terceiro{
+  background-color: #4CA7A6;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-top-left-radius: 60vh;
+  border-top-right-radius: 60vh;
+  height: 50vh;
+  width: 90vh;
+  z-index: 3;
 }
 
 h1 {
