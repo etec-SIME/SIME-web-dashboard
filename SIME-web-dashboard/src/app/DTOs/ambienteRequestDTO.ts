@@ -1,4 +1,5 @@
 export interface ambienteRequestDTO{
-    nomeAmbiente: string;
+    numAmbiente: string;
     descricaoAmbiente: string;
+    //tipoAmbiente: string
 }

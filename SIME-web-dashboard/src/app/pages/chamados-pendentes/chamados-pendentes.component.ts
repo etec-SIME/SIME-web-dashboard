@@ -1,26 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { FuncionarioService } from '../../services/funcionario/funcionario.service';
 import { chamadoProjection } from '../../DTOs/Projections/chamadoProjection';
+import { FuncionarioService } from '../../services/funcionario/funcionario.service';
 
 @Component({
   selector: 'app-chamados-pendentes',
-  standalone: true,
-  imports: [RouterModule],
+  imports: [],
   templateUrl: './chamados-pendentes.component.html',
-  styleUrl: './chamados-pendentes.component.css'
+  styleUrls: ['./chamados-pendentes.component.css']
 })
-export class ChamadosPendentesComponent implements OnInit{
-
-  chamadosConcluidos: chamadoProjection[] = [];
+export class ChamadosPendentesComponent { //implements OnInit {
+  // chamadosConcluidos: chamadoProjection[] = [];
   
-    constructor(private funcionarioService: FuncionarioService) {}
+  //   constructor(private funcionarioService: FuncionarioService) {}
   
-    ngOnInit(): void {
-      this.funcionarioService.getAllChamadosPendentes().subscribe((resp) => {
-        console.log('Chamados pendentes:', resp);
-        this.chamadosConcluidos = resp;
-      });
-    }
-
+  //   ngOnInit(): void {
+  //     this.funcionarioService.getAllChamadosPendentes().subscribe((resp) => {
+  //       console.log('Chamados pendentes:', resp);
+  //       this.chamadosConcluidos = resp;
+  //     });
+  //   }
 }

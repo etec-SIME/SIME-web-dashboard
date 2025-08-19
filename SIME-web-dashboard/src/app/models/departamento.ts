@@ -2,9 +2,9 @@ import { tipoChamado } from "./tipoChamado";
 import { usuario } from "./usuario";
 
 export interface departamento{
-  idDepartamento: number
+  idDepartamento: number;
   nomeDepartamento: string;
-  descricaoDepartamento: string
+  descricaoDepartamento: string;
 
   //tipoChamadoList: tipoChamado[]
   //usuarioList: usuario[]

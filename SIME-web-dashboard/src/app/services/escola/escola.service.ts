@@ -18,6 +18,7 @@ import { tipoChamadoRequestDTO } from '../../DTOs/tipoChamadoRequestDTO';
 import { departamentoRequestDTO } from '../../DTOs/departamentoRequestDTO';
 import { tipoEquipamentoRequestDTO } from '../../DTOs/tipoEquipamentoRequestDTO';
 import { equipamentoRequestDTO } from '../../DTOs/equipamentoRequestDTO';
+import { escolaProjection } from '../../DTOs/Projections/escolaProjection';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,7 @@ export class EscolaService {
 
   constructor(private http: HttpClient) { }
 
-  token : String = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODAwMDEwMCIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX0VTQ09MQSJ9XSwiZW50aWRhZGUiOiJFU0NPTEEiLCJpYXQiOjE3NTU2MTcwNDYsImV4cCI6MTc1NTcwMzQ0Nn0.V4qJN9NWr1DQU3R_EfFVgXzzyJZKy-mq-a7FM5vVsls';
+  token : String = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODAwMDEwMCIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX0VTQ09MQSJ9XSwiZW50aWRhZGUiOiJFU0NPTEEiLCJpYXQiOjE3NTU2MzM0NzMsImV4cCI6MTc1NTcxOTg3M30.cn5mIMycWFTxvuCmrRdg5rg850AC7iE-3Ej-9E4oLAU';
   // Inserir o Token manualmente para testar
 
   private getAuthHeaders() {
@@ -43,8 +44,8 @@ export class EscolaService {
   //login
 
 
-  getAllEscolas(): Observable<escola[]>{
-    return this.http.get<escola[]>(this.apiUrl, this.getAuthHeaders());
+  getAllEscolas(): Observable<escolaProjection[]>{
+    return this.http.get<escolaProjection[]>(this.apiUrl, this.getAuthHeaders());
   }
   getAllTipoPerfil(): Observable<tipoPerfil[]>{
     return this.http.get<tipoPerfil[]>(`${this.apiUrl}/tipoPerfi`, this.getAuthHeaders());
@@ -54,8 +55,8 @@ export class EscolaService {
     return this.http.get<ambiente[]>(`${this.apiUrl}/ambiente`, this.getAuthHeaders());
   }
 
-  getAllDepartamento(): Observable<departamento[]>{
-    return this.http.get<departamento[]>(`${this.apiUrl}/departamento`, this.getAuthHeaders());
+  getAllDepartamento(): Observable<departamentoRequestDTO[]>{
+    return this.http.get<departamentoRequestDTO[]>(`${this.apiUrl}/departamento`, this.getAuthHeaders());
   }
 
   getAllTipoChamado(): Observable<tipoChamado[]>{

@@ -4,8 +4,8 @@ import { tipoEquipamento } from "./tipoEquipamento"
 export interface ambiente{
   idAmbiente: number;
   descricaoAmbiente: string;
-  nomeAmbiente: string;
-
+  numAmbiente: string;
+  //tipoAmbiente: string;
   //chamadoList: chamado[]
   //tipoEquipamentoList: tipoEquipamento[]
 

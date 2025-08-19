@@ -12,15 +12,18 @@
   </div>
 </ng-container>
 
+<p>-----------------</p>
 
 <ng-container *ngIf="carregado; else carregando" >
   <div *ngIf="ambientes.length > 0; else nenhum">
     <div *ngFor="let a of ambientes" class="card">
-      <p><strong>Nome: </strong> {{ a.nomeAmbiente}}</p>
+      <p><strong>Número: </strong> {{ a.numAmbiente}}</p>
       <p><strong>Descrição: </strong> {{ a.descricaoAmbiente}}</p>
     </div>
   </div>
 </ng-container>
+
+<p>-----------------</p>
 
 <ng-container *ngIf="carregado; else carregando" >
   <div *ngIf="departamentos.length > 0; else nenhum">
@@ -30,6 +33,18 @@
     </div>
   </div>
 </ng-container>
+
+<p>-----------------</p>
+
+<ng-container *ngIf="carregado; else carregando" >
+  <div *ngIf="departamentos.length > 0; else nenhum">
+    <div *ngFor="let d of departamentos" class="card">
+      <p><strong>Nome: </strong> {{ d.nomeDepartamento}}</p>
+      <p><strong>Descrição: </strong> {{ d.descricaoDepartamento}}</p>
+    </div>
+  </div>
+</ng-container>
+
 
 <ng-template #nenhum>
   <p>Nenhuma escola encontrado.</p>

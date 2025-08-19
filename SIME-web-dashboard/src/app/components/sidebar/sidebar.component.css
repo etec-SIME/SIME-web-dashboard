@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.sidebar{
+    background-color: #44A1A0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 2vh;
+    gap: 2vh;
+}
+
+.logo{
+    width: 12rem;
+    align-self: center;
+    padding-top: 6vh;
+    padding-bottom: 6vh;
+}
+
+.home, .pendentes, .concluidos, .criar {
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+    padding: 1vh 3vw;
+}
+
+.iconeHome, .iconePendentes, .iconeConcluidos, .iconeCriar {
+    width: 1.8rem;
+}
+
+p{
+    font-family: var(--font-plus-jakarta-sans);
+    font-weight: var(--fw-medium);
+    color: white;
+    flex-grow: 1;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.buttonCriar{
+    font-family: var(--font-instrument-sans);
+    font-weight: var(--fw-semibold);
+    background-color: white;
+    width: 12rem;
+    height: 4rem;
+    border-radius: 0.8rem;
+    border: none;
+    color: #44A1A0;
+    font-size: 1rem;
+    margin-top: 10rem;
+    align-self: center;
+}
