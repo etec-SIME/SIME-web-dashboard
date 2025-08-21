@@ -11,12 +11,12 @@ import { LayoutComponent } from './components/layout/layout.component';
 export const routes: Routes = [
     { path: '', component: LayoutComponent,
       children: [
-        { path: 'recuperar-senha', component: RecuperarSenhaComponent, data: {titulo: 'Recuperar Senha'} },
         { path: 'chamados-pendentes', component: ChamadosPendentesComponent, data: { titulo: 'Chamados Pendentes' } },
         { path: 'chamados-concluidos', component: ChamadosConcluidosComponent, data: { titulo: 'Chamados Concluídos' } },
         { path: 'home', component: HomeComponent, data: { titulo: 'Home - Locais' } },	
       ]
     },
+     { path: 'recuperar-senha', component: RecuperarSenhaComponent, data: {titulo: 'Recuperar Senha'} },
     { path: 'dashboard', component: DashboardComponent },
     { path: 'funcionarios', component: FuncionariosComponent },
     { path: '**', redirectTo: '' }
