@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-import { usuarioProjection } from '../../DTOs/Projections/usuarioProjection';
-import { chamadoProjection } from '../../DTOs/Projections/chamadoProjection';
+import { usuarioProjection } from '../../DTOs/Projections/UsuarioProjection';
+import { chamadoProjection } from '../../DTOs/Projections/ChamadoProjection';
 
 @Injectable({ providedIn: 'root' })
 export class FuncionarioService {
