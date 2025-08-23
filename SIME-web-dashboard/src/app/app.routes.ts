@@ -6,13 +6,15 @@ import { ChamadosConcluidosComponent } from './pages/chamados-concluidos/chamado
 import { ChamadosPendentesComponent } from './pages/chamados-pendentes/chamados-pendentes.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LayoutComponent } from './components/layout/layout.component';
+import { CriarChamadoComponent } from './pages/criar-chamado/criar-chamado.component';
 
 export const routes: Routes = [
     { path: '', component: LayoutComponent,
       children: [
+        { path: 'home', component: HomeComponent, data: { titulo: 'Home - Locais' } },
         { path: 'chamados-pendentes', component: ChamadosPendentesComponent, data: { titulo: 'Chamados Pendentes' } },
         { path: 'chamados-concluidos', component: ChamadosConcluidosComponent, data: { titulo: 'Chamados Concluídos' } },
-        { path: 'home', component: HomeComponent, data: { titulo: 'Home - Locais' } },	
+        { path: 'criar-chamado', component: CriarChamadoComponent, data: { titulo: 'Criar Chamado' } }
       ]
     },
     { path: 'dashboard', component: DashboardComponent },
