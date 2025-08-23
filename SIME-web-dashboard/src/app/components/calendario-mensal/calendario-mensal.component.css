@@ -5,10 +5,6 @@
     font-family: var(--font-instrument-sans);
 }
 
-.calendario-mensal{
-    padding-right: 2vw;
-}
-
 p{
     color: #44A1A0;
     font-weight: var(--fw-semibold);
