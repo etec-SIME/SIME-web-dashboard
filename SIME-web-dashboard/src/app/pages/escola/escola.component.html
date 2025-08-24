@@ -1,5 +1,6 @@
 <!-- TESTE -->
 
+<!-- GET ALL ESCOLAS 
 <ng-container *ngIf="carregado; else carregando" >
   <div *ngIf="escolas.length > 0; else nenhum">
     <div *ngFor="let e of escolas" class="card">
@@ -10,10 +11,10 @@
       <p><strong>CNPJ: </strong> {{ e.cnpjEscola }}</p>
     </div>
   </div>
-</ng-container>
+</ng-container>-->
 
 <p>-----------------</p>
-
+<!-- GET ALL AMBIENTES 
 <ng-container *ngIf="carregado; else carregando" >
   <div *ngIf="ambientes.length > 0; else nenhum">
     <div *ngFor="let a of ambientes" class="card">
@@ -21,38 +22,81 @@
       <p><strong>Descrição: </strong> {{ a.descricaoAmbiente}}</p>
     </div>
   </div>
-</ng-container>
+</ng-container>-->
 
 <p>-----------------</p>
-
+<!-- GET ALL DEPARTAMENTOS 
 <ng-container *ngIf="carregado; else carregando" >
   <div *ngIf="departamentos.length > 0; else nenhum">
     <div *ngFor="let d of departamentos" class="card">
       <p><strong>Nome: </strong> {{ d.nomeDepartamento}}</p>
-      <p><strong>Descrição: </strong> {{ d.descricaoDepartamento}}</p>
+      <p><strong>Descrição: </strong> {{ d.descDepartamento}}</p>
     </div>
   </div>
-</ng-container>
+</ng-container>-->
 
 <p>-----------------</p>
-
+<!-- GET ALL EQUIPAMENTOS 
 <ng-container *ngIf="carregado; else carregando" >
-  <div *ngIf="departamentos.length > 0; else nenhum">
-    <div *ngFor="let d of departamentos" class="card">
-      <p><strong>Nome: </strong> {{ d.nomeDepartamento}}</p>
-      <p><strong>Descrição: </strong> {{ d.descricaoDepartamento}}</p>
+  <div *ngIf="equipamentos.length > 0; else nenhum">
+    <div *ngFor="let e of equipamentos" class="card">
+      <p><strong>código equipamento: </strong> {{ e.codEquipamento}}</p>
+      <p><strong>Id tipo Equipamentos: </strong> {{ e.idtipoEquipamento}}</p>
     </div>
   </div>
-</ng-container>
+</ng-container>-->
 
+<p>-----------------</p>
+<!-- GET ALL TIPO PERFIL 
+ <ng-container *ngIf="carregado; else carregando" >
+  <div *ngIf="tipoPerfis.length > 0; else nenhum">
+    <div *ngFor="let tp of tipoPerfis" class="card">
+      <p><strong>Nome: </strong> {{ tp.nomeTipoPerfil}}</p>
+    </div>
+  </div>
+</ng-container>-->
 
+<p>-----------------</p>
+<!-- GET ALL TIPO CHAMADO 
+ <ng-container *ngIf="carregado; else carregando" >
+  <div *ngIf="tipoChamados.length > 0; else nenhum">
+    <div *ngFor="let tc of tipoChamados" class="card">
+      <p><strong>Nome: </strong> {{ tc.nomeTipoChamado}}</p>
+    </div>
+  </div>
+</ng-container>-->
+
+<p>-----------------</p>
+<!-- GET ALL TIPO EQUIPAMENTO 
+ <ng-container *ngIf="carregado; else carregando" >
+  <div *ngIf="tipoEquipamentos.length > 0; else nenhum">
+    <div *ngFor="let te of tipoEquipamentos" class="card">
+      <p><strong>Nome: </strong> {{ te.idTipoEquipamento}}</p>
+      <p><strong>Descrição: </strong> {{ te.nomeTipoEquipamento}}</p>
+    </div>
+  </div>
+</ng-container>-->
+
+<p>-----------------</p>
+<!-- GET ALL TIPO AMBIENTE 
+<ng-container *ngIf="carregado; else carregando" >
+  <div *ngIf="tipoAmbientes.length > 0; else nenhum">
+    <div *ngFor="let ta of tipoAmbientes" class="card">
+      <p><strong>Nome: </strong> {{ ta.nomeTipoAmbiente}}</p>
+    </div>
+  </div>
+</ng-container>-->
+
+<!-- GET ALL PERMISSOES POR TIPO PERFIL -->
+<!-- GET ALL EQUIPAMENTOS POR TIPO AMBIENTE *AMBIENTE* -->
+<!--
 <ng-template #nenhum>
   <p>Nenhuma escola encontrado.</p>
 </ng-template>
 
 <ng-template #carregando>
   <p>Carregando escolas...</p>
-</ng-template>
+</ng-template>-->
 
 
 

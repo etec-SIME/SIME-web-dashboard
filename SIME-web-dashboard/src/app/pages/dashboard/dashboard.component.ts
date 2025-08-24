@@ -1,8 +1,8 @@
-import { Chamado } from './../../models/Chamado';
+import { chamado } from './../../models/chamado';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ChamadoService } from '../../services/chamado/Chamado.service';
-import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
+import { ChamadoService } from '../../services/chamado/chamado.service';
+import { ChamadoRequestDTO } from '../../DTOs/chamadoRequestDTO';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 
 @Component({

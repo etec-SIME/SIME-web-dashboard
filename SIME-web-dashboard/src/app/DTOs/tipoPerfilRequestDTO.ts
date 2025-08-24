@@ -1,3 +1,3 @@
 export interface tipoPerfilRequestDTO{
-  nomeTipoPerfi: string;
+  nomeTipoPerfil: string;
 }
