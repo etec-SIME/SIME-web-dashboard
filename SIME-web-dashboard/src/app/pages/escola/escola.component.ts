@@ -15,10 +15,11 @@ import { permissao } from '../../models/permissao';
 import { tipoEquipamento } from '../../models/tipoEquipamento';
 import { tipoAmbiente } from '../../models/tipoAmbiente';
 import { tipoAmbienteRequestDTO } from '../../DTOs/tipoAmbienteRequestDTO';
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-escola',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule ],
   templateUrl: './escola.component.html',
   styleUrl: './escola.component.css'
 })
@@ -34,8 +35,11 @@ export class EscolaComponent implements OnInit{
   tipoEquipamentos: tipoEquipamento[] = []
   tipoAmbientes: tipoAmbienteRequestDTO[] = []
 
-  constructor(private escolaService: EscolaService){}
+  constructor(private escolaService: EscolaService, private fb: FormBuilder){
+    this.cadastrarTipoPerfilForms();
+  }
   carregado: boolean = false;
+
 
   ngOnInit(): void{
 
@@ -93,7 +97,23 @@ export class EscolaComponent implements OnInit{
    // this.permissoes = resp
   //})
 
-
-  
   }
+
+  formCadastrarTipoPerfil!: FormGroup;
+
+  cadastrarTipoPerfilForms(){
+    this.formCadastrarTipoPerfil = this.fb.group({
+      nomeTipoPerfil: ['']
+    })
+  }
+
+  onCadastrarTipoPerfil(){
+    const novoTipoPerfil = this.formCadastrarTipoPerfil.value;
+
+    this.escolaService.cadastrarTipoPerfil(novoTipoPerfil);
+
+    this.formCadastrarTipoPerfil.reset()
+  }
+
+
 }

@@ -1,6 +1,6 @@
 <!-- TESTE -->
 
-<!-- GET ALL ESCOLAS 
+<!-- GET ALL ESCOLAS
 <ng-container *ngIf="carregado; else carregando" >
   <div *ngIf="escolas.length > 0; else nenhum">
     <div *ngFor="let e of escolas" class="card">
@@ -14,7 +14,7 @@
 </ng-container>-->
 
 <p>-----------------</p>
-<!-- GET ALL AMBIENTES 
+<!-- GET ALL AMBIENTES
 <ng-container *ngIf="carregado; else carregando" >
   <div *ngIf="ambientes.length > 0; else nenhum">
     <div *ngFor="let a of ambientes" class="card">
@@ -25,7 +25,7 @@
 </ng-container>-->
 
 <p>-----------------</p>
-<!-- GET ALL DEPARTAMENTOS 
+<!-- GET ALL DEPARTAMENTOS
 <ng-container *ngIf="carregado; else carregando" >
   <div *ngIf="departamentos.length > 0; else nenhum">
     <div *ngFor="let d of departamentos" class="card">
@@ -36,7 +36,7 @@
 </ng-container>-->
 
 <p>-----------------</p>
-<!-- GET ALL EQUIPAMENTOS 
+<!-- GET ALL EQUIPAMENTOS
 <ng-container *ngIf="carregado; else carregando" >
   <div *ngIf="equipamentos.length > 0; else nenhum">
     <div *ngFor="let e of equipamentos" class="card">
@@ -47,17 +47,17 @@
 </ng-container>-->
 
 <p>-----------------</p>
-<!-- GET ALL TIPO PERFIL 
+<!-- GET ALL TIPO PERFIL-->
  <ng-container *ngIf="carregado; else carregando" >
   <div *ngIf="tipoPerfis.length > 0; else nenhum">
     <div *ngFor="let tp of tipoPerfis" class="card">
       <p><strong>Nome: </strong> {{ tp.nomeTipoPerfil}}</p>
     </div>
   </div>
-</ng-container>-->
+</ng-container>
 
 <p>-----------------</p>
-<!-- GET ALL TIPO CHAMADO 
+<!-- GET ALL TIPO CHAMADO
  <ng-container *ngIf="carregado; else carregando" >
   <div *ngIf="tipoChamados.length > 0; else nenhum">
     <div *ngFor="let tc of tipoChamados" class="card">
@@ -67,7 +67,7 @@
 </ng-container>-->
 
 <p>-----------------</p>
-<!-- GET ALL TIPO EQUIPAMENTO 
+<!-- GET ALL TIPO EQUIPAMENTO
  <ng-container *ngIf="carregado; else carregando" >
   <div *ngIf="tipoEquipamentos.length > 0; else nenhum">
     <div *ngFor="let te of tipoEquipamentos" class="card">
@@ -78,7 +78,7 @@
 </ng-container>-->
 
 <p>-----------------</p>
-<!-- GET ALL TIPO AMBIENTE 
+<!-- GET ALL TIPO AMBIENTE
 <ng-container *ngIf="carregado; else carregando" >
   <div *ngIf="tipoAmbientes.length > 0; else nenhum">
     <div *ngFor="let ta of tipoAmbientes" class="card">
@@ -89,14 +89,23 @@
 
 <!-- GET ALL PERMISSOES POR TIPO PERFIL -->
 <!-- GET ALL EQUIPAMENTOS POR TIPO AMBIENTE *AMBIENTE* -->
-<!--
+<!---->
 <ng-template #nenhum>
   <p>Nenhuma escola encontrado.</p>
 </ng-template>
 
 <ng-template #carregando>
   <p>Carregando escolas...</p>
-</ng-template>-->
+</ng-template>
+
+<div>
+  <form [formGroup]="formCadastrarTipoPerfil" class="">
+    <label>Nome:
+      <input formControlName="nomeTipoPerfil">
+      <button (click)="onCadastrarTipoPerfil()">Criar</button>
+    </label>
+  </form>
+</div>
 
 
 
