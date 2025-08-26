@@ -1,0 +1,47 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 32px 0px;
+    background-color: #fff;
+}
+
+#titulo-pagina {
+    color: #44A1A0;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.acoes {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+#icone-perfil {
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+}
+
+#icone-notificacao {
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+}
+
+.perfil {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+#titulo-perfil {
+    font-size: 1.3rem;
+    font-family: var(--font-plus-jakarta-sans);
+}

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { PrioridadeChamadoEnum } from '../../models/enums/prioridade-chamado-enum';
 import { chamadoProjection } from '../../DTOs/Projections/chamadoProjection';
 
+
 @Injectable({ providedIn: 'root' })
 export class GestorGeralService {
   private apiUrl = 'http://localhost:8080/gestor-geral';
@@ -26,7 +27,7 @@ export class GestorGeralService {
   }
 
   recusarChamado(rmGestor:string, idChamado: number, msgRecusa: string): Observable<string> {
-    return this.http.delete<string>(`${this.apiUrl}/gestores/${rmGestor}/chamados/${idChamado}/recusar`, 
+    return this.http.delete<string>(`${this.apiUrl}/gestores/${rmGestor}/chamados/${idChamado}/recusar`,
       {body: msgRecusa}
     );
   }

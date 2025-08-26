@@ -1,10 +1,9 @@
 import { PrioridadeChamadoEnum } from './../../models/enums/prioridade-chamado-enum';
 import { Component, OnInit } from '@angular/core';
-import { chamadoProjection } from '../../DTOs/Projections/chamadoProjection';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { GestorGeralService } from '../../services/gestor-geral/gestor-geral.service';
-import { StatusChamadoEnum, StatusChamadoEnumDescricao } from '../../models/enums/status-chamado-enum';
+import { chamadoProjection } from '../../DTOs/Projections/chamadoProjection';
 
 @Component({
   selector: 'app-gestor-geral',

@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth/auth.service';
 import { UsuarioService } from '../../services/usuario/usuario.service';
 
 @Component({
   selector: 'app-login',
+  standalone: true,
   imports: [RouterModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  constructor(private usuarioService: UsuarioService) {}
+  constructor(private authService: AuthService, private usuarioService: UsuarioService) {}
 
   login() {
     const loginDTO = {
@@ -19,7 +21,7 @@ export class LoginComponent {
       codEscola: 'E01',
     }
 
-    this.usuarioService.login(loginDTO).subscribe({
+    this.authService.login(loginDTO).subscribe({
       next: (token) => console.log('Token recebido: ', token),
       error: (err) => console.error('Erro ao fazer login: ', err),
     })

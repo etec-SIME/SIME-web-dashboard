@@ -1,0 +1,31 @@
+<h2>Lista de Funcionários</h2>
+
+<ng-container *ngIf="carregado; else carregando">
+  <div *ngIf="funcionarios.length > 0; else nenhum">
+    <div *ngFor="let f of funcionarios" class="card">
+      <p><strong>RM:</strong> {{ f.rmUsuario }}</p>
+      <p><strong>Nome:</strong> {{ f.nomeUsuario }}</p>
+      <p><strong>Email:</strong> {{ f.emailUsuario }}</p>
+      <p><strong>Telefone:</strong> {{ f.telefoneUsuario }}</p>
+      <p><strong>Chamados abertos:</strong> {{ f.chamadosAbertos }}</p>
+      <p><strong>Chamados concluídos:</strong> {{ f.chamadosConcluidos }}</p>
+    </div>
+  </div>
+</ng-container>
+
+
+<ng-template #nenhum>
+  <p>Nenhum funcionário encontrado.</p>
+</ng-template>
+
+<ng-template #carregando>
+  <p>Carregando funcionários...</p>
+</ng-template>
+
+
+<!-- rmUsuario: string;
+    chamadosAbertos: string;
+    chamadosConcluidos: string;
+    emailUsuario: string;
+    nomeUsuario: string;
+    telefoneUsuario: string;-->
