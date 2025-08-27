@@ -4,3 +4,128 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+/* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+
+/* instrument-sans-regular - latin */
+@font-face {
+    font-display: swap;
+    font-family: 'Instrument Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./app/fonts/instrument-sans-v3-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* instrument-sans-500 - latin */
+@font-face {
+    font-display: swap;
+    font-family: 'Instrument Sans';
+    font-style: normal;
+    font-weight: 500;
+    src: url('./app/fonts/instrument-sans-v3-latin-500.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* instrument-sans-600 - latin */
+@font-face {
+    font-display: swap;
+    font-family: 'Instrument Sans';
+    font-style: normal;
+    font-weight: 600;
+    src: url('./app/fonts/instrument-sans-v3-latin-600.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* instrument-sans-700 - latin */
+@font-face {
+    font-display: swap;
+    font-family: 'Instrument Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: url('./app/fonts/instrument-sans-v3-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* plus-jakarta-sans-regular - latin */
+@font-face {
+    font-display: swap;
+    font-family: 'Plus Jakarta Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./app/fonts/instrument-sans-v3-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* plus-jakarta-sans-500 - latin */
+@font-face {
+    font-display: swap;
+    font-family: 'Plus Jakarta Sans';
+    font-style: normal;
+    font-weight: 500;
+    src: url('./app/fonts/plus-jakarta-sans-v11-latin-500.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* plus-jakarta-sans-600 - latin */
+@font-face {
+    font-display: swap;
+    font-family: 'Plus Jakarta Sans';
+    font-style: normal;
+    font-weight: 600;
+    src: url('./app/fonts/plus-jakarta-sans-v11-latin-600.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* plus-jakarta-sans-700 - latin */
+@font-face {
+    font-display: swap;
+    font-family: 'Plus Jakarta Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: url('./app/fonts/plus-jakarta-sans-v11-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* montserrat-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./app/fonts/montserrat-v30-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* montserrat-500 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  src: url('./app/fonts/montserrat-v30-latin-500.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* montserrat-600 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  src: url('./app/fonts/montserrat-v30-latin-600.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* montserrat-700 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  src: url('./app/fonts/montserrat-v30-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* Variável global */
+:root {
+    --font-instrument-sans: 'Instrument Sans', sans-serif;
+    --font-plus-jakarta-sans: 'Plus Jakarta Sans', sans-serif;
+    --font-montserrat: 'Montserrat', sans-serif;
+
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+    --fw-bold: 700;
+}
+
+/* Estilo global */
+body {
+    font-family: var(--font-instrument-sans);
+    font-weight: var(--fw-semibold);
+}

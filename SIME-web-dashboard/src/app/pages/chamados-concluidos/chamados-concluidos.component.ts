@@ -1,28 +1,49 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ChamadoService } from '../../services/chamado/chamado.service';
-import { chamadoProjection } from '../../DTOs/Projections/chamadoProjection';
+import { chamadoProjection } from '../../DTOs/Projections/ChamadoProjection';
 import { FuncionarioService } from '../../services/funcionario/funcionario.service';
+import { QuadroChamadosComponent } from '../../components/quadro-chamados/quadro-chamados.component';
+import { ChamadoCardDTO } from '../../DTOs/ChamadoCardDTO';
+import { ChamadoService } from '../../services/chamado/Chamado.service';
 
 @Component({
   selector: 'app-chamados-concluidos',
-  standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [RouterModule, QuadroChamadosComponent],
   templateUrl: './chamados-concluidos.component.html',
   styleUrl: './chamados-concluidos.component.css'
 })
-export class ChamadosConcluidosComponent implements OnInit{
+export class ChamadosConcluidosComponent {
 
-  chamadosConcluidos: chamadoProjection[] = [];
+  chamadosAlta: ChamadoCardDTO[] = [];
+  chamadosMedia: ChamadoCardDTO[] = [];
+  chamadosBaixa: ChamadoCardDTO[] = [];
 
-  constructor(private funcionarioService: FuncionarioService) {}
+  constructor(private chamadoService: ChamadoService) {}
 
   ngOnInit(): void {
-    this.funcionarioService.getAllChamadosConcluidos().subscribe((resp) => {
-      console.log('Chamados concluidos:', resp);
-      this.chamadosConcluidos = resp;
-    });
+    this.carregarChamados();
   }
-  
+
+  carregarChamados(): void {
+    this.chamadoService.getChamadosByPrioridadeAndStatus('ALTA_PRIORIDADE', 'CONCLUIDO')
+      .subscribe(res => this.chamadosAlta = res);
+
+    this.chamadoService.getChamadosByPrioridadeAndStatus('MEDIA_PRIORIDADE', 'CONCLUIDO')
+      .subscribe(res => this.chamadosMedia = res);
+
+    this.chamadoService.getChamadosByPrioridadeAndStatus('BAIXA_PRIORIDADE', 'CONCLUIDO')
+      .subscribe(res => this.chamadosBaixa = res);
+  }
+
+  // chamadosConcluidos: chamadoProjection[] = [];
+
+  // constructor(private funcionarioService: FuncionarioService) {}
+
+  // ngOnInit(): void {
+  //   this.funcionarioService.getAllChamadosConcluidos().subscribe((resp) => {
+  //     console.log('Chamados concluidos:', resp);
+  //     this.chamadosConcluidos = resp;
+  //   });
+  // }
+
 }

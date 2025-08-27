@@ -1,26 +1,51 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { chamadoProjection } from '../../DTOs/Projections/ChamadoProjection';
 import { FuncionarioService } from '../../services/funcionario/funcionario.service';
-import { chamadoProjection } from '../../DTOs/Projections/chamadoProjection';
+import { QuadroChamadosComponent } from '../../components/quadro-chamados/quadro-chamados.component';
+import { ChamadoCardDTO } from '../../DTOs/ChamadoCardDTO';
+import { ChamadoService } from '../../services/chamado/Chamado.service';
 
 @Component({
   selector: 'app-chamados-pendentes',
-  standalone: true,
-  imports: [RouterModule],
+  imports: [QuadroChamadosComponent],
   templateUrl: './chamados-pendentes.component.html',
-  styleUrl: './chamados-pendentes.component.css'
+  styleUrls: ['./chamados-pendentes.component.css']
 })
-export class ChamadosPendentesComponent implements OnInit{
+export class ChamadosPendentesComponent {
 
-  chamadosConcluidos: chamadoProjection[] = [];
+  chamadosAlta: ChamadoCardDTO[] = [];
+  chamadosMedia: ChamadoCardDTO[] = [];
+  chamadosBaixa: ChamadoCardDTO[] = [];
   
-    constructor(private funcionarioService: FuncionarioService) {}
-  
-    ngOnInit(): void {
-      this.funcionarioService.getAllChamadosPendentes().subscribe((resp) => {
-        console.log('Chamados pendentes:', resp);
-        this.chamadosConcluidos = resp;
+  constructor(private chamadoService: ChamadoService) {}
+
+  ngOnInit(): void {
+    this.carregarChamados();
+  }
+
+  carregarChamados(): void {
+    this.chamadoService.getChamadosByPrioridade('ALTA_PRIORIDADE')
+      .subscribe(res => {
+        this.chamadosAlta = res;
+        console.log('Chamados recebidos: ', res);
       });
-    }
 
+    this.chamadoService.getChamadosByPrioridade('MEDIA_PRIORIDADE')
+      .subscribe(res => this.chamadosMedia = res);
+
+    this.chamadoService.getChamadosByPrioridade('BAIXA_PRIORIDADE')
+      .subscribe(res => this.chamadosBaixa = res);
+  }
+
+  //implements OnInit {
+  // chamadosConcluidos: chamadoProjection[] = [];
+  
+  //   constructor(private funcionarioService: FuncionarioService) {}
+  
+  //   ngOnInit(): void {
+  //     this.funcionarioService.getAllChamadosPendentes().subscribe((resp) => {
+  //       console.log('Chamados pendentes:', resp);
+  //       this.chamadosConcluidos = resp;
+  //     });
+  //   }
 }
