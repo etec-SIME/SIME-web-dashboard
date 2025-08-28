@@ -1,0 +1,22 @@
+#chamados{
+    display: flex;
+}
+
+#chamados{
+    cursor: pointer;
+    background-color: aqua;
+    border-radius: 5px;
+    align-items: center;
+    padding: 20px 40px;
+    margin-bottom: 15px;
+}
+
+#btns-prioridade{
+    display: flex;
+    gap: 10px;
+}
+
+#btns-status{
+    display: flex;
+    gap: 10px;
+}
