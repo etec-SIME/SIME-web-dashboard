@@ -16,7 +16,7 @@ export const routes: Routes = [
         { path: 'home', component: HomeComponent, data: { titulo: 'Home - Locais' } },
         { path: 'chamados-pendentes', component: ChamadosPendentesComponent, data: { titulo: 'Chamados Pendentes' } },
         { path: 'chamados-concluidos', component: ChamadosConcluidosComponent, data: { titulo: 'Chamados Concluídos' } },
-        { path: 'criar-chamado', component: CriarChamadoComponent, data: { titulo: 'Criar Chamado' } }
+        { path: 'criar-chamado', component: CriarChamadoComponent, data: { titulo: 'Criar Chamado' } },
         { path: 'home', component: HomeComponent, data: { titulo: 'Home - Locais' } },
       ]
     },
