@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Form, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-criar-chamado',
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './criar-chamado.component.html',
   styleUrl: './criar-chamado.component.css'
 })
@@ -32,7 +32,7 @@ export class CriarChamadoComponent {
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
   }
-  
+
   onSubmit() {
     if (this.chamadoForm.valid) {
       const formData = new FormData();
@@ -43,7 +43,6 @@ export class CriarChamadoComponent {
         formData.append('anexo', this.selectedFile);
       }
       console.log('Form enviado:', formData);
-      
     }
   }
 }

@@ -1,4 +1,4 @@
-<form class="chamado-forms">
+<form [formGroup]="chamadoForm" (ngSubmit)="onSubmit()" class="form-container">
 
     <!-- Linha 1 -->
     <div class="form-row">
