@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { chamadoProjection } from '../../DTOs/Projections/ChamadoProjection';
 import { FuncionarioService } from '../../services/funcionario/funcionario.service';
 import { QuadroChamadosComponent } from '../../components/quadro-chamados/quadro-chamados.component';
 import { ChamadoCardDTO } from '../../DTOs/ChamadoCardDTO';
-import { ChamadoService } from '../../services/chamado/Chamado.service';
+import { ChamadoService } from '../../services/chamado/chamado.service';
 
 @Component({
   selector: 'app-chamados-concluidos',
