@@ -6,7 +6,7 @@
 
 .sidebar{
     background-color: #44A1A0;
-    height: 100vh; /* ou 100% ?*/
+    height: 100vh; /* ou 100% ? -> Dá na mesma*/
     display: flex;
     flex-direction: column;
     align-items: center;
