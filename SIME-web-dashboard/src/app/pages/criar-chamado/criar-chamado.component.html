@@ -1,4 +1,49 @@
 <form class="chamado-forms">
-    <div class="inputs"></div>
-    <div class="anexo"></div>
+
+    <!-- Linha 1 -->
+    <div class="form-row">
+        <input type="date" formControlName="data" placeholder="Data" />
+        <input type="text" formControlName="local" placeholder="Local" />
+    </div>
+
+    <!-- Linha 2 -->
+    <div class="form-row">
+        <input type="email" formControlName="email" placeholder="Email" />
+    </div>
+
+    <!-- Linha 3 -->
+    <div class="form-row">
+        <select formControlName="tipoChamado">
+            <option value="">Tipo Chamado</option>
+            @for (tipoChamado of tiposChamado; track tipoChamado.idTipoChamado) {
+                <option [value]="tipoChamado.idTipoChamado">
+                    {{ tipoChamado.nomeTipoChamado }}
+                </option>
+            }
+        </select>
+
+        <input type="text" formControlName="problema" placeholder="Problema" />
+    </div>
+
+    <!-- Linha 4 -->
+    <div class="form-row">
+        <textarea formControlName="descricao" placeholder="Descrição"></textarea>
+    </div>
+    
+    <!-- Linha 5 -->
+    <div class="form-row">
+        <input type="text" formControlName="equipamento" placeholder="Equipamento" />
+        <input type="text" formControlName="codigoEquipamento" placeholder="Código do equipamento" />
+    </div>
+
+    <!-- Upload -->
+    <div class="form-upload">
+        <label for="anexo">Adicionar Anexo</label>
+        <input type="file" id="anexo" (change)="onFileSelected($event)" />
+    </div>
+
+    <!-- Botão -->
+    <div class="form-actions">
+        <button type="submit" [disabled]="chamadoForm.invalid">Enviar</button>
+    </div>
 </form>
