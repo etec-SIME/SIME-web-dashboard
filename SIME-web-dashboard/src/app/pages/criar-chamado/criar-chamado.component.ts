@@ -14,12 +14,17 @@ export class CriarChamadoComponent {
     { idTipoChamado: 2, nomeTipoChamado: 'Suporte' },
     { idTipoChamado: 3, nomeTipoChamado: 'Outro' }
   ];
+  ambiente = [
+    { idAmbiente: 1, nomeAmbiente: 'Quitters1' },
+    { idAmbiente: 2, nomeAmbiente: 'Quitters2' },
+    { idAmbiente: 3, nomeAmbiente: 'Quitters3' }
+  ];
   selectedFile: File | null = null;
 
   constructor(private fb: FormBuilder) {
     this.chamadoForm = this.fb.group({
       data: ['', Validators.required],
-      local: ['', Validators.required],
+      ambiente: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       tipoChamado: ['', Validators.required],
       problema: ['', Validators.required],
