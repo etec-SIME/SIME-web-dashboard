@@ -1,0 +1,20 @@
+<div class="calendario-semanal">
+    <p>Semana</p>
+    <div class="calendario-semanal-container">
+    
+        <!-- Números -->
+        <div *ngFor="let num of diasNum; let i = index"
+            class="diasNum" 
+            [ngClass]="{ 'dia-atual num': num === diaAtualNum }">
+            {{ num }}
+        </div>
+        
+        <!-- Nomes -->
+        <div *ngFor="let nome of diasDaSemana; let i = index" 
+            class="diasNome" 
+            [ngClass]="{ 'dia-atual semana': i === diaAtualSemana }">
+            {{ nome }}
+        </div>
+        
+    </div>
+</div>
