@@ -7,17 +7,16 @@
 
 .calendario-semanal {
   background-color: #F1EEF6;
-  padding: 1.5vw;
-  padding-top: 1.2vw;
-  margin-right: 2vw;
-  border-radius: 0.6vw;
+  padding: clamp(10px ,1vw, 3vw);
+  padding-top: clamp(10px, 1.2vw, 3.2vw);
+  border-radius: clamp(5px, 0.6vw, 2.6vw);
 }
 
 p {
   color: #44A1A0;
   font-weight: var(--fw-semibold);
-  margin-bottom: 1.2vw;
-  font-size: clamp(11px, 1.2vw, 20px);
+  margin-bottom: clamp(10px, 1vw, 3.2vw);
+  font-size: clamp(15px, 1.2vw, 3.2vw);
 }
 
 .calendario-semanal-container {
@@ -28,10 +27,10 @@ p {
 
 .diasNum {
   text-align: center;
-  font-size: clamp(13px, 1.25vw, 22px);
+  font-size: clamp(15px, 1.25vw, 3.25vw);
   font-weight: var(--fw-semibold);
   color: black;
-  height: clamp(20px, 1.7vw, 28px); /* altura igual para todos */
+  height: clamp(30px, 1.7vw, 3.7vw); /* altura igual para todos */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -39,9 +38,11 @@ p {
 
 .diasNome {
   text-align: center;
-  font-size: clamp(7px, 1vw, 13px);
   color: #757575;
   font-weight: var(--fw-medium);
+  font-size: clamp(11.5px, 1vw, 3vw);
+  padding-left: clamp(3px, 0.1vw, 3vw);
+  padding-right: clamp(3px, 0.1vw, 3vw);
 }
 
 .dia-atual {
@@ -50,15 +51,15 @@ p {
 }
 
 .dia-atual.semana{
-    padding-bottom: 0.4vw;
-    border-bottom-left-radius: 0.5vw;
-    border-bottom-right-radius: 0.5vw;
-    font-weight: var(--fw-medium);
+  font-weight: var(--fw-medium);
+  padding-bottom: clamp(4px, 0.4vw, 2.4vw);
+  border-bottom-left-radius: clamp(5px ,0.5vw, 2.5vw);
+  border-bottom-right-radius: clamp(5px ,0.5vw, 2.5vw);
 }
 
 .dia-atual.num{
   font-weight: var(--fw-bold);
-    border-top-left-radius: 0.5vw;
-    border-top-right-radius: 0.5vw;
-    padding: 0 0.4vw; /* só padding horizontal */
+  border-top-left-radius: clamp(5px ,0.5vw, 2.5vw);
+  border-top-right-radius: clamp(5px ,0.5vw, 2.5vw);
+  padding: 0 clamp(2px, 0.4vw, 2.4vw); /* só padding horizontal */
 }

@@ -11,6 +11,5 @@ import { CalendarioSemanalComponent } from "../../components/calendario-semanal/
 })
 export class HomeComponent {
 
-  locais: 
 
 }
