@@ -1,4 +1,4 @@
-import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
+import { ChamadoRequestDTO } from '../../DTOs/chamadoRequestDTO';
 import { chamadoProjection } from './../../DTOs/Projections/chamadoProjection';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -26,6 +26,6 @@ export class ChamadoService {
   }
 
   criarChamado(rmUsuario: string, dto: ChamadoRequestDTO): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/${rmUsuario}/chamado`, dto);
+    return this.http.post(`${this.apiUrl}/${rmUsuario}/chamado`, dto);
   }
 }
