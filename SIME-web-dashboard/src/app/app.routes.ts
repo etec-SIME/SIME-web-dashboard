@@ -8,6 +8,7 @@ import { ChamadosPendentesComponent } from './pages/chamados-pendentes/chamados-
 import { HomeComponent } from './pages/home/home.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { GestorGeralComponent } from './pages/gestor-geral/gestor-geral.component';
+import { PerfilComponent } from './pages/perfil/perfil.component';
 
 export const routes: Routes = [
     { path: '', component: LayoutComponent,
@@ -15,6 +16,7 @@ export const routes: Routes = [
         { path: 'chamados-pendentes', component: ChamadosPendentesComponent, data: { titulo: 'Chamados Pendentes' } },
         { path: 'chamados-concluidos', component: ChamadosConcluidosComponent, data: { titulo: 'Chamados Concluídos' } },
         { path: 'home', component: HomeComponent, data: { titulo: 'Home - Locais' } },
+        { path: 'perfil', component: PerfilComponent, data: { titulo: 'Perfil' } },
       ]
     },
     { path: 'dashboard', component: DashboardComponent },
