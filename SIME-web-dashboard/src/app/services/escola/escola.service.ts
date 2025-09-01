@@ -21,6 +21,9 @@ import { equipamentoRequestDTO } from '../../DTOs/equipamentoRequestDTO';
 import { escolaProjection } from '../../DTOs/Projections/escolaProjection';
 import { tipoAmbiente } from '../../models/tipoAmbiente';
 import { tipoAmbienteRequestDTO } from '../../DTOs/tipoAmbienteRequestDTO';
+import { permissaoTipoPerfilDTO } from '../../DTOs/permissaoTipoPerfilDTO';
+import { tipoEquipamentoAmbienteDTO } from '../../DTOs/tipoEquipamentoAmbienteDTO';
+import { tipoPerfilProjection } from '../../DTOs/Projections/tipoPerfilProjection';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +34,7 @@ export class EscolaService {
 
   constructor(private http: HttpClient) { }
 
-  token : String = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODAwMDEwMCIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX0VTQ09MQSJ9XSwiZW50aWRhZGUiOiJFU0NPTEEiLCJpYXQiOjE3NTYyMTkxOTAsImV4cCI6MTc1NjMwNTU5MH0.nreD2bnCyUXnjDgVaHlu385QMPORdQhHlszL9bHJjok';
+  token : String = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODAwMDEwMCIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX0VTQ09MQSJ9XSwiZW50aWRhZGUiOiJFU0NPTEEiLCJpYXQiOjE3NTY3NTkzOTksImV4cCI6MTc1Njg0NTc5OX0.7iRsMwM_t-fk74GRusO7kMdG3bTgWksm4j35lXCxwY0';
   // Inserir o Token manualmente para testar
 
   private getAuthHeaders() {
@@ -49,6 +52,7 @@ export class EscolaService {
   getAllEscolas(): Observable<escolaProjection[]>{
     return this.http.get<escolaProjection[]>(this.apiUrl, this.getAuthHeaders());
   }
+  
   getAllTipoPerfil(): Observable<tipoPerfilRequestDTO[]>{
     return this.http.get<tipoPerfilRequestDTO[]>(`${this.apiUrl}/tipo-perfil`, this.getAuthHeaders());
   }
@@ -120,42 +124,46 @@ export class EscolaService {
 
   //MÉTODOS DE ATRIBUIÇÃO -------------
 
-  atribuirPermissoesTipoPerfil(idTipoPerfil: number): Observable<permissao[]>{
-    return this.http.put<permissao[]>(`${this.apiUrl}/tipo-perfil/${idTipoPerfil}/permissao`, this.getAuthHeaders());
+  atribuirPermissoesTipoPerfil(idTipoPerfil: number, permissoes: permissaoTipoPerfilDTO): Observable<permissao[]>{
+    return this.http.put<permissao[]>(`${this.apiUrl}/tipo-perfil/${idTipoPerfil}/permissao`, permissoes, this.getAuthHeaders());
   }
 
-  atribuirTipoEquipamentoAmbiente(idAmbiente: number): Observable<tipoEquipamento[]>{
-    return this.http.put<tipoEquipamento[]>(`${this.apiUrl}/ambiente/${idAmbiente}/tipo-equipamento`, this.getAuthHeaders());
+  atribuirTipoEquipamentoAmbiente(idAmbiente: number, tipoEquipamentos: tipoEquipamentoAmbienteDTO): Observable<tipoEquipamento[]>{
+    return this.http.put<tipoEquipamento[]>(`${this.apiUrl}/ambiente/${idAmbiente}/tipo-equipamento`, tipoEquipamentos, this.getAuthHeaders());
   }
 
   //MÉTODOS DE EDIÇÃO -------------
 
-  editarTipoPerfil(idTipoPerfil: number): Observable<tipoPerfil>{
-    return this.http.put<tipoPerfil>(`${this.apiUrl}/tipo-perfil/${idTipoPerfil}`, this.getAuthHeaders());
+  editarTipoPerfil(idTipoPerfil: number, tipoPerfilDTO: tipoPerfilRequestDTO): Observable<tipoPerfilProjection>{
+    return this.http.put<tipoPerfilProjection>(`${this.apiUrl}/tipo-perfil/${idTipoPerfil}`, tipoPerfilDTO, this.getAuthHeaders());
   }
 
-  editarDepartamento(idDepartamento: number): Observable<departamento>{
-    return this.http.put<departamento>(`${this.apiUrl}/departamento/${idDepartamento}`, this.getAuthHeaders());
+  editarDepartamento(idDepartamento: number, departamentoDTO: departamentoRequestDTO): Observable<departamento>{
+    return this.http.put<departamento>(`${this.apiUrl}/departamento/${idDepartamento}`, departamentoDTO, this.getAuthHeaders());
   }
 
-  editarTipoEquipamento(idTipoEquipamento: number): Observable<tipoEquipamento>{
-    return this.http.put<tipoEquipamento>(`${this.apiUrl}/tipo-equipamento/${idTipoEquipamento}`, this.getAuthHeaders());
+  editarTipoEquipamento(idTipoEquipamento: number, tipoEquipamentoDTO: tipoEquipamentoRequestDTO): Observable<tipoEquipamento>{
+    return this.http.put<tipoEquipamento>(`${this.apiUrl}/tipo-equipamento/${idTipoEquipamento}`, tipoEquipamentoDTO, this.getAuthHeaders());
   }
 
-  editarEquipamento(idEquipamento: number): Observable<equipamento>{
-    return this.http.put<equipamento>(`${this.apiUrl}/equipamento/${idEquipamento}`, this.getAuthHeaders());
+  editarEquipamento(idEquipamento: number, equipamentoDTO: equipamentoRequestDTO): Observable<equipamento>{
+    return this.http.put<equipamento>(`${this.apiUrl}/equipamento/${idEquipamento}`, equipamentoDTO, this.getAuthHeaders());
   }
 
-  editarTipoChamado(idTipoChamado: number): Observable<tipoChamado>{
-    return this.http.put<tipoChamado>(`${this.apiUrl}/tipo-chamado/${idTipoChamado}`, this.getAuthHeaders());
+  editarTipoChamado(idTipoChamado: number, tipoChamadoDTO: tipoChamadoRequestDTO): Observable<tipoChamado>{
+    return this.http.put<tipoChamado>(`${this.apiUrl}/tipo-chamado/${idTipoChamado}`, tipoChamadoDTO, this.getAuthHeaders());
   }
 
-  editarAmbiente(idAmbiente: number){
-    return this.http.put<ambiente>(`${this.apiUrl}/ambiente/${idAmbiente}`, this.getAuthHeaders());
+  editarAmbiente(idAmbiente: number, ambienteDTO: ambienteRequestDTO){
+    return this.http.put<ambiente>(`${this.apiUrl}/ambiente/${idAmbiente}`, ambienteDTO, this.getAuthHeaders());
   }
 
-  editarTipoAmbiente(idTipoAmbiente: number){
-    return this.http.put<tipoAmbiente>(`${this.apiUrl}/tipo-ambiente/${idTipoAmbiente}`, this.getAuthHeaders());
+  editarTipoAmbiente(idTipoAmbiente: number, tipoAmbienteDTO: tipoAmbienteRequestDTO){
+    return this.http.put<tipoAmbiente>(`${this.apiUrl}/tipo-ambiente/${idTipoAmbiente}`, tipoAmbienteDTO, this.getAuthHeaders());
+  }
+
+  editarUsuario(idUsuario: number, usuarioDTO: usuarioRequestDTO){
+    return this.http.put<usuario>(`${this.apiUrl}/usuario/${idUsuario}`, usuarioDTO, this.getAuthHeaders());
   }
 
 }

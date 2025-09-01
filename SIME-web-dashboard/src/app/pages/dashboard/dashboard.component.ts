@@ -1,9 +1,8 @@
-import { chamado } from './../../models/chamado';
+import { ChamadoService } from './../../services/chamado/chamado.service';
+import { ChamadoRequestDTO } from './../../DTOs/chamadoRequestDTO';
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { ChamadoService } from '../../services/chamado/chamado.service';
-import { ChamadoRequestDTO } from '../../DTOs/chamadoRequestDTO';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,7 +13,7 @@ import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 })
 export class DashboardComponent {
 
-  constructor(private chamadoService: ChamadoService) { }
+  constructor(private chamadoService: ChamadoService){}
 
   getAllChamados() {
     this.chamadoService.getAllChamados().subscribe({

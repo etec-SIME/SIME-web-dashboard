@@ -1,0 +1,105 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.content-box-get{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    background-color: rgb(232, 232, 232);
+    margin-bottom: 60px;
+}
+
+.content-box-post{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    background-color: rgb(232, 232, 232);
+    margin-bottom: 60px;
+}
+
+.content-box-put{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    background-color: rgb(232, 232, 232);
+}
+
+.card-post{
+    display: flex;
+    width: 300px;
+    height: 200px;
+    background-color:rgb(185, 207, 249);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.card-post-usuario{
+    display: flex;
+    width: 300px;
+    height: 400px;
+    background-color:rgb(185, 207, 249);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.card-put{
+    display: flex;
+    width: 300px;
+    height: 200px;
+    background-color:rgb(185, 249, 229);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.card-put-usuario{
+    display: flex;
+    width: 300px;
+    height: 400px;
+    background-color:rgb(185, 249, 229);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.card-get{
+    display: flex;
+    width: 300px;
+    height: 400px;
+    background-color:rgb(246, 249, 185);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.tipo_perfil{
+    background-color: aqua;
+    width: 300px;
+    height: 100px;
+}
+.departamentos{
+    background-color: aqua;
+    width: 300px;
+    height: 130px;
+}
+.departamento{
+    display: flex;
+    flex-direction: column;
+}
+.departamento input{
+    width: 200px;
+}
+.departamento button{
+    width: 100px;
+}

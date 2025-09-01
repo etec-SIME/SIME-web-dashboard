@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ChamadoCardComponent } from '../chamado-card/chamado-card.component';
 import { ChamadoCardDTO } from '../../DTOs/ChamadoCardDTO';
-import { ChamadoService } from '../../services/chamado/chamado.service';
 import { CommonModule, DatePipe } from '@angular/common';
 
 @Component({

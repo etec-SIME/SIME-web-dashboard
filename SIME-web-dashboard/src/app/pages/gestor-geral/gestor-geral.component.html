@@ -1,0 +1,28 @@
+<a routerLink="/">Voltar</a>
+
+<h2>Lista Chamados</h2>
+
+<button (click)="exibeBtnsPrioridade()">Editar prioridade</button>
+
+@for(c of chamados; track c.idChamado){
+    <br>
+    <div id="chamados">
+       <div id="chamado">
+            <p><strong>Título:</strong> {{c.tituloChamado}}</p>
+            <p><strong>Status:</strong> {{c.statusChamado}}</p>
+            <p><strong>Prioridade:</strong> {{c.prioridadeChamado}}</p>
+            @if(exibe){
+                <div id="btns-prioridade">
+                    <button (click)="editarPrioridade('123456', c.idChamado, prioridades[0])">Baixa prioridade</button>
+                    <button (click)="editarPrioridade('123456', c.idChamado, prioridades[1])">Média prioridade</button>
+                    <button (click)="editarPrioridade('123456', c.idChamado, prioridades[2])">Alta prioridade</button>
+                </div>
+                <br>
+            }
+            <div id="btns-status">
+                <button (click)="aceitarChamado('123456', c.idChamado)">Aceitar</button>
+                <button (click)="recusarChamado('123456', c.idChamado, 'Teste funfou')">Recusar</button>
+            </div>
+       </div>
+    </div>
+}

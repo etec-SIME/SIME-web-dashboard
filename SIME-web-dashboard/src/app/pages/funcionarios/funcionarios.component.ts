@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { usuarioProjection } from '../../DTOs/Projections/usuarioProjection';
 import { FuncionarioService } from '../../services/funcionario/funcionario.service';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { usuarioProjection } from '../../DTOs/Projections/usuarioProjection';
 
 @Component({
   selector: 'app-funcionarios',

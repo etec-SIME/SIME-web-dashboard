@@ -1,6 +1,6 @@
 .layout {
     display: grid;
-    grid-template-columns: minmax(200px, 20vw) auto 3vw;
+    grid-template-columns: clamp(230px, 18vw, 20vw) auto 3vw;
 }
 
 .content {
