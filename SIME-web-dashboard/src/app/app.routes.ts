@@ -8,6 +8,8 @@ import { ChamadosPendentesComponent } from './pages/chamados-pendentes/chamados-
 import { HomeComponent } from './pages/home/home.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { GestorGeralComponent } from './pages/gestor-geral/gestor-geral.component';
+/*Retirar no final */
+import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha.component';
 
 export const routes: Routes = [
     { path: '', component: LayoutComponent,
@@ -20,5 +22,7 @@ export const routes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
     { path: 'funcionarios', component: FuncionariosComponent },
     {path: 'gestor-geral', component: GestorGeralComponent},
+    /*Retirar no final */
+    { path: 'recuperar-senha', component: RecuperarSenhaComponent, data: {titulo: 'Recuperar Senha'} },
     { path: '**', redirectTo: '' }
 ];
