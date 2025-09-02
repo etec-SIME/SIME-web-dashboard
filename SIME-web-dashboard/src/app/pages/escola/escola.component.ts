@@ -34,18 +34,18 @@ export class EscolaComponent implements OnInit{
   tipoChamados: tipoChamadoRequestDTO[] = []
   tipoEquipamentos: tipoEquipamento[] = []
   tipoAmbientes: tipoAmbienteRequestDTO[] = []
-  
+
   permissoes: permissao[] = []
   tipoEquipamento: tipoEquipamento[] = []
 
-  constructor(private escolaService: EscolaService, private fb: FormBuilder){ 
+  constructor(private escolaService: EscolaService, private fb: FormBuilder){
     this.CriarForms();
   }
 
   carregado: boolean = false;
 
   ngOnInit(): void{
-    
+
     // escolas
     this.escolaService.getAllEscolas().subscribe((resp) => {
       this.escolas = resp,
@@ -96,7 +96,7 @@ export class EscolaComponent implements OnInit{
   }
 
   //Formulários de cadastro/criação
-  
+
   formCadastrarTipoPerfil!: FormGroup;
   formCriarTipoChamado!: FormGroup;
   formCriarTipoEquipamento!: FormGroup;
@@ -132,7 +132,7 @@ export class EscolaComponent implements OnInit{
 
     this.idAmbiente = this.fb.group({
       id: ['']
-    })    
+    })
 
     this.listaPermissoes = this.fb.group({
       idTipoPerfil: [''],
@@ -153,6 +153,7 @@ export class EscolaComponent implements OnInit{
     })
 
     this.formCriarTipoChamado = this.fb.group({
+      idDepartamento: [''],
       nomeTipoChamado: ['']
     })
 
@@ -199,6 +200,7 @@ export class EscolaComponent implements OnInit{
 
     this.formEditarTipoChamado = this.fb.group({
       id: [''],
+      idDepartamento: [''],
       nomeTipoChamado: ['']
     })
 
@@ -284,7 +286,7 @@ export class EscolaComponent implements OnInit{
         }
       })
     }
-    
+
     onAtribuirTipoEquipamento(){
       const idAmbiente = this.listaTipoEquipamento.value.idAmbiente;
 
@@ -412,10 +414,10 @@ export class EscolaComponent implements OnInit{
 
   onEditarTipoPerfil(){
     const idTipoPerfil= this.formEditarTipoPerfil.value.id;
-      
+
     const tipoPerfilEditado = {
         nomeTipoPerfil: this.formEditarTipoPerfil.value.nomeTipoPerfil
-      } 
+      }
 
     this.escolaService.editarTipoPerfil(idTipoPerfil, tipoPerfilEditado).subscribe({
       next: (res) => {
@@ -432,10 +434,10 @@ export class EscolaComponent implements OnInit{
 
   onEditarTipoAmbiente(){
     const idTipoAmbiente = this.formEditarTipoAmbiente.value.id;
-      
+
     const tipoAmbienteEditado = {
         nomeTipoAmbiente: this.formEditarTipoAmbiente.value.nomeTipoAmbiente
-      } 
+      }
 
     this.escolaService.editarTipoAmbiente(idTipoAmbiente, tipoAmbienteEditado).subscribe({
       next: (res) => {
@@ -450,10 +452,10 @@ export class EscolaComponent implements OnInit{
 
   onEditarTipoEquipamento(){
     const idTipoEquipamento= this.formEditarTipoEquipamento.value.id;
-      
+
     const tipoEquipamentoEditado = {
         nomeTipoEquipamento: this.formEditarTipoEquipamento.value.nomeTipoEquipamento
-      } 
+      }
 
     this.escolaService.editarTipoEquipamento(idTipoEquipamento, tipoEquipamentoEditado).subscribe({
       next: (res) => {
@@ -468,10 +470,11 @@ export class EscolaComponent implements OnInit{
 
   onEditarTipoChamado(){
     const idTipoChamado= this.formEditarTipoChamado.value.id;
-      
+
     const tipoChamadoEditado = {
+        idDepartamento: this.formEditarTipoChamado.value.idDepartamento,
         nomeTipoChamado: this.formEditarTipoChamado.value.nomeTipoChamado
-      } 
+      }
 
     this.escolaService.editarTipoChamado(idTipoChamado, tipoChamadoEditado).subscribe({
       next: (res) => {

@@ -34,7 +34,7 @@ export class EscolaService {
 
   constructor(private http: HttpClient) { }
 
-  token : String = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODAwMDEwMCIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX0VTQ09MQSJ9XSwiZW50aWRhZGUiOiJFU0NPTEEiLCJpYXQiOjE3NTY3NTkzOTksImV4cCI6MTc1Njg0NTc5OX0.7iRsMwM_t-fk74GRusO7kMdG3bTgWksm4j35lXCxwY0';
+  token : String = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTYiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiQWRtaW4ifSx7ImF1dGhvcml0eSI6IlZpc3VhbGl6YXIgQ2hhbWFkbyJ9LHsiYXV0aG9yaXR5IjoiRWRpdGFyIENoYW1hZG8ifSx7ImF1dGhvcml0eSI6IkNyaWFyIENoYW1hZG8ifV0sImVudGlkYWRlIjoiVVNVQVJJTyIsImlhdCI6MTc1NjgyNDg0MSwiZXhwIjoxNzU2OTExMjQxfQ.YIml1g5F5pkV_QMqjVi-PaZ0zbwlYLTY4vliMgA873o';
   // Inserir o Token manualmente para testar
 
   private getAuthHeaders() {
@@ -52,7 +52,7 @@ export class EscolaService {
   getAllEscolas(): Observable<escolaProjection[]>{
     return this.http.get<escolaProjection[]>(this.apiUrl, this.getAuthHeaders());
   }
-  
+
   getAllTipoPerfil(): Observable<tipoPerfilRequestDTO[]>{
     return this.http.get<tipoPerfilRequestDTO[]>(`${this.apiUrl}/tipo-perfil`, this.getAuthHeaders());
   }
@@ -105,21 +105,22 @@ export class EscolaService {
   }
 
   criarTipoChamado(dto: tipoChamadoRequestDTO): Observable<any>{
-    return this.http.post<ambiente>(`${this.apiUrl}/tipo-chamado`, dto, this.getAuthHeaders());
+    return this.http.post<tipoChamadoRequestDTO>(`${this.apiUrl}/tipo-chamado`, dto, this.getAuthHeaders());
   }
 
   criarDepartamento(dto: departamentoRequestDTO): Observable<any>{
-    return this.http.post<ambiente>(`${this.apiUrl}/departamento`, dto, this.getAuthHeaders());
+    return this.http.post<departamento>(`${this.apiUrl}/departamento`, dto, this.getAuthHeaders());
   }
+  
   criarTipoEquipamento(dto: tipoEquipamentoRequestDTO): Observable<any>{
-    return this.http.post<ambiente>(`${this.apiUrl}/tipo-equipamento`, dto, this.getAuthHeaders());
+    return this.http.post<tipoEquipamento>(`${this.apiUrl}/tipo-equipamento`, dto, this.getAuthHeaders());
   }
   cadastrarEquipamento(dto: equipamentoRequestDTO): Observable<any>{
-    return this.http.post<ambiente>(`${this.apiUrl}/equipamento`, dto, this.getAuthHeaders());
+    return this.http.post<equipamento>(`${this.apiUrl}/equipamento`, dto, this.getAuthHeaders());
   }
 
   criarTipoAmbiente(dto: tipoAmbienteRequestDTO): Observable<any>{
-    return this.http.post<ambiente>(`${this.apiUrl}/tipo_ambiente`, dto, this.getAuthHeaders());
+    return this.http.post<tipoAmbienteRequestDTO>(`${this.apiUrl}/tipo-ambiente`, dto, this.getAuthHeaders());
   }
 
   //MÉTODOS DE ATRIBUIÇÃO -------------

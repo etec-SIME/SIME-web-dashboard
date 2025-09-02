@@ -65,8 +65,8 @@
  <ng-container *ngIf="carregado; else carregando" >
   <div *ngIf="tipoEquipamentos.length > 0; else nenhum" class="card-get">
     <div *ngFor="let te of tipoEquipamentos">
-      <p><strong>Nome: </strong> {{ te.idTipoEquipamento}}</p>
-      <p><strong>Descrição: </strong> {{ te.nomeTipoEquipamento}}</p>
+      <p><strong>ID: </strong> {{ te.idTipoEquipamento}}</p>
+      <p><strong>Nome: </strong> {{ te.nomeTipoEquipamento}}</p>
     </div>
   </div>
 </ng-container>
@@ -82,7 +82,7 @@
 
 <!-- GET ALL PERMISSOES POR TIPO PERFIL -->
  <div class="card-get">
-  
+
     <h4>-- PERMISSOES POR TIPO PERFIL --</h4>
     <form [formGroup]="idTipoPerfil">
       <label>
@@ -101,11 +101,11 @@
   </div>
 
 </div>
- 
+
 <!-- GET ALL EQUIPAMENTOS POR AMBIENTE -->
- 
+
 <div class="card-get">
-  
+
     <h4>-- TIPO EQUIPAMENTOS POR AMBIENTE  --</h4>
     <form [formGroup]="idAmbiente">
       <label>
@@ -174,6 +174,8 @@
     <h4>-- TIPO CHAMADO --</h4>
     <form [formGroup]="formCriarTipoChamado" class="">
     <label>
+      <p>ID departamento:</p>
+      <input formControlName="idDepartamento">
       <p>Nome tipo chamado: </p>
       <input formControlName="nomeTipoChamado">
       <button (click)="onCriarTipoChamado()">Criar</button>
@@ -186,8 +188,8 @@
     <form [formGroup]="formCriarDepartamento">
       <label class="departamento">
         <p>Nome do Departamento:</p>
-        <input formControlName="nomeDepartamento"> 
-        <p>Descrição departamento:</p> 
+        <input formControlName="nomeDepartamento">
+        <p>Descrição departamento:</p>
         <input formControlName="descDepartamento">
         <button (click)="OnCriarDepartanmento()">Criar</button>
       </label>
@@ -199,8 +201,8 @@
     <form [formGroup]="formCadastrarAmbiente">
       <label class="ambiente">
         <p>Nome do ambiente:</p>
-        <input formControlName="numAmbiente"> 
-        <p>Descrição ambiente:</p> 
+        <input formControlName="numAmbiente">
+        <p>Descrição ambiente:</p>
         <input formControlName="descricaoAmbiente">
         <button (click)="onCadastrarAmbiente()">Criar</button>
       </label>
@@ -212,8 +214,8 @@
     <form [formGroup]="formCadastrarEquipamento">
       <label>
         <p>Codigo equipamento:</p>
-        <input formControlName="codEquipamento"> 
-        <p>ID Tipo equipamento:</p> 
+        <input formControlName="codEquipamento">
+        <p>ID Tipo equipamento:</p>
         <input formControlName="idtipoEquipamento">
         <button (click)="onCadastrarEquipamento()">Criar</button>
       </label>
@@ -225,8 +227,8 @@
     <form [formGroup]="formCadastrarUsuario">
       <label>
         <p>rm usuario:</p>
-        <input formControlName="rmUsuario"> 
-        <p>ID tipo perfil:</p> 
+        <input formControlName="rmUsuario">
+        <p>ID tipo perfil:</p>
         <input formControlName="idTipoPerfil">
         <p>nome usuario:</p>
         <input formControlName="nomeUsuario">
@@ -352,8 +354,8 @@
       <p>ID usuario:</p>
       <input formControlName="id">
       <p>rm usuario:</p>
-        <input formControlName="rmUsuario"> 
-        <p>ID tipo perfil:</p> 
+        <input formControlName="rmUsuario">
+        <p>ID tipo perfil:</p>
         <input formControlName="idTipoPerfil">
         <p>nome usuario:</p>
         <input formControlName="nomeUsuario">
