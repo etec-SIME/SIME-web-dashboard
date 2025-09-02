@@ -1,8 +1,11 @@
-<div>
-  <button>
-    <img src="public/iconePerfil.svg" alt="Avatar">
-    <title>Usuário</title>
-    <p>nome meramente ilustrativa</p>
-    <p>x permissões</p>
+<div class="list-context">
+  <button class="usuarioBtn" [ngClass]="cargo">
+    <div class="card-context">
+      <img src="public/iconePerfil.svg" alt="Avatar">
+      <div class="text-context">
+        <p id="card-cargo">{{ cargo }}</p>
+        <p id="card-numeroPermissoes">{{ numeroPermissoes }}</p>
+      </div>
+    </div>
   </button>
 </div>
