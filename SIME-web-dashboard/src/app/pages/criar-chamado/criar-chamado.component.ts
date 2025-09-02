@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Form, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ChamadoService } from '../../services/chamado/chamado.service';
+import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
 
 @Component({
   selector: 'app-criar-chamado',
@@ -8,20 +10,13 @@ import { Form, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@
   styleUrl: './criar-chamado.component.css'
 })
 export class CriarChamadoComponent {
+  tiposChamado = [];
+  ambiente = [];
+
   chamadoForm: FormGroup;
-  tiposChamado = [
-    { idTipoChamado: 1, nomeTipoChamado: 'Manutenção' },
-    { idTipoChamado: 2, nomeTipoChamado: 'Suporte' },
-    { idTipoChamado: 3, nomeTipoChamado: 'Outro' }
-  ];
-  ambiente = [
-    { idAmbiente: 1, nomeAmbiente: 'Quitters1' },
-    { idAmbiente: 2, nomeAmbiente: 'Quitters2' },
-    { idAmbiente: 3, nomeAmbiente: 'Quitters3' }
-  ];
   selectedFile: File | null = null;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private chamadoService: ChamadoService) {
     this.chamadoForm = this.fb.group({
       data: ['', Validators.required],
       ambiente: ['', Validators.required],
@@ -35,19 +30,43 @@ export class CriarChamadoComponent {
   }
 
   onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0];
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.chamadoForm.patchValue({
+          imgChamado: reader.result as string
+        });
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
   onSubmit() {
-    if (this.chamadoForm.valid) {
-      const formData = new FormData();
-      Object.keys(this.chamadoForm.value).forEach(key => {
-        formData.append(key, this.chamadoForm.value[key]);
-      });
-      if (this.selectedFile) {
-        formData.append('anexo', this.selectedFile);
-      }
-      console.log('Form enviado:', formData);
+    if(this.chamadoForm.invalid) {
+      return;
     }
+
+    const formValues = this.chamadoForm.value;
+
+    const chamadoRequestDTO: ChamadoRequestDTO = {
+      tituloChamado: formValues.problema,
+      descChamado: formValues.descricao,
+      data: formValues.data,
+      emailUsuario: formValues.email,
+      imgChamado: formValues.imgChamado,
+      idTipoChamado: formValues.tipoChamado,
+      codEquipamento: formValues.codigoEquipamento,
+      idAmbiente: formValues.ambiente
+    };
+    
+    this.chamadoService.criarChamado(, chamadoRequestDTO).subscribe({
+      next: (res) => {
+        console.log('Chamado criado com sucesso:', res);
+      },
+      error: (err) => {
+        console.error('Erro ao criar chamado:', err);
+      }
+    });
   }
 }

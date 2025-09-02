@@ -1,8 +1,10 @@
 export interface ChamadoRequestDTO {
     tituloChamado: string;
     descChamado: string;
-    localChamado: string;
+    data: Date;
     emailUsuario: string;
-    tipoChamado: string;
     imgChamado: string;
+    idTipoChamado: number;
+    codEquipamento: string;
+    idAmbiente: number;
 }
