@@ -1,5 +1,5 @@
 
 export interface tipoChamadoRequestDTO{
-  nomeTipoChamado: string
   idDepartamento: number
+  nomeTipoChamado: string
 }

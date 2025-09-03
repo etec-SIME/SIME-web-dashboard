@@ -57,8 +57,8 @@ export class EscolaService {
     return this.http.get<tipoPerfilRequestDTO[]>(`${this.apiUrl}/tipo-perfil`, this.getAuthHeaders());
   }
 
-  getAllAmbiente(): Observable<ambiente[]>{
-    return this.http.get<ambiente[]>(`${this.apiUrl}/ambiente`, this.getAuthHeaders());
+  getAllAmbiente(): Observable<ambienteRequestDTO[]>{
+    return this.http.get<ambienteRequestDTO[]>(`${this.apiUrl}/ambiente`, this.getAuthHeaders());
   }
 
   getAllDepartamento(): Observable<departamentoRequestDTO[]>{
@@ -101,7 +101,7 @@ export class EscolaService {
   }
 
   cadastrarAmbiente(dto: ambienteRequestDTO): Observable<any>{
-    return this.http.post<ambiente>(`${this.apiUrl}/ambiente`, dto, this.getAuthHeaders());
+    return this.http.post<ambienteRequestDTO>(`${this.apiUrl}/ambiente`, dto, this.getAuthHeaders());
   }
 
   criarTipoChamado(dto: tipoChamadoRequestDTO): Observable<any>{
@@ -115,8 +115,9 @@ export class EscolaService {
   criarTipoEquipamento(dto: tipoEquipamentoRequestDTO): Observable<any>{
     return this.http.post<tipoEquipamento>(`${this.apiUrl}/tipo-equipamento`, dto, this.getAuthHeaders());
   }
+  
   cadastrarEquipamento(dto: equipamentoRequestDTO): Observable<any>{
-    return this.http.post<equipamento>(`${this.apiUrl}/equipamento`, dto, this.getAuthHeaders());
+    return this.http.post<equipamentoRequestDTO>(`${this.apiUrl}/equipamento`, dto, this.getAuthHeaders());
   }
 
   criarTipoAmbiente(dto: tipoAmbienteRequestDTO): Observable<any>{
@@ -156,7 +157,7 @@ export class EscolaService {
   }
 
   editarAmbiente(idAmbiente: number, ambienteDTO: ambienteRequestDTO){
-    return this.http.put<ambiente>(`${this.apiUrl}/ambiente/${idAmbiente}`, ambienteDTO, this.getAuthHeaders());
+    return this.http.put<ambienteRequestDTO>(`${this.apiUrl}/ambiente/${idAmbiente}`, ambienteDTO, this.getAuthHeaders());
   }
 
   editarTipoAmbiente(idTipoAmbiente: number, tipoAmbienteDTO: tipoAmbienteRequestDTO){

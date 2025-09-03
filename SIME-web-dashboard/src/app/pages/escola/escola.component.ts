@@ -126,6 +126,7 @@ export class EscolaComponent implements OnInit{
 
   CriarForms(){
 
+    //
     this.idTipoPerfil = this.fb.group({
       id: ['']
     })
@@ -144,6 +145,7 @@ export class EscolaComponent implements OnInit{
       ids: ['']
     })
 
+    //
     this.formCadastrarTipoPerfil = this.fb.group({
       nomeTipoPerfil: ['']
     })
@@ -168,7 +170,8 @@ export class EscolaComponent implements OnInit{
 
     this.formCadastrarAmbiente = this.fb.group({
         numAmbiente: [''],
-        descricaoAmbiente: ['']
+        descricaoAmbiente: [''],
+        idTipoAmbiente: ['']
     })
 
     this.formCadastrarUsuario =  this.fb.group({
@@ -212,7 +215,8 @@ export class EscolaComponent implements OnInit{
     this.formEditarAmbiente = this.fb.group({
       id: [''],
       numAmbiente: [''],
-      descricaoAmbiente: ['']
+      descricaoAmbiente: [''],
+      idTipoAmbiente: ['']
     })
 
     this.formEditarUsuario =  this.fb.group({
@@ -373,7 +377,14 @@ export class EscolaComponent implements OnInit{
 
 
     onCadastrarAmbiente(){
-      const novoAmbiente = this.formCadastrarAmbiente.value;
+      const formValue = this.formCadastrarAmbiente.value;
+
+      const novoAmbiente: ambienteRequestDTO = {
+        numAmbiente: Number(formValue.numAmbiente),
+        descricaoAmbiente: formValue.descricaoAmbiente,
+        idTipoAmbiente: Number(formValue.idTipoAmbiente)
+      };
+
 
       this.escolaService.cadastrarAmbiente(novoAmbiente).subscribe({
         next: (resp) => {
@@ -399,12 +410,18 @@ export class EscolaComponent implements OnInit{
     }
 
     onCadastrarEquipamento(){
-      const novoEquipamento =  this.formCadastrarEquipamento.value;
+      const formValue = this.formCadastrarEquipamento.value;
+
+      const novoEquipamento: equipamentoRequestDTO = {
+        codEquipamento: Number(formValue.codEquipamento),
+        idtipoEquipamento: Number(formValue.idtipoEquipamento)
+
+      };
 
       this.escolaService.cadastrarEquipamento(novoEquipamento).subscribe({
         next: (resp) => {
           alert("Equipamento criado com sucesso!");
-          this.formCadastrarAmbiente.reset();
+          this.formCadastrarEquipamento.reset();
         },error: (err) => {
           alert("Erro ao criar Equipamento!!");
         }
@@ -512,7 +529,8 @@ export class EscolaComponent implements OnInit{
 
       const ambienteEditado = {
         numAmbiente: this.formEditarTipoAmbiente.value.numAmbiente,
-        descricaoAmbiente: this.formEditarAmbiente.value.descricaoAmbiente
+        descricaoAmbiente: this.formEditarAmbiente.value.descricaoAmbiente,
+        idTipoAmbiente: this.formEditarAmbiente.value.idTipoAmbiente
       }
 
       this.escolaService.editarAmbiente(idAmbiente, ambienteEditado).subscribe({
