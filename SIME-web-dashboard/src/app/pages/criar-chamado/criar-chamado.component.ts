@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { Form, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ChamadoService } from '../../services/chamado/chamado.service';
 import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
+import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
+import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-criar-chamado',
@@ -10,8 +13,8 @@ import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
   styleUrl: './criar-chamado.component.css'
 })
 export class CriarChamadoComponent {
-  tiposChamado = [];
-  ambiente = [];
+  tiposChamado: TipoChamadoSelectDTO[] = [];
+  ambientes: AmbienteSelectDTO[] = [];
 
   chamadoForm: FormGroup;
   selectedFile: File | null = null;
@@ -26,6 +29,26 @@ export class CriarChamadoComponent {
       descricao: ['', Validators.required],
       equipamento: [''],
       codigoEquipamento: ['']
+    });
+  }
+
+  ngOnInit() {
+    this.loadSelects();
+  }
+
+  loadSelects() {
+    forkJoin({
+      ambientes: this.chamadoService.getAmbienteChamadoSelect(),
+      tiposChamado: this.chamadoService.getTipoChamadoSelect()
+    }).subscribe({
+      next: ({ambientes, tiposChamado}) => {
+        this.ambientes = ambientes.map(a => ({
+          ...a, // pega todas as propriedades do objeto 'a' (idAmbiente, numAmbiente, nomeTipoAmbiente, etc.)
+          displayName: `${a.nomeTipoAmbiente} - ${a.numAmbiente}`
+        }))
+        this.tiposChamado = tiposChamado;
+      },
+      error: (err) => console.error('Erro ao carregar ambientes:', err)
     });
   }
 
@@ -49,18 +72,21 @@ export class CriarChamadoComponent {
 
     const formValues = this.chamadoForm.value;
 
+    const ambienteSelecionado: AmbienteSelectDTO = formValues.ambiente;
+
     const chamadoRequestDTO: ChamadoRequestDTO = {
       tituloChamado: formValues.problema,
       descChamado: formValues.descricao,
-      data: formValues.data,
+      dataAbertura: formValues.data,
       emailUsuario: formValues.email,
       imgChamado: formValues.imgChamado,
       idTipoChamado: formValues.tipoChamado,
       codEquipamento: formValues.codigoEquipamento,
-      idAmbiente: formValues.ambiente
+      idAmbiente: ambienteSelecionado?.idAmbiente ?? 0,
+      idTipoAmbiente: ambienteSelecionado?.idTipoAmbiente ?? 0
     };
     
-    this.chamadoService.criarChamado(, chamadoRequestDTO).subscribe({
+    this.chamadoService.criarChamado(chamadoRequestDTO).subscribe({
       next: (res) => {
         console.log('Chamado criado com sucesso:', res);
       },

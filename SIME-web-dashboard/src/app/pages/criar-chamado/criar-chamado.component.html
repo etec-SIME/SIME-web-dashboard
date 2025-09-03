@@ -6,10 +6,12 @@
             <input type="date" formControlName="data" placeholder="Data" />
             <select formControlName="ambiente">
                 <option value="">Local</option>
-                @for (ambiente of ambiente; track ambiente.idAmbiente) {
-                    <option [value]="ambiente.idAmbiente">
-                        {{ ambiente.nomeAmbiente }}
+                @for (ambiente of ambientes; track ambiente.idAmbiente) {
+                    <option [value]="ambiente">
+                        {{ ambiente.nomeTipoAmbiente }} {{ ambiente.numAmbiente }}
                     </option>
+                } @empty {
+                    <option [ngValue]="null" disabled>Nenhum ambiente disponível</option>
                 }
             </select>
         </div>

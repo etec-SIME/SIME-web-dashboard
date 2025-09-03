@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ChamadoCardDTO } from '../../DTOs/ChamadoCardDTO';
+import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
+import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +27,15 @@ export class ChamadoService {
     return this.http.get<ChamadoCardDTO[]>(`${this.apiUrl}/prioridade/concluidos?prioridade=${prioridade}&status=${status}`);
   }
 
-  criarChamado(rmUsuario: string, dto: ChamadoRequestDTO): Observable<any> {
-    return this.http.post(`${this.apiUrl}/${rmUsuario}/chamado`, dto);
+  getAmbienteChamadoSelect(): Observable<AmbienteSelectDTO[]> {
+    return this.http.get<AmbienteSelectDTO[]>(`${this.apiUrl}/ambientes`);
+  }
+
+  getTipoChamadoSelect(): Observable<TipoChamadoSelectDTO[]> {
+    return this.http.get<TipoChamadoSelectDTO[]>(`${this.apiUrl}/tipos-chamado`);
+  }
+
+  criarChamado(dto: ChamadoRequestDTO): Observable<any> {
+    return this.http.post(`${this.apiUrl}/criar-chamado`, dto);
   }
 }
