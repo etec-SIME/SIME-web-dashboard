@@ -21,12 +21,21 @@ export class CriarChamadoComponent {
 
   constructor(private fb: FormBuilder, private chamadoService: ChamadoService) {
     this.chamadoForm = this.fb.group({
-      data: ['', Validators.required],
-      ambiente: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      tipoChamado: ['', Validators.required],
-      problema: ['', Validators.required],
-      descricao: ['', Validators.required],
+      // data: ['', Validators.required],
+      // ambiente: ['', Validators.required],
+      // email: ['', [Validators.required, Validators.email]],
+      // tipoChamado: ['', Validators.required],
+      // problema: ['', Validators.required],
+      // descricao: ['', Validators.required],
+      // equipamento: [''],
+      // codigoEquipamento: ['']
+
+      data: [''],
+      ambiente: [''],
+      email: [''],
+      tipoChamado: [''],
+      problema: [''],
+      descricao: [''],
       equipamento: [''],
       codigoEquipamento: ['']
     });
@@ -74,16 +83,19 @@ export class CriarChamadoComponent {
 
     const ambienteSelecionado: AmbienteSelectDTO = formValues.ambiente;
 
+    const ambienteObj = { ...ambienteSelecionado };
+    console.log(JSON.stringify(ambienteObj, null, 2))
+
     const chamadoRequestDTO: ChamadoRequestDTO = {
-      tituloChamado: formValues.problema,
-      descChamado: formValues.descricao,
+      tituloChamado: "dawdwa", //formValues.problema,
+      descChamado: "dawdwa",//formValues.descricao,
       dataAbertura: formValues.data,
-      emailUsuario: formValues.email,
-      imgChamado: formValues.imgChamado,
-      idTipoChamado: formValues.tipoChamado,
-      codEquipamento: formValues.codigoEquipamento,
-      idAmbiente: ambienteSelecionado?.idAmbiente ?? 0,
-      idTipoAmbiente: ambienteSelecionado?.idTipoAmbiente ?? 0
+      emailUsuario: "raphael@gmail.com", //formValues.email,
+      imgChamado: 'abc.png', //formValues.imgChamado,
+      idTipoChamado: 1, //formValues.tipoChamado,
+      codEquipamento: "123", //formValues.codigoEquipamento,
+      idAmbiente: 1, //ambienteSelecionado?.idAmbiente ?? 0,
+      idTipoAmbiente: 1, //ambienteSelecionado?.idTipoAmbiente ?? 0
     };
     
     this.chamadoService.criarChamado(chamadoRequestDTO).subscribe({

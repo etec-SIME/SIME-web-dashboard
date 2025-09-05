@@ -24,18 +24,18 @@ export class ChamadoService {
   }
 
   getChamadosByPrioridadeAndStatus(prioridade: 'ALTA_PRIORIDADE' | 'MEDIA_PRIORIDADE' | 'BAIXA_PRIORIDADE', status: 'CONCLUIDO'): Observable<ChamadoCardDTO[]> {
-    return this.http.get<ChamadoCardDTO[]>(`${this.apiUrl}/prioridade/concluidos?prioridade=${prioridade}&status=${status}`);
+    return this.http.get<ChamadoCardDTO[]>(`${this.apiUrl}/prioridade/concluidos?prioridade=${prioridade}&status=${status}`, { withCredentials: true });
   }
 
   getAmbienteChamadoSelect(): Observable<AmbienteSelectDTO[]> {
-    return this.http.get<AmbienteSelectDTO[]>(`${this.apiUrl}/ambientes`);
+    return this.http.get<AmbienteSelectDTO[]>(`${this.apiUrl}/ambientes`, { withCredentials: true });
   }
 
   getTipoChamadoSelect(): Observable<TipoChamadoSelectDTO[]> {
-    return this.http.get<TipoChamadoSelectDTO[]>(`${this.apiUrl}/tipos-chamado`);
+    return this.http.get<TipoChamadoSelectDTO[]>(`${this.apiUrl}/tipos-chamado`, { withCredentials: true });
   }
 
   criarChamado(dto: ChamadoRequestDTO): Observable<any> {
-    return this.http.post(`${this.apiUrl}/criar-chamado`, dto);
+    return this.http.post(`${this.apiUrl}/criar-chamado`, dto, { withCredentials: true });
   }
 }
