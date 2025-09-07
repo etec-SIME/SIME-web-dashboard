@@ -6,7 +6,6 @@ export interface usuarioRequestDTO{
     codEscola: string;
     emailUsuario: string;
     telefoneUsuario: string;
-
-    //departamentoList: departamento[];
+    departamentoIds: number[];
     
 }

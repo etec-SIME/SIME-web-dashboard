@@ -181,12 +181,13 @@ export class EscolaComponent implements OnInit{
         senhaUsuario: [''],
         codEscola: [''],
         emailUsuario: [''],
-        telefoneUsuario: ['']
+        telefoneUsuario: [''],
+        departamentoIds: ['']
     })
 
     this.formCadastrarEquipamento = this.fb.group({
       codEquipamento: [''],
-      idtipoEquipamento: ['']
+      idTipoEquipamento: ['']
     })
 
     //Forms de edição
@@ -227,13 +228,13 @@ export class EscolaComponent implements OnInit{
       senhaUsuario: [''],
       codEscola: [''],
       emailUsuario: [''],
-      telefoneUsuario: ['']
+      telefoneUsuario: [''],
+      departamentoIds: ['']
     })
 
     this.formEditarEquipamento = this.fb.group({
-      id: [''],
       codEquipamento: [''],
-      idtipoEquipamento: ['']
+      idTipoEquipamento: ['']
     })
 
     this.formEditarDepartamento = this.fb.group({
@@ -413,8 +414,8 @@ export class EscolaComponent implements OnInit{
       const formValue = this.formCadastrarEquipamento.value;
 
       const novoEquipamento: equipamentoRequestDTO = {
-        codEquipamento: Number(formValue.codEquipamento),
-        idtipoEquipamento: Number(formValue.idtipoEquipamento)
+        codEquipamento: formValue.codEquipamento,
+        idTipoEquipamento: formValue.idTipoEquipamento
 
       };
 
@@ -528,7 +529,7 @@ export class EscolaComponent implements OnInit{
       const idAmbiente = this.formEditarAmbiente.value.id;
 
       const ambienteEditado = {
-        numAmbiente: this.formEditarTipoAmbiente.value.numAmbiente,
+        numAmbiente: this.formEditarAmbiente.value.numAmbiente,
         descricaoAmbiente: this.formEditarAmbiente.value.descricaoAmbiente,
         idTipoAmbiente: this.formEditarAmbiente.value.idTipoAmbiente
       }
@@ -554,7 +555,8 @@ export class EscolaComponent implements OnInit{
         senhaUsuario: this.formEditarUsuario.value.senhaUsuario,
         codEscola: this.formEditarUsuario.value.codEscola,
         emailUsuario: this.formEditarUsuario.value.emailUsuario,
-        telefoneUsuario: this.formEditarUsuario.value.telefoneUsuario
+        telefoneUsuario: this.formEditarUsuario.value.telefoneUsuario,
+        departamentoIds: this.formEditarUsuario.value.departamentoIds
       }
 
       this.escolaService.editarUsuario(idUsuario, usuarioEditado).subscribe({
@@ -569,14 +571,14 @@ export class EscolaComponent implements OnInit{
     }
 
     onEditarEquipamento(){
-      const idEquipamento = this.formEditarEquipamento.value.id;
+      const codEquipamento = this.formEditarEquipamento.value.codEquipamento;
 
       const equipamentoEditado = {
         codEquipamento: this.formEditarEquipamento.value.codEquipamento,
-        idtipoEquipamento: this.formEditarEquipamento.value.idTipoEquipamento
+        idTipoEquipamento: this.formEditarEquipamento.value.idTipoEquipamento
       }
 
-      this.escolaService.editarEquipamento(idEquipamento, equipamentoEditado).subscribe({
+      this.escolaService.editarEquipamento(codEquipamento, equipamentoEditado).subscribe({
         next: (resp) => {
           alert("Equipamento editado com sucesso!",);
           this.formEditarEquipamento.reset();

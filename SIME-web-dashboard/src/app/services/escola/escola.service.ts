@@ -34,7 +34,7 @@ export class EscolaService {
 
   constructor(private http: HttpClient) { }
 
-  token : String = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTYiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiQWRtaW4ifSx7ImF1dGhvcml0eSI6IlZpc3VhbGl6YXIgQ2hhbWFkbyJ9LHsiYXV0aG9yaXR5IjoiRWRpdGFyIENoYW1hZG8ifSx7ImF1dGhvcml0eSI6IkNyaWFyIENoYW1hZG8ifV0sImVudGlkYWRlIjoiVVNVQVJJTyIsImlhdCI6MTc1NjgyNDg0MSwiZXhwIjoxNzU2OTExMjQxfQ.YIml1g5F5pkV_QMqjVi-PaZ0zbwlYLTY4vliMgA873o';
+  token : String = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODAwMDEwMCIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX0VTQ09MQSJ9XSwiZW50aWRhZGUiOiJFU0NPTEEiLCJpYXQiOjE3NTcxOTk0NDYsImV4cCI6MTc1NzI4NTg0Nn0.SClwyMmrixN3iakFvcd7rW1HPUmmOZuq-omPE-3kZhs';
   // Inserir o Token manualmente para testar
 
   private getAuthHeaders() {

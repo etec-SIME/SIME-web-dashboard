@@ -40,7 +40,7 @@
   <div *ngIf="equipamentos.length > 0; else nenhum" class="card-get">
     <div *ngFor="let e of equipamentos" >
       <p><strong>código equipamento: </strong> {{ e.codEquipamento}}</p>
-      <p><strong>Id tipo Equipamentos: </strong> {{ e.idtipoEquipamento}}</p>
+      <p><strong>Id tipo Equipamentos: </strong> {{ e.idTipoEquipamento}}</p>
     </div>
   </div>
 </ng-container>
@@ -221,7 +221,7 @@
         <p>Codigo equipamento:</p>
         <input formControlName="codEquipamento">
         <p>ID Tipo equipamento:</p>
-        <input formControlName="idtipoEquipamento">
+        <input formControlName="idTipoEquipamento">
         <button (click)="onCadastrarEquipamento()">Criar</button>
       </label>
     </form>
@@ -301,6 +301,8 @@
       <input formControlName="id">
       <p>Nome tipo chamado:</p>
       <input formControlName="nomeTipoChamado">
+      <p>Id departamento</p>
+      <input formControlName="idDepartamento">
       <button (click)="onEditarTipoChamado()">Editar</button>
     </label>
   </form>
@@ -343,12 +345,10 @@
     <h4>-- Equipamento edição--</h4>
     <form [formGroup]="formEditarEquipamento">
     <label>
-      <p>ID equipamento:</p>
-      <input formControlName="id">
       <p>Código equipamento:</p>
       <input formControlName="codEquipamento">
       <p>ID tipo equipamento:</p>
-      <input formControlName="idtipoEquipamento">
+      <input formControlName="idTipoEquipamento">
       <button (click)="onEditarEquipamento()">Editar</button>
     </label>
   </form>
