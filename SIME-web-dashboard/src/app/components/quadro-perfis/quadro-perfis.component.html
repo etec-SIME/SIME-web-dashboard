@@ -1,0 +1,18 @@
+<!-- <div class="perfis-container">
+  <app-card-perfil
+    *ngFor="let perfil of perfis"
+    [perfil]="perfil">
+  </app-card-perfil>
+</div> -->
+
+<div class="quadro-perfis">
+    <app-card-perfil cargo="Usuário" numeroPermissoes="2" (selecionarPerfil)="selecionarPerfil($event)"></app-card-perfil>
+
+    <app-card-perfil cargo="Gestor Geral" numeroPermissoes="7" (selecionarPerfil)="selecionarPerfil($event)"></app-card-perfil>
+
+    <app-card-perfil cargo="Administrador" numeroPermissoes="9" (selecionarPerfil)="selecionarPerfil($event)"></app-card-perfil>
+</div>
+
+<div class="tabela-permissoes" *ngIf="perfilSelecionado">
+  <app-tabela-permissoes [perfil]="perfilSelecionado"></app-tabela-permissoes>
+</div>

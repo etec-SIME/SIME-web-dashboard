@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-card-perfil',
@@ -11,4 +11,9 @@ export class CardPerfilComponent {
   @Input() numeroPermissoes!: number;
   //@Input() fotoPerfil!: Image
 
+  @Output() selecionarPerfil = new EventEmitter<string>();
+
+  onClick() {
+    this.selecionarPerfil.emit(this.cargo);
+  }
 }

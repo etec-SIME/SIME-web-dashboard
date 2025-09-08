@@ -1,0 +1,5 @@
+.perfis-container {
+  max-height: 300px;   /* altura máxima visível */
+  overflow-y: auto;    /* ativa o scroll vertical */
+  padding-right: 8px;  /* espaço para o scroll não colar */
+}
