@@ -83,19 +83,33 @@ export class CriarChamadoComponent {
 
     const ambienteSelecionado: AmbienteSelectDTO = formValues.ambiente;
 
-    const ambienteObj = { ...ambienteSelecionado };
-    console.log(JSON.stringify(ambienteObj, null, 2))
+    console.log(`idAmbiente: ${ambienteSelecionado.idAmbiente}`);
+    console.log(`idTipoAmbiente: ${ambienteSelecionado.idTipoAmbiente}`);
+    console.log(`numAmbiente: ${ambienteSelecionado.numAmbiente}`);
+    console.log(`nomeTipoAmbiente: ${ambienteSelecionado.nomeTipoAmbiente}`);
+
+    // const chamadoRequestDTO: ChamadoRequestDTO = {
+    //   tituloChamado: "dawdwa", //formValues.problema,
+    //   descChamado: "dawdwa",//formValues.descricao,
+    //   dataAbertura: formValues.data,
+    //   emailUsuario: "raphael@gmail.com", //formValues.email,
+    //   imgChamado: 'abc.png', //formValues.imgChamado,
+    //   idTipoChamado: 1, //formValues.tipoChamado,
+    //   codEquipamento: "123", //formValues.codigoEquipamento,
+    //   idAmbiente: 1, //ambienteSelecionado?.idAmbiente ?? 0,
+    //   idTipoAmbiente: 1, //ambienteSelecionado?.idTipoAmbiente ?? 0
+    // };
 
     const chamadoRequestDTO: ChamadoRequestDTO = {
-      tituloChamado: "dawdwa", //formValues.problema,
-      descChamado: "dawdwa",//formValues.descricao,
+      tituloChamado: formValues.problema,
+      descChamado: formValues.descricao,
       dataAbertura: formValues.data,
-      emailUsuario: "raphael@gmail.com", //formValues.email,
+      emailUsuario: formValues.email,
       imgChamado: 'abc.png', //formValues.imgChamado,
-      idTipoChamado: 1, //formValues.tipoChamado,
-      codEquipamento: "123", //formValues.codigoEquipamento,
-      idAmbiente: 1, //ambienteSelecionado?.idAmbiente ?? 0,
-      idTipoAmbiente: 1, //ambienteSelecionado?.idTipoAmbiente ?? 0
+      idTipoChamado: formValues.tipoChamado,
+      codEquipamento: formValues.codigoEquipamento,
+      idAmbiente: ambienteSelecionado?.idAmbiente ?? 0,
+      idTipoAmbiente: ambienteSelecionado?.idTipoAmbiente ?? 0
     };
     
     this.chamadoService.criarChamado(chamadoRequestDTO).subscribe({
