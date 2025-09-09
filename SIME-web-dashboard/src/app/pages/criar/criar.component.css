@@ -1,0 +1,35 @@
+/* vw -> width (na dúvida vai esse msm)
+   vh -> height
+
+   responsividade:
+   clamp(minimo, tamanho esperado(q eu queo q mantenha), max)
+*/
+#cardsCriar{
+  margin-top: 3vw;
+  margin-left: 3vw;
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  row-gap: 3vw;
+}
+
+.card{
+  background-color: #EAEAEA;
+  display: flex;
+  padding: 1.5vw;
+  gap: 1.5vw;
+  border-radius: 0.5vw;
+  width: 28vw;
+}
+
+.cardContent small{
+  font-weight: 100;
+}
+
+.voltar{
+  color: #808080;
+}
+
+.icon{
+  width: 2vw;
+  height: 2vh;
+}
