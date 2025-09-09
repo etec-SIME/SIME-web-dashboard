@@ -1,0 +1,65 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-plus-jakarta-sans);
+}
+
+.calendario-semanal {
+  background-color: #F1EEF6;
+  padding: clamp(10px ,1vw, 3vw);
+  padding-top: clamp(10px, 1.2vw, 3.2vw);
+  border-radius: clamp(5px, 0.6vw, 2.6vw);
+}
+
+p {
+  color: #44A1A0;
+  font-weight: var(--fw-semibold);
+  margin-bottom: clamp(10px, 1vw, 3.2vw);
+  font-size: clamp(15px, 1.2vw, 3.2vw);
+}
+
+.calendario-semanal-container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  width: auto;
+}
+
+.diasNum {
+  text-align: center;
+  font-size: clamp(15px, 1.25vw, 3.25vw);
+  font-weight: var(--fw-semibold);
+  color: black;
+  height: clamp(30px, 1.7vw, 3.7vw); /* altura igual para todos */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.diasNome {
+  text-align: center;
+  color: #757575;
+  font-weight: var(--fw-medium);
+  font-size: clamp(11.5px, 1vw, 3vw);
+  padding-left: clamp(3px, 0.1vw, 3vw);
+  padding-right: clamp(3px, 0.1vw, 3vw);
+}
+
+.dia-atual {
+  background-color: #44A1A0;
+  color: white;
+}
+
+.dia-atual.semana{
+  font-weight: var(--fw-medium);
+  padding-bottom: clamp(4px, 0.4vw, 2.4vw);
+  border-bottom-left-radius: clamp(5px ,0.5vw, 2.5vw);
+  border-bottom-right-radius: clamp(5px ,0.5vw, 2.5vw);
+}
+
+.dia-atual.num{
+  font-weight: var(--fw-bold);
+  border-top-left-radius: clamp(5px ,0.5vw, 2.5vw);
+  border-top-right-radius: clamp(5px ,0.5vw, 2.5vw);
+  padding: 0 clamp(2px, 0.4vw, 2.4vw); /* só padding horizontal */
+}
