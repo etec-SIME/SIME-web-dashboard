@@ -13,16 +13,14 @@ export class AuthService {
   constructor( private http: HttpClient ) { }
 
   login(credentials: loginDTO) : Observable<tokenDTO> {
-    return this.http.post<any>(`${this.apiUrl}/login`, credentials).pipe(
-      tap(response => localStorage.setItem('token', response.token))   // guarda o token
-    );
+    return this.http.post<any>(`${this.apiUrl}/login`, credentials, { withCredentials: true });
   }
 
-  getToken(): string | null {
-    return localStorage.getItem('token'); // retorna o token do localStorage
-  }
+  // getToken(): string | null {
+  //   return localStorage.getItem('token'); // retorna o token do localStorage
+  // }
 
-  logout(): void {
-    localStorage.removeItem('token');  // remove o token do localStorage
-  }
+  // logout(): void {
+  //   localStorage.removeItem('token');  // remove o token do localStorage
+  // }
 }

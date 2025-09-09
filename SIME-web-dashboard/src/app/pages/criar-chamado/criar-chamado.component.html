@@ -3,13 +3,15 @@
     <div class="rows">
         <!-- Linha 1 -->
         <div class="form-row">
-            <input type="date" formControlName="data" placeholder="Data" />
+            <input type="datetime-local" formControlName="data" placeholder="Data" />
             <select formControlName="ambiente">
                 <option value="">Local</option>
-                @for (ambiente of ambiente; track ambiente.idAmbiente) {
-                    <option [value]="ambiente.idAmbiente">
-                        {{ ambiente.nomeAmbiente }}
+                @for (ambiente of ambientes; track ambiente.idAmbiente) {
+                    <option [ngValue]="ambiente">
+                        {{ ambiente.nomeTipoAmbiente }} {{ ambiente.numAmbiente }}
                     </option>
+                } @empty {
+                    <option [ngValue]="null" disabled>Nenhum ambiente disponível</option>
                 }
             </select>
         </div>
@@ -22,11 +24,13 @@
         <!-- Linha 3 -->
         <div class="form-row">
             <select formControlName="tipoChamado">
-                <option value="">Tipo Chamado</option>
+                <option value="">Tipo de Chamado</option>
                 @for (tipoChamado of tiposChamado; track tipoChamado.idTipoChamado) {
-                    <option [value]="tipoChamado.idTipoChamado">
+                    <option [ngValue]="tipoChamado.idTipoChamado">
                         {{ tipoChamado.nomeTipoChamado }}
                     </option>
+                } @empty {
+                    <option [ngValue]="null" disabled>Nenhum tipo de chamado disponível</option>
                 }
             </select>
     
@@ -58,7 +62,7 @@
     
         <!-- Botão -->
         <div class="form-actions">
-            <button type="submit" [disabled]="chamadoForm.invalid">Enviar</button>
+            <button type="submit" (click)="onSubmit()" [disabled]="chamadoForm.invalid">Enviar</button>
         </div>
     </div>
 </form>
