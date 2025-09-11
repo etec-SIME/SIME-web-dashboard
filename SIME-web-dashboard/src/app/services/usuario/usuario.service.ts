@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
-import { usuarioProjection } from '../../DTOs/Projections/UsuarioProjection';
+import { UsuarioProjection } from '../../DTOs/Projections/UsuarioProjection';
 
 @Injectable({ providedIn: 'root' })
 export class UsuarioService {
@@ -9,7 +9,7 @@ export class UsuarioService {
   
   constructor( private http: HttpClient ) { }
 
-  getAllUsuarios(): Observable<usuarioProjection[]> {
-    return this.http.get<usuarioProjection[]>(this.apiUrl);
+  getAllUsuarios(): Observable<UsuarioProjection[]> {
+    return this.http.get<UsuarioProjection[]>(this.apiUrl);
   }
 }

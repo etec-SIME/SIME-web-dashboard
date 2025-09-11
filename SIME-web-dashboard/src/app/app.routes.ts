@@ -7,18 +7,22 @@ import { ChamadosConcluidosComponent } from './pages/chamados-concluidos/chamado
 import { ChamadosPendentesComponent } from './pages/chamados-pendentes/chamados-pendentes.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LayoutComponent } from './components/layout/layout.component';
+import { CriarChamadoComponent } from './pages/criar-chamado/criar-chamado.component';
 import { GestorGeralComponent } from './pages/gestor-geral/gestor-geral.component';
+import { LoginComponent } from './pages/login/login.component';
 /*Retirar no final */
 import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha.component';
 
 export const routes: Routes = [
     { path: '', component: LayoutComponent,
       children: [
+        { path: 'home', component: HomeComponent, data: { titulo: 'Home - Locais' } },
         { path: 'chamados-pendentes', component: ChamadosPendentesComponent, data: { titulo: 'Chamados Pendentes' } },
         { path: 'chamados-concluidos', component: ChamadosConcluidosComponent, data: { titulo: 'Chamados Concluídos' } },
-        { path: 'home', component: HomeComponent, data: { titulo: 'Home - Locais' } },
+        { path: 'criar-chamado', component: CriarChamadoComponent, data: { titulo: 'Criar Chamado' } },
       ]
     },
+    { path: 'login', component: LoginComponent },
     { path: 'dashboard', component: DashboardComponent },
     { path: 'funcionarios', component: FuncionariosComponent },
     {path: 'gestor-geral', component: GestorGeralComponent},

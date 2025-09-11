@@ -1,10 +1,12 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Estilos para dispositivos móveis (320px - 480px) */
+
+/* celulares (520px - 900px) */
+@media screen and (min-width: 520px) {
 body {
     background-color: #44A1A0;
     position: relative;
@@ -37,7 +39,7 @@ body {
     bottom: 0;
     border-top-left-radius: 60vh;
     border-top-right-radius: 60vh;
-    height: 35vh;
+    height: 33vh;
     width: 60vh;
     z-index: 1;
     transition: all 0.5s ease-in-out;
@@ -69,11 +71,12 @@ body {
 
 .Logo {
     position: absolute;
-    top: -7%;
-    left: 11%;
+    top: -6%;
+    left: 17%;
     transform: translateX(-50%);
-    height: 36vh; /*para computador*/
-    width: 38vh;
+    height: 24vh;
+    width: 19vh;
+    z-index: 1;
 }
 
 .Logo img {
@@ -82,8 +85,8 @@ body {
     object-fit: contain;
 }
 
-/* iPads e tablets (481px - 768px) */
-@media screen and (min-width: 481px) {
+/* iPads e tablets (900px - 1200px) */
+@media screen and (min-width: 900px) {
     .f1 {
         width: 80vh;
         height: 70vh;
@@ -108,60 +111,78 @@ body {
         height: 28vh;
         width: 48vh;
     }
-}
 
-/* Telas pequenas e laptops (769px - 1024px) */
-@media screen and (min-width: 769px) {
-    .f1 {
-        width: 100vh;
-        height: 80vh;
-    }
-
-    .container {
-        width: 100vh;
-        height: 60vh;
-    }
-
-    .primeiro{
-        height: 50vh;
-        width: 100vh;
-    }
-
-    .segundo{
-        height: 40vh;
-        width: 74vh;
-    }
-
-    .terceiro{
-        height: 32vh;
-        width: 54vh;
+    .Logo{
+      top: -9%;
+      left: 13%;
+      height: 30vh;
+      width: 25vh;
     }
 }
+}
 
-/* Desktops e telas grandes (1025px - 1200px) */
-@media screen and (min-width: 1025px) {
-    .f1 {
-        width: 110vh;
-        height: 92vh;
-    }
+/* Telas pequenas e laptops (1200px - 1350px) */
+@media screen and (min-width: 1200px) {
+  .f1 {
+      width: 100vh;
+      height: 80vh;
+  }
 
-    .container {
-        width: 110vh;
-        height: 70vh;
-    }
+  .container {
+      width: 100vh;
+      height: 70vh;
+  }
 
-    .primeiro{
-        height: 55vh;
-        width: 110vh;
-    }
+  .primeiro{
+      height: 50vh;
+      width: 90h;
+  }
 
-    .segundo{
-        height: 45vh;
-        width: 84vh;
-    }
+  .segundo{
+      height: 40vh;
+      width: 64vh;
+  }
 
-    .terceiro{
-        height: 37vh;
-        width: 64vh;
-    }
+  .terceiro{
+      height: 32vh;
+      width: 44vh;
+  }
+
+  .Logo{
+    height: 31vh;
+    width: 28vh;
+  }
+}
+
+/* Desktops e telas grandes (1350px - 1920px) */
+@media screen and (min-width: 1350px) {
+  .f1 {
+      width: 110vh;
+      height: 92vh;
+  }
+
+  .container {
+      width: 110vh;
+      height: 70vh;
+  }
+
+  .primeiro{
+      height: 55vh;
+      width: 110vh;
+  }
+
+  .segundo{
+      height: 45vh;
+      width: 84vh;
+  }
+
+  .terceiro{
+      height: 37vh;
+      width: 64vh;
+  }
+
+  .Logo{
+    height: 36vh;
+    width: 38vh;
+  }
 }
