@@ -17,7 +17,7 @@ export class CriarChamadoComponent {
   ambientes: AmbienteSelectDTO[] = [];
 
   chamadoForm: FormGroup;
-  selectedFile: File | null = null;
+  selectedFiles: File[] = []; // Changed from a single File to an array of Files
 
   constructor(private fb: FormBuilder, private chamadoService: ChamadoService) {
     this.chamadoForm = this.fb.group({
@@ -62,15 +62,14 @@ export class CriarChamadoComponent {
   }
 
   onFileSelected(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.chamadoForm.patchValue({
-          imgChamado: reader.result as string
-        });
-      };
-      reader.readAsDataURL(file);
+    if (event.target.files && event.target.files.length > 0) {
+      const files: File[] = Array.from(event.target.files);
+  
+      this.selectedFiles = files.filter(file => file.type.startsWith('image/'));
+  
+      if (this.selectedFiles.length !== files.length) {
+        alert('Apenas arquivos de imagem são permitidos!');
+      }
     }
   }
 
@@ -105,14 +104,22 @@ export class CriarChamadoComponent {
       descChamado: formValues.descricao,
       dataAbertura: formValues.data,
       emailUsuario: formValues.email,
-      imgChamado: 'abc.png', //formValues.imgChamado,
       idTipoChamado: formValues.tipoChamado,
       codEquipamento: formValues.codigoEquipamento,
       idAmbiente: ambienteSelecionado?.idAmbiente ?? 0,
       idTipoAmbiente: ambienteSelecionado?.idTipoAmbiente ?? 0
     };
+
+    const formData = new FormData();
+    formData.append('chamado', new Blob([JSON.stringify(chamadoRequestDTO)], { type: 'application/json' }));
+
+    if (this.selectedFiles && this.selectedFiles.length > 0) {
+      for (let file of this.selectedFiles) {
+        formData.append('files', file);
+      }
+    }
     
-    this.chamadoService.criarChamado(chamadoRequestDTO).subscribe({
+    this.chamadoService.criarChamado(formData).subscribe({
       next: (res) => {
         console.log('Chamado criado com sucesso:', res);
       },

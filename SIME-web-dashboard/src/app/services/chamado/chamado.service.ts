@@ -35,7 +35,7 @@ export class ChamadoService {
     return this.http.get<TipoChamadoSelectDTO[]>(`${this.apiUrl}/tipos-chamado`, { withCredentials: true });
   }
 
-  criarChamado(dto: ChamadoRequestDTO): Observable<any> {
-    return this.http.post(`${this.apiUrl}/criar-chamado`, dto, { withCredentials: true });
+  criarChamado(formData: FormData): Observable<any> {
+    return this.http.post(`${this.apiUrl}/criar-chamado`, formData, { withCredentials: true });
   }
 }
