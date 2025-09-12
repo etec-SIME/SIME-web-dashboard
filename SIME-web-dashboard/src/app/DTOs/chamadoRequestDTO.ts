@@ -3,7 +3,6 @@ export interface ChamadoRequestDTO {
     descChamado: string;
     dataAbertura: Date;
     emailUsuario: string;
-    imgChamado: string;
     idTipoChamado: number;
     codEquipamento: string;
     idAmbiente: any;
