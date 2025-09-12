@@ -1,0 +1,22 @@
+<div class="calendario-mensal">   
+    <p>{{ mesAnoAtual }}</p>
+    <div class="calendario-mensal-container">
+      <div class="dia semana">S</div>
+      <div class="dia semana">T</div>
+      <div class="dia semana">Q</div>
+      <div class="dia semana">Q</div>
+      <div class="dia semana">S</div>
+      <div class="dia semana">S</div>
+      <div class="dia semana">D</div>
+
+      <!-- Dias do mês anterior -->
+      <div *ngFor="let dia of ultimosDiasMesAnterior" class="dia dia-mes-anterior">
+        {{ dia }}
+      </div>
+
+      <!-- Dias do mês -->
+      <div *ngFor="let dia of diasDoMes" class="dia">
+        {{ dia }}
+      </div>
+    </div>
+</div> 
