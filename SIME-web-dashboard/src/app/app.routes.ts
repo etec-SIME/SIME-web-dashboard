@@ -10,6 +10,7 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { CriarChamadoComponent } from './pages/criar-chamado/criar-chamado.component';
 import { GestorGeralComponent } from './pages/gestor-geral/gestor-geral.component';
 import { LoginComponent } from './pages/login/login.component';
+import { ChamadoDetalheComponent } from './pages/chamado-detalhe/chamado-detalhe.component';
 
 export const routes: Routes = [
     { path: '', component: LayoutComponent,
@@ -18,6 +19,7 @@ export const routes: Routes = [
         { path: 'chamados-pendentes', component: ChamadosPendentesComponent, data: { titulo: 'Chamados Pendentes' } },
         { path: 'chamados-concluidos', component: ChamadosConcluidosComponent, data: { titulo: 'Chamados Concluídos' } },
         { path: 'criar-chamado', component: CriarChamadoComponent, data: { titulo: 'Criar Chamado' } },
+        { path: 'chamado-detalhe', component: ChamadoDetalheComponent, data: { titulo: 'Chamado 1' } }
       ]
     },
     { path: 'login', component: LoginComponent },

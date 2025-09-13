@@ -1,0 +1,52 @@
+<div class="container">
+
+    <!-- Voltar -->
+    <button class="btn-back" (click)="voltar()">← Voltar</button>
+
+    <!-- Barra de progresso -->
+    <div class="progress">
+        @for (etapa of etapas; let i = $index; track i) {
+        <div class="progress-step">
+            <div class="circle" [class.active]="i <= etapaAtual">
+            @if (i < etapaAtual) {
+                ✔
+            } @else {
+                {{ i + 1 }}
+            }
+            </div>
+            @if (i < etapas.length - 1) {
+            <div class="line" [class.active]="i < etapaAtual"></div>
+            }
+        </div>
+        }
+    </div>
+
+    <!-- Infos -->
+    <div class="content">
+        <div class="preview"></div>
+
+        <div class="details">
+        <h2>{{ chamado.titulo }}</h2>
+        <p>{{ chamado.descricao }}</p>
+
+        <div class="meta">
+            <p><strong>Departamento:</strong> {{ chamado.departamento }}</p>
+            <p>
+            <strong>Prioridade:</strong>
+            <span [class.alta]="chamado.prioridade === 'Alta'"
+                    [class.media]="chamado.prioridade === 'Média'"
+                    [class.baixa]="chamado.prioridade === 'Baixa'">
+                {{ chamado.prioridade }}
+            </span>
+            </p>
+        </div>
+        </div>
+    </div>
+
+    <!-- Botões -->
+    <div class="actions">
+        <button class="btn-approve" (click)="aprovar()">Aprovar</button>
+        <button class="btn-reject" (click)="recusar()">Recusar</button>
+    </div>
+</div>
+  
