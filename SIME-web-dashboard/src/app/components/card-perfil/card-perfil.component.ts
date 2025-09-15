@@ -11,4 +11,10 @@ export class CardPerfilComponent {
   @Input() numeroPermissoes!: number;
   //@Input() fotoPerfil!: Image
 
+  @Output() selecionarPerfil = new EventEmitter<string>();
+
+  onClick() {
+    this.selecionarPerfil.emit(this.cargo);
+  }
+
 }
