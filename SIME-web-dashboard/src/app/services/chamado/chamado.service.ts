@@ -1,9 +1,11 @@
+import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
+import { chamadoProjection } from './../../DTOs/Projections/chamadoProjection';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ChamadoCardDTO } from '../../DTOs/ChamadoCardDTO';
-import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
-import { Chamado } from '../../models/Chamado';
+import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
+import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +15,8 @@ export class ChamadoService {
 
   constructor( private http: HttpClient ) { }
 
-  getAllChamados(): Observable<Chamado[]> {
-    return this.http.get<Chamado[]>(this.apiUrl);
+  getAllChamados(): Observable<chamadoProjection[]> {
+    return this.http.get<chamadoProjection[]>(this.apiUrl);
   }
 
   getChamadosByPrioridade(prioridade: 'ALTA_PRIORIDADE' | 'MEDIA_PRIORIDADE' | 'BAIXA_PRIORIDADE'): Observable<ChamadoCardDTO[]> {
@@ -22,10 +24,18 @@ export class ChamadoService {
   }
 
   getChamadosByPrioridadeAndStatus(prioridade: 'ALTA_PRIORIDADE' | 'MEDIA_PRIORIDADE' | 'BAIXA_PRIORIDADE', status: 'CONCLUIDO'): Observable<ChamadoCardDTO[]> {
-    return this.http.get<ChamadoCardDTO[]>(`${this.apiUrl}/prioridade/concluidos?prioridade=${prioridade}&status=${status}`);
+    return this.http.get<ChamadoCardDTO[]>(`${this.apiUrl}/prioridade/concluidos?prioridade=${prioridade}&status=${status}`, { withCredentials: true });
   }
 
-  criarChamado(rmUsuario: string, dto: ChamadoRequestDTO): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/${rmUsuario}/chamado`, dto);
+  getAmbienteChamadoSelect(): Observable<AmbienteSelectDTO[]> {
+    return this.http.get<AmbienteSelectDTO[]>(`${this.apiUrl}/ambientes`, { withCredentials: true });
+  }
+
+  getTipoChamadoSelect(): Observable<TipoChamadoSelectDTO[]> {
+    return this.http.get<TipoChamadoSelectDTO[]>(`${this.apiUrl}/tipos-chamado`, { withCredentials: true });
+  }
+
+  criarChamado(formData: FormData): Observable<any> {
+    return this.http.post(`${this.apiUrl}/criar-chamado`, formData, { withCredentials: true });
   }
 }

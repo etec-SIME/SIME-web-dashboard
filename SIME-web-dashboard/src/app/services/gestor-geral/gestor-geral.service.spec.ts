@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ChamadoService } from './chamado.service';
+import { GestorGeralService } from './gestor-geral.service';
 
-describe('ChamadoService', () => {
-  let service: ChamadoService;
+describe('GestorGeralService', () => {
+  let service: GestorGeralService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ChamadoService);
+    service = TestBed.inject(GestorGeralService);
   });
 
   it('should be created', () => {

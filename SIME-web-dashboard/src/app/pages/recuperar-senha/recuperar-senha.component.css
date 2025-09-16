@@ -1,78 +1,42 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+body, html {
+    width: 100%;
+    height: 100%;
+}
+
 body {
-    background-color: #44A1A0;
-    position: relative;
-    min-height: 100vh;
-    overflow: hidden;
-}
-
-.r1 {
-    background-color: #499d9c;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 110vh;
-    height: 92vh;
-    clip-path: polygon( 29.794% 16.328%,29.794% 16.328%,25.242% 16.414%,21.004% 15.659%,17.095% 14.203%,13.527% 12.188%,10.316% 9.752%,7.473% 7.037%,5.013% 4.182%,2.951% 1.328%,1.298% -1.385%,0.069% -3.817%,100% -3.313%,100% 100%,88.839% 100%,88.839% 100%,79.643% 97.898%,72.637% 94.983%,67.585% 91.423%,64.255% 87.386%,62.412% 83.039%,61.823% 78.549%,62.253% 74.085%,63.47% 69.813%,65.239% 65.901%,67.326% 62.517%,67.326% 62.517%,68.681% 60.078%,70.154% 57.127%,71.661% 53.757%,73.115% 50.062%,74.432% 46.137%,75.524% 42.074%,76.307% 37.968%,76.695% 33.912%,76.602% 30.001%,75.943% 26.328%,75.943% 26.328%,74.196% 22.42%,71.471% 19.431%,67.895% 17.261%,63.596% 15.805%,58.702% 14.961%,53.342% 14.627%,47.643% 14.699%,41.733% 15.075%,35.741% 15.652%,29.794% 16.328% );
-}
-
-.container {
-    width: 110vh;
-    height: 70vh;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
-.primeiro{
-    background-color: #499D9C;
-    position: absolute;
-    bottom: 0;
-    border-top-left-radius: 60vh;
-    border-top-right-radius: 60vh;
-    height: 55vh;
-    width: 110vh;
-    z-index: 1;
+.recovery-container {
+    position: relative; 
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 40px;
+    width: 90%;
+    max-width: 400px;
 }
-
-.segundo{
-    background-color: #46A1A0;
-    position: absolute;
-    bottom: 0;
-    border-top-left-radius: 60vh;
-    border-top-right-radius: 60vh;
-    height: 45vh;
-    width: 84vh;
-    z-index: 2;
-}
-
-.terceiro{
-    background-color: #4CA7A6;
-    position: absolute;
-    bottom: 0;
-    border-top-left-radius: 60vh;
-    border-top-right-radius: 60vh;
-    height: 37vh;
-    width: 64vh;
-    z-index: 3;
-}
-
 
 h1 {
-    position: absolute;
-    color: #ffffff;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 450;
-    font-size: 7vh;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2; /* Garante que o texto fique acima das imagens */
-    white-space: nowrap; /* Evita quebra de linha */
+    color: white;
+    font-family: sans-serif;
+    text-align: center;
+}
+
+.recovery-input {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
 }
