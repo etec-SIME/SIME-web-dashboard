@@ -10,8 +10,6 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { CriarChamadoComponent } from './pages/criar-chamado/criar-chamado.component';
 import { GestorGeralComponent } from './pages/gestor-geral/gestor-geral.component';
 import { LoginComponent } from './pages/login/login.component';
-/*Retirar no final */
-import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha.component';
 
 export const routes: Routes = [
     { path: '', component: LayoutComponent,
@@ -26,7 +24,5 @@ export const routes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
     { path: 'funcionarios', component: FuncionariosComponent },
     {path: 'gestor-geral', component: GestorGeralComponent},
-    /*Retirar no final */
-    { path: 'recuperar-senha', component: RecuperarSenhaComponent, data: {titulo: 'Recuperar Senha'} },
     { path: '**', redirectTo: '' }
 ];
