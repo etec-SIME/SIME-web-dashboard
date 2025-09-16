@@ -4,25 +4,48 @@
    responsividade:
    clamp(minimo, tamanho esperado(q eu queo q mantenha), max)
 */
+
 #cardsCriar{
   margin-top: 3vw;
   margin-left: 3vw;
   display: grid;
   grid-template-columns: 2fr 2fr;
-  row-gap: 3vw;
+  row-gap: clamp(20px, 3vw, 5vw);
+  column-gap: clamp(20px, 5vw, 7vw);
 }
 
 .card{
-  background-color: #EAEAEA;
+  background-color: #EAEAEA80;
   display: flex;
   padding: 1.5vw;
-  gap: 1.5vw;
+  gap: clamp(10px, 1vw, 3vw);
   border-radius: 0.5vw;
-  width: 28vw;
+  width: clamp(30px, 28vw, 30vw);
+  height: clamp(10px, 12vh, 14vh);
 }
 
-.cardContent small{
+.tipo-perfil-card{
+  gap: 1.5vw;
+}
+
+.cardText{
+  margin-left: clamp( 10px, 1.2vw, 3.2vw);
+  margin-top: 0.2vw;
+  text-wrap: nowrap;
+
+}
+
+.cardText small{
   font-weight: 100;
+  font-size: clamp(13px, 1.2vw, 3vw);
+}
+
+.cardText p{
+  font-size: clamp(15px, 1.3vw, 12vw);
+}
+
+.tipo-perfil-text{
+  margin-left: 0vw;
 }
 
 .voltar{
@@ -30,6 +53,17 @@
 }
 
 .icon{
-  width: 2vw;
-  height: 2vh;
+  height: clamp(3px ,6vh, 8vh);
+  margin-left: 1vw;
+}
+
+.tipo-perfil{
+  width: clamp(60px, 5vw, 7vw);
+  height: clamp( 40px, 6vh, 8vh);
+  margin-left: 0vw;
+}
+
+.departamento{
+  height: clamp(30px, 7.2vh, 9.2vh);
+  margin-left: 0.5vw;
 }
