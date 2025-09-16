@@ -179,7 +179,7 @@ export class EscolaComponent implements OnInit{
         idTipoPerfil: [''],
         nomeUsuario: [''],
         senhaUsuario: [''],
-        codEscola: [''],
+        cpfUsuario: [''],
         emailUsuario: [''],
         telefoneUsuario: [''],
         departamentoIds: ['']
@@ -226,10 +226,10 @@ export class EscolaComponent implements OnInit{
       idTipoPerfil: [''],
       nomeUsuario: [''],
       senhaUsuario: [''],
-      codEscola: [''],
+      cpfUsuario: [''],
       emailUsuario: [''],
       telefoneUsuario: [''],
-      departamentoIds: ['']
+      departamentoIds: [[]]
     })
 
     this.formEditarEquipamento = this.fb.group({
@@ -273,6 +273,7 @@ export class EscolaComponent implements OnInit{
         alert("Erro ao listar permissoes")
       }
       });
+
     }
 
     onAtribuirPermissoes(){
@@ -403,7 +404,7 @@ export class EscolaComponent implements OnInit{
       this.escolaService.cadastrarUsuario(novoUsuario).subscribe({
         next: (resp) => {
           alert("Usuario criado com sucesso!");
-          this.formCadastrarAmbiente.reset();
+          this.formCadastrarUsuario.reset();
         },error: (err) => {
           alert("Erro ao criar Usuario!!");
         }
