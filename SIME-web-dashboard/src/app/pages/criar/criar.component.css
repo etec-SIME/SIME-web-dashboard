@@ -20,8 +20,8 @@
   padding: 1.5vw;
   gap: clamp(10px, 1vw, 3vw);
   border-radius: 0.5vw;
-  width: clamp(30px, 28vw, 30vw);
-  height: clamp(10px, 12vh, 14vh);
+  width: clamp(290px, 28vw, 30vw);
+  height: clamp(5px, 12vh, 14vh);
 }
 
 .tipo-perfil-card{
