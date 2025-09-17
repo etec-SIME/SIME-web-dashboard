@@ -1,52 +1,76 @@
+<!-- Voltar -->
+<button class="btn-back" (click)="voltar()">← Voltar</button>
+
 <div class="container">
 
-    <!-- Voltar -->
-    <button class="btn-back" (click)="voltar()">← Voltar</button>
-
-    <!-- Barra de progresso -->
-    <div class="progress">
-        @for (etapa of etapas; let i = $index; track i) {
-        <div class="progress-step">
-            <div class="circle" [class.active]="i <= etapaAtual">
-            @if (i < etapaAtual) {
-                ✔
-            } @else {
-                {{ i + 1 }}
-            }
-            </div>
-            @if (i < etapas.length - 1) {
-            <div class="line" [class.active]="i < etapaAtual"></div>
-            }
-        </div>
-        }
-    </div>
+    <div class="preview"></div>
 
     <!-- Infos -->
     <div class="content">
-        <div class="preview"></div>
 
         <div class="details">
-        <h2>{{ chamado.titulo }}</h2>
-        <p>{{ chamado.descricao }}</p>
+            <h2>{{ chamado.titulo }}</h2>
 
-        <div class="meta">
-            <p><strong>Departamento:</strong> {{ chamado.departamento }}</p>
-            <p>
-            <strong>Prioridade:</strong>
-            <span [class.alta]="chamado.prioridade === 'Alta'"
-                    [class.media]="chamado.prioridade === 'Média'"
-                    [class.baixa]="chamado.prioridade === 'Baixa'">
-                {{ chamado.prioridade }}
-            </span>
-            </p>
+        <!-- Barra de progresso -->
+        <div class="progress">
+            @for (etapa of etapas; let i = $index; track i) {
+            <div class="progress-step">
+                <div class="circle" [class.active]="i <= etapaAtual">
+                @if (i < etapaAtual) {
+                    ✔
+                } @else {
+                    {{ i + 1 }}
+                }
+                </div>
+        
+                <!-- Conector (linha entre os círculos) -->
+                @if (i < etapas.length - 1) {
+                <div class="line" [class.active]="i < etapaAtual"></div>
+                }
+        
+                <!-- Texto abaixo do círculo -->
+                <div class="label">
+                <p class="title">{{ etapa.nome }}</p>
+                <p class="date">{{ etapa.data }}</p>
+                </div>
+            </div>
+            }
         </div>
+            
+            <div class="details-info">
+                <div class="details-header">
+                    <p>Descricao</p>
+                    <p>Departamento</p>
+                    <p>Prioridade</p>
+                </div>
+                <div class="details-body">
+                    <div>
+                        <p>{{ chamado.descricao }}</p>
+                    </div>
+            
+                    <div>
+                        <p>Informática</p>
+                    </div>
+            
+                    <div>
+                        <span   [class.alta]="chamado.prioridade === 'Alta'"
+                                [class.media]="chamado.prioridade === 'Média'"
+                                [class.baixa]="chamado.prioridade === 'Baixa'">
+                            {{ chamado.prioridade }}
+                        </span>
+                    </div>
+                </div>  
+            </div>
+            
+            <p>Emitido 21/07/2025 - 13:20</p>
         </div>
-    </div>
 
-    <!-- Botões -->
-    <div class="actions">
-        <button class="btn-approve" (click)="aprovar()">Aprovar</button>
-        <button class="btn-reject" (click)="recusar()">Recusar</button>
+        <!-- Botões -->
+        <div class="actions">
+            <button class="btn-approve" (click)="aprovar()">Aprovar</button>
+            <button class="btn-reject" (click)="recusar()">Recusar</button>
+        </div>
+
     </div>
 </div>
   

@@ -8,8 +8,16 @@ import { ChamadoService } from '../../services/chamado/chamado.service';
   styleUrl: './chamado-detalhe.component.css'
 })
 export class ChamadoDetalheComponent {
-  etapas = ['Em análise', 'Aprovado', 'Análise de APM', 'Em andamento', 'Concluído'];
+  etapas = [
+    { nome: 'Em análise', data: 'Segunda, 21/07/2025' },
+    { nome: 'Aprovado', data: 'Quarta, 23/07/2025' },
+    { nome: 'Análise da APM', data: 'Quinta, 24/07/2025' },
+    { nome: 'Em andamento', data: 'Segunda, 28/07/2025' },
+    { nome: 'Concluído', data: 'Quarta, 30/07/2025' },
+  ];
+  
   etapaAtual = 1;
+  
 
   constructor(private chamadoService: ChamadoService) {}
 
