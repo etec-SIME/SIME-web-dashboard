@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-body {
+.main {
   background-color: #44A1A0;
   min-height: 100vh;
   overflow: hidden;
