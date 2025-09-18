@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-tabela-permissoes',
@@ -7,5 +8,13 @@ import { Component } from '@angular/core';
   styleUrl: './tabela-permissoes.component.css'
 })
 export class TabelaPermissoesComponent {
+  itens: Item[] = [
+    {name }
+  ]
+
+
+  // constructor() {
+  //   this.concordo.valueChanges.subscribe(isChecked)
+  // }
 
 }
