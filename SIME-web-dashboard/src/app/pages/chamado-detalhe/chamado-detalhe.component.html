@@ -56,7 +56,8 @@
                         <span   [class.alta]="chamado.prioridade === 'Alta'"
                                 [class.media]="chamado.prioridade === 'Média'"
                                 [class.baixa]="chamado.prioridade === 'Baixa'">
-                            {{ chamado.prioridade }}
+                                {{ chamado.prioridade }}
+                                <img [src]="iconePrioridade[chamado.prioridade]" [alt]="chamado.prioridade" width="20" height="20" align="center" />
                         </span>
                     </div>
                 </div>  

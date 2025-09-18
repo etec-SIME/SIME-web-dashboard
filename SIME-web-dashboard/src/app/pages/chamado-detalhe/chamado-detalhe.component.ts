@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ChamadoService } from '../../services/chamado/chamado.service';
 
 @Component({
@@ -8,6 +8,12 @@ import { ChamadoService } from '../../services/chamado/chamado.service';
   styleUrl: './chamado-detalhe.component.css'
 })
 export class ChamadoDetalheComponent {
+  iconePrioridade: any = {
+    Alta: "/images/pendentes/altaPrioridade.svg",
+    Media: "/images/pendentes/mediaPrioridade.svg",
+    Baixa: "/images/pendentes/baixaPrioridade.svg"
+  };
+
   etapas = [
     { nome: 'Em análise', data: 'Segunda, 21/07/2025' },
     { nome: 'Aprovado', data: 'Quarta, 23/07/2025' },
@@ -18,7 +24,6 @@ export class ChamadoDetalheComponent {
   
   etapaAtual = 1;
   
-
   constructor(private chamadoService: ChamadoService) {}
 
   chamado = {
