@@ -21,9 +21,9 @@ export class ChamadoDetalheComponent {
     { nome: 'Em andamento', data: 'Segunda, 28/07/2025' },
     { nome: 'Concluído', data: 'Quarta, 30/07/2025' },
   ];
-  
+
   etapaAtual = 1;
-  
+
   constructor(private chamadoService: ChamadoService) {}
 
   chamado = {
