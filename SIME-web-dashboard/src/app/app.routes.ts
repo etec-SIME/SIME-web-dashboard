@@ -10,6 +10,7 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { CriarChamadoComponent } from './pages/criar-chamado/criar-chamado.component';
 import { GestorGeralComponent } from './pages/gestor-geral/gestor-geral.component';
 import { LoginComponent } from './pages/login/login.component';
+import { PaginaDeFundoComponent } from './components/pagina-de-fundo/pagina-de-fundo.component';
 
 export const routes: Routes = [
     { path: '', component: LayoutComponent,
@@ -23,6 +24,7 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'dashboard', component: DashboardComponent },
     { path: 'funcionarios', component: FuncionariosComponent },
-    {path: 'gestor-geral', component: GestorGeralComponent},
+    { path: 'gestor-geral', component: GestorGeralComponent },
+    { path: 'pagina-de-fundo', component: PaginaDeFundoComponent },
     { path: '**', redirectTo: '' }
 ];

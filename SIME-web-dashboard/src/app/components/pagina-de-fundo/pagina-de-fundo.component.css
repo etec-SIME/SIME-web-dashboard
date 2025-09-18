@@ -4,12 +4,10 @@
     box-sizing: border-box;
 }
 
-/* Estilos para dispositivos móveis (320px - 480px) */
-body {
-    background-color: #44A1A0;
-    position: relative;
-    min-height: 100vh;
-    overflow: hidden;
+.main {
+  background-color: #44A1A0;
+  min-height: 100vh;
+  overflow: hidden;
 }
 
 .f1 {
