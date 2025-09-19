@@ -1,5 +1,42 @@
-<a routerLink="/dashboard">dashboard</a>
-<br>
-<a routerLink="/gestor-geral">gestor-geral</a>
-<button (click)="login()">Login</button>
-<button (click)="getAllUsuarios()">getAllUsuarios</button>
+<div class="sime-logo">
+  <img src="images/logo.png" alt="SIME Logo">
+</div>
+
+<div class="login-container">
+  <div class="login-card">
+    <h1>LOGIN</h1>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="login-options">
+        <select formControlName="perfil">
+          <option value="" disabled selected>PERFIL</option>
+          <option value="gestor">Escola</option>
+          <option value="gestor">Gestor</option>
+          <option value="funcionario">Funcionário</option>
+        </select>
+        <img src="images/Group.png" class="input-icon">
+        <input type="text" placeholder="CÓD. ETEC" formControlName="codigoEtec">
+      </div>
+
+      <div class="input-group">
+        <img src="images/user 1.png" class="input-icon">
+        <input type="text" placeholder="USUÁRIO" formControlName="usuario">
+      </div>
+
+      <div class="input-group">
+        <img src="images/lock 1.png" class="input-icon">
+        <input [type]="showPassword ? 'text' : 'password'" placeholder="SENHA" formControlName="senha">
+        <img 
+          src="{{ showPassword ? 'images/closed-eye.png' : 'images/view 1.png' }}" 
+          class="input-eye" 
+          (click)="showPassword = !showPassword"
+          alt="Mostrar/Esconder senha">
+      </div>
+      <button type="submit" class="btn-login" [disabled]="loginForm.invalid">ENTRAR</button>
+
+      <div class="links">
+        <a href="#">Esqueci a senha</a>
+        <p>NÃO POSSUI CONTA? <a href="#">CADASTRE-SE</a></p>
+      </div>
+    </form>
+  </div>
+</div>

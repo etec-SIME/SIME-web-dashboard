@@ -1,30 +1,48 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
 import { UsuarioService } from '../../services/usuario/usuario.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  constructor(private authService: AuthService, private usuarioService: UsuarioService) {}
+  loginForm: FormGroup;
+  showPassword = false;
+
+  constructor(
+    private authService: AuthService,
+    private usuarioService: UsuarioService,
+    private fb: FormBuilder
+  ) {
+    this.loginForm = this.fb.group({
+      perfil: ['', Validators.required],
+      codigoEtec: ['', Validators.required],
+      usuario: ['', Validators.required],
+      senha: ['', Validators.required],
+    });
+  }
 
   login() {
+    if (this.loginForm.invalid) return;
+
     const loginDTO = {
-      rmUsuario: '123456',
-      idTipoPerfil: 1,
-      senhaUsuario: 'admin123',
-      codEscola: 'E01',
-    }
+      rmUsuario: this.loginForm.value.usuario,
+      idTipoPerfil: this.loginForm.value.perfil === 'gestor' ? 1 : 2,
+      senhaUsuario: this.loginForm.value.senha,
+      codEscola: this.loginForm.value.codigoEtec,
+    };
 
     this.authService.login(loginDTO).subscribe({
       next: (token) => console.log('Token recebido: ', token),
       error: (err) => console.error('Erro ao fazer login: ', err),
-    })
+    });
   }
 
   getAllUsuarios() {
@@ -34,4 +52,3 @@ export class LoginComponent {
     });
   }
 }
-

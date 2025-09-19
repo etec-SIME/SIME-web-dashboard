@@ -8,8 +8,10 @@ import { ChamadosPendentesComponent } from './pages/chamados-pendentes/chamados-
 import { HomeComponent } from './pages/home/home.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { GestorGeralComponent } from './pages/gestor-geral/gestor-geral.component';
+import { LoginComponent } from './pages/login/login.component';
 
 export const routes: Routes = [
+    { path: 'login', component: LoginComponent },
     { path: '', component: LayoutComponent,
       children: [
         { path: 'chamados-pendentes', component: ChamadosPendentesComponent, data: { titulo: 'Chamados Pendentes' } },
