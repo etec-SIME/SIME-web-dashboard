@@ -18,20 +18,27 @@
   gap: 100px;
 }
 
-.preview-container {
-  width: auto;
-  height: auto;
+.content-preview {
+    width: auto;
+    height: auto;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 20px;
+}
+
+.sub-previews {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .sub-previews div {
-  width: 10px;
-  height: 10px;
+  width: 50px;
+  height: 50px;
   background: #ddd;
 }
 
 .preview {
-  width: auto;
-  height: auto;
   background: #ddd;
 }
 
