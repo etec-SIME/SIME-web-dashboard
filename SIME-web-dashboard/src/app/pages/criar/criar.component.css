@@ -6,12 +6,12 @@
 */
 
 #cardsCriar{
-  margin-top: clamp(35px, 3vw, 5vw);
+  margin-top: clamp(35px, 5vw, 7vw);
   margin-left: 3vw;
   display: grid;
   grid-template-columns: 2fr 2fr;
   row-gap: clamp(20px, 3vw, 5vw);
-  column-gap: clamp(20px, 5vw, 7vw);
+  column-gap: clamp(20px, 1vw, 3vw);
 }
 
 .card{
