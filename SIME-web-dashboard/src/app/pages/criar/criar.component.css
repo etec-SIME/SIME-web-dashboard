@@ -6,7 +6,7 @@
 */
 
 #cardsCriar{
-  margin-top: 3vw;
+  margin-top: clamp(35px, 3vw, 5vw);
   margin-left: 3vw;
   display: grid;
   grid-template-columns: 2fr 2fr;
@@ -16,12 +16,16 @@
 
 .card{
   background-color: #EAEAEA80;
-  display: flex;
-  padding: 1.5vw;
-  gap: clamp(10px, 1vw, 3vw);
   border-radius: 0.5vw;
   width: clamp(290px, 28vw, 30vw);
-  height: clamp(5px, 12vh, 14vh);
+  height: clamp(2px, 12vh, 14vh);
+}
+
+.cardContent{
+  display: flex;
+  gap: clamp(10px, 1vw, 3vw);
+  margin-top: clamp(22px, 1.5vw, 3.5vw);
+  margin-left: clamp(22px, 0.3vw, 3vw);
 }
 
 .tipo-perfil-card{
