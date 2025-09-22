@@ -1,5 +1,5 @@
 import { ChamadoService } from './../../services/chamado/chamado.service';
-import { ChamadoRequestDTO } from './../../DTOs/chamadoRequestDTO';
+import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
 import { Component } from '@angular/core';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
@@ -21,24 +21,25 @@ export class DashboardComponent {
       error: (err) => console.error('Erro ao buscar chamados: ', err),
     });
   }
+  criarChamado() {}
 
-  criarChamado() {
-    const dto: ChamadoRequestDTO = {
-      tituloChamado: "Problema no projetor",
-      descChamado: "O projetor da sala 101 não está ligando",
-      localChamado: "Sala 101",
-      emailUsuario: "usuario@email.com",
-      tipoChamado: "Problema Técnico",
-      imgChamado: "base64ouURLdaImagem"
-    };
+  // criarChamado() {
+  //   const dto: ChamadoRequestDTO = {
+  //     tituloChamado: "Problema no projetor",
+  //     descChamado: "O projetor da sala 101 não está ligando",
+  //     localChamado: "Sala 101",
+  //     emailUsuario: "usuario@email.com",
+  //     tipoChamado: "Problema Técnico",
+  //     imgChamado: "base64ouURLdaImagem"
+  //   };
 
-    this.chamadoService.criarChamado('123456', dto).subscribe({
-      next: (res) => {
-        console.log('Resposta do backend:', res);
-      },
-      error: (err) => {
-        console.error('Erro ao criar chamado:', err);
-      }
-    });
-  }
+  //   this.chamadoService.criarChamado('123456', dto).subscribe({
+  //     next: (res) => {
+  //       console.log('Resposta do backend:', res);
+  //     },
+  //     error: (err) => {
+  //       console.error('Erro ao criar chamado:', err);
+  //     }
+  //   });
+  // }
 }
