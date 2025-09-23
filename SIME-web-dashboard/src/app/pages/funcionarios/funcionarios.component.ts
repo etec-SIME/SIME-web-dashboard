@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FuncionarioService } from '../../services/funcionario/funcionario.service';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { usuarioProjection } from '../../DTOs/Projections/usuarioProjection';
+import { UsuarioProjection } from '../../DTOs/Projections/UsuarioProjection';
 
 @Component({
   selector: 'app-funcionarios',
@@ -13,7 +13,7 @@ import { usuarioProjection } from '../../DTOs/Projections/usuarioProjection';
 })
 export class FuncionariosComponent implements OnInit {
 
-  funcionarios: usuarioProjection[] = [];
+  funcionarios: UsuarioProjection[] = [];
 
   constructor(private funcionarioService: FuncionarioService) {}
 
