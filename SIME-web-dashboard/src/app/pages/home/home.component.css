@@ -14,10 +14,9 @@
 
 /* Segunda parte da tela */
 
-/*.home-content {
-  background-color: white;
-  margin-right: clamp(90px, 30vw, 200px);  Vou alterar quando criar os cards 
-} */
+.home-content {
+  margin-right: clamp(90px, 3rem, 5rem);
+}
 
 .filtrar{
   font-family: var(--font-instrument-sans);
@@ -28,7 +27,7 @@
 }
 
 .filtrar > p { /* estiliza apenas o parágrafo filho direto de "filtrar"*/
-  font-size: clamp(15px, 1.25vw, 20px);
+  font-size: clamp(15px, 1.25vw, 2.25vw);
   font-weight: var(--fw-medium);
 }
 
@@ -43,7 +42,7 @@
   padding: 0.35vw 2vw;
   background-color: #EEEEEE;
   color: black;
-  font-size: clamp(12px, 1vw, 20px);
+  font-size: clamp(12px, 1vw, 3vw);
   border-radius: 2vw;
   border: 0;
   cursor: pointer;
@@ -58,12 +57,41 @@
 
 /* Terceira parte da tela */
 
+.locais-cards{
+  width: clamp(500px, 45vw, 47vw);
+  height: clamp(390px, 68vh, 70vh);
+  background-color: red;
+  margin-top: clamp(20px, 4vh, 6vh);
+  display: flex;
+  flex-direction: column;
+  gap: 5vh;
+}
+
+.card{
+  background-color: white;
+  color: white;
+  width: 45vw;
+  height: 10vh;
+  border-color: black;
+  border-width: 2vw;
+  font-size: 20vw;
+  display: flex;
+  flex-direction: row; /* Row? */
+}
+
+h2{
+  color: black;
+  font-weight: 500;
+  font-size: clamp(20px, 1.7vw, 3.7vw);
+}
+
 .home-info{
   flex-shrink: 1; /* 0 não encolhe, 1 encolhe para caber*/
   display: flex;
   flex-direction: column;
   gap: clamp(25px, 7vh, 9vh);
   align-self: center;
+  margin-left: 3rem;
   /*padding-left: 4vw;*/
 }
 
@@ -72,5 +100,5 @@
   width: 50vw;
   height: 20vh;
   padding-right: 4vw;
-  
+
 }*/
