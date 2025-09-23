@@ -1,0 +1,21 @@
+#content{
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    margin-top: clamp(3px, 1vw, 4vw);
+}
+
+.voltar{
+  color: #808080;
+}
+
+.card-tipo-ambiente{
+    display: flex;
+    background-color:"#EAEAEA80";
+    gap: clamp(2px, 1.5vw, 3.5vw);
+    border-radius: 2vw;
+    padding: clamp(2px, 1vw, 12vw);
+}
+
+.icon-ambiente{
+    height: clamp(3px, 5vh, 7vh);
+}
