@@ -2,7 +2,7 @@
 .login-options input,
 .input-group input {
   width: 100%;
-  padding: 12px 40px 12px 40px;
+  padding: 12px 40px;
   border: 1px solid #fff;
   border-radius: 3px;
   background: #44A1A0;
@@ -21,6 +21,19 @@
   color: #fff;
   background: #44A1A0;
   padding-left: 12px;
+}
+
+.select-group {
+  position: relative;
+}
+
+.select-group .input-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 17px;
+  height: 17px;
 }
 
 .login-container {
@@ -57,7 +70,8 @@
 }
 
 .login-options {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 10px;
   margin-bottom: 1rem;
 }
@@ -86,7 +100,7 @@
 .login-options select:focus {
   outline: none;
   border: 1px solid #c3f1ee;
-  box-shadow: 0 0 5px rgba(195, 241, 238, 0.5);
+  box-shadow: 0 0 5px rgba(185, 247, 242, 0.5);
 }
 
 .btn-login {
@@ -99,6 +113,7 @@
   cursor: pointer;
   font-size: 13px;
   font-weight: 550;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .btn-login:hover {

@@ -13,8 +13,10 @@
           <option value="gestor">Gestor</option>
           <option value="funcionario">Funcionário</option>
         </select>
-        <img src="images/Group.png" class="input-icon">
-        <input type="text" placeholder="CÓD. ETEC" formControlName="codigoEtec">
+        <div class="select-group">
+          <img src="images/Group.png" class="input-icon">
+          <input type="text" placeholder="CÓD. ETEC" formControlName="codigoEtec">
+        </div>
       </div>
 
       <div class="input-group">
@@ -25,9 +27,9 @@
       <div class="input-group">
         <img src="images/lock 1.png" class="input-icon">
         <input [type]="showPassword ? 'text' : 'password'" placeholder="SENHA" formControlName="senha">
-        <img 
-          src="{{ showPassword ? 'images/closed-eye.png' : 'images/view 1.png' }}" 
-          class="input-eye" 
+        <img
+          src="{{ showPassword ? 'images/closed-eye.png' : 'images/view 1.png' }}"
+          class="input-eye"
           (click)="showPassword = !showPassword"
           alt="Mostrar/Esconder senha">
       </div>
