@@ -11,6 +11,8 @@ import { CriarChamadoComponent } from './pages/criar-chamado/criar-chamado.compo
 import { GestorGeralComponent } from './pages/gestor-geral/gestor-geral.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ChamadoDetalheComponent } from './pages/chamado-detalhe/chamado-detalhe.component';
+import { PaginaDeFundoComponent } from './components/pagina-de-fundo/pagina-de-fundo.component';
+>>>>>>> 2d9202b8fc254920a1f614c555d82d97fdb2a0d5
 
 export const routes: Routes = [
     { path: '', component: LayoutComponent,
@@ -25,6 +27,7 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'dashboard', component: DashboardComponent },
     { path: 'funcionarios', component: FuncionariosComponent },
-    {path: 'gestor-geral', component: GestorGeralComponent},
+    { path: 'gestor-geral', component: GestorGeralComponent },
+    { path: 'pagina-de-fundo', component: PaginaDeFundoComponent },
     { path: '**', redirectTo: '' }
 ];
