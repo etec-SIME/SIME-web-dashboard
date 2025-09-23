@@ -13,7 +13,7 @@ import { UsuarioService } from '../../services/usuario/usuario.service';
 export class LoginComponent {
   constructor(private authService: AuthService, private usuarioService: UsuarioService) {}
 
-  login() {
+  loginUsuario() {
     const loginDTO = {
       rmUsuario: '123456',
       idTipoPerfil: 1,
@@ -21,9 +21,22 @@ export class LoginComponent {
       codEscola: 'E01',
     }
 
-    this.authService.login(loginDTO).subscribe({
-      next: (token) => console.log('Token recebido: ', token),
-      error: (err) => console.error('Erro ao fazer login: ', err),
+    this.authService.loginUsuario(loginDTO).subscribe({
+      next: (token) => console.log('Token do Usuário recebido: ', token),
+      error: (err) => console.error('Erro ao fazer login com Usuário: ', err),
+    })
+  }
+
+  loginEscola() {
+    const loginEscolaDTO = {
+      codEscola: 'E01',
+      cnpjEscola: '12345678000100',
+      senhaEscola: '123'
+    }
+
+    this.authService.loginEscola(loginEscolaDTO).subscribe({
+      next: (token) => console.log('Token da Escola recebido: ', token),
+      error: (err) => console.log('Erro ao fazer login com Escola: ', err)
     })
   }
 
