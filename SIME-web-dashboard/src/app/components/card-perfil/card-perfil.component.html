@@ -1,11 +1,24 @@
-<div class="list-context">
-  <button class="usuarioBtn" [ngClass]="cargo" (click)="onClick()">
-    <div class="card-context">
-      <img src="public/iconePerfil.svg" alt="Avatar">
-      <div class="text-context">
-        <p id="card-cargo">{{ cargo }}</p>
-        <p id="card-numeroPermissoes">{{ numeroPermissoes }}</p>
-      </div>
-    </div>
-  </button>
+<button class="btn-card" [ngClass]="cargo">
+  <img src="images/Group.svg">
+  <p id="card-permissoes">{{numeroPermissoes}}</p>
+</button>
+
+<!-- <div class="coluna">
+        <h3>
+            Alta Prioridade
+            <img [src]="imgAlta" alt="Alta Prioridade">
+        </h3>
+        @for (chamado of chamadosAlta; track chamado.idChamado) {
+          <div class="chamado-wrapper">
+            <app-chamado-card
+                [data]="chamado.dtAberturaChamado"
+                [descricao]="chamado.descChamado"
+                [local]="chamado.localChamado">
+            </app-chamado-card>
+          </div>
+        }
+    </div> -->
+
+<div class="scroll">
+  @for (item of items; track $index) {}
 </div>
