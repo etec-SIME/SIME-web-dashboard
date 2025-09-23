@@ -3,9 +3,8 @@ export interface usuarioRequestDTO{
     idTipoPerfil: number;
     nomeUsuario: string;
     senhaUsuario: string;
-    codEscola: string;
+    cpfUsuario: string;
     emailUsuario: string;
     telefoneUsuario: string;
     departamentoIds: number[];
-    
 }

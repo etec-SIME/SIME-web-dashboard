@@ -1,3 +1,7 @@
+import { chamado } from "./chamado";
+import { departamento } from "./departamento";
+import { tipoPerfil } from "./tipoPerfil";
+
 export interface usuario {
     rmUsuario: string;
     chamadosAbertos: string;
@@ -5,14 +9,13 @@ export interface usuario {
     idTipoPerfil: number;
     senhaUsuario: string;
     cpfUsuario: string
-    codEscola: string;
     emailUsuario: string;
     nomeUsuario: string;
     telefoneUsuario: string;
     
-    //tipoPerfil: tipoPerfil;
+    tipoPerfil: tipoPerfil;
     //feedbackList: feedback[];
-    //chamadoList: chamado[];
-    //chamadoResponsavelList: chamado[];
-    //departamentoList: departamento[];
+    chamadoList: chamado[];
+    chamadoResponsavelList: chamado[];
+    departamentoList: departamento[];
 }

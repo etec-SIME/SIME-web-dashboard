@@ -34,7 +34,7 @@ export class EscolaService {
 
   constructor(private http: HttpClient) { }
 
-  token : String = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODAwMDEwMCIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX0VTQ09MQSJ9XSwiZW50aWRhZGUiOiJFU0NPTEEiLCJpYXQiOjE3NTcxOTk0NDYsImV4cCI6MTc1NzI4NTg0Nn0.SClwyMmrixN3iakFvcd7rW1HPUmmOZuq-omPE-3kZhs';
+  token : String = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODAwMDEwMCIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX0VTQ09MQSJ9XSwiZW50aWRhZGUiOiJFU0NPTEEiLCJpYXQiOjE3NTg1Nzg4OTIsImV4cCI6MTc1ODY2NTI5Mn0.TddIqePMlG_OqMJzrluzZfhnA-UQzLr28iU0PKJFvao';
   // Inserir o Token manualmente para testar
 
   private getAuthHeaders() {
@@ -82,7 +82,7 @@ export class EscolaService {
   }
 
   getAllPermissaoTipoPerfil(idTipoPerfil: number): Observable<permissao[]>{
-    return this.http.get<permissao[]>(`${this.apiUrl}/tipoPerfil/${idTipoPerfil}/permissao`, this.getAuthHeaders());
+    return this.http.get<permissao[]>(`${this.apiUrl}/tipo-perfil/${idTipoPerfil}/permissao`, this.getAuthHeaders());
   }
 
   getAllTipoEquipamentoAmbiente(idAmbiente: number): Observable<tipoEquipamento[]>{
@@ -93,7 +93,7 @@ export class EscolaService {
   //MÉTODOS CRIAÇÃO/CADASTRO -------------
 
   cadastrarUsuario(dto: usuarioRequestDTO): Observable<any>{
-    return this.http.post<usuario>(`${this.apiUrl}/usuario`, dto, this.getAuthHeaders());
+    return this.http.post<usuarioRequestDTO>(`${this.apiUrl}/usuario`, dto, this.getAuthHeaders());
   }
 
   cadastrarTipoPerfil(dto:tipoPerfilRequestDTO ): Observable<any>{
@@ -164,9 +164,6 @@ export class EscolaService {
     return this.http.put<tipoAmbiente>(`${this.apiUrl}/tipo-ambiente/${idTipoAmbiente}`, tipoAmbienteDTO, this.getAuthHeaders());
   }
 
-  editarUsuario(idUsuario: number, usuarioDTO: usuarioRequestDTO){
-    return this.http.put<usuario>(`${this.apiUrl}/usuario/${idUsuario}`, usuarioDTO, this.getAuthHeaders());
-  }
 
 }
 

@@ -16,6 +16,9 @@ import { tipoEquipamento } from '../../models/tipoEquipamento';
 import { tipoAmbiente } from '../../models/tipoAmbiente';
 import { tipoAmbienteRequestDTO } from '../../DTOs/tipoAmbienteRequestDTO';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { usuarioRequestDTO } from '../../DTOs/usuarioRequestDTO';
+import { permissaoTipoPerfilDTO } from '../../DTOs/permissaoTipoPerfilDTO';
+import { tipoEquipamentoAmbienteDTO } from '../../DTOs/tipoEquipamentoAmbienteDTO';
 
 @Component({
   selector: 'app-escola',
@@ -137,12 +140,12 @@ export class EscolaComponent implements OnInit{
 
     this.listaPermissoes = this.fb.group({
       idTipoPerfil: [''],
-      ids: ['']
+      ids: [[]]
     })
 
     this.listaTipoEquipamento = this.fb.group({
       idAmbiente: [''],
-      ids: ['']
+      ids: [[]]
     })
 
     //
@@ -220,17 +223,6 @@ export class EscolaComponent implements OnInit{
       idTipoAmbiente: ['']
     })
 
-    this.formEditarUsuario =  this.fb.group({
-      id: [''],
-      rmUsuario: [''],
-      idTipoPerfil: [''],
-      nomeUsuario: [''],
-      senhaUsuario: [''],
-      cpfUsuario: [''],
-      emailUsuario: [''],
-      telefoneUsuario: [''],
-      departamentoIds: [[]]
-    })
 
     this.formEditarEquipamento = this.fb.group({
       codEquipamento: [''],
@@ -246,11 +238,10 @@ export class EscolaComponent implements OnInit{
   }
 
   onListarPermissaoTipoPerfil(){
-      const id = this.idTipoPerfil.value.get('id')?.value;
+      const id = this.idTipoPerfil.value.id;
 
-      this.escolaService.getAllPermissaoTipoPerfil(id).subscribe({
+      this.escolaService.getAllPermissaoTipoPerfil(Number(id)).subscribe({
         next: (resp) => {
-        alert("Listou permissoes")
         this.permissoes = resp;
         this.carregado = true
       },
@@ -263,14 +254,13 @@ export class EscolaComponent implements OnInit{
     onListarTipoEquipamentoAmbiente(){
       const id = this.idAmbiente.value.id;
 
-      this.escolaService.getAllTipoEquipamentoAmbiente(id).subscribe({
+      this.escolaService.getAllTipoEquipamentoAmbiente(Number(id)).subscribe({
         next: (resp) => {
-        alert("Listou permissoes")
         this.tipoEquipamento = resp;
         this.carregado = true
       },
       error: (err) =>{
-        alert("Erro ao listar permissoes")
+        alert("Erro ao listar tipo de equipamentos")
       }
       });
 
@@ -283,12 +273,15 @@ export class EscolaComponent implements OnInit{
 
       const listaPermissoes = idsPermissao.split(',').map((id: string) => Number(id.trim()));
 
-      this.escolaService.atribuirPermissoesTipoPerfil(idTipoPerfil, listaPermissoes).subscribe({
+      const payload: permissaoTipoPerfilDTO = {idPermissoes: listaPermissoes};
+  
+      this.escolaService.atribuirPermissoesTipoPerfil(idTipoPerfil, payload).subscribe({
         next: (resp) => {
           alert("Atribuiu!!");
           this.listaPermissoes.reset();
         }, error: (err) => {
           alert("Não atribuiu!!");
+          console.log(err);
         }
       })
     }
@@ -300,7 +293,9 @@ export class EscolaComponent implements OnInit{
 
       const listaTipoEquipamento = idsTipoEquipamento.split(',').map((id: string) => Number(id.trim()));
 
-      this.escolaService.atribuirTipoEquipamentoAmbiente(idAmbiente, listaTipoEquipamento).subscribe({
+      const payload: tipoEquipamentoAmbienteDTO = {idsTipoEquipamento: listaTipoEquipamento};
+
+      this.escolaService.atribuirTipoEquipamentoAmbiente(idAmbiente, payload).subscribe({
         next: (resp) => {
           alert("Atribuiu!!");
           this.listaTipoEquipamento.reset();
@@ -399,7 +394,22 @@ export class EscolaComponent implements OnInit{
     }
 
     onCadastrarUsuario(){
-      const novoUsuario = this.formCadastrarUsuario.value;
+      const formValue = this.formCadastrarUsuario.value;
+      const departamentos = formValue.departamentoIds;
+      const departamentoIdsArray = String(departamentos)
+  .split(',')
+  .map((id: string) => Number(id.trim()))
+  .filter((id: number) => !isNaN(id));
+      const novoUsuario: usuarioRequestDTO = {
+        idTipoPerfil: Number(formValue.idTipoPerfil),
+        rmUsuario: String(formValue.rmUsuario),
+        nomeUsuario: String(formValue.nomeUsuario),
+        senhaUsuario: String(formValue.senhaUsuario),
+        emailUsuario: String(formValue.emailUsuario),
+        cpfUsuario: String(formValue.cpfUsuario),
+        telefoneUsuario: String(formValue.telefoneUsuario),
+        departamentoIds: (departamentoIdsArray)
+      };
 
       this.escolaService.cadastrarUsuario(novoUsuario).subscribe({
         next: (resp) => {
@@ -407,9 +417,11 @@ export class EscolaComponent implements OnInit{
           this.formCadastrarUsuario.reset();
         },error: (err) => {
           alert("Erro ao criar Usuario!!");
+          console.log(err)
         }
       })
     }
+
 
     onCadastrarEquipamento(){
       const formValue = this.formCadastrarEquipamento.value;
@@ -546,30 +558,7 @@ export class EscolaComponent implements OnInit{
       });
     }
 
-    onEditarUsuario(){
-      const idUsuario = this.formEditarUsuario.value.id;
-
-      const usuarioEditado = {
-        rmUsuario: this.formEditarUsuario.value.rmUsuario,
-        idTipoPerfil: this.formEditarUsuario.value.idTipoPerfil,
-        nomeUsuario: this.formEditarUsuario.value.nomeUsuario,
-        senhaUsuario: this.formEditarUsuario.value.senhaUsuario,
-        codEscola: this.formEditarUsuario.value.codEscola,
-        emailUsuario: this.formEditarUsuario.value.emailUsuario,
-        telefoneUsuario: this.formEditarUsuario.value.telefoneUsuario,
-        departamentoIds: this.formEditarUsuario.value.departamentoIds
-      }
-
-      this.escolaService.editarUsuario(idUsuario, usuarioEditado).subscribe({
-        next: (resp) => {
-          alert("Usuario editado com sucesso!",);
-          this.formEditarUsuario.reset();
-        },
-        error: (err) => {
-          alert("erro ao editar usuario")
-        }
-      });
-    }
+    
 
     onEditarEquipamento(){
       const codEquipamento = this.formEditarEquipamento.value.codEquipamento;

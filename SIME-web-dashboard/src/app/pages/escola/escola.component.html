@@ -95,20 +95,23 @@
       </label>
     </form>
 
-  <div *ngIf="permissoes.length > 0">
-    <div *ngFor="let p of permissoes" class="card-get">
+</div>
+
+<div class="card-get">
+<div *ngIf="permissoes.length > 0">
+    <div *ngFor="let p of permissoes" class="listar">
+      <p>---------------</p>
       <p>idPermissao: {{p.idPermissao}}</p>
       <p>nome Permissao: {{p.nomePermissao}}</p>
       <p>descricao Permissao: {{p.descricaoPermissao}}</p>
     </div>
   </div>
-
 </div>
 
-<!-- GET ALL EQUIPAMENTOS POR AMBIENTE -->
+
+<!-- GET ALL TIPO EQUIPAMENTO POR AMBIENTE -->
 
 <div class="card-get">
-
     <h4>-- TIPO EQUIPAMENTOS POR AMBIENTE  --</h4>
     <form [formGroup]="idAmbiente">
       <label>
@@ -117,15 +120,17 @@
         <button (click)="onListarTipoEquipamentoAmbiente()">listar</button>
       </label>
     </form>
+</div>
 
-  <div *ngIf="tipoEquipamento.length > 0">
-    <div *ngFor="let te of tipoEquipamento" class="card-get">
+<div class="card-get">
+<div *ngIf="tipoEquipamento.length > 0">
+    <div *ngFor="let te of tipoEquipamento" class="listar">
       <p>id tipo equipamento: {{te.idTipoEquipamento}}</p>
       <p>nome Tipo equipamento: {{te.nomeTipoEquipamento}}</p>
     </div>
   </div>
-
 </div>
+
  </div>
 
 
@@ -203,7 +208,7 @@
     <h4>-- AMBIENTE --</h4>
     <form [formGroup]="formCadastrarAmbiente">
       <label class="ambiente">
-        <p>Nome do ambiente:</p>
+        <p>Número do ambiente:</p>
         <input formControlName="numAmbiente">
         <p>Descrição ambiente:</p>
         <input formControlName="descricaoAmbiente">
@@ -239,12 +244,15 @@
         <input formControlName="nomeUsuario">
         <p>senha:</p>
         <input formControlName="senhaUsuario">
-        <p>código escola:</p>
-        <input formControlName="codEscola">
+        <p>CPF:</p>
+        <input formControlName="cpfUsuario">
         <p>email:</p>
         <input formControlName="emailUsuario">
         <p>telefone:</p>
         <input formControlName="telefoneUsuario">
+        <p>Departamentos:</p>
+        <input formControlName="departamentoIds">
+
         <button (click)="onCadastrarUsuario()">Criar</button>
       </label>
     </form>
@@ -350,31 +358,6 @@
       <p>ID tipo equipamento:</p>
       <input formControlName="idTipoEquipamento">
       <button (click)="onEditarEquipamento()">Editar</button>
-    </label>
-  </form>
-  </div>
-
-  <div class="card-put-usuario">
-    <h4>-- Usuario edição--</h4>
-    <form [formGroup]="formEditarUsuario">
-    <label>
-      <p>ID usuario:</p>
-      <input formControlName="id">
-      <p>rm usuario:</p>
-        <input formControlName="rmUsuario">
-        <p>ID tipo perfil:</p>
-        <input formControlName="idTipoPerfil">
-        <p>nome usuario:</p>
-        <input formControlName="nomeUsuario">
-        <p>senha:</p>
-        <input formControlName="senhaUsuario">
-        <p>código escola:</p>
-        <input formControlName="codEscola">
-        <p>email:</p>
-        <input formControlName="emailUsuario">
-        <p>telefone:</p>
-        <input formControlName="telefoneUsuario">
-      <button (click)="onEditarUsuario()">Editar</button>
     </label>
   </form>
   </div>
