@@ -12,7 +12,6 @@ import { GestorGeralComponent } from './pages/gestor-geral/gestor-geral.componen
 import { LoginComponent } from './pages/login/login.component';
 import { ChamadoDetalheComponent } from './pages/chamado-detalhe/chamado-detalhe.component';
 import { PaginaDeFundoComponent } from './components/pagina-de-fundo/pagina-de-fundo.component';
->>>>>>> 2d9202b8fc254920a1f614c555d82d97fdb2a0d5
 
 export const routes: Routes = [
     { path: '', component: LayoutComponent,
