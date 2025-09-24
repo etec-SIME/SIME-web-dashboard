@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { loginDTO } from '../../DTOs/LoginDTO';
 import { tokenDTO } from '../../DTOs/TokenDTO';
+import { loginDTO } from '../../DTOs/LoginDTO';
+import { loginEscolaDTO } from '../../DTOs/LoginEscolaDTO';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 
@@ -8,21 +9,23 @@ import { Observable, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080/usuarios';
+  private apiUrl = 'http://localhost:8080';
   
   constructor( private http: HttpClient ) { }
 
-  login(credentials: loginDTO) : Observable<tokenDTO> {
-    return this.http.post<any>(`${this.apiUrl}/login`, credentials).pipe(
-      tap(response => localStorage.setItem('token', response.token))   // guarda o token
-    );
+  loginUsuario(credentials: loginDTO) : Observable<tokenDTO> {
+    return this.http.post<any>(`${this.apiUrl}/usuarios/login`, credentials, { withCredentials: true });
   }
 
-  getToken(): string | null {
-    return localStorage.getItem('token'); // retorna o token do localStorage
+  loginEscola(credentials: loginEscolaDTO) : Observable<tokenDTO> {
+    return this.http.post<any>(`${this.apiUrl}/escola/login`, credentials, { withCredentials: true });
   }
 
-  logout(): void {
-    localStorage.removeItem('token');  // remove o token do localStorage
-  }
+  // getToken(): string | null {
+  //   return localStorage.getItem('token'); // retorna o token do localStorage
+  // }
+
+  // logout(): void {
+  //   localStorage.removeItem('token');  // remove o token do localStorage
+  // }
 }

@@ -29,9 +29,7 @@ export class LoginComponent {
     });
   }
 
-  login() {
-    if (this.loginForm.invalid) return;
-
+  loginUsuario() {
     const loginDTO = {
       rmUsuario: this.loginForm.value.usuario,
       idTipoPerfil: this.loginForm.value.perfil === 'gestor' ? 1 : 2,
@@ -39,10 +37,23 @@ export class LoginComponent {
       codEscola: this.loginForm.value.codigoEtec,
     };
 
-    this.authService.login(loginDTO).subscribe({
-      next: (token) => console.log('Token recebido: ', token),
-      error: (err) => console.error('Erro ao fazer login: ', err),
-    });
+    this.authService.loginUsuario(loginDTO).subscribe({
+      next: (token) => console.log('Token do Usuário recebido: ', token),
+      error: (err) => console.error('Erro ao fazer login com Usuário: ', err),
+    })
+  }
+
+  loginEscola() {
+    const loginEscolaDTO = {
+      codEscola: 'E01',
+      cnpjEscola: '12345678000100',
+      senhaEscola: '123'
+    }
+
+    this.authService.loginEscola(loginEscolaDTO).subscribe({
+      next: (token) => console.log('Token da Escola recebido: ', token),
+      error: (err) => console.log('Erro ao fazer login com Escola: ', err)
+    })
   }
 
   getAllUsuarios() {
