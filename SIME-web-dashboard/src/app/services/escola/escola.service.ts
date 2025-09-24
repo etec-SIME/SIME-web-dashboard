@@ -1,4 +1,3 @@
-import { loginEscolaDTO } from '../../DTOs/LoginEscolaDTO';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -44,10 +43,6 @@ export class EscolaService {
       })
     };
   }
-
-
-  //login
-
 
   getAllEscolas(): Observable<escolaProjection[]>{
     return this.http.get<escolaProjection[]>(this.apiUrl, this.getAuthHeaders());
@@ -163,7 +158,5 @@ export class EscolaService {
   editarTipoAmbiente(idTipoAmbiente: number, tipoAmbienteDTO: tipoAmbienteRequestDTO){
     return this.http.put<tipoAmbiente>(`${this.apiUrl}/tipo-ambiente/${idTipoAmbiente}`, tipoAmbienteDTO, this.getAuthHeaders());
   }
-
-
 }
 

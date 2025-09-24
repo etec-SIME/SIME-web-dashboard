@@ -43,7 +43,7 @@
   align-items: center;
   justify-content: center;
   background-color: #44A1A0;
-  background-image: url('images/login-background/formas.png');
+  background-image: url('/public/images/login-background/formas.png');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
