@@ -1,0 +1,391 @@
+<h3>MÉTODOS GET</h3>
+ <div class="content-box-get">
+
+  <!-- GET ALL ESCOLAS-->
+<ng-container *ngIf="carregado; else carregando" >
+  <div *ngIf="escolas.length > 0; else nenhum" class="card-get">
+    <div *ngFor="let e of escolas">
+      <p><strong>Nome: </strong> {{ e.nomeEscola}}</p>
+      <p><strong>Código: </strong> {{ e.codEscola }}</p>
+      <p><strong>Endereço: </strong> {{ e.numEnderecoEscola }}</p>
+      <p><strong>CEP: </strong> {{ e.cepEscola }}</p>
+      <p><strong>CNPJ: </strong> {{ e.cnpjEscola }}</p>
+    </div>
+  </div>
+</ng-container>
+
+<!-- GET ALL AMBIENTES-->
+  <ng-container *ngIf="carregado; else carregando">
+  <div *ngIf="ambientes.length > 0; else nenhum" class="card-get">
+    <div *ngFor="let a of ambientes">
+      <p><strong>Número: </strong> {{ a.numAmbiente}}</p>
+      <p><strong>Descrição: </strong> {{ a.descricaoAmbiente}}</p>
+      <p><strong>Id tipo ambiente: </strong> {{ a.idTipoAmbiente}}</p>
+    </div>
+  </div>
+</ng-container>
+
+<!-- GET ALL DEPARTAMENTOS-->
+<ng-container *ngIf="carregado; else carregando" >
+  <div *ngIf="departamentos.length > 0; else nenhum" class="card-get">
+    <div *ngFor="let d of departamentos">
+      <p><strong>Nome: </strong> {{ d.nomeDepartamento}}</p>
+      <p><strong>Descrição: </strong> {{ d.descDepartamento}}</p>
+    </div>
+  </div>
+</ng-container>
+
+<!-- GET ALL EQUIPAMENTOS -->
+<ng-container *ngIf="carregado; else carregando" >
+  <div *ngIf="equipamentos.length > 0; else nenhum" class="card-get">
+    <div *ngFor="let e of equipamentos" >
+      <p><strong>código equipamento: </strong> {{ e.codEquipamento}}</p>
+      <p><strong>Id tipo Equipamentos: </strong> {{ e.idTipoEquipamento}}</p>
+    </div>
+  </div>
+</ng-container>
+
+<!-- GET ALL TIPO PERFIL -->
+ <ng-container *ngIf="carregado; else carregando" >
+  <div *ngIf="tipoPerfis.length > 0; else nenhum" class="card-get">
+    <div *ngFor="let tp of tipoPerfis">
+      <p><strong>Nome: </strong> {{ tp.nomeTipoPerfil}}</p>
+    </div>
+  </div>
+</ng-container>
+
+<!-- GET ALL TIPO CHAMADO -->
+ <ng-container *ngIf="carregado; else carregando" >
+  <div *ngIf="tipoChamados.length > 0; else nenhum" class="card-get">
+    <div *ngFor="let tc of tipoChamados">
+      <p><strong>Id Departamento: {{tc.idDepartamento}}</strong></p>
+      <p><strong>Nome: </strong> {{ tc.nomeTipoChamado}}</p>
+    </div>
+  </div>
+</ng-container>
+
+<!-- GET ALL TIPO EQUIPAMENTO -->
+ <ng-container *ngIf="carregado; else carregando" >
+  <div *ngIf="tipoEquipamentos.length > 0; else nenhum" class="card-get">
+    <div *ngFor="let te of tipoEquipamentos">
+      <p><strong>ID: </strong> {{ te.idTipoEquipamento}}</p>
+      <p><strong>Nome: </strong> {{ te.nomeTipoEquipamento}}</p>
+    </div>
+  </div>
+</ng-container>
+
+<!-- GET ALL TIPO AMBIENTE -->
+<ng-container *ngIf="carregado; else carregando" >
+  <div *ngIf="tipoAmbientes.length > 0; else nenhum" class="card-get">
+    <div *ngFor="let ta of tipoAmbientes">
+      <p><strong>Nome: </strong> {{ ta.nomeTipoAmbiente}}</p>
+    </div>
+  </div>
+</ng-container>
+
+<!-- GET ALL PERMISSOES POR TIPO PERFIL -->
+ <div class="card-get">
+
+    <h4>-- PERMISSOES POR TIPO PERFIL --</h4>
+    <form [formGroup]="idTipoPerfil">
+      <label>
+        <p>ID tipo perfil:</p>
+        <input formControlName="id">
+        <button type="button" (click)="onListarPermissaoTipoPerfil()">listar</button>
+      </label>
+    </form>
+
+</div>
+
+<div class="card-get">
+<div *ngIf="permissoes.length > 0">
+    <div *ngFor="let p of permissoes" class="listar">
+      <p>---------------</p>
+      <p>idPermissao: {{p.idPermissao}}</p>
+      <p>nome Permissao: {{p.nomePermissao}}</p>
+      <p>descricao Permissao: {{p.descricaoPermissao}}</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- GET ALL TIPO EQUIPAMENTO POR AMBIENTE -->
+
+<div class="card-get">
+    <h4>-- TIPO EQUIPAMENTOS POR AMBIENTE  --</h4>
+    <form [formGroup]="idAmbiente">
+      <label>
+        <p>ID ambiente:</p>
+        <input formControlName="id">
+        <button (click)="onListarTipoEquipamentoAmbiente()">listar</button>
+      </label>
+    </form>
+</div>
+
+<div class="card-get">
+<div *ngIf="tipoEquipamento.length > 0">
+    <div *ngFor="let te of tipoEquipamento" class="listar">
+      <p>id tipo equipamento: {{te.idTipoEquipamento}}</p>
+      <p>nome Tipo equipamento: {{te.nomeTipoEquipamento}}</p>
+    </div>
+  </div>
+</div>
+
+ </div>
+
+
+<!---->
+<ng-template #nenhum>
+  <p>Nenhuma escola encontrado.</p>
+</ng-template>
+
+<ng-template #carregando>
+  <p>Carregando escolas...</p>
+</ng-template>
+
+<h3>MÉTODOS POST</h3>
+<div class="content-box-post">
+  <div class="card-post">
+    <h4>-- TIPO PERFIL --</h4>
+    <form [formGroup]="formCadastrarTipoPerfil">
+      <div>
+        <p>Nome tipo perfil:</p>
+      <input formControlName="nomeTipoPerfil">
+      </div>
+    <button (click)="onCadastrarTipoPerfil()">Criar</button>
+  </form>
+  </div>
+
+  <div class="card-post">
+    <h4>-- TIPO EQUIPAMENTO --</h4>
+    <form [formGroup]="formCriarTipoEquipamento" class="">
+    <label>
+      <p>Nome tipo equipamento: </p>
+      <input formControlName="nomeTipoEquipamento">
+      <button (click)="onCriarTipoEquipamento()">Criar</button>
+    </label>
+  </form>
+  </div>
+
+  <div class="card-post">
+    <h4>-- TIPO AMBIENTE --</h4>
+    <form [formGroup]="formCriarTipoAmbiente" class="">
+    <label>
+      <p>Nome tipo ambiente: </p>
+      <input formControlName="nomeTipoAmbiente">
+      <button (click)="onCriarTipoAmbiente()">Criar</button>
+    </label>
+    </form>
+  </div>
+
+  <div class="card-post">
+    <h4>-- TIPO CHAMADO --</h4>
+    <form [formGroup]="formCriarTipoChamado" class="">
+    <label>
+      <p>ID departamento:</p>
+      <input formControlName="idDepartamento">
+      <p>Nome tipo chamado: </p>
+      <input formControlName="nomeTipoChamado">
+      <button (click)="onCriarTipoChamado()">Criar</button>
+    </label>
+    </form>
+  </div>
+
+  <div class="card-post">
+    <h4>-- DEPARTAMENTO --</h4>
+    <form [formGroup]="formCriarDepartamento">
+      <label class="departamento">
+        <p>Nome do Departamento:</p>
+        <input formControlName="nomeDepartamento">
+        <p>Descrição departamento:</p>
+        <input formControlName="descDepartamento">
+        <button (click)="OnCriarDepartanmento()">Criar</button>
+      </label>
+    </form>
+  </div>
+
+  <div class="card-post">
+    <h4>-- AMBIENTE --</h4>
+    <form [formGroup]="formCadastrarAmbiente">
+      <label class="ambiente">
+        <p>Número do ambiente:</p>
+        <input formControlName="numAmbiente">
+        <p>Descrição ambiente:</p>
+        <input formControlName="descricaoAmbiente">
+        <p>Id tipo ambiente:</p>
+        <input formControlName="idTipoAmbiente">
+        <button (click)="onCadastrarAmbiente()">Criar</button>
+      </label>
+    </form>
+  </div>
+
+  <div class="card-post">
+    <h4>-- EQUIPAMENTO --</h4>
+    <form [formGroup]="formCadastrarEquipamento">
+      <label>
+        <p>Codigo equipamento:</p>
+        <input formControlName="codEquipamento">
+        <p>ID Tipo equipamento:</p>
+        <input formControlName="idTipoEquipamento">
+        <button (click)="onCadastrarEquipamento()">Criar</button>
+      </label>
+    </form>
+  </div>
+
+  <div class="card-post-usuario">
+    <h4>-- USUARIO --</h4>
+    <form [formGroup]="formCadastrarUsuario">
+      <label>
+        <p>rm usuario:</p>
+        <input formControlName="rmUsuario">
+        <p>ID tipo perfil:</p>
+        <input formControlName="idTipoPerfil">
+        <p>nome usuario:</p>
+        <input formControlName="nomeUsuario">
+        <p>senha:</p>
+        <input formControlName="senhaUsuario">
+        <p>CPF:</p>
+        <input formControlName="cpfUsuario">
+        <p>email:</p>
+        <input formControlName="emailUsuario">
+        <p>telefone:</p>
+        <input formControlName="telefoneUsuario">
+        <p>Departamentos:</p>
+        <input formControlName="departamentoIds">
+
+        <button (click)="onCadastrarUsuario()">Criar</button>
+      </label>
+    </form>
+  </div>
+
+</div>
+
+<h3>MÉTODOS PUT</h3>
+<div class="content-box-put">
+  <div class="card-put">
+    <h4>-- Tipo Perfil edição--</h4>
+    <form [formGroup]="formEditarTipoPerfil">
+    <label>
+      <p>ID tipo perfil:</p>
+      <input formControlName="id">
+      <p>Nome tipo perfil:</p>
+      <input formControlName="nomeTipoPerfil">
+      <button type="button" (click)="onEditarTipoPerfil()">Editar</button>
+    </label>
+  </form>
+  </div>
+
+  <div class="card-put">
+    <h4>-- Tipo ambiente edição--</h4>
+    <form [formGroup]="formEditarTipoAmbiente">
+    <label>
+      <p>ID tipo ambiente:</p>
+      <input formControlName="id">
+      <p>Nome tipo ambiente:</p>
+      <input formControlName="nomeTipoAmbiente">
+      <button type="button" (click)="onEditarTipoAmbiente()">Editar</button>
+    </label>
+  </form>
+  </div>
+
+  <div class="card-put">
+    <h4>-- Tipo equipamento edição--</h4>
+    <form [formGroup]="formEditarTipoEquipamento" class="">
+    <label>
+      <p>ID tipo equipamento:</p>
+      <input formControlName="id">
+      <p>Nome tipo equipamento:</p>
+      <input formControlName="nomeTipoEquipamento">
+      <button (click)="onEditarTipoEquipamento()">Editar</button>
+    </label>
+  </form>
+  </div>
+
+  <div class="card-put">
+    <h4>-- Tipo chamado edição--</h4>
+    <form [formGroup]="formEditarTipoChamado" class="">
+    <label>
+      <p>ID tipo chamado:</p>
+      <input formControlName="id">
+      <p>Nome tipo chamado:</p>
+      <input formControlName="nomeTipoChamado">
+      <p>Id departamento</p>
+      <input formControlName="idDepartamento">
+      <button (click)="onEditarTipoChamado()">Editar</button>
+    </label>
+  </form>
+  </div>
+
+  <div class="card-put">
+    <h4>-- Departamento edição--</h4>
+    <form [formGroup]="formEditarDepartamento">
+    <label>
+      <p>ID departamento:</p>
+      <input formControlName="id">
+      <p>Nome departamento:</p>
+      <input formControlName="nomeDepartamento">
+      <p>decrição departamento:</p>
+      <input formControlName="descDepartamento">
+      <button (click)="onEditarDepartanmento()">Editar</button>
+    </label>
+  </form>
+  </div>
+
+
+  <div class="card-put">
+    <h4>-- Ambiente edição--</h4>
+    <form [formGroup]="formEditarAmbiente">
+    <label>
+      <p>ID ambiente:</p>
+      <input formControlName="id">
+      <p>Número ambiente:</p>
+      <input formControlName="numAmbiente">
+      <p>decrição ambiente:</p>
+      <input formControlName="descricaoAmbiente">
+      <p>Id tipo ambiente:</p>
+      <input formControlName="idTipoAmbiente">
+      <button (click)="onEditarAmbiente()">Editar</button>
+    </label>
+  </form>
+  </div>
+
+  <div class="card-put">
+    <h4>-- Equipamento edição--</h4>
+    <form [formGroup]="formEditarEquipamento">
+    <label>
+      <p>Código equipamento:</p>
+      <input formControlName="codEquipamento">
+      <p>ID tipo equipamento:</p>
+      <input formControlName="idTipoEquipamento">
+      <button (click)="onEditarEquipamento()">Editar</button>
+    </label>
+  </form>
+  </div>
+
+  <div class="card-put">
+    <h4>-- ATRIBUIR TIPO EQUIPAMENTO --</h4>
+    <form [formGroup]="listaTipoEquipamento">
+    <label>
+      <p>Id Ambiente: </p>
+      <input formControlName="idAmbiente">
+      <p>Lista de tipo equipamento: </p>
+      <input formControlName="ids">
+      <button (click)="onAtribuirTipoEquipamento()">atribuir</button>
+    </label>
+  </form>
+  </div>
+
+  <div class="card-put">
+    <h4>-- ATRIBUIR PERMISSOES --</h4>
+    <form [formGroup]="listaPermissoes">
+    <label>
+      <p>Id tipo perfil: </p>
+      <input formControlName="idTipoPerfil">
+      <p>Lista de permissoes: </p>
+      <input formControlName="ids">
+      <button (click)="onAtribuirPermissoes()">atribuir</button>
+    </label>
+  </form>
+  </div>
+
+</div>
