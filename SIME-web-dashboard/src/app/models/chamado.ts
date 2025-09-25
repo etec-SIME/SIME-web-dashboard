@@ -1,6 +1,6 @@
 import { usuario } from "./usuario";
 
-export interface Chamado {
+export interface chamado {
     idChamado?: number;
     dtAberturaChamado?: Date;
     descChamado?: string;
