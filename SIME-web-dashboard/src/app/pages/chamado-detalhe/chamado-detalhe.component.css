@@ -140,7 +140,10 @@
   margin-top: 30px;
   display: flex;
   gap: 30px;
-  justify-self: end;
+}
+
+.container .actions {
+  justify-content: end;
 }
 
 .btn-approve {
