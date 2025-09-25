@@ -3,43 +3,81 @@
         <div class="filtrar">
             <p>Filtrar por:</p>
             <div class="filtrar opcoes">
-                <button class="opcao">Salas</button>
-                <button class="opcao">Labs</button>
-                <button class="opcao">Outros</button>
+                <button class="opcao" (click)="setOpcao('salas')">Salas</button>
+                <button class="opcao" (click)="setOpcao('labs')">Labs</button>
+                <button class="opcao" (click)="setOpcao('outros')">Outros</button>
             </div>
         </div>
     <!-- Criar aqui -->
     <!-- <div class="teste"></div> -->
+
         <div class="locais-cards">
-          <div clas="card">
-            <h2>Sala 1</h2>
-            <div class="chamados">
-              <Label>01</Label>
-              <p>Chamadas</p>
+          <div *ngIf="opcaoAtual === 'salas'">
+            <div class="card" *ngFor="let sala of salas">
+              <p>{{ sala.nome }}</p>
+              <div class="chamados">
+                <p>{{ sala.chamados | number:'2.0' }}</p>
+                <p class="text-chamado">Chamados</p>
+              </div>
             </div>
           </div>
-          <div clas="card">
-            <h2>Sala 2</h2>
-            <div class="chamados">
 
+          <div *ngIf="opcaoAtual === 'labs'">
+            <div class="card" *ngFor="let lab of labs">
+              <p>{{ lab.nome }}</p>
+              <div class="chamados">
+                <p>{{ lab.chamados }}</p>
+                <p class="text-chamado">Chamados</p>
+              </div>
             </div>
           </div>
-          <div clas="card">
-            <h2>Sala 3</h2>
-            <div class="chamados">
 
+          <div *ngIf="opcaoAtual === 'outros'">
+            <div class="card" *ngFor="let outro of outros">
+              <p>{{ outro.nome }}</p>
+              <div class="chamados">
+                <p>{{ outro.chamados }}</p>
+                <p class="text-chamado">Chamados</p>
+              </div>
+          </div>
+
+        <!--<div class="locais-cards">
+          <div class="card salas">
+            <p>Sala 1</p>
+            <div class="chamados">
+              <p>01</p>
+              <p class="text-chamado">Chamados</p>
             </div>
           </div>
-          <div clas="card">
-            <h2>Sala 4</h2>
-            <div class="chamados">
 
+          <div class="card salas">
+            <p>Sala 2</p>
+            <div class="chamados">
+              <p>02</p>
+              <p class="text-chamado">Chamados</p>
             </div>
           </div>
-        </div>
 
+          <div class="card salas">
+            <p>Sala 3</p>
+            <div class="chamados">
+              <p>03</p>
+              <p class="text-chamado">Chamados</p>
+            </div>
+          </div>
+
+          <div class="card salas">
+            <p>Sala 4</p>
+            <div class="chamados">
+              <p>04</p>
+              <p class="text-chamado">Chamados</p>
+            </div>
+          </div>
+        </div> -->
+
+
+    
     </div>
-
     <div class="home-info">
         <app-calendario-mensal></app-calendario-mensal>
         <app-calendario-semanal></app-calendario-semanal>

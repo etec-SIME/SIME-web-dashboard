@@ -57,10 +57,12 @@
 
 /* Terceira parte da tela */
 
+.card { display: none; } /* todos escondidos */
+.card.show { display: flex; } /* apenas os ativos */
+
 .locais-cards{
   width: clamp(500px, 45vw, 47vw);
   height: clamp(390px, 68vh, 70vh);
-  background-color: red;
   margin-top: clamp(20px, 4vh, 6vh);
   display: flex;
   flex-direction: column;
@@ -69,20 +71,40 @@
 
 .card{
   background-color: white;
-  color: white;
-  width: 45vw;
-  height: 10vh;
-  border-color: black;
-  border-width: 2vw;
-  font-size: 20vw;
+  width: clamp(500px, 45vw, 47vw);
+  height: clamp(100px, 10vh, 12vh);
+  border-width: 10vw;
+  border: 0.13vw solid #D1D0CA;
+  border-radius: 1vw;
   display: flex;
   flex-direction: row; /* Row? */
+  gap: clamp(320px, 30vw, 32vw);
+  align-items: center;
+  padding-left: 2vw;
 }
 
-h2{
+.card > p{
   color: black;
   font-weight: 500;
-  font-size: clamp(20px, 1.7vw, 3.7vw);
+  font-size: clamp(22px, 1.7vw, 3.7vw);
+}
+
+.chamados{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5vh;
+}
+
+.chamados > p{
+  color: black;
+  font-weight: 500;
+  font-size: clamp(22px, 1.7vw, 3.7vw);
+}
+
+.chamados p.text-chamado{
+  font-size: clamp(14px, 1.1vw, 3.1vw);
+  font-weight: 100;
 }
 
 .home-info{
