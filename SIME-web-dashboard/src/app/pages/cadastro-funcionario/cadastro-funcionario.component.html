@@ -1,0 +1,16 @@
+<div class="content-box">
+  <div class="card-post">
+    <form [formGroup]="formCadastrarUsuario">
+        <input placeholder="RM" formControlName="rmUsuario">
+        <input placeholder="NOME" formControlName="nomeUsuario">
+        <input placeholder="SENHA" formControlName="senhaUsuario">
+        <input placeholder="CPF" formControlName="cpfUsuario">
+        <input placeholder="EMAIL" formControlName="emailUsuario">
+        <input placeholder="TELEFONE" formControlName="telefoneUsuario">
+      <label>
+        <button (click)="onCadastrarUsuario()">Criar</button>
+      </label>
+    </form>
+  </div>
+</div>
+

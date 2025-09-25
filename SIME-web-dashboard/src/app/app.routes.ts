@@ -15,6 +15,7 @@ import { CriarChamadoComponent } from './pages/criar-chamado/criar-chamado.compo
 import { GestorGeralComponent } from './pages/gestor-geral/gestor-geral.component';
 import { LoginComponent } from './pages/login/login.component';
 import { PaginaDeFundoComponent } from './components/pagina-de-fundo/pagina-de-fundo.component';
+import { CadastroFuncionarioComponent } from './pages/cadastro-funcionario/cadastro-funcionario.component';
 
 export const routes: Routes = [
     { path: '', component: LayoutComponent,
@@ -31,5 +32,6 @@ export const routes: Routes = [
     { path: 'escolas', component: EscolaComponent },
     {path: 'gestor-geral', component: GestorGeralComponent},
     { path: 'pagina-de-fundo', component: PaginaDeFundoComponent },
+    {path: 'cadastro-funcionario', component: CadastroFuncionarioComponent},
     { path: '**', redirectTo: '' }
 ];

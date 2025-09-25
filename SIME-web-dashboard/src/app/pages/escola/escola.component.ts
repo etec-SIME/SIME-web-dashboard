@@ -274,7 +274,7 @@ export class EscolaComponent implements OnInit{
       const listaPermissoes = idsPermissao.split(',').map((id: string) => Number(id.trim()));
 
       const payload: permissaoTipoPerfilDTO = {idPermissoes: listaPermissoes};
-  
+
       this.escolaService.atribuirPermissoesTipoPerfil(idTipoPerfil, payload).subscribe({
         next: (resp) => {
           alert("Atribuiu!!");
@@ -401,14 +401,12 @@ export class EscolaComponent implements OnInit{
   .map((id: string) => Number(id.trim()))
   .filter((id: number) => !isNaN(id));
       const novoUsuario: usuarioRequestDTO = {
-        idTipoPerfil: Number(formValue.idTipoPerfil),
         rmUsuario: String(formValue.rmUsuario),
         nomeUsuario: String(formValue.nomeUsuario),
         senhaUsuario: String(formValue.senhaUsuario),
         emailUsuario: String(formValue.emailUsuario),
         cpfUsuario: String(formValue.cpfUsuario),
         telefoneUsuario: String(formValue.telefoneUsuario),
-        departamentoIds: (departamentoIdsArray)
       };
 
       this.escolaService.cadastrarUsuario(novoUsuario).subscribe({
@@ -558,7 +556,7 @@ export class EscolaComponent implements OnInit{
       });
     }
 
-    
+
 
     onEditarEquipamento(){
       const codEquipamento = this.formEditarEquipamento.value.codEquipamento;

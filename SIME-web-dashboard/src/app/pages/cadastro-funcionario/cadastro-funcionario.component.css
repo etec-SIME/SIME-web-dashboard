@@ -1,0 +1,23 @@
+body{
+  margin: 0;
+}
+
+.content-box{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-post{
+  display: flex;
+  width: 300px;
+  height: 200px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  border-radius: 5px;
+}
