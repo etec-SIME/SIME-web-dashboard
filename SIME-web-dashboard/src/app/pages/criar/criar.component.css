@@ -18,7 +18,7 @@
   background-color: #EAEAEA80;
   border-radius: 0.5vw;
   width: clamp(290px, 28vw, 30vw);
-  height: clamp(2px, 12vh, 14vh);
+  height: clamp(2px, 13vh, 15vh);
 }
 
 .cardContent{
