@@ -18,7 +18,7 @@
   background-color: #EAEAEA80;
   border-radius: 0.5vw;
   width: clamp(290px, 28vw, 30vw);
-  height: clamp(2px, 13vh, 15vh);
+  height: clamp(2px, 12.5vh, 14.5vh);
 }
 
 .cardContent{
@@ -36,7 +36,6 @@
   margin-left: clamp( 10px, 1.2vw, 3.2vw);
   margin-top: 0.2vw;
   text-wrap: nowrap;
-
 }
 
 .cardText small{
@@ -62,9 +61,10 @@
 }
 
 .tipo-perfil{
-  width: clamp(60px, 5vw, 7vw);
-  height: clamp( 40px, 6vh, 8vh);
+  width: clamp(75px, 5vw, 7vw);
+  height: clamp(35px, 5.5vh, 7vh);
   margin-left: 0vw;
+  margin-top: clamp(6px, 0.2vw, 2.2vw);
 }
 
 .departamento{
