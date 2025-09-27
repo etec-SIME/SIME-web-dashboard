@@ -30,7 +30,7 @@ import { tipoPerfilProjection } from '../../DTOs/Projections/tipoPerfilProjectio
 })
 export class EscolaService {
 
-  private apiUrl = 'http://localhost:8080/escolas';
+  private apiUrl = 'http://localhost:8080/escola';
 
   constructor(private http: HttpClient) { }
 

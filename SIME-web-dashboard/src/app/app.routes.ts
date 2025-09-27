@@ -28,7 +28,7 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'dashboard', component: DashboardComponent },
     { path: 'funcionarios', component: FuncionariosComponent },
-    { path: 'escolas', component: EscolaComponent },
+    { path: 'escola', component: EscolaComponent },
     {path: 'gestor-geral', component: GestorGeralComponent},
     { path: 'pagina-de-fundo', component: PaginaDeFundoComponent },
     { path: '**', redirectTo: '' }
