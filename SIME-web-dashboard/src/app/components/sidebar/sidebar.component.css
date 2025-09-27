@@ -29,6 +29,7 @@
 }
 
 .home, .pendentes, .concluidos, .criar {
+    cursor: pointer;
     display: flex;
     align-items: center;
     gap: clamp(12px, 1vw, 3vw);
@@ -36,11 +37,31 @@
     /*padding-top: clamp(15px, 1vh, 25px);*/
 }
 
+.home.ativo, .pendentes.ativo, .concluidos.ativo, .criar.ativo {
+    position: relative;
+}
+
+.home.ativo::before, 
+.pendentes.ativo::before, 
+.concluidos.ativo::before, 
+.criar.ativo::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0.6vw; /* espessura da "borda" */
+    background: white; /* cor da "borda" */
+    border-top-right-radius: 0.4vw;   /* arredonda canto superior direito da faixa */
+    border-bottom-right-radius: 0.4vw; /* arredonda canto inferior direito da faixa */
+}
+
 .iconeHome, .iconePendentes, .iconeConcluidos, .iconeCriar {
     width: clamp(22px, 1.7vw, 3.7vw);
 }
 
 p{
+    user-select: none;
     font-family: var(--font-plus-jakarta-sans);
     font-weight: var(--fw-medium);
     color: white;

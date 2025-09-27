@@ -11,37 +11,18 @@
     <!-- Criar aqui -->
     <!-- <div class="teste"></div> -->
 
-        <div class="locais-cards">
-          <div *ngIf="opcaoAtual === 'salas'">
-            <div class="card" *ngFor="let sala of salas">
-              <p>{{ sala.nome }}</p>
-              <div class="chamados">
-                <p>{{ sala.chamados | number:'2.0' }}</p>
-                <p class="text-chamado">Chamados</p>
-              </div>
-            </div>
-          </div>
-
-          <div *ngIf="opcaoAtual === 'labs'">
-            <div class="card" *ngFor="let lab of labs">
-              <p>{{ lab.nome }}</p>
-              <div class="chamados">
-                <p>{{ lab.chamados }}</p>
-                <p class="text-chamado">Chamados</p>
-              </div>
-            </div>
-          </div>
-
-          <div *ngIf="opcaoAtual === 'outros'">
-            <div class="card" *ngFor="let outro of outros">
-              <p>{{ outro.nome }}</p>
-              <div class="chamados">
-                <p>{{ outro.chamados }}</p>
-                <p class="text-chamado">Chamados</p>
-              </div>
-          </div>
-
         <!--<div class="locais-cards">
+          <div class="card" *ngFor="let amb of ambientesFiltrados">
+            <p>{{ amb.nomeTipoAmbiente }} {{ amb.numAmbiente }}</p>
+            <div class="chamados">
+              <p>{{ amb.chamados ?? 0 }}</p>
+              <p class="text-chamado">Chamados</p>
+            </div>
+          </div>
+        </div> -->
+
+         
+        <div class="locais-cards">
           <div class="card salas">
             <p>Sala 1</p>
             <div class="chamados">
@@ -73,9 +54,7 @@
               <p class="text-chamado">Chamados</p>
             </div>
           </div>
-        </div> -->
-
-
+        </div>
     
     </div>
     <div class="home-info">

@@ -1,0 +1,48 @@
+<div class="prioridades">
+    <!-- Alta -->
+    <div class="coluna">
+        <h3>
+            Alta Prioridade
+            <img [src]="imgAlta" alt="Alta Prioridade">
+        </h3>
+        @for (chamado of chamadosAlta; track chamado.idChamado) {
+          <div class="chamado-wrapper">
+            <app-chamado-card
+                [data]="chamado.dtAberturaChamado"
+                [descricao]="chamado.descChamado"
+                [local]="chamado.localChamado">
+            </app-chamado-card>
+          </div>
+        }
+    </div>
+
+    <!-- Média -->
+    <div class="coluna">
+        <h3>
+            Média Prioridade
+            <img [src]="imgMedia" alt="Média Prioridade">
+        </h3>
+        @for (chamado of chamadosMedia; track chamado.idChamado) {
+            <app-chamado-card
+                [data]="chamado.dtAberturaChamado"
+                [descricao]="chamado.descChamado"
+                [local]="chamado.localChamado">
+            </app-chamado-card>
+        }
+    </div>
+
+    <!-- Baixa -->
+    <div class="coluna">
+        <h3>
+            Baixa Prioridade
+            <img [src]="imgBaixa" alt="Baixa Prioridade">
+        </h3>
+        @for (chamado of chamadosBaixa; track chamado.idChamado) {
+            <app-chamado-card
+                [data]="chamado.dtAberturaChamado"
+                [descricao]="chamado.descChamado"
+                [local]="chamado.localChamado">
+            </app-chamado-card>
+        }
+    </div>
+</div>

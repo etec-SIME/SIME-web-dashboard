@@ -1,5 +1,5 @@
 export interface chamadoProjection {
-    idChamado: string;
+    idChamado: number;
     descChamado: string;
     dtConclusaoChamado: Date;
     imgChamado: string;
