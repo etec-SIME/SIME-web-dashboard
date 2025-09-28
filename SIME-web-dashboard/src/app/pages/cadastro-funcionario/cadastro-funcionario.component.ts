@@ -18,11 +18,11 @@ export class CadastroFuncionarioComponent {
   cadastrarUsuario(){
     this.formCadastrarUsuario =  this.fb.group({
       rmUsuario: ['', Validators.required],
-      nomeUsuario: [''],
-      senhaUsuario: [''],
-      cpfUsuario: [''],
-      emailUsuario: [''],
-      telefoneUsuario: [''],
+      nomeUsuario: ['', Validators.required],
+      senhaUsuario: ['', Validators.required],
+      cpfUsuario: ['', Validators.required],
+      emailUsuario: ['', Validators.required],
+      telefoneUsuario: ['', Validators.required],
   })
   }
 

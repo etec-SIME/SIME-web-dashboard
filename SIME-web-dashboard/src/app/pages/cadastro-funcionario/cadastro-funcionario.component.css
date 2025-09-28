@@ -1,5 +1,3 @@
-
-
 *{
   background-color: #44A1A0;
 }
@@ -73,4 +71,8 @@ h3{
   color: white;
   font-size: clamp(1.5rem, 3vw, 2.5rem);
 
+}
+
+small{
+  color: rgb(178, 33, 33);
 }

@@ -51,16 +51,14 @@ export class EscolaComponent implements OnInit{
   ngOnInit(): void{
 
     // escolas
-    this.escolaService.getAllEscolas().subscribe((resp) => {
-      this.escolas = resp,
-      this.carregado = true
-    })
+    this.escolaService.getAllEscolas().subscribe(resp =>
+      this.escolas = resp
+    )
 
     // ambientes
-    this.escolaService.getAllAmbiente().subscribe((resp) => {
-      this.ambientes = resp,
-      this.carregado = true
-    })
+    this.escolaService.getAllAmbiente().subscribe(resp =>
+      this.ambientes = resp
+    )
 
     // departamentos
     this.escolaService.getAllDepartamento().subscribe((resp) => {

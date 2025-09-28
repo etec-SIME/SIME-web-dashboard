@@ -10,6 +10,7 @@ import { EscolaComponent } from './pages/escola/escola.component';
 
 import { CriarChamadoComponent } from './pages/criar-chamado/criar-chamado.component';
 import { GestorGeralComponent } from './pages/gestor-geral/gestor-geral.component';
+import { CriarComponent } from './pages/criar/criar.component';
 import { LoginComponent } from './pages/login/login.component';
 import { PaginaDeFundoComponent } from './components/pagina-de-fundo/pagina-de-fundo.component';
 import { CadastroFuncionarioComponent } from './pages/cadastro-funcionario/cadastro-funcionario.component';
@@ -20,6 +21,8 @@ export const routes: Routes = [
         { path: 'home', component: HomeComponent, data: { titulo: 'Home - Locais' } },
         { path: 'chamados-pendentes', component: ChamadosPendentesComponent, data: { titulo: 'Chamados Pendentes' } },
         { path: 'chamados-concluidos', component: ChamadosConcluidosComponent, data: { titulo: 'Chamados Concluídos' } },
+        { path: 'home', component: HomeComponent, data: { titulo: 'Home - Locais' } },
+        { path: 'criar', component: CriarComponent, data: { titulo: "Criar" } },
         { path: 'criar-chamado', component: CriarChamadoComponent, data: { titulo: 'Criar Chamado' } },
       ]
     },

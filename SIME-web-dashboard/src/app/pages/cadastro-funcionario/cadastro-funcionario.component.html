@@ -4,11 +4,65 @@
   <div class="card-post">
     <form [formGroup]="formCadastrarUsuario">
         <input placeholder="NOME" formControlName="nomeUsuario">
+
+      @if(formCadastrarUsuario.get('nomeUsuario')?.touched && formCadastrarUsuario.get('nomeUsuario')?.invalid){
+        <div>
+          @if (formCadastrarUsuario.get('nomeUsuario')?.errors?.['required']) {
+            <small>NOME é obrigatório!</small>
+          }
+        </div>
+      }
+
         <input placeholder="RM" formControlName="rmUsuario">
+
+        @if(formCadastrarUsuario.get('rmUsuario')?.touched && formCadastrarUsuario.get('rmUsuario')?.invalid){
+        <div>
+          @if (formCadastrarUsuario.get('rmUsuario')?.errors?.['required']) {
+            <small>RM é obrigatório!</small>
+          }
+        </div>
+      }
+
         <input placeholder="CPF" formControlName="cpfUsuario">
+
+        @if(formCadastrarUsuario.get('cpfUsuario')?.touched && formCadastrarUsuario.get('cpfUsuario')?.invalid){
+        <div>
+          @if (formCadastrarUsuario.get('cpfUsuario')?.errors?.['required']) {
+            <small>CPF é obrigatório!</small>
+          }
+        </div>
+      }
+
         <input placeholder="EMAIL" formControlName="emailUsuario">
+
+        @if(formCadastrarUsuario.get('emailUsuario')?.touched && formCadastrarUsuario.get('emailUsuario')?.invalid){
+        <div>
+          @if (formCadastrarUsuario.get('emailUsuario')?.errors?.['required']) {
+            <small>EMAIL é obrigatório!</small>
+          }
+        </div>
+      }
+
         <input placeholder="TELEFONE" formControlName="telefoneUsuario">
+
+        @if(formCadastrarUsuario.get('telefoneUsuario')?.touched && formCadastrarUsuario.get('telefoneUsuario')?.invalid){
+        <div>
+          @if (formCadastrarUsuario.get('telefoneUsuario')?.errors?.['required']) {
+            <small>TELEFONE é obrigatório!</small>
+          }
+        </div>
+      }
+
         <input type="password" placeholder="SENHA" formControlName="senhaUsuario">
+
+        @if(formCadastrarUsuario.get('senhaUsuario')?.touched && formCadastrarUsuario.get('senhaUsuario')?.invalid){
+        <div>
+          @if (formCadastrarUsuario.get('senhaUsuario')?.errors?.['required']) {
+            <small>SENHA é obrigatório!</small>
+          }
+        </div>
+      }
+
       <div>
         <button (click)="onCadastrarUsuario()">Concluir</button>
       </div>
