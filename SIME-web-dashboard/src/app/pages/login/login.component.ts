@@ -30,8 +30,8 @@ export class LoginComponent {
   loginEscola() {
     const loginEscolaDTO = {
       codEscola: 'E01',
-      cnpjEscola: '12345678000100',
-      senhaEscola: '123'
+      cnpjEscola: '12345678000195',
+      senhaEscola: 'senha123'
     }
 
     this.authService.loginEscola(loginEscolaDTO).subscribe({
