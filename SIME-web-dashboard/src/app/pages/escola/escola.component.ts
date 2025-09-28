@@ -50,16 +50,14 @@ export class EscolaComponent implements OnInit{
   ngOnInit(): void{
 
     // escolas
-    this.escolaService.getAllEscolas().subscribe((resp) => {
-      this.escolas = resp,
-      this.carregado = true
-    })
+    this.escolaService.getAllEscolas().subscribe(resp =>
+      this.escolas = resp
+    )
 
     // ambientes
-    this.escolaService.getAllAmbiente().subscribe((resp) => {
-      this.ambientes = resp,
-      this.carregado = true
-    })
+    this.escolaService.getAllAmbiente().subscribe(resp =>
+      this.ambientes = resp
+    )
 
     // departamentos
     this.escolaService.getAllDepartamento().subscribe((resp) => {
@@ -274,7 +272,7 @@ export class EscolaComponent implements OnInit{
       const listaPermissoes = idsPermissao.split(',').map((id: string) => Number(id.trim()));
 
       const payload: permissaoTipoPerfilDTO = {idPermissoes: listaPermissoes};
-  
+
       this.escolaService.atribuirPermissoesTipoPerfil(idTipoPerfil, payload).subscribe({
         next: (resp) => {
           alert("Atribuiu!!");
@@ -565,7 +563,7 @@ onEditarTipoAmbiente() {
       });
     }
 
-    
+
 
     onEditarEquipamento(){
       const codEquipamento = this.formEditarEquipamento.value.codEquipamento;
