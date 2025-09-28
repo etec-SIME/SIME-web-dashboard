@@ -1,17 +1,13 @@
-import { loginEscolaDTO } from '../../DTOs/LoginEscolaDTO';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { escola } from '../../models/escola';
 import { tipoPerfil } from '../../models/tipoPerfil';
-import { ambiente } from '../../models/ambiente';
 import { departamento } from '../../models/departamento';
 import { permissao } from '../../models/permissao';
 import { tipoChamado } from '../../models/tipoChamado';
 import { tipoEquipamento } from '../../models/tipoEquipamento';
 import { equipamento } from '../../models/equipamento';
 import { usuarioRequestDTO } from '../../DTOs/usuarioRequestDTO';
-import { usuario } from '../../models/usuario';
 import { tipoPerfilRequestDTO } from '../../DTOs/tipoPerfilRequestDTO';
 import { ambienteRequestDTO } from '../../DTOs/ambienteRequestDTO';
 import { tipoChamadoRequestDTO } from '../../DTOs/tipoChamadoRequestDTO';
@@ -30,11 +26,11 @@ import { tipoPerfilProjection } from '../../DTOs/Projections/tipoPerfilProjectio
 })
 export class EscolaService {
 
-  private apiUrl = 'http://localhost:8080/escolas';
+  private apiUrl = 'http://localhost:8080/escola';
 
   constructor(private http: HttpClient) { }
 
-  token : String = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODAwMDEwMCIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX0VTQ09MQSJ9XSwiZW50aWRhZGUiOiJFU0NPTEEiLCJpYXQiOjE3NTg1Nzg4OTIsImV4cCI6MTc1ODY2NTI5Mn0.TddIqePMlG_OqMJzrluzZfhnA-UQzLr28iU0PKJFvao';
+  token : String = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTYiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiQWRtaW4ifSx7ImF1dGhvcml0eSI6IlZpc3VhbGl6YXIgQ2hhbWFkbyJ9LHsiYXV0aG9yaXR5IjoiRWRpdGFyIENoYW1hZG8ifSx7ImF1dGhvcml0eSI6IkNyaWFyIENoYW1hZG8ifV0sImVudGlkYWRlIjoiVVNVQVJJTyIsImlhdCI6MTc1ODg1MDAxNiwiZXhwIjoxNzU4OTM2NDE2fQ.sZrelOdC2xo5Qc3bpEANDAmkFdrcDGmT2BxUHyFUdFg';
   // Inserir o Token manualmente para testar
 
   private getAuthHeaders() {
@@ -111,11 +107,11 @@ export class EscolaService {
   criarDepartamento(dto: departamentoRequestDTO): Observable<any>{
     return this.http.post<departamento>(`${this.apiUrl}/departamento`, dto, this.getAuthHeaders());
   }
-  
+
   criarTipoEquipamento(dto: tipoEquipamentoRequestDTO): Observable<any>{
     return this.http.post<tipoEquipamento>(`${this.apiUrl}/tipo-equipamento`, dto, this.getAuthHeaders());
   }
-  
+
   cadastrarEquipamento(dto: equipamentoRequestDTO): Observable<any>{
     return this.http.post<equipamentoRequestDTO>(`${this.apiUrl}/equipamento`, dto, this.getAuthHeaders());
   }
