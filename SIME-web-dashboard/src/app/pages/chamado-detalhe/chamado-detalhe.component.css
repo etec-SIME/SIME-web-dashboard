@@ -44,17 +44,20 @@
 }
 
 .progress {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+
   margin: 40px 0;
 }
 
 .progress-step {
   text-align: center;
-  flex: 1;
-  position: relative;
+}
+
+.circle-line {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
 }
 
 .circle {
@@ -80,10 +83,6 @@
 }
 
 .line {
-  position: absolute;
-  top: 17px;
-  left: 62%;
-  width: 76%;
   height: 2px;
   background-color: #ccc;
   z-index: 1;
