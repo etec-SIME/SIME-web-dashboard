@@ -1,4 +1,4 @@
-import { loginEscolaDTO } from '../../DTOs/LoginEscolaDTO';
+import { loginEscolaDTO } from '../../DTOs/loginEscolaDTO';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -30,11 +30,11 @@ import { tipoPerfilProjection } from '../../DTOs/Projections/tipoPerfilProjectio
 })
 export class EscolaService {
 
-  private apiUrl = 'http://localhost:8080/escolas';
+  private apiUrl = 'http://localhost:8080/escola';
 
   constructor(private http: HttpClient) { }
 
-  token : String = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODAwMDEwMCIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX0VTQ09MQSJ9XSwiZW50aWRhZGUiOiJFU0NPTEEiLCJpYXQiOjE3NTg1Nzg4OTIsImV4cCI6MTc1ODY2NTI5Mn0.TddIqePMlG_OqMJzrluzZfhnA-UQzLr28iU0PKJFvao';
+  token : String = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODAwMDEwMCIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX0VTQ09MQSJ9XSwiZW50aWRhZGUiOiJFU0NPTEEiLCJpYXQiOjE3NTkwMDY3MjAsImV4cCI6MTc1OTA5MzEyMH0.0VGU8fM12UUa2TWKtM7co2eV__1fcK1UW1Zg2f-5xYY';
   // Inserir o Token manualmente para testar
 
   private getAuthHeaders() {

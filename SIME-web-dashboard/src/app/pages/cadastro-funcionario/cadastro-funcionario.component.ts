@@ -23,17 +23,12 @@ export class CadastroFuncionarioComponent {
       cpfUsuario: [''],
       emailUsuario: [''],
       telefoneUsuario: [''],
-      departamentoIds: ['']
   })
   }
 
   onCadastrarUsuario(){
     const formValue = this.formCadastrarUsuario.value;
-    const departamentos = formValue.departamentoIds;
-    const departamentoIdsArray = String(departamentos)
-.split(',')
-.map((id: string) => Number(id.trim()))
-.filter((id: number) => !isNaN(id));
+
     const novoUsuario: usuarioRequestDTO = {
       rmUsuario: String(formValue.rmUsuario),
       nomeUsuario: String(formValue.nomeUsuario),
