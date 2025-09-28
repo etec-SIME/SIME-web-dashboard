@@ -11,18 +11,18 @@
     <!-- Criar aqui -->
     <!-- <div class="teste"></div> -->
 
-        <!--<div class="locais-cards">
-          <div class="card" *ngFor="let amb of ambientesFiltrados">
-            <p>{{ amb.nomeTipoAmbiente }} {{ amb.numAmbiente }}</p>
+        <div class="locais-cards">
+          <div class="card" *ngFor="let card of cards">
+            <p>{{ card.nome }}</p>
             <div class="chamados">
-              <p>{{ amb.chamados ?? 0 }}</p>
+              <p>{{ card.chamados }}</p>
               <p class="text-chamado">Chamados</p>
             </div>
           </div>
-        </div> -->
+        </div>
 
          
-        <div class="locais-cards">
+        <!--<div class="locais-cards">
           <div class="card salas">
             <p>Sala 1</p>
             <div class="chamados">
@@ -54,7 +54,7 @@
               <p class="text-chamado">Chamados</p>
             </div>
           </div>
-        </div>
+        </div> -->
     
     </div>
     <div class="home-info">

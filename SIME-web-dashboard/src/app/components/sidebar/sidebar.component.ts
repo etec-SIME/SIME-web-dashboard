@@ -15,6 +15,8 @@ export class SidebarComponent {
   navegarHome() {
     this.router.navigate(['/home']); // rota para o HomeComponent
   }
+
+  //Colocar as outras rotas aqui
   
   opcaoAtual: 'home' | 'pendentes' | 'concluidos' | 'criar' = 'home';
 

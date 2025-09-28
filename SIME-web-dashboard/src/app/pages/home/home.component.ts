@@ -19,20 +19,51 @@ export class HomeComponent implements OnInit{
 
   opcaoAtual: 'salas' | 'labs' | 'outros' = 'salas';
 
+  cards: {nome: string; chamados: string}[] = [];
+
+  ngOnInit(): void {
+    this.setOpcao('salas');
+    //this.carregarDados();
+  }
+
   setOpcao(opcao: 'salas' | 'labs' | 'outros') {
     this.opcaoAtual = opcao;
+
+    if (opcao === 'salas')
+    {
+      this.cards = Array.from({ length: 4 }, (_, i) => ({
+        nome: `Sala ${i + 1}`,
+        chamados: `0${i + 1}` // só de exemplo, Sala 1 -> 1 chamado, Sala 2 -> 2 chamados...
+      }));
+    }
+
+    if (opcao === 'labs')
+    {
+      this.cards = Array.from({ length: 4 }, (_, i) => ({
+        nome: `Laboratório ${i + 1}`,
+        chamados: `0${i + 1}`
+      }));
+    }
+
+    if (opcao === 'outros')
+    {
+      const outros = ['Biblioteca', 'Auditório', 'Pátio', 'Área Verde'];
+      this.cards = outros.map((nome, i) => ({
+        nome,
+        chamados: `0${i + 1}`
+      }));
+    }
+  }
+
+  constructor(private escolaService: EscolaService)
+  {
+    
   }
 
   tipoAmbientes: tipoAmbienteRequestDTO[] = [];
   ambientes: AmbienteSelectDTO[] = [];
   
   carregado: boolean = false;
-
-  constructor(private escolaService: EscolaService) {}
-
-  ngOnInit(): void {
-    //this.carregarDados();
-  }
 
   /*carregarDados() {
     this.escolaService.getAllTipoAmbiente().subscribe({
@@ -74,7 +105,7 @@ export class HomeComponent implements OnInit{
     }
     if (this.opcaoAtual === 'outros') {
       return !tipo.includes('sala') && !tipo.includes('laboratório') && !tipo.includes('lab');
-      // pega "Auditório" e "Biblioteca"
+      // pega o que não for Sala ou Laboratório
     }
 
     return false;
