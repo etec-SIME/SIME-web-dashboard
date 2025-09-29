@@ -1,23 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterModule, Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
-  constructor(private router: Router) {}
-
-  navegarHome() {
-    this.router.navigate(['/home']); // rota para o HomeComponent
-  }
-
-  //Colocar as outras rotas aqui
-  
-  opcaoAtual: 'home' | 'pendentes' | 'concluidos' | 'criar' = 'home';
 
 }
