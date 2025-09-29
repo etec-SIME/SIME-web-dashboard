@@ -1,3 +1,65 @@
-<div class="home-content">
-    <p>Funcionando</p>
+<div class="home-layout">
+    <div class="home-content">
+        <div class="filtrar">
+            <p>Filtrar por:</p>
+            <div class="filtrar opcoes">
+                <button class="opcao" (click)="setOpcao('salas')">Salas</button>
+                <button class="opcao" (click)="setOpcao('labs')">Labs</button>
+                <button class="opcao" (click)="setOpcao('outros')">Outros</button>
+            </div>
+        </div>
+    <!-- Criar aqui -->
+    <!-- <div class="teste"></div> -->
+
+        <div class="locais-cards">
+          <div class="card" *ngFor="let card of cards">
+            <p>{{ card.nome }}</p>
+            <div class="chamados">
+              <p>{{ card.chamados }}</p>
+              <p class="text-chamado">Chamados</p>
+            </div>
+          </div>
+        </div>
+
+         
+        <!--<div class="locais-cards">
+          <div class="card salas">
+            <p>Sala 1</p>
+            <div class="chamados">
+              <p>01</p>
+              <p class="text-chamado">Chamados</p>
+            </div>
+          </div>
+
+          <div class="card salas">
+            <p>Sala 2</p>
+            <div class="chamados">
+              <p>02</p>
+              <p class="text-chamado">Chamados</p>
+            </div>
+          </div>
+
+          <div class="card salas">
+            <p>Sala 3</p>
+            <div class="chamados">
+              <p>03</p>
+              <p class="text-chamado">Chamados</p>
+            </div>
+          </div>
+
+          <div class="card salas">
+            <p>Sala 4</p>
+            <div class="chamados">
+              <p>04</p>
+              <p class="text-chamado">Chamados</p>
+            </div>
+          </div>
+        </div> -->
+    
+    </div>
+    <div class="home-info">
+        <app-calendario-mensal></app-calendario-mensal>
+        <app-calendario-semanal></app-calendario-semanal>
+    </div>
+
 </div>

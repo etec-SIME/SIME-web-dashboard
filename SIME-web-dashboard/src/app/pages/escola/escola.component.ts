@@ -461,23 +461,30 @@ export class EscolaComponent implements OnInit{
     });
   }
 
-  onEditarTipoAmbiente(){
-    const idTipoAmbiente = this.formEditarTipoAmbiente.value.id;
+  tipoAmbienteSelecionadoId!: number;
 
-    const tipoAmbienteEditado = {
-        nomeTipoAmbiente: this.formEditarTipoAmbiente.value.nomeTipoAmbiente
-      }
-
-    this.escolaService.editarTipoAmbiente(idTipoAmbiente, tipoAmbienteEditado).subscribe({
-      next: (res) => {
-        alert('Tipo ambiente editado com sucesso');
-        this.formEditarTipoAmbiente.reset();
-      },
-      error: (err) => {
-        alert('Erro ao editar tipo ambiente');
-      }
+  selecionarTipoAmbienteParaEditar(ambiente: tipoAmbienteRequestDTO) {
+    this.tipoAmbienteSelecionadoId = ambiente.idTipoAmbiente;
+    this.formEditarTipoAmbiente.patchValue({
+      nomeTipoAmbiente: ambiente.nomeTipoAmbiente
     });
   }
+
+onEditarTipoAmbiente() {
+  const tipoAmbienteEditado: tipoAmbienteRequestDTO = {
+    idTipoAmbiente: this.tipoAmbienteSelecionadoId, // adiciona aqui
+    nomeTipoAmbiente: this.formEditarTipoAmbiente.value.nomeTipoAmbiente
+  };
+
+  this.escolaService.editarTipoAmbiente(this.tipoAmbienteSelecionadoId, tipoAmbienteEditado)
+    .subscribe({
+      next: () => {
+        alert('Tipo ambiente editado com sucesso!');
+        this.formEditarTipoAmbiente.reset();
+      },
+      error: () => alert('Erro ao editar tipo ambiente')
+    });
+}
 
   onEditarTipoEquipamento(){
     const idTipoEquipamento= this.formEditarTipoEquipamento.value.id;
