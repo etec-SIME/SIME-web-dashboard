@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-import { UsuarioProjection } from '../../DTOs/Projections/usuarioProjection';
+import { UsuarioProjection } from '../../DTOs/Projections/UsuarioProjection';
 import { chamadoProjection } from '../../DTOs/Projections/chamadoProjection';
 
 @Injectable({ providedIn: 'root' })
