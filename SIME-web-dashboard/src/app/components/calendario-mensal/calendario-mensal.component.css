@@ -5,28 +5,25 @@
     font-family: var(--font-instrument-sans);
 }
 
-.calendario-mensal{
-    width: clamp(230px, 8vw, 10vw);
-}
-
 p{
     color: #44A1A0;
     font-weight: var(--fw-semibold);
+    width: auto;
     font-size: clamp(18px, 1.5vw, 3.5vw);
-    padding-left: clamp(8px, 0.7vw, 2.7vw);
-    padding-bottom: clamp(12px, 1.5vw, 3.5vw);
+    padding-left: 1.05vw;
+    padding-bottom: 1.5vw;
 }
 
 .calendario-mensal-container {
     display: grid;
     grid-template-columns: repeat(7, 1fr); /* 7 colunas para os dias da semana */
-    gap: clamp(8px, 0.2vw, 2.2vw);
+    gap: clamp(4px, 0.2vw, 2.2vw);
     width: auto;
-    /*width: auto 20vw;*/
+    /*width: 20vw;*/
 }
 
 .dia {
-    padding: clamp(4px, 0.5vw, 2.5vw);
+    padding: clamp(4px, 0.6vw, 2.6vw);
     text-align: center;
     font-weight: var(--fw-regular);
     font-size: clamp(15px, 1.2vw, 3.2vw);

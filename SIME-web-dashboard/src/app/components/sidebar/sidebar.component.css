@@ -6,15 +6,15 @@
 
 .sidebar{
     background-color: #44A1A0;
-    height: 100vh;
+    height: 100vh; /* ou 100% ? -> Dá na mesma*/
     display: flex;
     flex-direction: column;
-    gap: clamp(10px, 2vh, 4vh);
+    align-items: center;
+    gap: 2vh;
 }
 
 .logo{
     width: clamp(160px, 13vw, 15vw);
-    align-self: center;
     /*display: block;
     margin: 0 auto;*/
     padding-top: 7vh;
@@ -29,31 +29,9 @@
 }
 
 .home, .pendentes, .concluidos, .criar {
-    cursor: pointer;
     display: flex;
-    align-items: center;
     gap: clamp(12px, 1vw, 3vw);
-    padding-left: clamp(35px, 1vw, 3vw);
     /*padding-top: clamp(15px, 1vh, 25px);*/
-}
-
-.home.ativo, .pendentes.ativo, .concluidos.ativo, .criar.ativo {
-    position: relative;
-}
-
-.home.ativo::before, 
-.pendentes.ativo::before, 
-.concluidos.ativo::before, 
-.criar.ativo::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: clamp(8px, 0.6vw, 2.6vw); 
-    background: white;
-    border-top-right-radius: clamp(5px, 0.4vw, 2.4vw);   
-    border-bottom-right-radius: clamp(5px, 0.4vw, 2.4vw); 
 }
 
 .iconeHome, .iconePendentes, .iconeConcluidos, .iconeCriar {
@@ -61,7 +39,6 @@
 }
 
 p{
-    user-select: none;
     font-family: var(--font-plus-jakarta-sans);
     font-weight: var(--fw-medium);
     color: white;
@@ -76,12 +53,11 @@ p{
     font-weight: var(--fw-semibold);
     font-size: clamp(16px, 1.3vw, 3.3vw);
     background-color: white;
-    width: clamp(160px, 12vw, 14vw);
-    height: clamp(20px ,6.8vh, 8.8vh);
-    border-radius: clamp(10px, 0.7vw, 2.7vw);
+    width: clamp(145px, 12vw, 14vw);
+    height: clamp(20px ,6.5vh, 8.5vh);
+    border-radius: clamp(8px, 0.8vw, 2.8vw);
     border: none;
     color: #44A1A0;
+    margin-top: clamp(180px, 29vh, 30vh);
     align-self: center;
-    margin-top: auto;
-    margin-bottom: clamp(60px, 7vh, 9vh);
 }
