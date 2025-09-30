@@ -5,7 +5,7 @@ import { UsuarioProjection } from '../../DTOs/Projections/UsuarioProjection';
 
 @Injectable({ providedIn: 'root' })
 export class UsuarioService {
-  private apiUrl = 'http://localhost:8081/usuarios';
+  private apiUrl = 'http://localhost:8080/usuarios';
   
   constructor( private http: HttpClient ) { }
 
