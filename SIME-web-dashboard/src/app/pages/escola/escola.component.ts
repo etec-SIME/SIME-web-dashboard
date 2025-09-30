@@ -19,6 +19,7 @@ import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validatio
 import { usuarioRequestDTO } from '../../DTOs/usuarioRequestDTO';
 import { permissaoTipoPerfilDTO } from '../../DTOs/permissaoTipoPerfilDTO';
 import { tipoEquipamentoAmbienteDTO } from '../../DTOs/tipoEquipamentoAmbienteDTO';
+import { loginEscolaDTO } from '../../DTOs/loginEscolaDTO';
 
 @Component({
   selector: 'app-escola',
@@ -177,13 +178,13 @@ export class EscolaComponent implements OnInit{
 
     this.formCadastrarUsuario =  this.fb.group({
         rmUsuario: [''],
-        idTipoPerfil: [''],
+        //idTipoPerfil: [''],
         nomeUsuario: [''],
         senhaUsuario: [''],
         cpfUsuario: [''],
         emailUsuario: [''],
         telefoneUsuario: [''],
-        departamentoIds: ['']
+        //departamentoIds: ['']
     })
 
     this.formCadastrarEquipamento = this.fb.group({
@@ -393,20 +394,14 @@ export class EscolaComponent implements OnInit{
 
     onCadastrarUsuario(){
       const formValue = this.formCadastrarUsuario.value;
-      const departamentos = formValue.departamentoIds;
-      const departamentoIdsArray = String(departamentos)
-  .split(',')
-  .map((id: string) => Number(id.trim()))
-  .filter((id: number) => !isNaN(id));
+
       const novoUsuario: usuarioRequestDTO = {
-        idTipoPerfil: Number(formValue.idTipoPerfil),
         rmUsuario: String(formValue.rmUsuario),
         nomeUsuario: String(formValue.nomeUsuario),
         senhaUsuario: String(formValue.senhaUsuario),
         emailUsuario: String(formValue.emailUsuario),
         cpfUsuario: String(formValue.cpfUsuario),
         telefoneUsuario: String(formValue.telefoneUsuario),
-        departamentoIds: (departamentoIdsArray)
       };
 
       this.escolaService.cadastrarUsuario(novoUsuario).subscribe({

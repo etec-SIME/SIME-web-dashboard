@@ -8,14 +8,12 @@ import { HomeComponent } from './pages/home/home.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { EscolaComponent } from './pages/escola/escola.component';
 
-/*
-export const routes: Routes = [
-    { path: '', component: EscolaComponent  },*/
 import { CriarChamadoComponent } from './pages/criar-chamado/criar-chamado.component';
 import { GestorGeralComponent } from './pages/gestor-geral/gestor-geral.component';
 import { CriarComponent } from './pages/criar/criar.component';
 import { LoginComponent } from './pages/login/login.component';
 import { PaginaDeFundoComponent } from './components/pagina-de-fundo/pagina-de-fundo.component';
+import { CadastroFuncionarioComponent } from './pages/cadastro-funcionario/cadastro-funcionario.component';
 
 export const routes: Routes = [
     { path: '', component: LayoutComponent,
@@ -31,8 +29,9 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'dashboard', component: DashboardComponent },
     { path: 'funcionarios', component: FuncionariosComponent },
-    { path: 'escolas', component: EscolaComponent },
+    { path: 'escola', component: EscolaComponent },
     {path: 'gestor-geral', component: GestorGeralComponent},
     { path: 'pagina-de-fundo', component: PaginaDeFundoComponent },
+    {path: 'cadastro-funcionario', component: CadastroFuncionarioComponent},
     { path: '**', redirectTo: '' }
 ];

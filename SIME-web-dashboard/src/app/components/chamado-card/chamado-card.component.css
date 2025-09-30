@@ -16,7 +16,7 @@
     text-align: justify;
     text-wrap: nowrap;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: 0.3s;
 }
 
 .btn-card:hover {
