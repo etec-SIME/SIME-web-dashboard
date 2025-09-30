@@ -3,23 +3,18 @@ import { EscolaService } from '../../services/escola/escola.service';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { escolaProjection } from '../../DTOs/Projections/escolaProjection';
-import { ambiente } from '../../models/ambiente';
-import { departamento } from '../../models/departamento';
 import { ambienteRequestDTO } from '../../DTOs/ambienteRequestDTO';
 import { departamentoRequestDTO } from '../../DTOs/departamentoRequestDTO';
-import { tipoPerfil } from '../../models/tipoPerfil';
 import { tipoPerfilRequestDTO } from '../../DTOs/tipoPerfilRequestDTO';
 import { tipoChamadoRequestDTO } from '../../DTOs/tipoChamadoRequestDTO';
 import { equipamentoRequestDTO } from '../../DTOs/equipamentoRequestDTO';
 import { permissao } from '../../models/permissao';
 import { tipoEquipamento } from '../../models/tipoEquipamento';
-import { tipoAmbiente } from '../../models/tipoAmbiente';
 import { tipoAmbienteRequestDTO } from '../../DTOs/tipoAmbienteRequestDTO';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { usuarioRequestDTO } from '../../DTOs/usuarioRequestDTO';
 import { permissaoTipoPerfilDTO } from '../../DTOs/permissaoTipoPerfilDTO';
 import { tipoEquipamentoAmbienteDTO } from '../../DTOs/tipoEquipamentoAmbienteDTO';
-import { loginEscolaDTO } from '../../DTOs/loginEscolaDTO';
 
 @Component({
   selector: 'app-escola',

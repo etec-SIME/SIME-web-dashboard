@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
@@ -23,7 +23,8 @@ export class LoginComponent {
   constructor(
     private authService: AuthService,
     private publicService: PublicService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {
     this.loginForm = this.fb.group({
       tipoPerfil: [this.tiposPerfil[0] || null],
@@ -41,8 +42,14 @@ export class LoginComponent {
   loadSelectTipoPerfil() {
     this.publicService.getTipoPerfilNomes().subscribe({
       next: (tiposPerfil) => {
-        this.tiposPerfil = tiposPerfil;
+        const tipoPadrao: TipoPerfilResponseDTO = { idTipoPerfil: 0, nomeTipoPerfil: 'Escola' };
+  
+        this.tiposPerfil = tiposPerfil.some(t => t.idTipoPerfil === tipoPadrao.idTipoPerfil)
+          ? tiposPerfil
+          : [tipoPadrao, ...tiposPerfil];
+  
         this.loginForm.get('tipoPerfil')?.setValue(this.tiposPerfil[0]);
+  
         this.onPerfilChange();
       },
       error: (err) => console.error('Erro ao buscar tipos de perfil: ', err),
@@ -76,7 +83,7 @@ export class LoginComponent {
   login() {
     const tipoPerfil = this.loginForm.get('tipoPerfil')?.value;
 
-    if (tipoPerfil === 'Escola') {
+    if (tipoPerfil.nomeTipoPerfil === 'Escola') {
       this.loginEscola();
     } else {
       this.loginUsuario();
@@ -96,7 +103,10 @@ export class LoginComponent {
     };
 
     this.authService.loginUsuario(LoginDTO).subscribe({
-      next: (token) => console.log('Token do Usuário recebido: ', token),
+      next: (token) => {
+        console.log('Token do Usuário recebido: ', token)
+        this.router.navigate(['/layout/home'])
+      },
       error: (err) => console.error('Erro ao fazer login com Usuário: ', err),
     })
   }
@@ -109,7 +119,10 @@ export class LoginComponent {
     }
 
     this.authService.loginEscola(loginEscolaDTO).subscribe({
-      next: (token) => console.log('Token da Escola recebido: ', token),
+      next: (token) => {
+        console.log('Token da Escola recebido: ', token)
+        this.router.navigate(['/layout/home'])
+      },
       error: (err) => console.log('Erro ao fazer login com Escola: ', err)
     })
   }

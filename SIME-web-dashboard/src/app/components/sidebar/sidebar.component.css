@@ -38,14 +38,15 @@
     width: clamp(22px, 1.7vw, 3.7vw);
 }
 
-p{
+a{
     font-family: var(--font-plus-jakarta-sans);
     font-weight: var(--fw-medium);
     color: white;
     flex-grow: 1;
     overflow: hidden;
     white-space: nowrap;
-    font-size: clamp(16px, 1.3vw, 3.3vw); /* mínimo, normal, máximo */
+    font-size: clamp(16px, 1.3vw, 3.3vw);
+    text-decoration: none;
 }
 
 .buttonCriar{
@@ -60,4 +61,5 @@ p{
     color: #44A1A0;
     margin-top: clamp(180px, 29vh, 30vh);
     align-self: center;
+    cursor: pointer;
 }

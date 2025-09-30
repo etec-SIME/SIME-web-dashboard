@@ -17,12 +17,11 @@ import { CadastroFuncionarioComponent } from './pages/cadastro-funcionario/cadas
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
-    { path: '', component: LayoutComponent,
+    { path: 'layout', component: LayoutComponent,
       children: [
         { path: 'home', component: HomeComponent, data: { titulo: 'Home - Locais' } },
         { path: 'chamados-pendentes', component: ChamadosPendentesComponent, data: { titulo: 'Chamados Pendentes' } },
         { path: 'chamados-concluidos', component: ChamadosConcluidosComponent, data: { titulo: 'Chamados Concluídos' } },
-        { path: 'home', component: HomeComponent, data: { titulo: 'Home - Locais' } },
         { path: 'criar', component: CriarComponent, data: { titulo: "Criar" } },
         { path: 'criar-chamado', component: CriarChamadoComponent, data: { titulo: 'Criar Chamado' } },
       ]
@@ -33,5 +32,5 @@ export const routes: Routes = [
     {path: 'gestor-geral', component: GestorGeralComponent},
     { path: 'pagina-de-fundo', component: PaginaDeFundoComponent },
     {path: 'cadastro-funcionario', component: CadastroFuncionarioComponent},
-    { path: '**', redirectTo: '' }
+    { path: '**', redirectTo: 'login' }
 ];
