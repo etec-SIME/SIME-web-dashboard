@@ -53,7 +53,7 @@ export class CriarComponent{
     this.tiposPerfis = results.tiposPerfis;
     this.departamentos = results.departamentos;
     this.equipamentos = results.equipamentos;
-    
+
     this.qtdLocais = this.locais.length;
     this.qtdPerfis = this.perfis.length;
     this.qtdDepartamentos =  this.departamentos.length;

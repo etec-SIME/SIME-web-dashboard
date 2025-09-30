@@ -1,23 +1,123 @@
 *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .home-layout {
   display: flex;
-  height: 100vh;
-  width: 100vw;
+  flex-direction: row;
+  width: 100%;
+  /*height: auto;*/
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
-app-sidebar {
-  flex-shrink: 0;
-  /*display: block;*/
-  width: 20vw;
-  height: 100vh;
-}
+/* Segunda parte da tela */
 
 .home-content {
   flex: 1;
-  background-color: #f0f0f0;
+  margin-right: clamp(30px, 8vw, 10vw);
+}
+
+.filtrar{
+  font-family: var(--font-instrument-sans);
+  display: flex;
+  align-items: center;
+  gap: clamp(40px, 4vw, 6vw);
+  /* flex-wrap: wrap; permite que os itens quebrem para a próxima linha */
+}
+
+.filtrar > p { /* estiliza apenas o parágrafo filho direto de "filtrar"*/
+  font-size: clamp(15px, 1.25vw, 2.25vw);
+  font-weight: var(--fw-medium);
+}
+
+.filtrar.opcoes{
+  display: flex;
+  gap: clamp(15px, 1.5vw, 3.5vw);
+  /* flex-wrap: wrap; permite que os cards quebrem linha */
+}
+
+.opcao {
+  font-weight: var(--fw-semibold);
+  padding: clamp(3px, 0.35vw, 2.35vw)  clamp(20px, 2vw, 4vw);
+  background-color: #EEEEEE;
+  color: black;
+  font-size: clamp(12px, 1vw, 3vw);
+  border-radius: clamp(10px, 2vw, 4vw);
+  border: 0;
+  cursor: pointer;
+  user-select: none; /* Não permite a seleção da palavra, útil para botões */
+  transition: background-color 0.3s ease;
+}
+
+.opcao:hover {
+  background-color: #3a8c8b;
+  color: white;
+}
+
+/* Terceira parte da tela */
+
+/*.card { display: none; } todos escondidos
+.card.show { display: flex; } apenas os ativos */
+
+.locais-cards{
+  width: clamp(500px, 45vw, 47vw);
+  height: clamp(390px, 68vh, 70vh);
+  margin-top: clamp(20px, 4vh, 6vh);
+  display: flex;
+  flex-direction: column;
+  gap: 5vh;
+}
+
+.card{
+  background-color: white;
+  width: clamp(400px, 45vw, 47vw);
+  height: clamp(80px, 10vh, 12vh);
+  border-width: 10vw;
+  border: 0.13vw solid #D1D0CA;
+  border-radius: clamp(10px, 1vw, 3vw);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2vw;
+}
+
+.card > p{
+  color: black;
+  font-weight: 500;
+  font-size: clamp(21px, 1.7vw, 3.7vw);
+  white-space: nowrap;
+}
+
+.chamados{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5vh;
+}
+
+.chamados > p{
+  color: black;
+  font-weight: 500;
+  font-size: clamp(22px, 1.7vw, 3.7vw);
+}
+
+.chamados p.text-chamado{
+  font-size: clamp(14px, 1.1vw, 3.1vw);
+  font-weight: 100;
+}
+
+.home-info{
+  flex-shrink: 0; /*0 não encolhe, 1 encolhe para caber*/
+  display: flex;
+  flex-direction: column;
+  gap: clamp(25px, 7vh, 9vh);
+  margin-right: clamp(60px, 2rem, 3rem);
+  /*align-self: center;
+  margin-left: clamp(30px, 3rem, 5rem);
+  margin-right: clamp(50px, 1vw, 3vw);
+  padding-left: 4vw;*/
 }

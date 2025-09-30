@@ -9,5 +9,23 @@ import { Router, RouterModule } from '@angular/router';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
+  constructor(private router: Router) {}
 
+  navegarHome() {
+    this.router.navigate(['/layout/home']);
+  }
+
+  navegarPendentes() {
+    this.router.navigate(['/layout/chamados-pendentes']);
+  }
+
+  navegarConcluidos() {
+    this.router.navigate(['/layout/chamados-concluidos']);
+  }
+
+  navegarCriar() {
+    this.router.navigate(['/layout/criar']);
+  }
+
+  opcaoAtual: 'home' | 'pendentes' | 'concluidos' | 'criar' = 'home';
 }

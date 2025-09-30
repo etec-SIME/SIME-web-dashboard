@@ -2,24 +2,32 @@
     <img class="logo" src="/images/logoSIME.png">
 
     <div class="menu">
-        <div class="home">
+        <div class="home"
+            [class.ativo]="opcaoAtual === 'home'"
+            (click)="opcaoAtual = 'home'; navegarHome()">
             <img class="iconeHome" src="/images/iconeHome.png">
-            <a [routerLink]="['/layout/home']">Home</a>
+            <p>Home</p>
         </div>
 
-        <div class="pendentes">
+        <div class="pendentes"
+            [class.ativo]="opcaoAtual === 'pendentes'"
+            (click)="opcaoAtual = 'pendentes'; navegarPendentes()">
             <img class="iconePendentes" src="/images/iconePendentes.png">
-            <a [routerLink]="['/layout/chamados-pendentes']">Pendentes</a>
-        </div>
-        
-        <div class="concluidos">
-            <img class="iconeConcluidos" src="/images/iconeConcluidos.png">
-            <a [routerLink]="['/layout/chamados-concluidos']">Concluídos</a>
+            <p>Pendentes</p>
         </div>
 
-        <div class="criar">
+        <div class="concluidos"
+            [class.ativo]="opcaoAtual === 'concluidos'"
+            (click)="opcaoAtual = 'concluidos'; navegarConcluidos()">
+            <img class="iconeConcluidos" src="/images/iconeConcluidos.png">
+            <p>Concluídos</p>
+        </div>
+
+        <div class="criar"
+            [class.ativo]="opcaoAtual === 'criar'"
+            (click)="opcaoAtual = 'criar'; navegarCriar()">
             <img class="iconeCriar" src="/images/iconeCriar.png">
-            <a [routerLink]="['/layout/criar']">Criar</a>
+            <p>Criar</p>
         </div>
     </div>
 
