@@ -9,25 +9,29 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { EscolaComponent } from './pages/escola/escola.component';
 import { CriarChamadoComponent } from './pages/criar-chamado/criar-chamado.component';
 import { GestorGeralComponent } from './pages/gestor-geral/gestor-geral.component';
+import { CriarComponent } from './pages/criar/criar.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ChamadoDetalheComponent } from './pages/chamado-detalhe/chamado-detalhe.component';
 import { PaginaDeFundoComponent } from './components/pagina-de-fundo/pagina-de-fundo.component';
+import { CadastroFuncionarioComponent } from './pages/cadastro-funcionario/cadastro-funcionario.component';
 
 export const routes: Routes = [
-    { path: '', component: LayoutComponent,
+    { path: 'login', component: LoginComponent },
+    { path: 'layout', component: LayoutComponent,
       children: [
         { path: 'home', component: HomeComponent, data: { titulo: 'Home - Locais' } },
         { path: 'chamados-pendentes', component: ChamadosPendentesComponent, data: { titulo: 'Chamados Pendentes' } },
         { path: 'chamados-concluidos', component: ChamadosConcluidosComponent, data: { titulo: 'Chamados Concluídos' } },
+        { path: 'criar', component: CriarComponent, data: { titulo: "Criar" } },
         { path: 'criar-chamado', component: CriarChamadoComponent, data: { titulo: 'Criar Chamado' } },
         { path: 'chamado-detalhe', component: ChamadoDetalheComponent, data: { titulo: 'Chamado 1' } }
       ]
     },
-    { path: 'login', component: LoginComponent },
     { path: 'dashboard', component: DashboardComponent },
     { path: 'funcionarios', component: FuncionariosComponent },
-    { path: 'escolas', component: EscolaComponent },
+    { path: 'escola', component: EscolaComponent },
     {path: 'gestor-geral', component: GestorGeralComponent},
     { path: 'pagina-de-fundo', component: PaginaDeFundoComponent },
-    { path: '**', redirectTo: '' }
+    {path: 'cadastro-funcionario', component: CadastroFuncionarioComponent},
+    { path: '**', redirectTo: 'login' }
 ];

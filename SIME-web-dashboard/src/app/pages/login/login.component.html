@@ -1,4 +1,50 @@
-<a routerLink="/dashboard">dashboard</a>
+<div class="sime-logo">
+  <img src="images/login-background/logo.png" alt="SIME Logo">
+</div>
+
+<div class="login-container">
+  <div class="login-card">
+    <h1>LOGIN</h1>
+    <form [formGroup]="loginForm">
+      <div class="login-options">
+        <select id="perfil" formControlName="tipoPerfil" (change)="onPerfilChange()">
+          @for (tipoPerfil of tiposPerfil; track tipoPerfil.idTipoPerfil) {
+            <option [ngValue]="tipoPerfil">{{ tipoPerfil.nomeTipoPerfil }}</option>
+          }
+        </select>
+        <div class="select-group">
+          <img src="images/Group.png" class="input-icon">
+          <input type="text" placeholder="CÓD. ETEC" formControlName="codigoEtec">
+        </div>
+      </div>
+
+      @for (campo of camposAtuais; track campo.nome) {
+        <div class="input-group">
+          <img src="images/user 1.png" class="input-icon">
+          <input 
+            [type]="campo.tipo" 
+            [placeholder]="campo.nome === 'rm' ? 'RM' : 'CNPJ'"
+            [formControlName]="campo.nome"
+          >
+        </div>
+      }
+      
+      <div class="input-group">
+        <img src="images/lock 1.png" class="input-icon">
+        <input [type]="showPassword ? 'text' : 'password'" placeholder="SENHA" formControlName="senha">
+        <img
+          src="{{ showPassword ? 'images/closed-eye.png' : 'images/view 1.png' }}"
+          class="input-eye"
+          (click)="showPassword = !showPassword"
+          alt="Mostrar/Esconder senha">
+      </div>
+
+      <button type="submit" class="btn-login" [disabled]="loginForm.invalid" (click)="login()">ENTRAR</button>
+    </form>
+  </div>
+</div>
+
+<!-- <a routerLink="/dashboard">dashboard</a>
 <br>
 <a routerLink="/gestor-geral">gestor-geral</a>
 <br>
@@ -6,4 +52,4 @@
 <br>
 <button (click)="loginEscola()">Login Escola</button>
 <br>
-<button (click)="getAllUsuarios()">getAllUsuarios</button>
+<button (click)="getAllUsuarios()">getAllUsuarios</button> -->
