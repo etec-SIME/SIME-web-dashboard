@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { tokenDTO } from '../../DTOs/TokenDTO';
-import { LoginDTO } from '../../DTOs/LoginDTO';
-import { LoginEscolaDTO } from '../../DTOs/LoginEscolaDTO';
+import { tokenDTO } from '../../DTOs/tokenDTO';
+import { LoginDTO } from '../../DTOs/loginDTO';
+import { LoginEscolaDTO } from '../../DTOs/loginEscolaDTO';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 
