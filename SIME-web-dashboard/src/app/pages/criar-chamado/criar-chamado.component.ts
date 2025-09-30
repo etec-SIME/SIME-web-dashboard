@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Form, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ChamadoService } from '../../services/chamado/chamado.service';
 import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
