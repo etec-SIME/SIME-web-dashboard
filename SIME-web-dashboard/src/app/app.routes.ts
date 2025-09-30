@@ -16,6 +16,7 @@ import { PaginaDeFundoComponent } from './components/pagina-de-fundo/pagina-de-f
 import { CadastroFuncionarioComponent } from './pages/cadastro-funcionario/cadastro-funcionario.component';
 
 export const routes: Routes = [
+    { path: 'login', component: LoginComponent },
     { path: '', component: LayoutComponent,
       children: [
         { path: 'home', component: HomeComponent, data: { titulo: 'Home - Locais' } },
@@ -26,7 +27,6 @@ export const routes: Routes = [
         { path: 'criar-chamado', component: CriarChamadoComponent, data: { titulo: 'Criar Chamado' } },
       ]
     },
-    { path: 'login', component: LoginComponent },
     { path: 'dashboard', component: DashboardComponent },
     { path: 'funcionarios', component: FuncionariosComponent },
     { path: 'escola', component: EscolaComponent },

@@ -1,6 +1,6 @@
-export interface loginDTO {
+export interface LoginDTO {
     rmUsuario: string;
-    idTipoPerfil: number;
+    idTipoPerfil: number | undefined;
     senhaUsuario: string;
     codEscola: string;
 }

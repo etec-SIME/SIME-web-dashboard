@@ -41,10 +41,6 @@ export class EscolaService {
     };
   }
 
-
-  //login
-
-
   getAllEscolas(): Observable<escolaProjection[]>{
     return this.http.get<escolaProjection[]>(this.apiUrl, this.getAuthHeaders());
   }
@@ -159,7 +155,5 @@ export class EscolaService {
   editarTipoAmbiente(idTipoAmbiente: number, tipoAmbienteDTO: tipoAmbienteRequestDTO){
     return this.http.put<tipoAmbiente>(`${this.apiUrl}/tipo-ambiente/${idTipoAmbiente}`, tipoAmbienteDTO, this.getAuthHeaders());
   }
-
-
 }
 
