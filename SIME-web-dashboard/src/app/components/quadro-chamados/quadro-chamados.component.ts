@@ -2,11 +2,12 @@ import { Component, Input } from '@angular/core';
 import { ChamadoCardComponent } from '../chamado-card/chamado-card.component';
 import { ChamadoCardDTO } from '../../DTOs/ChamadoCardDTO';
 import { CommonModule, DatePipe } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-quadro-chamados',
   standalone: true,
-  imports: [ChamadoCardComponent],
+  imports: [ChamadoCardComponent, RouterModule],
   templateUrl: './quadro-chamados.component.html',
   styleUrl: './quadro-chamados.component.css'
 })

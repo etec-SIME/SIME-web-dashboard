@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { loginDTO } from '../../DTOs/LoginDTO';
-import { tokenDTO } from '../../DTOs/TokenDTO';
+import { tokenDTO } from '../../DTOs/tokenDTO';
+import { LoginDTO } from '../../DTOs/loginDTO';
+import { LoginEscolaDTO } from '../../DTOs/loginEscolaDTO';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 
@@ -8,12 +9,16 @@ import { Observable, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080/usuarios';
+  private apiUrl = 'http://localhost:8080';
   
   constructor( private http: HttpClient ) { }
 
-  login(credentials: loginDTO) : Observable<tokenDTO> {
-    return this.http.post<any>(`${this.apiUrl}/login`, credentials, { withCredentials: true });
+  loginUsuario(credentials: LoginDTO) : Observable<tokenDTO> {
+    return this.http.post<any>(`${this.apiUrl}/usuarios/login`, credentials, { withCredentials: true });
+  }
+
+  loginEscola(credentials: LoginEscolaDTO) : Observable<tokenDTO> {
+    return this.http.post<any>(`${this.apiUrl}/escola/login`, credentials, { withCredentials: true });
   }
 
   // getToken(): string | null {

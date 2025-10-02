@@ -1,4 +1,3 @@
-import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
 import { chamadoProjection } from './../../DTOs/Projections/chamadoProjection';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';

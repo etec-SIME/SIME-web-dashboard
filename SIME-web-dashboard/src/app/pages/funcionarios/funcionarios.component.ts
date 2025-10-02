@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { FuncionarioService } from '../../services/funcionario/funcionario.service';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';

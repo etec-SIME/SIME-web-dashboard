@@ -1,0 +1,84 @@
+<!-- Voltar -->
+<button id="btn-back" (click)="voltar()">
+    <img src="images/iconeFlecha.svg" alt="ícone de flecha">Voltar
+</button>
+
+<div class="container">
+
+<!-- Infos -->
+<div class="content">
+
+    <div class="content-preview">
+    <div class="sub-previews">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div class="preview"></div>
+    </div>
+
+    <div class="details">
+    <h2>{{ chamado.titulo }}</h2>
+
+    <!-- Barra de progresso -->
+    <div class="progress">
+        @for (etapa of etapas; let i = $index; track i) {
+        <div class="progress-step">
+            <div class="circle-line">
+                <div class="circle" [class.active]="i <= etapaAtual">
+                    @if (i < etapaAtual) {
+                        <img src="images/iconeCorreto.svg" alt="">
+                    }
+                </div>
+                @if (i < etapas.length - 1) {
+                    <div class="line" [class.active]="i < etapaAtual"></div>
+                }
+            </div>
+            <div class="label">
+                <p class="title">{{ etapa.nome }}</p>
+                <p class="date">{{ etapa.data }}</p>
+            </div>    
+        </div>
+        }
+    </div>
+
+    <div class="details-info">
+
+        <div class="details-header">
+        <p>Descrição</p>
+        <p>Departamento</p>
+        <p>Prioridade</p>
+        </div>
+
+        <div class="details-body">
+        <div>
+            <p>{{ chamado.descricao }}</p>
+        </div>
+
+        <div>
+            <p>Informática</p>
+        </div>
+
+        <div>
+            <p [class.alta]="chamado.prioridade === 'Alta'"
+                [class.media]="chamado.prioridade === 'Média'"
+                [class.baixa]="chamado.prioridade === 'Baixa'">
+            {{ chamado.prioridade }}
+            <img [src]="iconePrioridade[chamado.prioridade]" [alt]="chamado.prioridade" width="20" height="20" align="center" />
+            </p>
+        </div>
+        </div>
+    </div>
+
+    <p id="details-date">Emitido 21/07/2025 - 13:20</p>
+    </div>
+
+</div>
+
+
+<div class="actions">
+    <button class="btn-approve" (click)="aprovar()">Aprovar</button>
+    <button class="btn-reject" (click)="recusar()">Recusar</button>
+</div>
+
+</div>
