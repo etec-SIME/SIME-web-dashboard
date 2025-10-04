@@ -3,10 +3,13 @@ import { CalendarioMensalComponent } from "../../components/calendario-mensal/ca
 import { CalendarioSemanalComponent } from "../../components/calendario-semanal/calendario-semanal.component";
 import { tipoAmbiente } from '../../models/tipoAmbiente';
 import { tipoAmbienteRequestDTO } from '../../DTOs/tipoAmbienteRequestDTO';
+import { forkJoin } from 'rxjs';
 import { EscolaService } from '../../services/escola/escola.service';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 import { ambienteRequestDTO } from '../../DTOs/ambienteRequestDTO';
 import { CommonModule } from '@angular/common';
+import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
+import { ChamadoService } from '../../services/chamado/chamado.service';
 
 @Component({
   selector: 'app-home',
@@ -19,17 +22,26 @@ export class HomeComponent implements OnInit{
 
   opcaoAtual: 'salas' | 'labs' | 'outros' = 'salas';
 
+  tipoAmbientes: tipoAmbienteRequestDTO[] = [];
+  ambientes: AmbienteSelectDTO[] = []; //ambienteRequestDTO
+  chamados: ChamadoRequestDTO[] = [];
+
+  carregado: boolean = false;
+
+  // Estrutura de exibição dos cards no html
   cards: {nome: string; chamados: string}[] = [];
+
+  constructor(private escolaService: EscolaService, private chamadoService: ChamadoService){}
 
   ngOnInit(): void {
     this.setOpcao('salas');
-    //this.carregarDados();
   }
 
   setOpcao(opcao: 'salas' | 'labs' | 'outros') {
     this.opcaoAtual = opcao;
+    this.carregarDados();
 
-    if (opcao === 'salas')
+    /*if (opcao === 'salas')
     {
       this.cards = Array.from({ length: 4 }, (_, i) => ({
         nome: `Sala ${i + 1}`,
@@ -52,64 +64,62 @@ export class HomeComponent implements OnInit{
         nome,
         chamados: `0${i + 1}`
       }));
-    }
+    }*/
   }
 
-  constructor(private escolaService: EscolaService)
-  {
+  carregarDados(): void {
+    this.carregado = false;
 
-  }
+    // Fazer as duas requisições paralelas
+    forkJoin({
+      tipos: this.escolaService.getAllTipoAmbiente(),
+      ambientes: this.escolaService.getAllAmbiente(),
+      chamados: this.chamadoService.getAllChamados()
+    }).subscribe({
+      next: (res) => {
+        this.tipoAmbientes = res.tipos;
+        this.ambientes = res.ambientes;
+        this.chamados = res.chamados;
+ 
+        // Filtrar ambiente pelos tipos de ambientes
+        let tiposFiltrados: tipoAmbienteRequestDTO[] = [];
 
-  tipoAmbientes: tipoAmbienteRequestDTO[] = [];
-  ambientes: AmbienteSelectDTO[] = [];
+        if (this.opcaoAtual === 'salas'){
+          tiposFiltrados = this.tipoAmbientes.filter(t =>
+            t.nomeTipoAmbiente.toLowerCase().includes('sala')
+          );
+        } else if (this.opcaoAtual === 'labs'){
+          tiposFiltrados = this.tipoAmbientes.filter(t =>
+            t.nomeTipoAmbiente.toLowerCase().includes('laboratório')
+          );
+        } else {
+          // "outros" pega tudo que não for sala nem laboratório
+          tiposFiltrados = this.tipoAmbientes.filter( t =>
+            !t.nomeTipoAmbiente.toLowerCase().includes('salas') &&
+            !t.nomeTipoAmbiente.toLowerCase().includes('laboratório')
+          );
+        }
 
-  carregado: boolean = false;
+        // Montar os cards dinâmicos para cada ambiente do tipo filtrado
+        this.cards = this.ambientes
+          .filter(a => tiposFiltrados.some(t => t.idTipoAmbiente === a.idTipoAmbiente))
+          .map(a =>{
+            const tipo = tiposFiltrados.find(t => t.idTipoAmbiente === a.idTipoAmbiente);
+            
+            const qtdChamados = this.chamados.filter(c => c.idAmbiente === a.idAmbiente).length;
 
-  /*carregarDados() {
-    this.escolaService.getAllTipoAmbiente().subscribe({
-      next: (tipos) => {
-        this.tipoAmbientes = tipos;
+            return{
+              nome: `${tipo?.nomeTipoAmbiente} ${a.numAmbiente}`, // Usar crase
+              chamados: qtdChamados.toString()
+            };
+          });
 
-        this.escolaService.getAllAmbiente().subscribe({
-          next: (ambs: ambienteRequestDTO[]) => {
-            // Faz o mapeamento de ambienteRequestDTO -> AmbienteSelectDTO
-            this.ambientes = ambs.map((amb, index) => {
-              const tipo = this.tipoAmbientes.find(t => t.idTipoAmbiente === amb.idTipoAmbiente);
-
-              return {
-                idAmbiente: index + 1, // se o backend não retornar idAmbiente, gera aqui
-                numAmbiente: amb.numAmbiente,
-                idTipoAmbiente: amb.idTipoAmbiente,
-                nomeTipoAmbiente: tipo ? tipo.nomeTipoAmbiente : "Desconhecido"
-              } as AmbienteSelectDTO;
-            });
-
-            this.carregado = true;
-          },
-          error: () => alert("Erro ao carregar os ambientes")
-        });
-      },
-      error: () => alert("Erro ao carregar os tipos dos ambientes")
+          this.carregado = true;
+        },
+        error: (err) => {
+        console.error('Erro ao carregar dados:', err);
+      }
     });
   }
-
-  get ambientesFiltrados(): AmbienteSelectDTO[] {
-  return this.ambientes.filter(amb => {
-    const tipo = amb.nomeTipoAmbiente.toLowerCase();
-
-    if (this.opcaoAtual === 'salas') {
-      return tipo.includes('sala'); // pega "Sala de Aula"
-    }
-    if (this.opcaoAtual === 'labs') {
-      return tipo.includes('laboratório') || tipo.includes('lab'); // pega "Laboratório"
-    }
-    if (this.opcaoAtual === 'outros') {
-      return !tipo.includes('sala') && !tipo.includes('laboratório') && !tipo.includes('lab');
-      // pega o que não for Sala ou Laboratório
-    }
-
-    return false;
-    });
-  }*/
 
 }

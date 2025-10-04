@@ -1,3 +1,4 @@
 export interface tipoAmbienteRequestDTO{
-  nomeTipoAmbiente: string
+  idTipoAmbiente: number;
+  nomeTipoAmbiente: string;
 }

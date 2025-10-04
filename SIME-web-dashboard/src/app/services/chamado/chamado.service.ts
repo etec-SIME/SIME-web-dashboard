@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { ChamadoCardDTO } from '../../DTOs/ChamadoCardDTO';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
+import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,8 @@ export class ChamadoService {
 
   constructor( private http: HttpClient ) { }
 
-  getAllChamados(): Observable<chamadoProjection[]> {
-    return this.http.get<chamadoProjection[]>(this.apiUrl);
+  getAllChamados(): Observable<ChamadoRequestDTO[]> { // mudar de chamadoProjetcion para ChamadoRequestDTO
+    return this.http.get<ChamadoRequestDTO[]>(this.apiUrl);
   }
 
   getChamadosByPrioridade(prioridade: 'ALTA_PRIORIDADE' | 'MEDIA_PRIORIDADE' | 'BAIXA_PRIORIDADE'): Observable<ChamadoCardDTO[]> {

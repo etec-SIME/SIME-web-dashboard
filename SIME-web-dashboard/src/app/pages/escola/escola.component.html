@@ -16,8 +16,8 @@
 
 <!-- GET ALL AMBIENTES-->
   <ng-container *ngIf="carregado; else carregando">
-  <div *ngIf="ambientes.length > 0; else nenhum" class="card-get">
-    <div *ngFor="let a of ambientes">
+  <div *ngIf="ambientesSelect.length > 0; else nenhum" class="card-get"> <!-- ambientes.length -->
+    <div *ngFor="let a of getAllAmbientesComDescricao()"> <!-- let a of ambientes -->
       <p><strong>Número: </strong> {{ a.numAmbiente}}</p>
       <p><strong>Descrição: </strong> {{ a.descricaoAmbiente}}</p>
       <p><strong>Id tipo ambiente: </strong> {{ a.idTipoAmbiente}}</p>

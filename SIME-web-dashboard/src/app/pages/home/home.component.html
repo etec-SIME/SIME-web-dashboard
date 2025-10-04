@@ -3,13 +3,17 @@
         <div class="filtrar">
             <p>Filtrar por:</p>
             <div class="filtrar opcoes">
-                <button class="opcao" (click)="setOpcao('salas')">Salas</button>
-                <button class="opcao" (click)="setOpcao('labs')">Labs</button>
-                <button class="opcao" (click)="setOpcao('outros')">Outros</button>
+                <button class="opcao" [class.ativa]="opcaoAtual === 'salas'" (click)="setOpcao('salas')">Salas</button>
+                <button class="opcao" [class.ativa]="opcaoAtual === 'labs'" (click)="setOpcao('labs')">Labs</button>
+                <button class="opcao" [class.ativa]="opcaoAtual === 'outros'" (click)="setOpcao('outros')">Outros</button>
             </div>
         </div>
     <!-- Criar aqui -->
     <!-- <div class="teste"></div> -->
+
+        <div *ngIf="!carregado" class="loading">
+          <p>Carregando dados...</p>
+        </div>
 
         <div class="locais-cards">
           <div class="card" *ngFor="let card of cards">
@@ -21,6 +25,9 @@
           </div>
         </div>
 
+        <div *ngIf="carregado && cards.length === 0" class="sem-dados">
+          <p>Nenhum ambiente encontrado.</p>
+        </div>
 
         <!--<div class="locais-cards">
           <div class="card salas">

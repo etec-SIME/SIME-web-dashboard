@@ -20,6 +20,7 @@ import { tipoAmbienteRequestDTO } from '../../DTOs/tipoAmbienteRequestDTO';
 import { permissaoTipoPerfilDTO } from '../../DTOs/permissaoTipoPerfilDTO';
 import { tipoEquipamentoAmbienteDTO } from '../../DTOs/tipoEquipamentoAmbienteDTO';
 import { tipoPerfilProjection } from '../../DTOs/Projections/tipoPerfilProjection';
+import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,7 @@ export class EscolaService {
 
   constructor(private http: HttpClient) { }
 
-  token : String = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODAwMDE5NSIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX0VTQ09MQSJ9XSwiZW50aWRhZGUiOiJFU0NPTEEiLCJpYXQiOjE3NTkyNDIwMzEsImV4cCI6MTc1OTMyODQzMX0.GeeA7HaqFfIzFM5jjOw2Rnnp4bmJeroOur6abMLtPPM';
+  token : String = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMDAwMDIiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiR2VyZW5jaWFyIFBlcmZpcyJ9LHsiYXV0aG9yaXR5IjoiR2VyZW5jaWFyIERlcGFydGFtZW50b3MifSx7ImF1dGhvcml0eSI6IkdlcmVuY2lhciBDaGFtYWRvcyJ9LHsiYXV0aG9yaXR5IjoiQ3JpYXIgQ2hhbWFkbyJ9LHsiYXV0aG9yaXR5IjoiVmlzdWFsaXphciBSZWxhdMOzcmlvcyJ9XSwiZW50aWRhZGUiOiJVU1VBUklPIiwiaWF0IjoxNzU5NTk2NzAwLCJleHAiOjE3NTk2ODMxMDB9.RNHGxSGD8MfSRAK90FbkhbHqrEdzBFeC7MOeXTAEB6A';
   // Inserir o Token manualmente para testar
 
   private getAuthHeaders() {
@@ -49,8 +50,8 @@ export class EscolaService {
     return this.http.get<tipoPerfilRequestDTO[]>(`${this.apiUrl}/tipo-perfil`, this.getAuthHeaders());
   }
 
-  getAllAmbiente(): Observable<ambienteRequestDTO[]>{
-    return this.http.get<ambienteRequestDTO[]>(`${this.apiUrl}/ambiente`, this.getAuthHeaders());
+  getAllAmbiente(): Observable<AmbienteSelectDTO[]>{ //ambienteRequestDTO
+    return this.http.get<AmbienteSelectDTO[]>(`${this.apiUrl}/ambiente`, this.getAuthHeaders()); //ambienteRequestDTO
   }
 
   getAllDepartamento(): Observable<departamentoRequestDTO[]>{
