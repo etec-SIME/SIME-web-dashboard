@@ -27,11 +27,11 @@ import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 })
 export class EscolaService {
 
-  private apiUrl = 'http://localhost:8080/escola';
+  private apiUrl = 'http://localhost:8081/escola';
 
   constructor(private http: HttpClient) { }
 
-  token : String = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMDAwMDIiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiR2VyZW5jaWFyIFBlcmZpcyJ9LHsiYXV0aG9yaXR5IjoiR2VyZW5jaWFyIERlcGFydGFtZW50b3MifSx7ImF1dGhvcml0eSI6IkdlcmVuY2lhciBDaGFtYWRvcyJ9LHsiYXV0aG9yaXR5IjoiQ3JpYXIgQ2hhbWFkbyJ9LHsiYXV0aG9yaXR5IjoiVmlzdWFsaXphciBSZWxhdMOzcmlvcyJ9XSwiZW50aWRhZGUiOiJVU1VBUklPIiwiaWF0IjoxNzU5NTk2NzAwLCJleHAiOjE3NTk2ODMxMDB9.RNHGxSGD8MfSRAK90FbkhbHqrEdzBFeC7MOeXTAEB6A';
+  token : String = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMDAwMDIiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiR2VyZW5jaWFyIFBlcmZpcyJ9LHsiYXV0aG9yaXR5IjoiR2VyZW5jaWFyIERlcGFydGFtZW50b3MifSx7ImF1dGhvcml0eSI6IkdlcmVuY2lhciBDaGFtYWRvcyJ9LHsiYXV0aG9yaXR5IjoiQ3JpYXIgQ2hhbWFkbyJ9LHsiYXV0aG9yaXR5IjoiVmlzdWFsaXphciBSZWxhdMOzcmlvcyJ9XSwiZW50aWRhZGUiOiJVU1VBUklPIiwiaWF0IjoxNzU5NzY2MjAxLCJleHAiOjE3NTk4NTI2MDF9.IU8UyvqQHkIVK3g8RQBC1PZfPyj5F0_1a8a_vtWCviM';
   // Inserir o Token manualmente para testar
 
   private getAuthHeaders() {

@@ -6,14 +6,16 @@
                 <button class="opcao" [class.ativa]="opcaoAtual === 'salas'" (click)="setOpcao('salas')">Salas</button>
                 <button class="opcao" [class.ativa]="opcaoAtual === 'labs'" (click)="setOpcao('labs')">Labs</button>
                 <button class="opcao" [class.ativa]="opcaoAtual === 'outros'" (click)="setOpcao('outros')">Outros</button>
+                <div class="barra-de-pesquisa">
+                  <input class="input-pesquisa" type="text" [(ngModel)]="localPesquisa" (ngModelChange)="filtrarLocais()" placeholder="Pesquisar...">
+                </div>
             </div>
         </div>
     <!-- Criar aqui -->
-    <!-- <div class="teste"></div> -->
 
-        <div *ngIf="!carregado" class="loading">
-          <p>Carregando dados...</p>
-        </div>
+        <!-- <div *ngIf="!carregado" class="loading">
+          <p>Carregando locais...</p>
+        </div> -->
 
         <div class="locais-cards">
           <div class="card" *ngFor="let card of cards">
@@ -29,41 +31,8 @@
           <p>Nenhum ambiente encontrado.</p>
         </div>
 
-        <!--<div class="locais-cards">
-          <div class="card salas">
-            <p>Sala 1</p>
-            <div class="chamados">
-              <p>01</p>
-              <p class="text-chamado">Chamados</p>
-            </div>
-          </div>
-
-          <div class="card salas">
-            <p>Sala 2</p>
-            <div class="chamados">
-              <p>02</p>
-              <p class="text-chamado">Chamados</p>
-            </div>
-          </div>
-
-          <div class="card salas">
-            <p>Sala 3</p>
-            <div class="chamados">
-              <p>03</p>
-              <p class="text-chamado">Chamados</p>
-            </div>
-          </div>
-
-          <div class="card salas">
-            <p>Sala 4</p>
-            <div class="chamados">
-              <p>04</p>
-              <p class="text-chamado">Chamados</p>
-            </div>
-          </div>
-        </div> -->
-
     </div>
+
     <div class="home-info">
         <app-calendario-mensal></app-calendario-mensal>
         <app-calendario-semanal></app-calendario-semanal>

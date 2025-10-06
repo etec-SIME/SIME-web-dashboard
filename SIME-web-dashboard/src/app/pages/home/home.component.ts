@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { CalendarioMensalComponent } from "../../components/calendario-mensal/calendario-mensal.component";
 import { CalendarioSemanalComponent } from "../../components/calendario-semanal/calendario-semanal.component";
 import { tipoAmbiente } from '../../models/tipoAmbiente';
@@ -14,17 +15,19 @@ import { ChamadoService } from '../../services/chamado/chamado.service';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, CalendarioMensalComponent, CalendarioSemanalComponent],
+  imports: [CommonModule, FormsModule, CalendarioMensalComponent, CalendarioSemanalComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit{
 
-  opcaoAtual: 'salas' | 'labs' | 'outros' = 'salas';
-
   tipoAmbientes: tipoAmbienteRequestDTO[] = [];
   ambientes: AmbienteSelectDTO[] = []; //ambienteRequestDTO
   chamados: ChamadoRequestDTO[] = [];
+
+  opcaoAtual: 'salas' | 'labs' | 'outros' = 'salas';
+
+  localPesquisa: string = '';
 
   carregado: boolean = false;
 
@@ -37,34 +40,14 @@ export class HomeComponent implements OnInit{
     this.setOpcao('salas');
   }
 
+  filtrarLocais() {
+  console.log(this.localPesquisa);
+  // Filtra os cards ou dados conforme o termo
+}
+
   setOpcao(opcao: 'salas' | 'labs' | 'outros') {
     this.opcaoAtual = opcao;
     this.carregarDados();
-
-    /*if (opcao === 'salas')
-    {
-      this.cards = Array.from({ length: 4 }, (_, i) => ({
-        nome: `Sala ${i + 1}`,
-        chamados: `0${i + 1}` // só de exemplo, Sala 1 -> 1 chamado, Sala 2 -> 2 chamados...
-      }));
-    }
-
-    if (opcao === 'labs')
-    {
-      this.cards = Array.from({ length: 4 }, (_, i) => ({
-        nome: `Laboratório ${i + 1}`,
-        chamados: `0${i + 1}`
-      }));
-    }
-
-    if (opcao === 'outros')
-    {
-      const outros = ['Biblioteca', 'Auditório', 'Pátio', 'Área Verde'];
-      this.cards = outros.map((nome, i) => ({
-        nome,
-        chamados: `0${i + 1}`
-      }));
-    }*/
   }
 
   carregarDados(): void {
@@ -85,17 +68,15 @@ export class HomeComponent implements OnInit{
         let tiposFiltrados: tipoAmbienteRequestDTO[] = [];
 
         if (this.opcaoAtual === 'salas'){
-          tiposFiltrados = this.tipoAmbientes.filter(t =>
-            t.nomeTipoAmbiente.toLowerCase().includes('sala')
+          tiposFiltrados = this.tipoAmbientes.filter(t => t.nomeTipoAmbiente.toLowerCase().includes('sala')
           );
         } else if (this.opcaoAtual === 'labs'){
-          tiposFiltrados = this.tipoAmbientes.filter(t =>
-            t.nomeTipoAmbiente.toLowerCase().includes('laboratório')
+          tiposFiltrados = this.tipoAmbientes.filter(t => t.nomeTipoAmbiente.toLowerCase().includes('laboratório')
           );
         } else {
           // "outros" pega tudo que não for sala nem laboratório
           tiposFiltrados = this.tipoAmbientes.filter( t =>
-            !t.nomeTipoAmbiente.toLowerCase().includes('salas') &&
+            !t.nomeTipoAmbiente.toLowerCase().includes('sala') &&
             !t.nomeTipoAmbiente.toLowerCase().includes('laboratório')
           );
         }
@@ -108,8 +89,13 @@ export class HomeComponent implements OnInit{
             
             const qtdChamados = this.chamados.filter(c => c.idAmbiente === a.idAmbiente).length;
 
+            // Simplificar o nome se for um laboratório
+            let nomeTipo = tipo?.nomeTipoAmbiente || '';
+
+            if (nomeTipo.toLowerCase().includes('laboratório')){ nomeTipo = 'Laboratório'; }
+
             return{
-              nome: `${tipo?.nomeTipoAmbiente} ${a.numAmbiente}`, // Usar crase
+              nome: `${nomeTipo} ${a.numAmbiente}`, // Usar crase
               chamados: qtdChamados.toString()
             };
           });
