@@ -26,13 +26,12 @@ export class HomeComponent implements OnInit{
   chamados: ChamadoRequestDTO[] = [];
 
   opcaoAtual: 'salas' | 'labs' | 'outros' = 'salas';
-
   localPesquisa: string = '';
-
   carregado: boolean = false;
 
   // Estrutura de exibição dos cards no html
   cards: {nome: string; chamados: string}[] = [];
+  cardsOriginais: {nome: string; chamados: string}[] = [];
 
   constructor(private escolaService: EscolaService, private chamadoService: ChamadoService){}
 
@@ -40,13 +39,9 @@ export class HomeComponent implements OnInit{
     this.setOpcao('salas');
   }
 
-  filtrarLocais() {
-  console.log(this.localPesquisa);
-  // Filtra os cards ou dados conforme o termo
-}
-
   setOpcao(opcao: 'salas' | 'labs' | 'outros') {
     this.opcaoAtual = opcao;
+    this.localPesquisa = ''; // Vai limpar o campo quando mudar de aba
     this.carregarDados();
   }
 
@@ -68,10 +63,12 @@ export class HomeComponent implements OnInit{
         let tiposFiltrados: tipoAmbienteRequestDTO[] = [];
 
         if (this.opcaoAtual === 'salas'){
-          tiposFiltrados = this.tipoAmbientes.filter(t => t.nomeTipoAmbiente.toLowerCase().includes('sala')
+          tiposFiltrados = this.tipoAmbientes.filter(t => 
+            t.nomeTipoAmbiente.toLowerCase().includes('sala')
           );
         } else if (this.opcaoAtual === 'labs'){
-          tiposFiltrados = this.tipoAmbientes.filter(t => t.nomeTipoAmbiente.toLowerCase().includes('laboratório')
+          tiposFiltrados = this.tipoAmbientes.filter(t => 
+            t.nomeTipoAmbiente.toLowerCase().includes('laboratório')
           );
         } else {
           // "outros" pega tudo que não for sala nem laboratório
@@ -82,16 +79,14 @@ export class HomeComponent implements OnInit{
         }
 
         // Montar os cards dinâmicos para cada ambiente do tipo filtrado
-        this.cards = this.ambientes
+        const cardsMontados = this.ambientes
           .filter(a => tiposFiltrados.some(t => t.idTipoAmbiente === a.idTipoAmbiente))
           .map(a =>{
             const tipo = tiposFiltrados.find(t => t.idTipoAmbiente === a.idTipoAmbiente);
-            
             const qtdChamados = this.chamados.filter(c => c.idAmbiente === a.idAmbiente).length;
 
             // Simplificar o nome se for um laboratório
             let nomeTipo = tipo?.nomeTipoAmbiente || '';
-
             if (nomeTipo.toLowerCase().includes('laboratório')){ nomeTipo = 'Laboratório'; }
 
             return{
@@ -100,12 +95,33 @@ export class HomeComponent implements OnInit{
             };
           });
 
+          this.cardsOriginais = cardsMontados; // Guardar todos os cards
+          this.cards = [...cardsMontados] // Exibir todos inicialmente
           this.carregado = true;
         },
         error: (err) => {
         console.error('Erro ao carregar dados:', err);
       }
     });
+  }
+
+  filtrarLocais(): void { // Busca dinâmica enquanto o usuário digita
+    if(this.opcaoAtual === 'outros')
+    {
+      this.cards = [...this.cardsOriginais]; // Cards estáticos para Outros
+      return;
+    }
+
+    const local = this.localPesquisa.trim().toLowerCase();
+
+    if (!local){
+      this.cards = [...this.cardsOriginais]; // Se a pesquisa estiver vazia
+      return;
+    }
+
+    this.cards = this.cardsOriginais.filter(card =>
+      card.nome.toLowerCase().includes(local)
+    );
   }
 
 }

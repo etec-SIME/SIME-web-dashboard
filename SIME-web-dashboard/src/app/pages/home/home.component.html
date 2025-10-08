@@ -19,6 +19,10 @@
           <p>Carregando locais...</p>
         </div> -->
 
+        <div *ngIf="carregado && cards.length === 0" class="sem-dados">
+          <p>Nenhum ambiente encontrado.</p>
+        </div>
+
         <div class="locais-cards">
           <div class="card" *ngFor="let card of cards">
             <p>{{ card.nome }}</p>
@@ -27,10 +31,6 @@
               <p class="text-chamado">Chamados</p>
             </div>
           </div>
-        </div>
-
-        <div *ngIf="carregado && cards.length === 0" class="sem-dados">
-          <p>Nenhum ambiente encontrado.</p>
         </div>
 
     </div>

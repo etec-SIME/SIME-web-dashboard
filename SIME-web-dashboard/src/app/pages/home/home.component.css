@@ -119,6 +119,10 @@
 
 /* Card de locais */
 
+.sem-dados{
+  margin-top: clamp(20px, 4vh, 6vh);
+}
+
 .locais-cards{
   width: clamp(500px, 45vw, 47vw);
   height: clamp(390px, 68vh, 70vh);
