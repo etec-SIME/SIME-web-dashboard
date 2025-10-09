@@ -8,6 +8,7 @@ import { tipoChamadoRequestDTO } from '../../DTOs/tipoChamadoRequestDTO';
 import { tipoPerfilRequestDTO } from '../../DTOs/tipoPerfilRequestDTO';
 import { departamentoRequestDTO } from '../../DTOs/departamentoRequestDTO';
 import { equipamentoRequestDTO } from '../../DTOs/equipamentoRequestDTO';
+import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 
 @Component({
   selector: 'app-criar',
@@ -17,7 +18,7 @@ import { equipamentoRequestDTO } from '../../DTOs/equipamentoRequestDTO';
 })
 export class CriarComponent{
 
-  locais: ambienteRequestDTO[] = [];
+  locais: AmbienteSelectDTO[] = []; //ambienteRequestDTO
   tiposChamado: tipoChamadoRequestDTO[] = [];
   tiposPerfis: tipoPerfilRequestDTO[] = [];
   perfis: UsuarioProjection[] = [];

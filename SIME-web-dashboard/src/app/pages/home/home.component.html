@@ -3,13 +3,25 @@
         <div class="filtrar">
             <p>Filtrar por:</p>
             <div class="filtrar opcoes">
-                <button class="opcao" (click)="setOpcao('salas')">Salas</button>
-                <button class="opcao" (click)="setOpcao('labs')">Labs</button>
-                <button class="opcao" (click)="setOpcao('outros')">Outros</button>
+                <button class="opcao" [class.ativa]="opcaoAtual === 'salas'" (click)="setOpcao('salas')">Salas</button>
+                <button class="opcao" [class.ativa]="opcaoAtual === 'labs'" (click)="setOpcao('labs')">Labs</button>
+                <button class="opcao" [class.ativa]="opcaoAtual === 'outros'" (click)="setOpcao('outros')">Outros</button>
+                <div class="barra-de-pesquisa">
+                  <input class="input-pesquisa" type="text" [(ngModel)]="localPesquisa" (ngModelChange)="filtrarLocais()" placeholder="Procurar...">
+                  <div class="separacao"></div>
+                  <img src="/images/lupa.png" class="lupa-img">
+                </div>
             </div>
         </div>
     <!-- Criar aqui -->
-    <!-- <div class="teste"></div> -->
+
+        <!-- <div *ngIf="!carregado" class="loading">
+          <p>Carregando locais...</p>
+        </div> -->
+
+        <div *ngIf="carregado && cards.length === 0" class="sem-dados">
+          <p>Nenhum ambiente encontrado.</p>
+        </div>
 
         <div class="locais-cards">
           <div class="card" *ngFor="let card of cards">
@@ -21,42 +33,8 @@
           </div>
         </div>
 
-
-        <!--<div class="locais-cards">
-          <div class="card salas">
-            <p>Sala 1</p>
-            <div class="chamados">
-              <p>01</p>
-              <p class="text-chamado">Chamados</p>
-            </div>
-          </div>
-
-          <div class="card salas">
-            <p>Sala 2</p>
-            <div class="chamados">
-              <p>02</p>
-              <p class="text-chamado">Chamados</p>
-            </div>
-          </div>
-
-          <div class="card salas">
-            <p>Sala 3</p>
-            <div class="chamados">
-              <p>03</p>
-              <p class="text-chamado">Chamados</p>
-            </div>
-          </div>
-
-          <div class="card salas">
-            <p>Sala 4</p>
-            <div class="chamados">
-              <p>04</p>
-              <p class="text-chamado">Chamados</p>
-            </div>
-          </div>
-        </div> -->
-
     </div>
+
     <div class="home-info">
         <app-calendario-mensal></app-calendario-mensal>
         <app-calendario-semanal></app-calendario-semanal>

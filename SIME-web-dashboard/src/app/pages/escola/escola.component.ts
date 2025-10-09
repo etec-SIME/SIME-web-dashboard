@@ -15,6 +15,7 @@ import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validatio
 import { usuarioRequestDTO } from '../../DTOs/usuarioRequestDTO';
 import { permissaoTipoPerfilDTO } from '../../DTOs/permissaoTipoPerfilDTO';
 import { tipoEquipamentoAmbienteDTO } from '../../DTOs/tipoEquipamentoAmbienteDTO';
+import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 
 @Component({
   selector: 'app-escola',
@@ -26,7 +27,8 @@ export class EscolaComponent implements OnInit{
 
   escolas: escolaProjection[] = []
 
-  ambientes: ambienteRequestDTO[] = []
+  ambientesSelect: AmbienteSelectDTO[] = []; // para filtros, cards, etc
+  ambientesRequest: ambienteRequestDTO[] = []; // para acessar descricaoAmbiente quando precisar
   departamentos: departamentoRequestDTO[] = []
   equipamentos: equipamentoRequestDTO[] = []
   tipoPerfis: tipoPerfilRequestDTO[] = []
@@ -52,8 +54,15 @@ export class EscolaComponent implements OnInit{
 
     // ambientes
     this.escolaService.getAllAmbiente().subscribe(resp =>
-      this.ambientes = resp
-    )
+      this.ambientesSelect = resp.map(a => {
+      const ambienteReq = this.ambientesRequest.find(ar => ar.numAmbiente === a.numAmbiente);
+        return {
+          ...a,
+          descricaoAmbiente: ambienteReq ? ambienteReq.descricaoAmbiente : 'Sem descrição'
+        };
+      }) // Arrumar aqui
+      
+    );
 
     // departamentos
     this.escolaService.getAllDepartamento().subscribe((resp) => {
@@ -91,6 +100,18 @@ export class EscolaComponent implements OnInit{
     })
 
   }
+
+  getDescricao(numAmbiente: number): string {
+    const ambiente = this.ambientesRequest.find(a => a.numAmbiente === numAmbiente);
+    return ambiente ? ambiente.descricaoAmbiente : 'Sem descrição';
+  }
+
+  getAllAmbientesComDescricao(): (AmbienteSelectDTO & { descricaoAmbiente: string })[] {
+  return this.ambientesSelect.map(a => ({
+    ...a,
+    descricaoAmbiente: this.getDescricao(a.numAmbiente)
+  }));
+}
 
   //Formulários de cadastro/criação
 
@@ -455,8 +476,9 @@ export class EscolaComponent implements OnInit{
     const idTipoAmbiente = this.formEditarTipoAmbiente.value.id;
 
     const tipoAmbienteEditado = {
+        idTipoAmbiente: idTipoAmbiente, 
         nomeTipoAmbiente: this.formEditarTipoAmbiente.value.nomeTipoAmbiente
-      }
+    }
 
     this.escolaService.editarTipoAmbiente(idTipoAmbiente, tipoAmbienteEditado).subscribe({
       next: (res) => {
