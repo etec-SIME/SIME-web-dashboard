@@ -6,7 +6,7 @@ import { chamadoProjection } from '../../DTOs/Projections/chamadoProjection';
 
 @Injectable({ providedIn: 'root' })
 export class FuncionarioService {
-  private apiUrl = 'http://localhost:8081/funcionarios';
+  private apiUrl = 'http://localhost:8080/funcionarios';
 
   constructor( private http: HttpClient ) { }
 

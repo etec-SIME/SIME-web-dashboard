@@ -27,7 +27,7 @@ import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 })
 export class EscolaService {
 
-  private apiUrl = 'http://localhost:8081/escola';
+  private apiUrl = 'http://localhost:8080/escola';
 
   constructor(private http: HttpClient) { }
 

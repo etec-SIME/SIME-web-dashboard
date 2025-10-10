@@ -11,7 +11,7 @@ import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
   providedIn: 'root'
 })
 export class ChamadoService {
-  private apiUrl = 'http://localhost:8081/chamados';
+  private apiUrl = 'http://localhost:8080/chamados';
 
   constructor( private http: HttpClient ) { }
 
