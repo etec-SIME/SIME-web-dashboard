@@ -78,7 +78,8 @@ p{
     font-size: clamp(16px, 1.3vw, 3.3vw);
     background-color: white;
     width: clamp(160px, 12vw, 14vw);
-    height: clamp(20px ,6.8vh, 8.8vh);
+    height: clamp(40px, 6.8vh, 8.8vh);
+    max-height: 50px; /* Pode alterar se for necessário*/
     border-radius: clamp(10px, 0.7vw, 2.7vw);
     border: none;
     color: #44A1A0;
