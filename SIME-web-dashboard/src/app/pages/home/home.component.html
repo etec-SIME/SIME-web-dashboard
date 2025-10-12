@@ -22,13 +22,15 @@
         <div *ngIf="carregado && cards.length === 0" class="sem-dados">
           <p>Nenhum ambiente encontrado.</p>
         </div>
-
-        <div class="locais-cards">
-          <div class="card" *ngFor="let card of cards">
-            <p>{{ card.nome }}</p>
-            <div class="chamados">
-              <p>{{ card.chamados }}</p>
-              <p class="text-chamado">Chamados</p>
+        
+        <div class="locais-cards-wrapper">
+          <div class="locais-cards">
+            <div class="card" *ngFor="let card of cards">
+              <p>{{ card.nome }}</p>
+              <div class="chamados">
+                <p>{{ card.chamados }}</p>
+                <p class="text-chamado">Chamados</p>
+              </div>
             </div>
           </div>
         </div>
