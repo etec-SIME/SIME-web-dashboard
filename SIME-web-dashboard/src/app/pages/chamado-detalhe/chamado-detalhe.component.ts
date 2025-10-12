@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { ChamadoService } from '../../services/chamado/chamado.service';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-chamado-detalhe',
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './chamado-detalhe.component.html',
   styleUrl: './chamado-detalhe.component.css'
 })
@@ -24,7 +25,7 @@ export class ChamadoDetalheComponent {
 
   etapaAtual = 1;
 
-  constructor(private chamadoService: ChamadoService) {}
+  constructor(private chamadoService: ChamadoService, private router: Router) {}
 
   chamado = {
     titulo: 'Computador Quebrado',
@@ -34,7 +35,7 @@ export class ChamadoDetalheComponent {
   };
 
   voltar() {
-    console.log("Voltar clicado");
+    this.router.navigate(['/layout/chamados-pendentes']);
   }
 
   aprovar() {
