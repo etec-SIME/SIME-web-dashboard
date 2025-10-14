@@ -8,10 +8,11 @@ import { tipoChamadoRequestDTO } from '../../DTOs/tipoChamadoRequestDTO';
 import { tipoPerfilRequestDTO } from '../../DTOs/tipoPerfilRequestDTO';
 import { departamentoRequestDTO } from '../../DTOs/departamentoRequestDTO';
 import { equipamentoRequestDTO } from '../../DTOs/equipamentoRequestDTO';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-criar',
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './criar.component.html',
   styleUrl: './criar.component.css'
 })
@@ -31,7 +32,7 @@ export class CriarComponent{
   qtdDepartamentos: number = 0;
   qtdEquipamentos: number = 0;
 
-  constructor(private escolaService: EscolaService, private usuarioService: UsuarioService) {}
+  constructor(private escolaService: EscolaService, private usuarioService: UsuarioService, private router: Router) {}
 
   ngOnInit(): void {
     this.carregarElementos();
@@ -62,6 +63,10 @@ export class CriarComponent{
     this.qtdTiposChamado = this.tiposChamado.length;
   });
     //this.escolaService.getAllAmbiente().subscribe((resp) => { this.locais = resp })
+  }
+
+  navCriarLocal(){
+    this.router.navigate(['/layout/criar-ambiente']);
   }
 
 }

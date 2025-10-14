@@ -8,13 +8,17 @@
 .linha{
   background-color: #808080;
   width: 1px;
-  margin-left: clamp(2px, 8vw, 80vw);
+  margin-left: clamp(2px, 4vw, 6vw);
   height: 65vh;
 }
 
 .cards-tipo-ambiente{
     margin-bottom: clamp(3px, 2vw, 50vw);
     margin-top: clamp(3px, 2vw, 50vw);
+    max-height: clamp(200px, 50.3vh, 52.3vh);
+    overflow-y: auto; 
+    overflow-x: hidden;
+    padding-right: clamp(2px, 3vw, 5vw);
 }
 
 .card-tipo-ambiente{
@@ -40,6 +44,10 @@
     height: clamp(3px, 5vh, 7vh);
 }
 
+.text-card{
+    text-wrap: nowrap;
+}
+
 .text-card p{
     font-size: 20px;
     margin-bottom: clamp(2px, 0.3vw, 2.3vw);
@@ -56,25 +64,14 @@
     border-color: transparent;
     border-radius: 0.6vw;
     height: clamp(3px, 6vh, 8vh);
-    width: clamp(4px, 13vw, 17vw);
-    font-size: 23px;
+    width: clamp(20px, 13vw, 17vw);
+    font-size: clamp(10px, 23px, 25px);
     font-weight: 100;
     cursor: pointer;
+    text-wrap: nowrap;
 }
 
-.btn-criar:focus{
-    background-color: #999999;
-}
-
-
-.forms-novo-ambiente{
-    display: grid;
-    grid-template-rows: 2fr 2fr 2fr 2fr 2fr 2fr;
-    margin-top: clamp(3px, 2vw, 4vw);
-    margin-right: clamp(3px, 6vw, 4vw);
-}
-
-.forms-novo-ambiente input, select{
+.forms-ambiente input, select{
     border-color: #999999;
     color: #999999;
     width: clamp(2px, 30vw, 32vw);
@@ -86,18 +83,26 @@
     border-style: solid;
 }
 
-.forms-novo-ambiente h2, h3{
+.forms-ambiente h2, h3{
     color: #44a1a0;
     font-weight: 600;
 }
 
-.forms-novo-ambiente h2{
-    font-size: 35px;
+.forms-ambiente h2{
+    font-size: 33px;
+    text-wrap: nowrap;
 }
 
-.forms-novo-ambiente h3{
+.forms-ambiente h3{
     font-size: 25px;
     margin-top: clamp(2px, 1.2vw, 3.2vw);
+}
+
+.forms-novo-ambiente{
+    display: grid;
+    grid-template-rows: 2fr 2fr 2fr 2fr 2fr 2fr;
+    margin-top: clamp(3px, 2vw, 4vw);
+    margin-right: clamp(3px, 6vw, 4vw);
 }
 
 .btns-forms-ambiente{
@@ -116,6 +121,7 @@
     width: clamp(2px, 13vw, 70vw);
     font-size: 20px;
     cursor: pointer;
+    text-wrap: nowrap;
 }
 
 .btns-forms-ambiente button:hover{
@@ -131,6 +137,7 @@
     grid-template-columns: 1fr 2fr;
     margin-top: clamp(3px, 4vw, 6vw);
     margin-left: clamp(2px, 11vw, 60vw);
+    text-wrap: nowrap;
 }
 
 .btn-cancelar{
@@ -151,4 +158,28 @@
     height: clamp(4px, 5vh, 100vh);
     font-size: 23px;
     cursor: pointer;
+}
+
+.btn-concluir:disabled{
+    background-color: #999999;
+    cursor: not-allowed;
+}
+
+.meu-botao-principal:disabled:hover {
+    background-color: #999999; 
+}
+
+.forms-tipo-ambiente{
+    margin-top: clamp(23px, 9vw, 11vw);
+}
+
+.forms-tipo-ambiente h2{
+    margin-right: clamp(20px, 8vw, 10vw);
+    margin-bottom: clamp(20px, 3.5vw, 5.5vw);
+    text-wrap: nowrap;
+}
+
+.erro-small{
+    color: red;
+    margin: 0;
 }

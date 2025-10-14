@@ -1,52 +1,78 @@
 <div id="content">
     <div class="tipo-ambiente">
         <div class="cards-tipo-ambiente">
-            <div class="card-tipo-ambiente" tabindex="0">
-                <img class="icon-ambiente" src="/images/sala_icon.png">
-                <div class="text-card">
-                    <p>Sala</p>
-                    <small>18 salas</small>
+            @for(tipoAmbiente of tiposAmbiente; track tipoAmbiente.idTipoAmbiente){
+                <div class="card-tipo-ambiente" tabindex="0" (click)="mandarIdNomeTipoAmbiente(tipoAmbiente.idTipoAmbiente, tipoAmbiente.nomeTipoAmbiente)">
+                    <img class="icon-ambiente" src="/images/sala_icon.png">
+                    <div class="text-card">
+                        <p>{{tipoAmbiente.nomeTipoAmbiente}}</p>
+                        <small>18 {{tipoAmbiente.nomeTipoAmbiente}}</small>
+                    </div>
                 </div>
-            </div>
-            <div class="card-tipo-ambiente" tabindex="0">
-                <img class="icon-ambiente" src="/images/pc_icon.png">
-                <div class="text-card">
-                    <p>Laboratório</p>
-                    <small>8 laboratórios</small>
-                </div>
-            </div>
-            <div class="card-tipo-ambiente" tabindex="0">
-                <img class="icon-ambiente" src="/images/livro_icon.png">
-                <div class="text-card">
-                    <p>Locais Comuns</p>
-                    <small>5 locais comuns</small>
-                </div>
-            </div>
+            }
         </div>
-        <button class="btn-criar">Criar tipo de local</button>
+        <button class="btn-criar" [innerText]="criarLocal === true ? 'Criar tipo de local' : 'Criar local'" (click)="btnCriar()"></button>
     </div>
     <div class="linha"></div>
     <div class="forms-ambiente">
-        <div class="forms-novo-ambiente">
-            <h2>NOVA SALA</h2>
-            <input type="text" placeholder="Nome Local"/>
-            <input type="number" placeholder="Número"/>
-            <h3>EQUIPAMENTOS</h3>
-            <select class="select-tipo-equip">
-                <option value="">Tipo equipamento</option>
-            </select>
-            <div class="btns-forms-ambiente">
-                <button>Criar equipamento</button>
-                <button>Selecionar códigos</button>
+       @if(criarLocal){
+         <form [formGroup]="ambienteForm">
+            <div class="forms-novo-ambiente">
+                <h2>{{nomeTipoAmbiente}}</h2>
+                <input type="text" placeholder="Nome Local" formControlName="nomeLocal"/>
+                @if(ambienteForm.get('nomeLocal')?.touched && ambienteForm.get('nomeLocal')?.invalid){
+                    <div>
+                        @if (ambienteForm.get('nomeLocal')?.errors?.['required']) {
+                            <small class="erro-small">Nome do local é obrigatório!</small>
+                        }
+                    </div>
+                }
+                <input type="number" placeholder="Número" formControlName="numeroLocal"/>
+                 @if(ambienteForm.get('numeroLocal')?.touched && ambienteForm.get('numeroLocal')?.invalid){
+                    <div>
+                        @if (ambienteForm.get('numeroLocal')?.errors?.['required']) {
+                            <small class="erro-small">Número do local é obrigatório!</small>
+                        }
+                    </div>
+                }
+                <h3>EQUIPAMENTOS</h3>
+                <select class="select-tipo-equip" formControlName="tipoEquipamento">
+                    <option value="">Tipo equipamento</option>
+                    @for(tipoEquipamento of tiposEquipamento; track tipoEquipamento.idTipoEquipamento){
+                        <option [ngValue]="tipoEquipamento">{{ tipoEquipamento.nomeTipoEquipamento }}</option>
+                    }
+                </select>
+                 @if(ambienteForm.get('tipoEquipamento')?.touched && ambienteForm.get('tipoEquipamento')?.invalid){
+                    <div>
+                        @if (ambienteForm.get('tipoEquipamento')?.errors?.['required']) {
+                            <small class="erro-small">Tipo equipamento é obrigatório!</small>
+                        }
+                    </div>
+                }
+                <div class="btns-forms-ambiente">
+                    <button>Criar equipamento</button>
+                    <button>Selecionar códigos</button>
+                </div>
             </div>
-        </div>
-        <!--<div class="forms-tipo-ambiente" >
-            <h2>CRIAR NOVO TIPO DE LOCAL</h2>
-            <input type="text" placeholder="Tipo de local"/>
-        </div>-->
+         </form>
+       }@else{
+        <form [formGroup]="tipoAmbienteForm">
+            <div class="forms-tipo-ambiente" >
+                <h2>CRIAR NOVO TIPO DE LOCAL</h2>
+                <input type="text" placeholder="Tipo do local" formControlName="nomeTipoLocal"/>
+                @if(tipoAmbienteForm.get('nomeTipoLocal')?.touched && tipoAmbienteForm.get('nomeTipoLocal')?.invalid){
+                    <div>
+                        @if (tipoAmbienteForm.get('nomeTipoLocal')?.errors?.['required']) {
+                            <small class="erro-small">O nome é obrigatório!</small>
+                        }
+                    </div>
+                }
+            </div>
+        </form>
+       }
         <div class="btns-forms-criar">
-            <button class="btn-cancelar">Cancelar</button>
-            <button class="btn-concluir">Concluir</button>
+            <button class="btn-cancelar" (click)="onCancelar()">Cancelar</button>
+            <button class="btn-concluir" (click)="onCriar()">Concluir</button>
         </div>
     </div>
 </div>

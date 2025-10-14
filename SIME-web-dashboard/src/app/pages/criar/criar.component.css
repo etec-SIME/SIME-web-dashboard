@@ -19,6 +19,11 @@
   border-radius: 0.5vw;
   width: clamp(290px, 28vw, 30vw);
   height: clamp(2px, 12.5vh, 14.5vh);
+  cursor: pointer;
+}
+
+.card:hover{
+  background-color: #d4efef;
 }
 
 .cardContent{
