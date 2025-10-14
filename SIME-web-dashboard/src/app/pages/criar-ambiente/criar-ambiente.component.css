@@ -1,22 +1,23 @@
 #content{
     display: grid;
     grid-template-columns: 1fr 1fr 2fr;
-    margin-top: clamp(3px, 4vw, 40vw);
-    margin-left: clamp(3px, 4vw, 50vw);
+    margin-top: clamp(3px, 4vw, 6vw);
+    margin-left: clamp(3px, 1.5vw, 3.5vw);
 }
 
 .linha{
   background-color: #808080;
   width: 1px;
-  margin-left: clamp(2px, 4vw, 6vw);
+  margin-left: clamp(20px, 4vw, 6vw);
+  margin-right: clamp(10px, 3vw, 2100vw);
   height: 65vh;
 }
 
 .cards-tipo-ambiente{
-    margin-bottom: clamp(3px, 2vw, 50vw);
-    margin-top: clamp(3px, 2vw, 50vw);
-    max-height: clamp(200px, 50.3vh, 52.3vh);
-    overflow-y: auto; 
+    margin-bottom: clamp(3px, 2vw, 4vw);
+    margin-top: clamp(3px, 2vw, 4vw);
+    max-height: clamp(200px, 52.3vh, 54.3vh);
+    overflow-y: auto;
     overflow-x: hidden;
     padding-right: clamp(2px, 3vw, 5vw);
 }
@@ -28,7 +29,7 @@
     border-radius: 0.5vw;
     padding: clamp(2px, 1.5vw, 3.5vw);
     margin-bottom: clamp(2px, 3vw, 40vw);
-    width: clamp(2px, 25vw, 27vw);
+    width: clamp(2px, 27vw, 29vw);
 }
 
 .card-tipo-ambiente:hover{
@@ -65,7 +66,7 @@
     border-radius: 0.6vw;
     height: clamp(3px, 6vh, 8vh);
     width: clamp(20px, 13vw, 17vw);
-    font-size: clamp(10px, 23px, 25px);
+    font-size: clamp(10px, 1.4vw, 2.4vw);
     font-weight: 100;
     cursor: pointer;
     text-wrap: nowrap;
@@ -74,7 +75,7 @@
 .forms-ambiente input, select{
     border-color: #999999;
     color: #999999;
-    width: clamp(2px, 30vw, 32vw);
+    width: clamp(2px, 33.5vw, 320vw);
     height: clamp(2px, 6.5vh, 8.5vh);
     border-radius: 0.4vw;
     font-size: 20px;
@@ -89,12 +90,12 @@
 }
 
 .forms-ambiente h2{
-    font-size: 33px;
-    text-wrap: nowrap;
+  font-size: clamp(10px, 28px, 50px);
+  text-wrap: nowrap;
 }
 
 .forms-ambiente h3{
-    font-size: 25px;
+    font-size: clamp(10px, 23px, 25px);
     margin-top: clamp(2px, 1.2vw, 3.2vw);
 }
 
@@ -102,7 +103,7 @@
     display: grid;
     grid-template-rows: 2fr 2fr 2fr 2fr 2fr 2fr;
     margin-top: clamp(3px, 2vw, 4vw);
-    margin-right: clamp(3px, 6vw, 4vw);
+    margin-right: clamp(2px, 4vw, 6vw);
 }
 
 .btns-forms-ambiente{
@@ -110,6 +111,7 @@
     grid-template-columns: 1fr 2fr;
     gap: clamp(2px, 4vw, 40vw);
     margin-top: clamp(2px, 1.7vw, 4vw);
+    margin-left: clamp(10px, 1.5vw, 3.5vw);
 }
 
 .btns-forms-ambiente button{
@@ -117,9 +119,9 @@
     border-color: transparent;
     color: white;
     border-radius: 0.3vw;
-    height: clamp(20px, 4.7vh, 6.7vh);
-    width: clamp(2px, 13vw, 70vw);
-    font-size: 20px;
+    height: clamp(20px, 5vh, 6.7vh);
+    width: clamp(2px, 13vw, 15vw);
+    font-size: clamp(10px, 19px, 21px);
     cursor: pointer;
     text-wrap: nowrap;
 }
@@ -136,7 +138,7 @@
     display: grid;
     grid-template-columns: 1fr 2fr;
     margin-top: clamp(3px, 4vw, 6vw);
-    margin-left: clamp(2px, 11vw, 60vw);
+    margin-left: clamp(2px, 14.2vw, 16.2vw);
     text-wrap: nowrap;
 }
 
@@ -144,7 +146,7 @@
     background-color: transparent;
     border-color: transparent;
     color: #868686;
-    font-size: 20px;
+    font-size: clamp(10px, 20px, 22px);
     cursor: pointer;
     width: clamp(2px, 10vw, 50vw);
 }
@@ -155,8 +157,8 @@
     border-color: transparent;
     border-radius: 0.5vw;
     width: clamp(3px, 9vw, 11vw);
-    height: clamp(4px, 5vh, 100vh);
-    font-size: 23px;
+    height: clamp(4px, 5.5vh, 7.5vh);
+    font-size: clamp(10px, 22px, 24px);
     cursor: pointer;
 }
 
@@ -166,7 +168,7 @@
 }
 
 .meu-botao-principal:disabled:hover {
-    background-color: #999999; 
+    background-color: #999999;
 }
 
 .forms-tipo-ambiente{
@@ -174,12 +176,13 @@
 }
 
 .forms-tipo-ambiente h2{
-    margin-right: clamp(20px, 8vw, 10vw);
+    margin-right: clamp(2px, 10vw, 12vw);
     margin-bottom: clamp(20px, 3.5vw, 5.5vw);
     text-wrap: nowrap;
+    font-size: clamp(20px, 30px, 35px);
 }
 
 .erro-small{
-    color: red;
-    margin: 0;
+  color: red;
 }
+

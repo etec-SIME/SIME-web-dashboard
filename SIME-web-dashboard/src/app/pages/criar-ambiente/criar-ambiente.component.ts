@@ -5,10 +5,11 @@ import { tipoEquipamento } from '../../models/tipoEquipamento';
 import { Router, RouterModule } from '@angular/router';
 import { tipoAmbiente } from '../../models/tipoAmbiente';
 import { ambienteRequestDTO } from '../../DTOs/ambienteRequestDTO';
+import { NgForOf } from "../../../../node_modules/@angular/common/common_module.d-NEF7UaHr";
 
 @Component({
   selector: 'app-criar-ambiente',
-  imports: [ReactiveFormsModule, RouterModule],
+  imports: [ReactiveFormsModule, RouterModule, NgForOf],
   templateUrl: './criar-ambiente.component.html',
   styleUrl: './criar-ambiente.component.css'
 })
@@ -39,6 +40,7 @@ export class CriarAmbienteComponent {
 
   ngOnInit(): void{
     this.getElementos();
+    this.contagemAmbiente();
   }
 
   getElementos(): void{
@@ -48,18 +50,20 @@ export class CriarAmbienteComponent {
     this.escolaService.getAllTipoAmbiente().subscribe((resp) => {this.tiposAmbiente = resp});
 
     this.escolaService.getAllAmbiente().subscribe((resp) => {this.ambientes = resp});
+  }
 
-    for (let i = 0; i < this.ambientes.length; i++) {
-      console.log('JUIODEFHDSOIHCO')
-      let k = 0;
+  contagemAmbiente(){
+    for(let i = 0; i < this.tiposAmbiente.length; i++){
+      let qtd = 0;
       for(let j = 0; j < this.ambientes.length; j++){
-        if(this.ambientes[i].idTipoAmbiente == this.tiposAmbiente[i].idTipoAmbiente){
-          k += 1;
-          console.log(k);
+        if(this.ambientes[j].idTipoAmbiente == this.tiposAmbiente[i].idTipoAmbiente){
+          qtd = qtd + 1;
         }
       }
-      this.qtdAmbientes.push(k);
+      this.qtdAmbientes.push(qtd)
     }
+
+    console.log(this.qtdAmbientes);
   }
 
   btnCriar(){
