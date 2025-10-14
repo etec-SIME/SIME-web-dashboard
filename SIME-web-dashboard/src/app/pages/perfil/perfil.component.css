@@ -1,0 +1,53 @@
+.cardContext {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* Espaço entre os botões */
+  padding: 16px;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  background-color: #f5f5f5;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 16px;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #eaeaea;
+}
+
+.image {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.image img {
+  width: 32px;
+  height: 32px;
+}
+
+.cardText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cardText p:first-child {
+  font-weight: bold;
+  font-size: 14px;
+  margin: 0 0 6px 0; /* adiciona espaço inferior */
+  color: #000;
+}
+
+.cardText p:last-child {
+  font-size: 13px;
+  margin: 0;
+  color: #555;
+}
