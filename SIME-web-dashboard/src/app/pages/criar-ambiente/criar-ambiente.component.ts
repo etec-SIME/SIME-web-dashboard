@@ -6,6 +6,7 @@ import { Router, RouterModule } from '@angular/router';
 import { tipoAmbiente } from '../../models/tipoAmbiente';
 import { ambienteRequestDTO } from '../../DTOs/ambienteRequestDTO';
 import { forkJoin, Observable } from 'rxjs';
+import { tipoAmbienteRequestDTO } from '../../DTOs/tipoAmbienteRequestDTO';
 
 @Component({
   selector: 'app-criar-ambiente',
@@ -144,6 +145,7 @@ export class CriarAmbienteComponent {
         }
       });
   }
+
 
   onCancelar(){
     this.router.navigate(['/layout/criar']);

@@ -1,115 +1,126 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { CalendarioMensalComponent } from "../../components/calendario-mensal/calendario-mensal.component";
 import { CalendarioSemanalComponent } from "../../components/calendario-semanal/calendario-semanal.component";
 import { tipoAmbiente } from '../../models/tipoAmbiente';
 import { tipoAmbienteRequestDTO } from '../../DTOs/tipoAmbienteRequestDTO';
+import { forkJoin } from 'rxjs';
 import { EscolaService } from '../../services/escola/escola.service';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
-import { ambienteRequestDTO } from '../../DTOs/ambienteRequestDTO';
 import { CommonModule } from '@angular/common';
+import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
+import { ChamadoService } from '../../services/chamado/chamado.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, CalendarioMensalComponent, CalendarioSemanalComponent],
+  imports: [CommonModule, FormsModule, CalendarioMensalComponent, CalendarioSemanalComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit{
 
-  opcaoAtual: 'salas' | 'labs' | 'outros' = 'salas';
+  tipoAmbientes: tipoAmbiente[] = [];
+  ambientes: AmbienteSelectDTO[] = []; //ambienteRequestDTO
+  chamados: ChamadoRequestDTO[] = [];
 
+  opcaoAtual: 'salas' | 'labs' | 'outros' = 'salas';
+  localPesquisa: string = '';
+  carregado: boolean = false;
+
+  // Estrutura de exibição dos cards no html
   cards: {nome: string; chamados: string}[] = [];
+  cardsOriginais: {nome: string; chamados: string}[] = [];
+
+  constructor(private escolaService: EscolaService, private chamadoService: ChamadoService){}
 
   ngOnInit(): void {
     this.setOpcao('salas');
-    //this.carregarDados();
   }
 
   setOpcao(opcao: 'salas' | 'labs' | 'outros') {
     this.opcaoAtual = opcao;
-
-    if (opcao === 'salas')
-    {
-      this.cards = Array.from({ length: 4 }, (_, i) => ({
-        nome: `Sala ${i + 1}`,
-        chamados: `0${i + 1}` // só de exemplo, Sala 1 -> 1 chamado, Sala 2 -> 2 chamados...
-      }));
-    }
-
-    if (opcao === 'labs')
-    {
-      this.cards = Array.from({ length: 4 }, (_, i) => ({
-        nome: `Laboratório ${i + 1}`,
-        chamados: `0${i + 1}`
-      }));
-    }
-
-    if (opcao === 'outros')
-    {
-      const outros = ['Biblioteca', 'Auditório', 'Pátio', 'Área Verde'];
-      this.cards = outros.map((nome, i) => ({
-        nome,
-        chamados: `0${i + 1}`
-      }));
-    }
+    this.localPesquisa = ''; // Vai limpar o campo quando mudar de aba
+    this.carregarDados();
   }
 
-  constructor(private escolaService: EscolaService)
-  {
+  carregarDados(): void {
+    this.carregado = false;
 
-  }
+    // Fazer as duas requisições paralelas
+    forkJoin({
+      tipos: this.escolaService.getAllTipoAmbiente(),
+      ambientes: this.escolaService.getAllAmbiente(),
+      chamados: this.chamadoService.getAllChamados()
+    }).subscribe({
+      next: (res) => {
+        this.tipoAmbientes = res.tipos;
+        this.ambientes = res.ambientes;
+        this.chamados = res.chamados;
+ 
+        // Filtrar ambiente pelos tipos de ambientes
+        let tiposFiltrados: tipoAmbiente[] = [];
 
-  tipoAmbientes: tipoAmbienteRequestDTO[] = [];
-  ambientes: AmbienteSelectDTO[] = [];
+        if (this.opcaoAtual === 'salas'){
+          tiposFiltrados = this.tipoAmbientes.filter(t => 
+            t.nomeTipoAmbiente.toLowerCase().includes('sala')
+          );
+        } else if (this.opcaoAtual === 'labs'){
+          tiposFiltrados = this.tipoAmbientes.filter(t => 
+            t.nomeTipoAmbiente.toLowerCase().includes('laboratório')
+          );
+        } else {
+          // "outros" pega tudo que não for sala nem laboratório
+          tiposFiltrados = this.tipoAmbientes.filter( t =>
+            !t.nomeTipoAmbiente.toLowerCase().includes('sala') &&
+            !t.nomeTipoAmbiente.toLowerCase().includes('laboratório')
+          );
+        }
 
-  carregado: boolean = false;
+        // Montar os cards dinâmicos para cada ambiente do tipo filtrado
+        const cardsMontados = this.ambientes
+          .filter(a => tiposFiltrados.some(t => t.idTipoAmbiente === a.idTipoAmbiente))
+          .map(a =>{
+            const tipo = tiposFiltrados.find(t => t.idTipoAmbiente === a.idTipoAmbiente);
+            const qtdChamados = this.chamados.filter(c => c.idAmbiente === a.idAmbiente).length;
 
-  /*carregarDados() {
-    this.escolaService.getAllTipoAmbiente().subscribe({
-      next: (tipos) => {
-        this.tipoAmbientes = tipos;
+            // Simplificar o nome se for um laboratório
+            let nomeTipo = tipo?.nomeTipoAmbiente || '';
+            if (nomeTipo.toLowerCase().includes('laboratório')){ nomeTipo = 'Laboratório'; }
 
-        this.escolaService.getAllAmbiente().subscribe({
-          next: (ambs: ambienteRequestDTO[]) => {
-            // Faz o mapeamento de ambienteRequestDTO -> AmbienteSelectDTO
-            this.ambientes = ambs.map((amb, index) => {
-              const tipo = this.tipoAmbientes.find(t => t.idTipoAmbiente === amb.idTipoAmbiente);
+            return{
+              nome: `${nomeTipo} ${a.numAmbiente}`, // Usar crase
+              chamados: qtdChamados.toString()
+            };
+          });
 
-              return {
-                idAmbiente: index + 1, // se o backend não retornar idAmbiente, gera aqui
-                numAmbiente: amb.numAmbiente,
-                idTipoAmbiente: amb.idTipoAmbiente,
-                nomeTipoAmbiente: tipo ? tipo.nomeTipoAmbiente : "Desconhecido"
-              } as AmbienteSelectDTO;
-            });
-
-            this.carregado = true;
-          },
-          error: () => alert("Erro ao carregar os ambientes")
-        });
-      },
-      error: () => alert("Erro ao carregar os tipos dos ambientes")
+          this.cardsOriginais = cardsMontados; // Guardar todos os cards
+          this.cards = [...cardsMontados] // Exibir todos inicialmente
+          this.carregado = true;
+        },
+        error: (err) => {
+        console.error('Erro ao carregar dados:', err);
+      }
     });
   }
 
-  get ambientesFiltrados(): AmbienteSelectDTO[] {
-  return this.ambientes.filter(amb => {
-    const tipo = amb.nomeTipoAmbiente.toLowerCase();
-
-    if (this.opcaoAtual === 'salas') {
-      return tipo.includes('sala'); // pega "Sala de Aula"
-    }
-    if (this.opcaoAtual === 'labs') {
-      return tipo.includes('laboratório') || tipo.includes('lab'); // pega "Laboratório"
-    }
-    if (this.opcaoAtual === 'outros') {
-      return !tipo.includes('sala') && !tipo.includes('laboratório') && !tipo.includes('lab');
-      // pega o que não for Sala ou Laboratório
+  filtrarLocais(): void { // Busca dinâmica enquanto o usuário digita
+    if(this.opcaoAtual === 'outros')
+    {
+      this.cards = [...this.cardsOriginais]; // Cards estáticos para Outros
+      return;
     }
 
-    return false;
-    });
-  }*/
+    const local = this.localPesquisa.trim().toLowerCase();
+
+    if (!local){
+      this.cards = [...this.cardsOriginais]; // Se a pesquisa estiver vazia
+      return;
+    }
+
+    this.cards = this.cardsOriginais.filter(card =>
+      card.nome.toLowerCase().includes(local)
+    );
+  }
 
 }

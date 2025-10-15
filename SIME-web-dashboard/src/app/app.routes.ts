@@ -34,6 +34,6 @@ export const routes: Routes = [
     { path: 'escola', component: EscolaComponent },
     {path: 'gestor-geral', component: GestorGeralComponent},
     { path: 'pagina-de-fundo', component: PaginaDeFundoComponent },
-    {path: 'cadastro-funcionario', component: CadastroFuncionarioComponent},
+    { path: 'cadastro-funcionario', component: CadastroFuncionarioComponent},
     { path: '**', redirectTo: 'login' }
 ];

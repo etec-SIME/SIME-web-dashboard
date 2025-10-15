@@ -8,3 +8,4 @@ export interface chamadoProjection {
     statusChamado : string;
     prioridadeChamado : string;
 }
+

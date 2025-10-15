@@ -20,6 +20,7 @@ import { tipoAmbienteRequestDTO } from '../../DTOs/tipoAmbienteRequestDTO';
 import { permissaoTipoPerfilDTO } from '../../DTOs/permissaoTipoPerfilDTO';
 import { tipoEquipamentoAmbienteDTO } from '../../DTOs/tipoEquipamentoAmbienteDTO';
 import { tipoPerfilProjection } from '../../DTOs/Projections/tipoPerfilProjection';
+import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -49,8 +50,8 @@ export class EscolaService {
     return this.http.get<tipoPerfilRequestDTO[]>(`${this.apiUrl}/tipo-perfil`, this.getAuthHeaders());
   }
 
-  getAllAmbiente(): Observable<ambienteRequestDTO[]>{
-    return this.http.get<ambienteRequestDTO[]>(`${this.apiUrl}/ambiente`, this.getAuthHeaders());
+  getAllAmbiente(): Observable<AmbienteSelectDTO[]>{ //ambienteRequestDTO
+    return this.http.get<AmbienteSelectDTO[]>(`${this.apiUrl}/ambiente`, this.getAuthHeaders()); //ambienteRequestDTO
   }
 
   getAllDepartamento(): Observable<departamentoRequestDTO[]>{

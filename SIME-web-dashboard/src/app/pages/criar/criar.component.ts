@@ -9,6 +9,7 @@ import { tipoPerfilRequestDTO } from '../../DTOs/tipoPerfilRequestDTO';
 import { departamentoRequestDTO } from '../../DTOs/departamentoRequestDTO';
 import { equipamentoRequestDTO } from '../../DTOs/equipamentoRequestDTO';
 import { RouterModule, Router } from '@angular/router';
+import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 
 @Component({
   selector: 'app-criar',
@@ -18,7 +19,7 @@ import { RouterModule, Router } from '@angular/router';
 })
 export class CriarComponent{
 
-  locais: ambienteRequestDTO[] = [];
+  locais: AmbienteSelectDTO[] = []; //ambienteRequestDTO
   tiposChamado: tipoChamadoRequestDTO[] = [];
   tiposPerfis: tipoPerfilRequestDTO[] = [];
   perfis: UsuarioProjection[] = [];
