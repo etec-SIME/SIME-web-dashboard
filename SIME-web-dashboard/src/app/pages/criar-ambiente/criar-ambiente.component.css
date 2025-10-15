@@ -9,7 +9,7 @@
   background-color: #808080;
   width: 1px;
   margin-left: clamp(20px, 4vw, 6vw);
-  margin-right: clamp(10px, 3vw, 2100vw);
+  margin-right: clamp(10px, 3vw, 5vw);
   height: 65vh;
 }
 
@@ -28,7 +28,7 @@
     gap: clamp(2px, 1.5vw, 3.5vw);
     border-radius: 0.5vw;
     padding: clamp(2px, 1.5vw, 3.5vw);
-    margin-bottom: clamp(2px, 3vw, 40vw);
+    margin-bottom: clamp(2px, 3vw, 5vw);
     width: clamp(2px, 27vw, 29vw);
 }
 
@@ -66,7 +66,7 @@
     border-radius: 0.6vw;
     height: clamp(3px, 6vh, 8vh);
     width: clamp(20px, 13vw, 17vw);
-    font-size: clamp(10px, 1.4vw, 2.4vw);
+    font-size: clamp(10px, 1.4vw, 3.4vw);
     font-weight: 100;
     cursor: pointer;
     text-wrap: nowrap;
@@ -75,12 +75,12 @@
 .forms-ambiente input, select{
     border-color: #999999;
     color: #999999;
-    width: clamp(2px, 33.5vw, 320vw);
+    width: clamp(2px, 33.5vw, 35.5vw);
     height: clamp(2px, 6.5vh, 8.5vh);
     border-radius: 0.4vw;
     font-size: 20px;
     font-weight: 600;
-    padding-left: clamp(3px, 1vw, 4vw);
+    padding-left: clamp(3px, 1vw, 3vw);
     border-style: solid;
 }
 
@@ -90,7 +90,7 @@
 }
 
 .forms-ambiente h2{
-  font-size: clamp(10px, 28px, 50px);
+  font-size: clamp(10px, 28px, 30px);
   text-wrap: nowrap;
 }
 
@@ -110,7 +110,7 @@
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: clamp(2px, 4vw, 40vw);
-    margin-top: clamp(2px, 1.7vw, 4vw);
+    margin-top: clamp(2px, 1.7vw, 3.7vw);
     margin-left: clamp(10px, 1.5vw, 3.5vw);
 }
 
@@ -119,7 +119,7 @@
     border-color: transparent;
     color: white;
     border-radius: 0.3vw;
-    height: clamp(20px, 5vh, 6.7vh);
+    height: clamp(20px, 5vh, 7.7vh);
     width: clamp(2px, 13vw, 15vw);
     font-size: clamp(10px, 19px, 21px);
     cursor: pointer;
@@ -148,7 +148,7 @@
     color: #868686;
     font-size: clamp(10px, 20px, 22px);
     cursor: pointer;
-    width: clamp(2px, 10vw, 50vw);
+    width: clamp(2px, 10vw, 12vw);
 }
 
 .btn-concluir{
@@ -176,10 +176,10 @@
 }
 
 .forms-tipo-ambiente h2{
-    margin-right: clamp(2px, 10vw, 12vw);
+    margin-right: clamp(2px, 11vw, 13vw);
     margin-bottom: clamp(20px, 3.5vw, 5.5vw);
     text-wrap: nowrap;
-    font-size: clamp(20px, 30px, 35px);
+    font-size: clamp(20px, 30px, 32px);
 }
 
 .erro-small{

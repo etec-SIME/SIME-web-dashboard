@@ -1,12 +1,12 @@
 <div id="content">
     <div class="tipo-ambiente">
         <div class="cards-tipo-ambiente">
-            @for(tipoAmbiente of tiposAmbiente; track tipoAmbiente.idTipoAmbiente){
+            @for(tipoAmbiente of tiposAmbiente; track tipoAmbiente.idTipoAmbiente; let index = $index){
                 <div class="card-tipo-ambiente" tabindex="0" (click)="mandarIdNomeTipoAmbiente(tipoAmbiente.idTipoAmbiente, tipoAmbiente.nomeTipoAmbiente)">
                     <img class="icon-ambiente" src="/images/sala_icon.png">
                     <div class="text-card">
                         <p>{{tipoAmbiente.nomeTipoAmbiente}}</p>
-                        <small>18 {{tipoAmbiente.nomeTipoAmbiente}}</small>
+                        <small>{{qtdAmbientes[index]}} {{tipoAmbiente.nomeTipoAmbiente}}</small>
                     </div>
                 </div>
             }

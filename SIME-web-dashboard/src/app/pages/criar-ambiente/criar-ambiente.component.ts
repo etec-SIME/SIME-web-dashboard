@@ -5,11 +5,11 @@ import { tipoEquipamento } from '../../models/tipoEquipamento';
 import { Router, RouterModule } from '@angular/router';
 import { tipoAmbiente } from '../../models/tipoAmbiente';
 import { ambienteRequestDTO } from '../../DTOs/ambienteRequestDTO';
-import { NgForOf } from "../../../../node_modules/@angular/common/common_module.d-NEF7UaHr";
+import { forkJoin, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-criar-ambiente',
-  imports: [ReactiveFormsModule, RouterModule, NgForOf],
+  imports: [ReactiveFormsModule, RouterModule],
   templateUrl: './criar-ambiente.component.html',
   styleUrl: './criar-ambiente.component.css'
 })
@@ -39,17 +39,32 @@ export class CriarAmbienteComponent {
   }
 
   ngOnInit(): void{
-    this.getElementos();
+    this.getElementos().subscribe(
+        (data) => {
+            // 1. Atribua os resultados APENAS quando todos chegarem
+            this.tiposEquipamento = data.tiposEquipamento;
+            this.tiposAmbiente = data.tiposAmbiente;
+            this.ambientes = data.ambientes;
+
+            // 2. Agora os arrays estão preenchidos, então a contagem funciona!
+            this.contagemAmbiente();
+        },
+        (error) => {
+            console.error('Erro ao carregar dados:', error);
+        }
+    );
+
     this.contagemAmbiente();
   }
 
-  getElementos(): void{
+  getElementos(): Observable<any>{
+    
+    return forkJoin({
+        tiposEquipamento: this.escolaService.getAllTipoEquipamento(),
+        tiposAmbiente: this.escolaService.getAllTipoAmbiente(),
+        ambientes: this.escolaService.getAllAmbiente()
+    });
 
-    this.escolaService.getAllTipoEquipamento().subscribe((resp) => {this.tiposEquipamento = resp});
-
-    this.escolaService.getAllTipoAmbiente().subscribe((resp) => {this.tiposAmbiente = resp});
-
-    this.escolaService.getAllAmbiente().subscribe((resp) => {this.ambientes = resp});
   }
 
   contagemAmbiente(){
@@ -99,6 +114,7 @@ export class CriarAmbienteComponent {
         this.escolaService.cadastrarAmbiente(ambienteRequestDTO).subscribe({
           next: () => {
             alert("Ambiente criado com sucesso!")
+            window.location.reload();
           },
           error: () => {
             alert("Erro, ambiente não criado!")
