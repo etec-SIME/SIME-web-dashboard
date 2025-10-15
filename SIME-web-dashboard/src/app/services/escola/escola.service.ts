@@ -21,6 +21,7 @@ import { permissaoTipoPerfilDTO } from '../../DTOs/permissaoTipoPerfilDTO';
 import { tipoEquipamentoAmbienteDTO } from '../../DTOs/tipoEquipamentoAmbienteDTO';
 import { tipoPerfilProjection } from '../../DTOs/Projections/tipoPerfilProjection';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
+import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,7 @@ export class EscolaService {
 
   constructor(private http: HttpClient) { }
 
-  token : String = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMDAwMDIiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiR2VyZW5jaWFyIFBlcmZpcyJ9LHsiYXV0aG9yaXR5IjoiR2VyZW5jaWFyIERlcGFydGFtZW50b3MifSx7ImF1dGhvcml0eSI6IkdlcmVuY2lhciBDaGFtYWRvcyJ9LHsiYXV0aG9yaXR5IjoiQ3JpYXIgQ2hhbWFkbyJ9LHsiYXV0aG9yaXR5IjoiVmlzdWFsaXphciBSZWxhdMOzcmlvcyJ9XSwiZW50aWRhZGUiOiJVU1VBUklPIiwiaWF0IjoxNzYwMzg3ODkyLCJleHAiOjE3NjA0NzQyOTJ9.lfIIM96zdfVx4hEEqDWzKaW_ML00g7APPPvuKH-Ky08';
+  token : String = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMDAwMDIiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiR2VyZW5jaWFyIFBlcmZpcyJ9LHsiYXV0aG9yaXR5IjoiR2VyZW5jaWFyIERlcGFydGFtZW50b3MifSx7ImF1dGhvcml0eSI6IkdlcmVuY2lhciBDaGFtYWRvcyJ9LHsiYXV0aG9yaXR5IjoiQ3JpYXIgQ2hhbWFkbyJ9LHsiYXV0aG9yaXR5IjoiVmlzdWFsaXphciBSZWxhdMOzcmlvcyJ9XSwiZW50aWRhZGUiOiJVU1VBUklPIiwiaWF0IjoxNzYwNTM2OTk2LCJleHAiOjE3NjA2MjMzOTZ9.IhSwE8UopNvEK0Bj6Z4lVU51mpcUdTT8TYm4k2l-QpA';
   // Inserir o Token manualmente para testar
 
   private getAuthHeaders() {
@@ -50,7 +51,7 @@ export class EscolaService {
     return this.http.get<tipoPerfilRequestDTO[]>(`${this.apiUrl}/tipo-perfil`, this.getAuthHeaders());
   }
 
-  getAllAmbiente(): Observable<AmbienteSelectDTO[]>{ //ambienteRequestDTO
+  getAllAmbiente(): Observable<AmbienteSelectDTO[]>{ //ambienteRequestDTO não tinha id do ambiente
     return this.http.get<AmbienteSelectDTO[]>(`${this.apiUrl}/ambiente`, this.getAuthHeaders()); //ambienteRequestDTO
   }
 
@@ -58,9 +59,13 @@ export class EscolaService {
     return this.http.get<departamentoRequestDTO[]>(`${this.apiUrl}/departamento`, this.getAuthHeaders());
   }
 
-  getAllTipoChamado(): Observable<tipoChamadoRequestDTO[]>{
-    return this.http.get<tipoChamadoRequestDTO[]>(`${this.apiUrl}/tipo-chamado`, this.getAuthHeaders());
+  getAllTipoChamado(): Observable<TipoChamadoSelectDTO[]>{ //tipoChamadoRequestDTO não tinha id do tipoChamado
+    return this.http.get<TipoChamadoSelectDTO[]>(`${this.apiUrl}/tipo-chamado`, this.getAuthHeaders()); //tipoChamadoRequestDTO
   }
+
+  getAllTipoChamadoRequest() {
+  return this.http.get<tipoChamadoRequestDTO[]>(`${this.apiUrl}/tipo-chamado`);
+}
 
   getAllEquipamento(): Observable<equipamentoRequestDTO[]>{
     return this.http.get<equipamentoRequestDTO[]>(`${this.apiUrl}/equipamento`, this.getAuthHeaders());

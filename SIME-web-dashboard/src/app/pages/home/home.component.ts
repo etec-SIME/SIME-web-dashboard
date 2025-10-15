@@ -11,11 +11,13 @@ import { ambienteRequestDTO } from '../../DTOs/ambienteRequestDTO';
 import { CommonModule } from '@angular/common';
 import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
 import { ChamadoService } from '../../services/chamado/chamado.service';
+import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
+import { ChamadosLocaisCardsComponent } from "../../components/chamados-locais-cards/chamados-locais-cards.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule, CalendarioMensalComponent, CalendarioSemanalComponent],
+  imports: [CommonModule, FormsModule, CalendarioMensalComponent, CalendarioSemanalComponent, ChamadosLocaisCardsComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
@@ -24,10 +26,13 @@ export class HomeComponent implements OnInit{
   tipoAmbientes: tipoAmbienteRequestDTO[] = [];
   ambientes: AmbienteSelectDTO[] = []; //ambienteRequestDTO
   chamados: ChamadoRequestDTO[] = [];
+  tiposChamado: TipoChamadoSelectDTO[] = [];
 
   opcaoAtual: 'salas' | 'labs' | 'outros' = 'salas';
-  localPesquisa: string = '';
+  modoAtual: 'locais' | 'chamados' = 'locais';
+  ambienteSelecionado: string | null = null;
   carregado: boolean = false;
+  localPesquisa: string = '';
 
   // Estrutura de exibição dos cards no html
   cards: {nome: string; chamados: string}[] = [];
@@ -46,18 +51,18 @@ export class HomeComponent implements OnInit{
   }
 
   carregarDados(): void {
-    this.carregado = false;
-
     // Fazer as duas requisições paralelas
     forkJoin({
       tipos: this.escolaService.getAllTipoAmbiente(),
       ambientes: this.escolaService.getAllAmbiente(),
-      chamados: this.chamadoService.getAllChamados()
+      chamados: this.chamadoService.getAllChamados(),
+      tipoChamados: this.escolaService.getAllTipoChamado()
     }).subscribe({
       next: (res) => {
         this.tipoAmbientes = res.tipos;
         this.ambientes = res.ambientes;
         this.chamados = res.chamados;
+        this.tiposChamado = res.tipoChamados;
  
         // Filtrar ambiente pelos tipos de ambientes
         let tiposFiltrados: tipoAmbienteRequestDTO[] = [];
@@ -122,6 +127,24 @@ export class HomeComponent implements OnInit{
     this.cards = this.cardsOriginais.filter(card =>
       card.nome.toLowerCase().includes(local)
     );
+  }
+
+  exibirChamados(nomeAmbiente: string){
+    this.ambienteSelecionado = nomeAmbiente;
+    this.modoAtual = 'chamados';
+
+    const ambiente = this.ambientes.find( a =>
+      nomeAmbiente.includes(a.numAmbiente.toString())
+    );
+
+    this.chamados = this.chamados.filter(
+      c => c.idAmbiente === ambiente?.idAmbiente
+    );
+  }
+
+  retornarLocais(){
+    this.modoAtual = 'locais';
+    this.ambienteSelecionado = null;
   }
 
 }

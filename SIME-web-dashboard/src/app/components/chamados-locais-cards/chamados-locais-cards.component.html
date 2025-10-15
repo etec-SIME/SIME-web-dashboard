@@ -1,0 +1,10 @@
+<div class="chamados-local-container">
+    <p>Chamados {{ambiente}}</p>
+
+    <div *ngIf="chamadosFiltrados.length > 0; else nenhumChamado">
+        <div class="card-chamado" *ngIf="let chamado of chamadosFiltrados">
+            <p>{{ chamado.tituloChamado}}</p>
+            <p>{{ chamado.dataAbertura | }}</p>
+        </div>
+    </div>
+</div>
