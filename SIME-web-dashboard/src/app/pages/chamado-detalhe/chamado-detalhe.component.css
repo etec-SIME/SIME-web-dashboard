@@ -107,14 +107,21 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0,0,0,0.5);
-  color: white;
+  background: #44A1A0;
+  color: #fff;
   border: none;
   font-size: 30px;
   padding: 10px 15px;
   cursor: pointer;
   border-radius: 5px;
-  z-index: 10;
+  z-index: 3;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.btn-nav:hover {
+  transform: translateY(-50%) scale(1.1);
+  background: #fff;
+  color: #44A1A0;
 }
 
 .prev { left: 20px; }
@@ -135,7 +142,7 @@
 }
 
 .modal-sub-previews img.active {
-  border: 2px solid #3498db;
+  border: 2px solid #44A1A0;
   transform: scale(1.1);
 }
 
