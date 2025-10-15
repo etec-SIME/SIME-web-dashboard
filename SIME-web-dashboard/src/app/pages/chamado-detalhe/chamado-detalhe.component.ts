@@ -3,6 +3,7 @@ import { ChamadoService } from '../../services/chamado/chamado.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ChamadoResponseDTO } from '../../DTOs/ChamadoResponseDTO';
 import { CommonModule } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-chamado-detalhe',
@@ -11,9 +12,10 @@ import { CommonModule } from '@angular/common';
   styleUrl: './chamado-detalhe.component.css'
 })
 export class ChamadoDetalheComponent {
-  chamaderia: ChamadoResponseDTO | null = null;
+  chamado: ChamadoResponseDTO | null = null;
   imagensUrl: string[] = [];
   idChamado!: number;
+  titulo: string = 'Detalhes do Chamado';
 
   imagemSelecionada: string | null = null;
   modalAberto: boolean = false;
@@ -35,7 +37,11 @@ export class ChamadoDetalheComponent {
 
   etapaAtual = 1;
 
-  constructor(private chamadoService: ChamadoService, private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private chamadoService: ChamadoService,
+    private router: Router,
+    private route: ActivatedRoute,
+  ) {}
 
   ngOnInit(): void {
     this.idChamado = +this.route.snapshot.paramMap.get('id')!;
@@ -44,11 +50,12 @@ export class ChamadoDetalheComponent {
 
   carregarChamado(id: number): void {
     this.chamadoService.getDetalheChamado(id)
-      .subscribe(res => {
-        this.chamaderia = res;
-        this.imagensUrl = res.caminhoImagensList?.map(caminho => `http://localhost:8080${caminho}`);
+      .subscribe(chamado => {
+        this.chamado = chamado;
+        this.imagensUrl = chamado.caminhoImagensList?.map(caminho => `http://localhost:8080${caminho}`);
         this.imagemSelecionada = this.imagensUrl[0] || null;
-        console.log('Detalhe do chamado recebido: ', res);
+
+        console.log('Detalhe do chamado recebido: ', chamado);
         console.log('Imagens URLs: ', this.imagensUrl);
       });
   }
@@ -76,13 +83,6 @@ export class ChamadoDetalheComponent {
     const nextIndex = (index + 1) % this.imagensUrl.length;
     this.imagemModal = this.imagensUrl[nextIndex];
   }
-
-  chamado = {
-    titulo: 'Computador Quebrado',
-    descricao: 'Cheguei no laboratório 2 e havia um computador que não estava ligando e a tela estava rachada',
-    departamento: 'Informática',
-    prioridade: 'Alta',
-  };
 
   voltar() {
     this.router.navigate(['/layout/chamados-pendentes']);

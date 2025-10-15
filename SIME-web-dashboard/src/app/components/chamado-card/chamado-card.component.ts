@@ -19,6 +19,6 @@ export class ChamadoCardComponent {
   constructor(private router: Router) {}
 
   navigate() {
-    this.router.navigate(['/layout/chamado-detalhe/', this.idChamado]);
+    this.router.navigate(['/layout/chamado', this.idChamado]);
   }
 }
