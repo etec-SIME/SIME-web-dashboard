@@ -1,18 +1,28 @@
 import { Component, Input } from '@angular/core';
 import { ChamadoService } from '../../services/chamado/chamado.service';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ChamadoResponseDTO } from '../../DTOs/ChamadoResponseDTO';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-chamado-detalhe',
-  imports: [RouterModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './chamado-detalhe.component.html',
   styleUrl: './chamado-detalhe.component.css'
 })
 export class ChamadoDetalheComponent {
+  chamaderia: ChamadoResponseDTO | null = null;
+  imagensUrl: string[] = [];
+  idChamado!: number;
+
+  imagemSelecionada: string | null = null;
+  modalAberto: boolean = false;
+  imagemModal: string | null = null;
+
   iconePrioridade: any = {
-    Alta: "/images/pendentes/altaPrioridade.svg",
-    Media: "/images/pendentes/mediaPrioridade.svg",
-    Baixa: "/images/pendentes/baixaPrioridade.svg"
+    'Alta Prioridade': "/images/pendentes/altaPrioridade.svg",
+    'Média Prioridade': "/images/pendentes/mediaPrioridade.svg",
+    'Baixa Prioridade': "/images/pendentes/baixaPrioridade.svg"
   };
 
   etapas = [
@@ -25,13 +35,53 @@ export class ChamadoDetalheComponent {
 
   etapaAtual = 1;
 
-  constructor(private chamadoService: ChamadoService, private router: Router) {}
+  constructor(private chamadoService: ChamadoService, private router: Router, private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.idChamado = +this.route.snapshot.paramMap.get('id')!;
+    this.carregarChamado(this.idChamado);
+  }
+
+  carregarChamado(id: number): void {
+    this.chamadoService.getDetalheChamado(id)
+      .subscribe(res => {
+        this.chamaderia = res;
+        this.imagensUrl = res.caminhoImagensList?.map(caminho => `http://localhost:8080${caminho}`);
+        this.imagemSelecionada = this.imagensUrl[0] || null;
+        console.log('Detalhe do chamado recebido: ', res);
+        console.log('Imagens URLs: ', this.imagensUrl);
+      });
+  }
+
+  abrirModal(imagem: string) {
+    this.imagemModal = imagem;
+    this.modalAberto = true;
+  }
+
+  fecharModal() {
+    this.modalAberto = false;
+    this.imagemModal = null;
+  }
+
+  prevImagem(event: Event) {
+    event.stopPropagation();
+    const index = this.imagensUrl.indexOf(this.imagemModal!);
+    const prevIndex = (index - 1 + this.imagensUrl.length) % this.imagensUrl.length;
+    this.imagemModal = this.imagensUrl[prevIndex];
+  }
+
+  nextImagem(event: Event) {
+    event.stopPropagation();
+    const index = this.imagensUrl.indexOf(this.imagemModal!);
+    const nextIndex = (index + 1) % this.imagensUrl.length;
+    this.imagemModal = this.imagensUrl[nextIndex];
+  }
 
   chamado = {
     titulo: 'Computador Quebrado',
     descricao: 'Cheguei no laboratório 2 e havia um computador que não estava ligando e a tela estava rachada',
     departamento: 'Informática',
-    prioridade: 'Alta'
+    prioridade: 'Alta',
   };
 
   voltar() {

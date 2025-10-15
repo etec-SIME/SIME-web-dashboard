@@ -7,18 +7,44 @@
 
 <!-- Infos -->
 <div class="content">
-
     <div class="content-preview">
-    <div class="sub-previews">
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-    <div class="preview"></div>
+        
+        <!-- Miniaturas -->
+        <div class="sub-previews">
+            @for (imagem of imagensUrl; let i = $index; track i) {
+                <img [src]="imagem" alt="Pré-visualização" (click)="imagemSelecionada = imagem" [class.active]="imagem === imagemSelecionada">
+            }
+        </div>
+
+        <!-- Imagem principal com botão -->
+        <div class="preview-container">
+            <img class="preview" [src]="imagemSelecionada || imagensUrl[0]" alt="Pré-visualização principal">
+            <button class="btn-ampliar" (click)="abrirModal(imagemSelecionada || imagensUrl[0])">🔍</button>
+        </div>
+
+        <!-- Modal -->
+        @if(modalAberto) {
+            <div class="modal" (click)="fecharModal()">
+                <!-- Botão anterior -->
+                <button class="btn-nav prev" (click)="prevImagem($event)">❮</button>
+
+                <!-- Imagem ampliada -->
+                <img class="modal-img" [src]="imagemModal" alt="Imagem ampliada">
+
+                <!-- Botão próximo -->
+                <button class="btn-nav next" (click)="nextImagem($event)">❯</button>
+
+                <!-- Miniaturas no modal -->
+                <div class="modal-sub-previews">
+                @for (imagem of imagensUrl; let i = $index; track i) {
+                    <img [src]="imagem" [class.active]="imagem === imagemModal" (click)="abrirModal(imagem); $event.stopPropagation()" alt="Miniatura">
+                }
+                </div>
+            </div>
+        }
     </div>
 
     <div class="details">
-    <h2>{{ chamado.titulo }}</h2>
 
     <!-- Barra de progresso -->
     <div class="progress">
@@ -52,25 +78,26 @@
 
         <div class="details-body">
         <div>
-            <p>{{ chamado.descricao }}</p>
+            <p>{{ chamaderia?.descChamado }}</p>
         </div>
 
         <div>
-            <p>Informática</p>
+            <p>{{ chamaderia?.nomeTipoChamado }}</p>
         </div>
 
         <div>
-            <p [class.alta]="chamado.prioridade === 'Alta'"
-                [class.media]="chamado.prioridade === 'Média'"
-                [class.baixa]="chamado.prioridade === 'Baixa'">
-            {{ chamado.prioridade }}
-            <img [src]="iconePrioridade[chamado.prioridade]" [alt]="chamado.prioridade" width="20" height="20" align="center" />
+            <p [class.alta]="chamaderia?.prioridadeChamado === 'Alta Prioridade'"
+                [class.media]="chamaderia?.prioridadeChamado === 'Média Prioridade'"
+                [class.baixa]="chamaderia?.prioridadeChamado === 'Baixa Prioridade'">
+            {{ chamaderia?.prioridadeChamado }}
+            <img [src]="iconePrioridade[chamaderia?.prioridadeChamado || 'Padrão']"
+                 [alt]="chamaderia?.prioridadeChamado || 'Sem prioridade'"/>
             </p>
         </div>
         </div>
     </div>
 
-    <p id="details-date">Emitido 21/07/2025 - 13:20</p>
+    <p id="details-date">Emitido {{ chamaderia?.dtAberturaChamado | date:'dd/MM/yyyy - HH:mm' }}</p>
     </div>
 
 </div>

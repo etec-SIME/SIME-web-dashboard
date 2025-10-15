@@ -34,3 +34,8 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.card-link {
+  text-decoration: none;
+  color: inherit;
+}
