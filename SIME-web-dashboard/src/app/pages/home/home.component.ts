@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CalendarioMensalComponent } from "../../components/calendario-mensal/calendario-mensal.component";
 import { CalendarioSemanalComponent } from "../../components/calendario-semanal/calendario-semanal.component";
-import { tipoAmbiente } from '../../models/tipoAmbiente';
 import { tipoAmbienteRequestDTO } from '../../DTOs/tipoAmbienteRequestDTO';
 import { forkJoin } from 'rxjs';
 import { EscolaService } from '../../services/escola/escola.service';
@@ -20,7 +19,7 @@ import { ChamadoService } from '../../services/chamado/chamado.service';
 })
 export class HomeComponent implements OnInit{
 
-  tipoAmbientes: tipoAmbiente[] = [];
+  tipoAmbientes: tipoAmbienteRequestDTO[] = [];
   ambientes: AmbienteSelectDTO[] = []; //ambienteRequestDTO
   chamados: ChamadoRequestDTO[] = [];
 
@@ -59,7 +58,7 @@ export class HomeComponent implements OnInit{
         this.chamados = res.chamados;
  
         // Filtrar ambiente pelos tipos de ambientes
-        let tiposFiltrados: tipoAmbiente[] = [];
+        let tiposFiltrados: tipoAmbienteRequestDTO[] = [];
 
         if (this.opcaoAtual === 'salas'){
           tiposFiltrados = this.tipoAmbientes.filter(t => 

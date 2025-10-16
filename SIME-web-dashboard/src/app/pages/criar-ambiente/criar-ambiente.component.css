@@ -16,7 +16,7 @@
 .cards-tipo-ambiente{
     margin-bottom: clamp(3px, 2vw, 4vw);
     margin-top: clamp(3px, 2vw, 4vw);
-    max-height: clamp(200px, 52.3vh, 54.3vh);
+    max-height: clamp(200px, 51vh, 53vh);
     overflow-y: auto;
     overflow-x: hidden;
     padding-right: clamp(2px, 3vw, 5vw);
@@ -96,13 +96,13 @@
 
 .forms-ambiente h3{
     font-size: clamp(10px, 23px, 25px);
-    margin-top: clamp(2px, 1.2vw, 3.2vw);
+    margin-top: clamp(2px, 0.7vw, 2.7vw);
 }
 
 .forms-novo-ambiente{
     display: grid;
-    grid-template-rows: 2fr 2fr 2fr 2fr 2fr 2fr;
-    margin-top: clamp(3px, 2vw, 4vw);
+    grid-template-rows: 1.7fr 2.3fr 2fr 1.5fr 1.5fr 1fr;
+    margin-top: clamp(3px, 1.5vw, 3.5vw);
     margin-right: clamp(2px, 4vw, 6vw);
 }
 
@@ -110,7 +110,6 @@
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: clamp(2px, 4vw, 40vw);
-    margin-top: clamp(2px, 1.7vw, 3.7vw);
     margin-left: clamp(10px, 1.5vw, 3.5vw);
 }
 
