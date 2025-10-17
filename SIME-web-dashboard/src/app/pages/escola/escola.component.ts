@@ -176,7 +176,8 @@ export class EscolaComponent implements OnInit{
     })
 
     this.formCriarTipoChamado = this.fb.group({
-      idDepartamento: [''],
+      //idDepartamento: [''],
+      idTipoChamado: [''],
       nomeTipoChamado: ['']
     })
 

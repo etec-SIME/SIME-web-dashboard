@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit{
   ambientes: AmbienteSelectDTO[] = []; //ambienteRequestDTO
   chamados: ChamadoRequestDTO[] = [];
   tiposChamado: TipoChamadoSelectDTO[] = [];
+  chamadosAmbiente: ChamadoRequestDTO[] = [];
 
   opcaoAtual: 'salas' | 'labs' | 'outros' = 'salas';
   modoAtual: 'locais' | 'chamados' = 'locais';
@@ -63,6 +64,7 @@ export class HomeComponent implements OnInit{
         this.ambientes = res.ambientes;
         this.chamados = res.chamados;
         this.tiposChamado = res.tipoChamados;
+        this.chamadosAmbiente = [...this.chamados]
  
         // Filtrar ambiente pelos tipos de ambientes
         let tiposFiltrados: tipoAmbienteRequestDTO[] = [];
@@ -137,7 +139,7 @@ export class HomeComponent implements OnInit{
       nomeAmbiente.includes(a.numAmbiente.toString())
     );
 
-    this.chamados = this.chamados.filter(
+    this.chamadosAmbiente = this.chamados.filter(
       c => c.idAmbiente === ambiente?.idAmbiente
     );
   }

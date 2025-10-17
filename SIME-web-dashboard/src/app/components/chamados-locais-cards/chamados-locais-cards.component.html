@@ -2,9 +2,16 @@
     <p>Chamados {{ambiente}}</p>
 
     <div *ngIf="chamadosFiltrados.length > 0; else nenhumChamado">
-        <div class="card-chamado" *ngIf="let chamado of chamadosFiltrados">
-            <p>{{ chamado.tituloChamado}}</p>
-            <p>{{ chamado.dataAbertura | }}</p>
+        <div class="card-chamado" *ngFor="let chamado of chamadosFiltrados">
+            <p>{{ chamado.tituloChamado }}</p>
+            <p>{{ chamado.dataAbertura | date:'dd/MM/yyyy'}}</p>
+            <p>{{ chamado.nomeTipoChamado }}</p>
         </div>
     </div>
+
+    <ng-template #nenhumChamado>
+        <p>Nenhum chamado encontrado neste local.</p>
+    </ng-template>
+
+    <button class="retornaLocais" (click)="voltarLocais()"></button>
 </div>
