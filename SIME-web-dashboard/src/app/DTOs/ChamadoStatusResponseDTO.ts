@@ -1,4 +1,4 @@
-export interface ChamadoProgressoResponseDTO {
+export interface ChamadoStatusResponseDTO {
     idChamado: number;
     statusAtualProgressoChamado: string;
     historicoChamadoList: historicoChamadoList[];

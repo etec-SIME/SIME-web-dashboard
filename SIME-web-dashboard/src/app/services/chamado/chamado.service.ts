@@ -1,5 +1,5 @@
 import { chamadoProjection } from './../../DTOs/Projections/chamadoProjection';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ChamadoCardDTO } from '../../DTOs/ChamadoCardDTO';
@@ -7,7 +7,7 @@ import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
 import { ChamadoResponseDTO } from '../../DTOs/ChamadoResponseDTO';
 import { ChamadoRequestDTO } from '../../DTOs/chamadoRequestDTO';
-import { ChamadoProgressoResponseDTO } from '../../DTOs/chamadoProgressoResponseDTO';
+import { ChamadoStatusResponseDTO } from '../../DTOs/ChamadoStatusResponseDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -45,7 +45,13 @@ export class ChamadoService {
     return this.http.get<ChamadoResponseDTO>(`${this.apiUrl}/${id}`, { withCredentials: true });
   }
 
-  getProgressoChamado(id: number): Observable<ChamadoProgressoResponseDTO> {
-    return this.http.get<ChamadoProgressoResponseDTO>(`${this.apiUrl}/${id}/progresso`, { withCredentials: true });
+  getStatusChamado(id: number): Observable<ChamadoStatusResponseDTO> {
+    return this.http.get<ChamadoStatusResponseDTO>(`${this.apiUrl}/${id}/status`, { withCredentials: true });
+  }
+
+  atualizarStatusGeral(id: number, novoStatus: string): Observable<ChamadoStatusResponseDTO> {
+    const param = new HttpParams().set('novoStatus', novoStatus);
+
+    return this.http.put<ChamadoStatusResponseDTO>(`${this.apiUrl}/${id}/atualizar-status-geral`, {}, { params: param, withCredentials: true });
   }
 }

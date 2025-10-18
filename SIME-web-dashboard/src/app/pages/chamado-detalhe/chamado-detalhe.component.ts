@@ -3,7 +3,7 @@ import { ChamadoService } from '../../services/chamado/chamado.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ChamadoResponseDTO } from '../../DTOs/ChamadoResponseDTO';
 import { CommonModule } from '@angular/common';
-import { ChamadoProgressoResponseDTO } from '../../DTOs/chamadoProgressoResponseDTO';
+import { ChamadoStatusResponseDTO } from '../../DTOs/ChamadoStatusResponseDTO';
 import { forkJoin } from 'rxjs';
 
 @Component({
@@ -14,7 +14,7 @@ import { forkJoin } from 'rxjs';
 })
 export class ChamadoDetalheComponent {
   chamado: ChamadoResponseDTO | null = null;
-  progresso: ChamadoProgressoResponseDTO | null = null;
+  progresso: ChamadoStatusResponseDTO | null = null;
 
   imagensUrl: string[] = [];
     etapas: { nome: string, data?: string }[] = [
@@ -34,9 +34,9 @@ export class ChamadoDetalheComponent {
   imagemModal: string | null = null;
 
   iconePrioridade: any = {
-    'Alta Prioridade': "/images/pendentes/altaPrioridade.svg",
-    'Média Prioridade': "/images/pendentes/mediaPrioridade.svg",
-    'Baixa Prioridade': "/images/pendentes/baixaPrioridade.svg"
+    'Alta': "/images/pendentes/altaPrioridade.svg",
+    'Média': "/images/pendentes/mediaPrioridade.svg",
+    'Baixa': "/images/pendentes/baixaPrioridade.svg"
   };
 
   constructor(
@@ -53,7 +53,7 @@ export class ChamadoDetalheComponent {
   carregarChamado(id: number): void {
     forkJoin({
       chamado: this.chamadoService.getDetalheChamado(id),
-      progresso: this.chamadoService.getProgressoChamado(id)
+      progresso: this.chamadoService.getStatusChamado(id)
     }).subscribe({
       next: ({chamado, progresso}) => {
         this.chamado = chamado;
@@ -64,17 +64,25 @@ export class ChamadoDetalheComponent {
 
         console.log(progresso.historicoChamadoList);
 
+        if (progresso.statusAtualProgressoChamado === 'Concluído') {
+          this.chamadoService.atualizarStatusGeral(this.idChamado, 'CONCLUIDO').subscribe({
+            next: res => console.log('Status geral atualizado para CONCLUIDO:', res),
+            error: err => console.error('Erro ao atualizar status geral:', err)
+          });
+        } 
+        else if (progresso.statusAtualProgressoChamado === 'Aprovado') {
+          this.chamadoService.atualizarStatusGeral(this.idChamado, 'PENDENTE').subscribe({
+            next: res => console.log('Status geral atualizado para PENDENTE:', res),
+            error: err => console.error('Erro ao atualizar status geral:', err)
+          });
+        }
+
         this.etapas.forEach((etapa, index) => {
           if (index === 0) {
             const dataAbertura = chamado.dtAberturaChamado;
             etapa.data = `${this.obterDiaSemana(dataAbertura)}, ${this.formatarData(dataAbertura)}`;
-          } else if (index === this.etapas.length - 1) {
-            if (chamado.dtConclusaoChamado) {
-              const dataConclusao = chamado.dtConclusaoChamado;
-              etapa.data = `${this.obterDiaSemana(dataConclusao)}, ${this.formatarData(dataConclusao)}`;
-            }
           } else {
-            const itemHistorico = progresso.historicoChamadoList.find(
+              const itemHistorico = progresso.historicoChamadoList.find(
               (h: any) => h.statusProgresso === etapa.nome
             );
             if (itemHistorico) {

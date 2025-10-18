@@ -20,7 +20,9 @@
                 <!-- Imagem principal com botão -->
                 <div class="preview-container">
                     <img class="preview" [src]="imagemSelecionada || imagensUrl[0]" alt="Pré-visualização principal">
-                    <button class="btn-ampliar" (click)="abrirModal(imagemSelecionada || imagensUrl[0])">🔍</button>
+                    <button class="btn-ampliar" (click)="abrirModal(imagemSelecionada || imagensUrl[0])">
+                        <img src="/images/iconeAmpliar.svg" alt="">
+                    </button>
                 </div>
             } @else {            
                 <div class="fallback-image">
@@ -55,37 +57,39 @@
 
         <!-- Barra de progresso -->
         <div class="progress">
+            <button class="btn-nav-progress progress-prev"><img src="images/navLeft.svg" alt=""></button>
             @for (etapa of etapas; let i = $index; track i) {
-            <div class="progress-step">
-                <div class="circle-line">
-                    <div class="circle"
-                        [class.active]="i < etapaAtualIndex"
-                        [class.current]="i === etapaAtualIndex">
+                <div class="progress-step">
+                    <div class="circle-line">
+                        <div class="circle"
+                            [class.active]="i < etapaAtualIndex+1"
+                            [class.current]="i === etapaAtualIndex+1">
 
-                        @if (i < etapaAtualIndex) {
-                            <img src="images/iconeCorreto.svg" alt="">
+                            @if (i < etapaAtualIndex+1) {
+                                <img src="images/iconeCorreto.svg" alt="">
+                            }
+                        </div>
+                        @if (i < etapas.length - 1) {
+                            <div class="line" 
+                                [class.completed]="i < etapaAtualIndex" 
+                                [class.animating]="i === etapaAtualIndex"></div>
                         }
                     </div>
-                    @if (i < etapas.length - 1) {
-                        <div class="line" 
-                            [class.completed]="i < etapaAtualIndex - 1" 
-                            [class.animating]="i === etapaAtualIndex - 1"></div>
-                    }
+                    <div class="label">
+                        <p class="title">{{ etapa.nome }}</p>
+                        <p class="date">{{ etapa.data }}</p>
+                    </div>    
                 </div>
-                <div class="label">
-                    <p class="title">{{ etapa.nome }}</p>
-                    <p class="date">{{ etapa.data }}</p>
-                </div>    
-            </div>
             }
+            <button class="btn-nav-progress progress-next"><img src="images/navRight.svg" alt=""></button>
         </div>
 
         <div class="details-info">
 
             <div class="details-header">
-            <p>Descrição</p>
-            <p>Departamento</p>
-            <p>Prioridade</p>
+                <p>Descrição</p>
+                <p>Departamento</p>
+                <p>Prioridade</p>
             </div>
 
             <div class="details-body">
