@@ -13,6 +13,7 @@ import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
 import { ChamadoService } from '../../services/chamado/chamado.service';
 import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
 import { ChamadosLocaisCardsComponent } from "../../components/chamados-locais-cards/chamados-locais-cards.component";
+import { chamadosAmbienteDTO } from '../../DTOs/chamadosAmbienteDTO';
 
 @Component({
   selector: 'app-home',
@@ -25,9 +26,9 @@ export class HomeComponent implements OnInit{
 
   tipoAmbientes: tipoAmbienteRequestDTO[] = [];
   ambientes: AmbienteSelectDTO[] = []; //ambienteRequestDTO
-  chamados: ChamadoRequestDTO[] = [];
+  chamados: chamadosAmbienteDTO[] = [];
   tiposChamado: TipoChamadoSelectDTO[] = [];
-  chamadosAmbiente: ChamadoRequestDTO[] = [];
+  chamadosAmbiente: chamadosAmbienteDTO[] = [];
 
   opcaoAtual: 'salas' | 'labs' | 'outros' = 'salas';
   modoAtual: 'locais' | 'chamados' = 'locais';
@@ -56,7 +57,7 @@ export class HomeComponent implements OnInit{
     forkJoin({
       tipos: this.escolaService.getAllTipoAmbiente(),
       ambientes: this.escolaService.getAllAmbiente(),
-      chamados: this.chamadoService.getAllChamados(),
+      chamados: this.chamadoService.getAllChamadosPorAmbiente(),
       tipoChamados: this.escolaService.getAllTipoChamado()
     }).subscribe({
       next: (res) => {
@@ -65,7 +66,7 @@ export class HomeComponent implements OnInit{
         this.chamados = res.chamados;
         this.tiposChamado = res.tipoChamados;
         this.chamadosAmbiente = [...this.chamados]
- 
+
         // Filtrar ambiente pelos tipos de ambientes
         let tiposFiltrados: tipoAmbienteRequestDTO[] = [];
 
@@ -135,13 +136,20 @@ export class HomeComponent implements OnInit{
     this.ambienteSelecionado = nomeAmbiente;
     this.modoAtual = 'chamados';
 
+    const numeroAmbiente = parseInt(nomeAmbiente.match(/\d+$/)?.[0] || '')
+    if (!numeroAmbiente) return;
+
     const ambiente = this.ambientes.find( a =>
-      nomeAmbiente.includes(a.numAmbiente.toString())
+      a.numAmbiente === numeroAmbiente
     );
+    if (!ambiente) return;
 
     this.chamadosAmbiente = this.chamados.filter(
-      c => c.idAmbiente === ambiente?.idAmbiente
+      c => c.tipoAmbiente.idTipoAmbiente === ambiente.idTipoAmbiente
     );
+
+    console.log('Chamados filtrados:', this.chamadosAmbiente);
+
   }
 
   retornarLocais(){

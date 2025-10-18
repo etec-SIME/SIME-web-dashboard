@@ -4,8 +4,8 @@ import { Location } from '@angular/common';
 import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
 import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
+import { chamadosAmbienteDTO } from '../../DTOs/chamadosAmbienteDTO';
 
-type ChamadoComTipo = ChamadoRequestDTO & { nomeTipoChamado: string };
 
 @Component({
   selector: 'app-chamados-locais-cards',
@@ -16,45 +16,30 @@ type ChamadoComTipo = ChamadoRequestDTO & { nomeTipoChamado: string };
 })
 export class ChamadosLocaisCardsComponent {
   @Input() ambiente!: string | null;
-  @Input() chamados: ChamadoRequestDTO[] = [];
+  @Input() chamados: chamadosAmbienteDTO[] = [];
   @Input() ambientes: AmbienteSelectDTO[] = [];
   @Input() tiposChamado: TipoChamadoSelectDTO[] = [];
 
-  constructor(private location: Location) {}
-
-  get chamadosFiltrados(): ChamadoComTipo[] {
-    if (!this.chamados || !this.ambientes || !this.tiposChamado || !this.ambiente){
-      return [];
-    }
-    
-    const ambienteEncontrado = this.ambientes.find(a =>
-      this.ambiente?.includes(a.numAmbiente.toString())
-    );
-
-    if(!ambienteEncontrado){
+  get chamadosFiltrados(){
+    if (!this.chamados || !this.tiposChamado){ //|| !this.ambientes || !this.tiposChamado || !this.ambiente
       return [];
     }
 
-    return this.chamados
-      .filter(c => c.idAmbiente === ambienteEncontrado?.idAmbiente)
-      .map((chamado): ChamadoComTipo => {
-        const tipo = this.tiposChamado.find(t => 
-          Number(t.idTipoChamado) === Number(chamado.idTipoChamado));
+    return this.chamados.map(chamado => ({
+        /*const tipo = this.tiposChamado.find(t => 
+          Number(t.idTipoChamado) === Number(chamado.TipoChamado.idTipoChamado));
         
-        const data = chamado.dataAbertura instanceof Date
-          ? chamado.dataAbertura
-          : new Date(chamado.dataAbertura);
-
-        return {
+        return {};*/
           ...chamado,
-          dataAbertura: data,
-          nomeTipoChamado: tipo ? tipo.nomeTipoChamado: "Tipo do Chamado não encontrado."
-        };
-      });
+          dataAberturaFormatada: this.formatarData(chamado.dataAbertura),
+          nomeTipoChamado: chamado.tipoChamado?.nomeTipoChamado || "Tipo do Chamado não encontrado."
+        
+      }));
   }
 
-  voltarLocais(): void{
-    this.location.back();
+  public formatarData(data: string): string {
+    if (!data) return '';
+    return data.split('T')[0].split('-').reverse().join('/');
   }
 
 }

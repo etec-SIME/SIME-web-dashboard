@@ -6,6 +6,7 @@ import { ChamadoCardDTO } from '../../DTOs/ChamadoCardDTO';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
 import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
+import { chamadosAmbienteDTO } from '../../DTOs/chamadosAmbienteDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class ChamadoService {
 
   constructor( private http: HttpClient ) { }
 
-  token : String = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMDAwMDIiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiR2VyZW5jaWFyIFBlcmZpcyJ9LHsiYXV0aG9yaXR5IjoiR2VyZW5jaWFyIERlcGFydGFtZW50b3MifSx7ImF1dGhvcml0eSI6IkdlcmVuY2lhciBDaGFtYWRvcyJ9LHsiYXV0aG9yaXR5IjoiQ3JpYXIgQ2hhbWFkbyJ9LHsiYXV0aG9yaXR5IjoiVmlzdWFsaXphciBSZWxhdMOzcmlvcyJ9XSwiZW50aWRhZGUiOiJVU1VBUklPIiwiaWF0IjoxNzYwNzQwOTIxLCJleHAiOjE3NjA4MjczMjF9.Iy8calUH4VEfia2razQxByNWkRdz7_uJHXhgKH0sggo';
+  token : String = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMDAwMDIiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiR2VyZW5jaWFyIFBlcmZpcyJ9LHsiYXV0aG9yaXR5IjoiR2VyZW5jaWFyIERlcGFydGFtZW50b3MifSx7ImF1dGhvcml0eSI6IkdlcmVuY2lhciBDaGFtYWRvcyJ9LHsiYXV0aG9yaXR5IjoiQ3JpYXIgQ2hhbWFkbyJ9LHsiYXV0aG9yaXR5IjoiVmlzdWFsaXphciBSZWxhdMOzcmlvcyJ9XSwiZW50aWRhZGUiOiJVU1VBUklPIiwiaWF0IjoxNzYwODA1NzYxLCJleHAiOjE3NjA4OTIxNjF9.IMLCqz3_qXxAddZzK7l-fc7rMrZJGpBaJH3_RNpq5h0';
   // Inserir o Token manualmente para testar
 
   private getAuthHeaders() {
@@ -28,6 +29,10 @@ export class ChamadoService {
 
   getAllChamados(): Observable<ChamadoRequestDTO[]> { // mudar de chamadoProjetcion para ChamadoRequestDTO
     return this.http.get<ChamadoRequestDTO[]>(this.apiUrl, this.getAuthHeaders());
+  }
+
+  getAllChamadosPorAmbiente(): Observable<chamadosAmbienteDTO[]> { // mudar de chamadoProjetcion para ChamadoRequestDTO
+    return this.http.get<chamadosAmbienteDTO[]>(this.apiUrl, this.getAuthHeaders());
   }
 
   getChamadosByPrioridade(prioridade: 'ALTA_PRIORIDADE' | 'MEDIA_PRIORIDADE' | 'BAIXA_PRIORIDADE'): Observable<ChamadoCardDTO[]> {
