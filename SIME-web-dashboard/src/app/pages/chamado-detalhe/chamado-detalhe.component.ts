@@ -3,7 +3,8 @@ import { ChamadoService } from '../../services/chamado/chamado.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ChamadoResponseDTO } from '../../DTOs/ChamadoResponseDTO';
 import { CommonModule } from '@angular/common';
-import { Title } from '@angular/platform-browser';
+import { ChamadoProgressoResponseDTO } from '../../DTOs/chamadoProgressoResponseDTO';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-chamado-detalhe',
@@ -13,7 +14,18 @@ import { Title } from '@angular/platform-browser';
 })
 export class ChamadoDetalheComponent {
   chamado: ChamadoResponseDTO | null = null;
+  progresso: ChamadoProgressoResponseDTO | null = null;
+
   imagensUrl: string[] = [];
+    etapas: { nome: string, data?: string }[] = [
+    { nome: 'Em análise' },
+    { nome: 'Aprovado' },
+    { nome: 'Análise da APM' },
+    { nome: 'Em andamento' },
+    { nome: 'Concluído' }
+  ];
+  etapaAtualIndex: number = 0;
+
   idChamado!: number;
   titulo: string = 'Detalhes do Chamado';
 
@@ -27,16 +39,6 @@ export class ChamadoDetalheComponent {
     'Baixa Prioridade': "/images/pendentes/baixaPrioridade.svg"
   };
 
-  etapas = [
-    { nome: 'Em análise', data: 'Segunda, 21/07/2025' },
-    { nome: 'Aprovado', data: 'Quarta, 23/07/2025' },
-    { nome: 'Análise da APM', data: 'Quinta, 24/07/2025' },
-    { nome: 'Em andamento', data: 'Segunda, 28/07/2025' },
-    { nome: 'Concluído', data: 'Quarta, 30/07/2025' },
-  ];
-
-  etapaAtual = 1;
-
   constructor(
     private chamadoService: ChamadoService,
     private router: Router,
@@ -49,15 +51,51 @@ export class ChamadoDetalheComponent {
   }
 
   carregarChamado(id: number): void {
-    this.chamadoService.getDetalheChamado(id)
-      .subscribe(chamado => {
+    forkJoin({
+      chamado: this.chamadoService.getDetalheChamado(id),
+      progresso: this.chamadoService.getProgressoChamado(id)
+    }).subscribe({
+      next: ({chamado, progresso}) => {
         this.chamado = chamado;
-        this.imagensUrl = chamado.caminhoImagensList?.map(caminho => `http://localhost:8080${caminho}`);
+        this.imagensUrl = chamado.caminhoImagensList?.map((caminho) => `http://localhost:8080${caminho}`) || [];
         this.imagemSelecionada = this.imagensUrl[0] || null;
+
+        this.progresso = progresso;
+
+        console.log(progresso.historicoChamadoList);
+
+        this.etapas.forEach((etapa, index) => {
+          if (index === 0) {
+            const dataAbertura = chamado.dtAberturaChamado;
+            etapa.data = `${this.obterDiaSemana(dataAbertura)}, ${this.formatarData(dataAbertura)}`;
+          } else if (index === this.etapas.length - 1) {
+            if (chamado.dtConclusaoChamado) {
+              const dataConclusao = chamado.dtConclusaoChamado;
+              etapa.data = `${this.obterDiaSemana(dataConclusao)}, ${this.formatarData(dataConclusao)}`;
+            }
+          } else {
+            const itemHistorico = progresso.historicoChamadoList.find(
+              (h: any) => h.statusProgresso === etapa.nome
+            );
+            if (itemHistorico) {
+              etapa.data = `${itemHistorico.diaSemana}, ${this.formatarData(itemHistorico.dtAlteracao)}`;
+            }
+          }
+        });
+
+        this.etapaAtualIndex = this.etapas.findIndex(
+          e => e.nome === progresso.statusAtualProgressoChamado
+        );
+        if (this.etapaAtualIndex === -1) this.etapaAtualIndex = 0;
 
         console.log('Detalhe do chamado recebido: ', chamado);
         console.log('Imagens URLs: ', this.imagensUrl);
-      });
+        console.log('Progresso do chamado recebido: ', progresso);
+      },
+      error: (err) => {
+        console.error('Erro ao carregar detalhes do chamado ou progresso:', err);
+      }
+    })
   }
 
   abrirModal(imagem: string) {
@@ -95,4 +133,19 @@ export class ChamadoDetalheComponent {
   recusar() {
     console.log("Chamado recusado!");
   }
+
+  private formatarData(dataISO: string): string {
+    const data = new Date(dataISO);
+    const dia = data.getDate().toString().padStart(2, '0');
+    const mes = (data.getMonth() + 1).toString().padStart(2, '0');
+    const ano = data.getFullYear();
+    return `${dia}/${mes}/${ano}`;
+  }
+
+  private obterDiaSemana(dataISO: string): string {
+    const dias = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+    const data = new Date(dataISO);
+    return dias[data.getDay()];
+  }
+
 }

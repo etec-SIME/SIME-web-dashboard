@@ -64,6 +64,15 @@
   height: 100%;
 }
 
+.fallback-image {
+  width: 400px; 
+  height: 300px;
+  background-color: #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .btn-ampliar {
   position: absolute;
   top: 10px;
@@ -184,10 +193,44 @@
   z-index: 2;
 }
 
+.circle img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 25px;
+  height: 25px;
+  z-index: 2;
+}
+
 .circle.active {
   border-color: #44A1A0;
   background-color: #44A1A0;
   color: #fff;
+}
+
+.circle.current::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #44A1A0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: preencherCircle 0.8s forwards ease-in-out;
+}
+
+@keyframes preencherCircle {
+  from {
+    width: 0;
+    height: 0;
+  }
+  to {
+    width: 18px;
+    height: 18px;
+  }
 }
 
 .line {
@@ -195,13 +238,26 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  z-index: 1;
   height: 2px;
   background-color: #ccc;
 }
 
-.line.active {
+/* Linhas concluídas */
+.line.completed {
   background-color: #44A1A0;
+}
+
+/* Linha que cresce animada */
+.line.animating {
+  width: 0;
+  background-color: #44A1A0;
+  transition: width 1.5s ease-in-out;
+  animation: growLine 1.5s forwards;
+}
+
+@keyframes growLine {
+  from { width: 0; }
+  to   { width: 100%; }
 }
 
 .label {

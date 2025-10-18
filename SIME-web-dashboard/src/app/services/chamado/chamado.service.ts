@@ -6,7 +6,8 @@ import { ChamadoCardDTO } from '../../DTOs/ChamadoCardDTO';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
 import { ChamadoResponseDTO } from '../../DTOs/ChamadoResponseDTO';
-import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
+import { ChamadoRequestDTO } from '../../DTOs/chamadoRequestDTO';
+import { ChamadoProgressoResponseDTO } from '../../DTOs/chamadoProgressoResponseDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class ChamadoService {
 
   constructor( private http: HttpClient ) { }
 
-  getAllChamados(): Observable<ChamadoRequestDTO[]> { // mudar de chamadoProjetcion para ChamadoRequestDTO
+  getAllChamados(): Observable<ChamadoRequestDTO[]> {
     return this.http.get<ChamadoRequestDTO[]>(this.apiUrl);
   }
 
@@ -42,5 +43,9 @@ export class ChamadoService {
 
   getDetalheChamado(id: number): Observable<ChamadoResponseDTO> {
     return this.http.get<ChamadoResponseDTO>(`${this.apiUrl}/${id}`, { withCredentials: true });
+  }
+
+  getProgressoChamado(id: number): Observable<ChamadoProgressoResponseDTO> {
+    return this.http.get<ChamadoProgressoResponseDTO>(`${this.apiUrl}/${id}/progresso`, { withCredentials: true });
   }
 }

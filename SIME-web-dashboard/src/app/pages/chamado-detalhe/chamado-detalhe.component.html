@@ -9,18 +9,24 @@
     <div class="content">
         <div class="content-preview">
             
-            <!-- Miniaturas -->
-            <div class="sub-previews">
-                @for (imagem of imagensUrl; let i = $index; track i) {
-                    <img [src]="imagem" alt="Pré-visualização" (click)="imagemSelecionada = imagem" [class.active]="imagem === imagemSelecionada">
-                }
-            </div>
-
-            <!-- Imagem principal com botão -->
-            <div class="preview-container">
-                <img class="preview" [src]="imagemSelecionada || imagensUrl[0]" alt="Pré-visualização principal">
-                <button class="btn-ampliar" (click)="abrirModal(imagemSelecionada || imagensUrl[0])">🔍</button>
-            </div>
+            @if(imagensUrl.length > 0) {
+                <!-- Miniaturas -->
+                <div class="sub-previews">
+                    @for (imagem of imagensUrl; let i = $index; track i) {
+                        <img [src]="imagem" alt="Pré-visualização" (click)="imagemSelecionada = imagem" [class.active]="imagem === imagemSelecionada">
+                    }
+                </div>
+    
+                <!-- Imagem principal com botão -->
+                <div class="preview-container">
+                    <img class="preview" [src]="imagemSelecionada || imagensUrl[0]" alt="Pré-visualização principal">
+                    <button class="btn-ampliar" (click)="abrirModal(imagemSelecionada || imagensUrl[0])">🔍</button>
+                </div>
+            } @else {            
+                <div class="fallback-image">
+                    <h2>Sem imagens</h2>
+                </div>
+            }
 
             <!-- Modal -->
             @if(modalAberto) {
@@ -52,13 +58,18 @@
             @for (etapa of etapas; let i = $index; track i) {
             <div class="progress-step">
                 <div class="circle-line">
-                    <div class="circle" [class.active]="i <= etapaAtual">
-                        @if (i < etapaAtual) {
+                    <div class="circle"
+                        [class.active]="i < etapaAtualIndex"
+                        [class.current]="i === etapaAtualIndex">
+
+                        @if (i < etapaAtualIndex) {
                             <img src="images/iconeCorreto.svg" alt="">
                         }
                     </div>
                     @if (i < etapas.length - 1) {
-                        <div class="line" [class.active]="i < etapaAtual"></div>
+                        <div class="line" 
+                            [class.completed]="i < etapaAtualIndex - 1" 
+                            [class.animating]="i === etapaAtualIndex - 1"></div>
                     }
                 </div>
                 <div class="label">

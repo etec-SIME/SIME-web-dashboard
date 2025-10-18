@@ -6,5 +6,6 @@ export interface ChamadoResponseDTO {
     nomeTipoChamado: string;
     prioridadeChamado: string;
     dtAberturaChamado: string;
+    dtConclusaoChamado: string;
     caminhoImagensList: string[];
 }
