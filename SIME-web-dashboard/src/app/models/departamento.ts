@@ -1,7 +1,4 @@
-import { tipoChamado } from "./tipoChamado";
-import { usuario } from "./usuario";
-
-export interface departamento{
+export interface departamento {
   idDepartamento: number;
   nomeDepartamento: string;
   descricaoDepartamento: string;

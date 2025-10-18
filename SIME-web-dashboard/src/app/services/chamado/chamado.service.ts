@@ -5,7 +5,9 @@ import { Observable } from 'rxjs';
 import { ChamadoCardDTO } from '../../DTOs/ChamadoCardDTO';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
-import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
+import { ChamadoResponseDTO } from '../../DTOs/ChamadoResponseDTO';
+import { ChamadoRequestDTO } from '../../DTOs/chamadoRequestDTO';
+import { ChamadoProgressoResponseDTO } from '../../DTOs/chamadoProgressoResponseDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -15,19 +17,8 @@ export class ChamadoService {
 
   constructor( private http: HttpClient ) { }
 
-  token : String = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMDAwMDIiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiR2VyZW5jaWFyIFBlcmZpcyJ9LHsiYXV0aG9yaXR5IjoiR2VyZW5jaWFyIERlcGFydGFtZW50b3MifSx7ImF1dGhvcml0eSI6IkdlcmVuY2lhciBDaGFtYWRvcyJ9LHsiYXV0aG9yaXR5IjoiQ3JpYXIgQ2hhbWFkbyJ9LHsiYXV0aG9yaXR5IjoiVmlzdWFsaXphciBSZWxhdMOzcmlvcyJ9XSwiZW50aWRhZGUiOiJVU1VBUklPIiwiaWF0IjoxNzYwMjAxNzAwLCJleHAiOjE3NjAyODgxMDB9.-HCgdMoN_KpRDpnzAlLio8tuAkytJt9UCEMkI0xnpCo';
-  // Inserir o Token manualmente para testar
-
-  private getAuthHeaders() {
-    return {
-      headers: new HttpHeaders({
-        Authorization: `Bearer ${this.token}`
-      })
-    };
-  }
-
-  getAllChamados(): Observable<ChamadoRequestDTO[]> { // mudar de chamadoProjetcion para ChamadoRequestDTO
-    return this.http.get<ChamadoRequestDTO[]>(this.apiUrl, this.getAuthHeaders());
+  getAllChamados(): Observable<ChamadoRequestDTO[]> {
+    return this.http.get<ChamadoRequestDTO[]>(this.apiUrl);
   }
 
   getChamadosByPrioridade(prioridade: 'ALTA_PRIORIDADE' | 'MEDIA_PRIORIDADE' | 'BAIXA_PRIORIDADE'): Observable<ChamadoCardDTO[]> {
@@ -48,5 +39,13 @@ export class ChamadoService {
 
   criarChamado(formData: FormData): Observable<any> {
     return this.http.post(`${this.apiUrl}/criar-chamado`, formData, { withCredentials: true });
+  }
+
+  getDetalheChamado(id: number): Observable<ChamadoResponseDTO> {
+    return this.http.get<ChamadoResponseDTO>(`${this.apiUrl}/${id}`, { withCredentials: true });
+  }
+
+  getProgressoChamado(id: number): Observable<ChamadoProgressoResponseDTO> {
+    return this.http.get<ChamadoProgressoResponseDTO>(`${this.apiUrl}/${id}/progresso`, { withCredentials: true });
   }
 }
