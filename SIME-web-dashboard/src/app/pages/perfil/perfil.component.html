@@ -1,35 +1,18 @@
-<div class="cardContext ">
-  <button>
-    <div class="image">
-      <img src="/images/Group.svg">
-      <div class="cardText">
-        <p>Usuário</p>
-        <p>2 permissões</p>
+<div>
+  <div class="cardPerfil">
+    @for (tipoPerfil of tipoPerfil; track [idTipoPerfil]; let index = $index) {
+      <div class="cardPerfil" tabindex="0">
+        <img src="/images/Group.svg">
+        <div class="cardText">
+          <p>{{tipoPerfil.nomeTipoPerfil}}</p>
+          <p>"permissões"</p>
+        </div>
       </div>
-    </div>
-  </button>
-  <br>
+    }
+  </div>
 
-  <button>
-    <div class="image">
-      <img src="/images/Group.svg">
-      <div class="cardText">
-        <p>Gestor Geral</p>
-        <p>7 permissões</p>
-      </div>
-    </div>
-  </button>
-  <br>
+  <button class="btn-criar"></button>
 
-  <button>
-    <div class="image">
-      <img src="/images/Group.svg">
-      <div class="cardText">
-        <p>Administrador</p>
-        <p>9 permissões</p>
-      </div>
-    </div>
-  </button>
-  <br>
+  <div class="tablePermissoes"></div>
 </div>
 <!-- ver código de criar ambiente para terminar e melhorar o código atual -->
