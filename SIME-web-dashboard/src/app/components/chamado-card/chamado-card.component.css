@@ -16,7 +16,7 @@
     text-align: justify;
     text-wrap: nowrap;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: 0.3s;
 }
 
 .btn-card:hover {
@@ -33,4 +33,9 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.card-link {
+  text-decoration: none;
+  color: inherit;
 }

@@ -1,3 +1,45 @@
-<div class="home-content">
-    <p>Funcionando</p>
+<div class="home-layout">
+    <div class="home-content">
+        <div class="filtrar">
+            <p>Filtrar por:</p>
+            <div class="filtrar opcoes">
+                <button class="opcao" [class.ativa]="opcaoAtual === 'salas'" (click)="setOpcao('salas')">Salas</button>
+                <button class="opcao" [class.ativa]="opcaoAtual === 'labs'" (click)="setOpcao('labs')">Labs</button>
+                <button class="opcao" [class.ativa]="opcaoAtual === 'outros'" (click)="setOpcao('outros')">Outros</button>
+                <div class="barra-de-pesquisa">
+                  <input class="input-pesquisa" type="text" [(ngModel)]="localPesquisa" (ngModelChange)="filtrarLocais()" placeholder="Procurar...">
+                  <div class="separacao"></div>
+                  <img src="/images/lupa.png" class="lupa-img">
+                </div>
+            </div>
+        </div>
+    <!-- Criar aqui -->
+
+        <!-- <div *ngIf="!carregado" class="loading">
+          <p>Carregando locais...</p>
+        </div> -->
+
+        <div *ngIf="carregado && cards.length === 0" class="sem-dados">
+          <p>Nenhum ambiente encontrado.</p>
+        </div>
+        
+        <div class="locais-cards-wrapper">
+          <div class="locais-cards">
+            <div class="card" *ngFor="let card of cards">
+              <p>{{ card.nome }}</p>
+              <div class="chamados">
+                <p>{{ card.chamados }}</p>
+                <p class="text-chamado">Chamados</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    </div>
+
+    <div class="home-info">
+        <app-calendario-mensal></app-calendario-mensal>
+        <app-calendario-semanal></app-calendario-semanal>
+    </div>
+
 </div>

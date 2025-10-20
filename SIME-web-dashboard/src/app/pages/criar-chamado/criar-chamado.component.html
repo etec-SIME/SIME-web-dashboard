@@ -1,0 +1,68 @@
+<form [formGroup]="chamadoForm" class="form-container">
+
+    <div class="rows">
+        <!-- Linha 1 -->
+        <div class="form-row">
+            <input type="datetime-local" formControlName="data" placeholder="Data" />
+            <select formControlName="ambiente">
+                <option value="">Local</option>
+                @for (ambiente of ambientes; track ambiente.idAmbiente) {
+                    <option [ngValue]="ambiente">
+                        {{ ambiente.nomeTipoAmbiente }} {{ ambiente.numAmbiente }}
+                    </option>
+                } @empty {
+                    <option [ngValue]="null" disabled>Nenhum ambiente disponível</option>
+                }
+            </select>
+        </div>
+    
+        <!-- Linha 2 -->
+        <div class="form-row">
+            <input type="email" formControlName="email" placeholder="Email" />
+        </div>
+    
+        <!-- Linha 3 -->
+        <div class="form-row">
+            <select formControlName="tipoChamado">
+                <option value="">Tipo de Chamado</option>
+                @for (tipoChamado of tiposChamado; track tipoChamado.idTipoChamado) {
+                    <option [ngValue]="tipoChamado.idTipoChamado">
+                        {{ tipoChamado.nomeTipoChamado }}
+                    </option>
+                } @empty {
+                    <option [ngValue]="null" disabled>Nenhum tipo de chamado disponível</option>
+                }
+            </select>
+    
+            <input type="text" formControlName="problema" placeholder="Problema" />
+        </div>
+    
+        <!-- Linha 4 -->
+        <div class="form-row">
+            <textarea formControlName="descricao" placeholder="Descrição"></textarea>
+        </div>
+        
+        <!-- Linha 5 -->
+        <div class="form-row">
+            <input type="text" formControlName="equipamento" placeholder="Equipamento" />
+            <input type="text" formControlName="codigoEquipamento" placeholder="Código do equipamento" />
+        </div>
+    </div>
+
+    <div class="upload">
+        <!-- Upload -->
+        <div class="form-upload">
+            <label for="anexo" id="anexo-title">Adicionar Anexo</label>
+            <div id="anexo">
+                <span id="file-name">Carregar do dispositivo</span>
+                <label for="fileUpload" id="upload-btn">Navegar</label>
+                <input type="file" id="fileUpload" multiple (change)="onFileSelected($event)" multiple hidden>
+            </div>
+        </div>
+    
+        <!-- Botão -->
+        <div class="form-actions">
+            <button type="submit" (click)="onSubmit()" [disabled]="chamadoForm.invalid">Enviar</button>
+        </div>
+    </div>
+</form>

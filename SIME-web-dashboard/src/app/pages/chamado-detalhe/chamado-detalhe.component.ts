@@ -1,0 +1,151 @@
+import { Component, Input } from '@angular/core';
+import { ChamadoService } from '../../services/chamado/chamado.service';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ChamadoResponseDTO } from '../../DTOs/ChamadoResponseDTO';
+import { CommonModule } from '@angular/common';
+import { ChamadoProgressoResponseDTO } from '../../DTOs/chamadoProgressoResponseDTO';
+import { forkJoin } from 'rxjs';
+
+@Component({
+  selector: 'app-chamado-detalhe',
+  imports: [RouterModule, CommonModule],
+  templateUrl: './chamado-detalhe.component.html',
+  styleUrl: './chamado-detalhe.component.css'
+})
+export class ChamadoDetalheComponent {
+  chamado: ChamadoResponseDTO | null = null;
+  progresso: ChamadoProgressoResponseDTO | null = null;
+
+  imagensUrl: string[] = [];
+    etapas: { nome: string, data?: string }[] = [
+    { nome: 'Em análise' },
+    { nome: 'Aprovado' },
+    { nome: 'Análise da APM' },
+    { nome: 'Em andamento' },
+    { nome: 'Concluído' }
+  ];
+  etapaAtualIndex: number = 0;
+
+  idChamado!: number;
+  titulo: string = 'Detalhes do Chamado';
+
+  imagemSelecionada: string | null = null;
+  modalAberto: boolean = false;
+  imagemModal: string | null = null;
+
+  iconePrioridade: any = {
+    'Alta Prioridade': "/images/pendentes/altaPrioridade.svg",
+    'Média Prioridade': "/images/pendentes/mediaPrioridade.svg",
+    'Baixa Prioridade': "/images/pendentes/baixaPrioridade.svg"
+  };
+
+  constructor(
+    private chamadoService: ChamadoService,
+    private router: Router,
+    private route: ActivatedRoute,
+  ) {}
+
+  ngOnInit(): void {
+    this.idChamado = +this.route.snapshot.paramMap.get('id')!;
+    this.carregarChamado(this.idChamado);
+  }
+
+  carregarChamado(id: number): void {
+    forkJoin({
+      chamado: this.chamadoService.getDetalheChamado(id),
+      progresso: this.chamadoService.getProgressoChamado(id)
+    }).subscribe({
+      next: ({chamado, progresso}) => {
+        this.chamado = chamado;
+        this.imagensUrl = chamado.caminhoImagensList?.map((caminho) => `http://localhost:8080${caminho}`) || [];
+        this.imagemSelecionada = this.imagensUrl[0] || null;
+
+        this.progresso = progresso;
+
+        console.log(progresso.historicoChamadoList);
+
+        this.etapas.forEach((etapa, index) => {
+          if (index === 0) {
+            const dataAbertura = chamado.dtAberturaChamado;
+            etapa.data = `${this.obterDiaSemana(dataAbertura)}, ${this.formatarData(dataAbertura)}`;
+          } else if (index === this.etapas.length - 1) {
+            if (chamado.dtConclusaoChamado) {
+              const dataConclusao = chamado.dtConclusaoChamado;
+              etapa.data = `${this.obterDiaSemana(dataConclusao)}, ${this.formatarData(dataConclusao)}`;
+            }
+          } else {
+            const itemHistorico = progresso.historicoChamadoList.find(
+              (h: any) => h.statusProgresso === etapa.nome
+            );
+            if (itemHistorico) {
+              etapa.data = `${itemHistorico.diaSemana}, ${this.formatarData(itemHistorico.dtAlteracao)}`;
+            }
+          }
+        });
+
+        this.etapaAtualIndex = this.etapas.findIndex(
+          e => e.nome === progresso.statusAtualProgressoChamado
+        );
+        if (this.etapaAtualIndex === -1) this.etapaAtualIndex = 0;
+
+        console.log('Detalhe do chamado recebido: ', chamado);
+        console.log('Imagens URLs: ', this.imagensUrl);
+        console.log('Progresso do chamado recebido: ', progresso);
+      },
+      error: (err) => {
+        console.error('Erro ao carregar detalhes do chamado ou progresso:', err);
+      }
+    })
+  }
+
+  abrirModal(imagem: string) {
+    this.imagemModal = imagem;
+    this.modalAberto = true;
+  }
+
+  fecharModal() {
+    this.modalAberto = false;
+    this.imagemModal = null;
+  }
+
+  prevImagem(event: Event) {
+    event.stopPropagation();
+    const index = this.imagensUrl.indexOf(this.imagemModal!);
+    const prevIndex = (index - 1 + this.imagensUrl.length) % this.imagensUrl.length;
+    this.imagemModal = this.imagensUrl[prevIndex];
+  }
+
+  nextImagem(event: Event) {
+    event.stopPropagation();
+    const index = this.imagensUrl.indexOf(this.imagemModal!);
+    const nextIndex = (index + 1) % this.imagensUrl.length;
+    this.imagemModal = this.imagensUrl[nextIndex];
+  }
+
+  voltar() {
+    this.router.navigate(['/layout/chamados-pendentes']);
+  }
+
+  aprovar() {
+    console.log("Chamado aprovado!");
+  }
+
+  recusar() {
+    console.log("Chamado recusado!");
+  }
+
+  private formatarData(dataISO: string): string {
+    const data = new Date(dataISO);
+    const dia = data.getDate().toString().padStart(2, '0');
+    const mes = (data.getMonth() + 1).toString().padStart(2, '0');
+    const ano = data.getFullYear();
+    return `${dia}/${mes}/${ano}`;
+  }
+
+  private obterDiaSemana(dataISO: string): string {
+    const dias = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+    const data = new Date(dataISO);
+    return dias[data.getDay()];
+  }
+
+}
