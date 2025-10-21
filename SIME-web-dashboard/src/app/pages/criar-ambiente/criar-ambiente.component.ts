@@ -30,9 +30,8 @@ export class CriarAmbienteComponent {
 
   constructor(private fb: FormBuilder, private escolaService: EscolaService, private router: Router){
     this.ambienteForm = this.fb.group({
-      nomeLocal: ['', Validators.required],
       numeroLocal: [ , Validators.required],
-      tipoEquipamento: ['', Validators.required]
+      descLocal: ['', Validators.required]
     }),
     this.tipoAmbienteForm = this.fb.group({
       nomeTipoLocal: ['', Validators.required]
@@ -59,7 +58,7 @@ export class CriarAmbienteComponent {
   }
 
   getElementos(): Observable<any>{
-    
+
     return forkJoin({
         tiposEquipamento: this.escolaService.getAllTipoEquipamento(),
         tiposAmbiente: this.escolaService.getAllTipoAmbiente(),

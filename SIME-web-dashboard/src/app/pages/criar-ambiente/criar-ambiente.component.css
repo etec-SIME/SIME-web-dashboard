@@ -5,6 +5,10 @@
     margin-left: clamp(3px, 1.5vw, 3.5vw);
 }
 
+#modal-codigos{
+  background-color: red;
+}
+
 .linha{
   background-color: #808080;
   width: 1px;
@@ -16,7 +20,7 @@
 .cards-tipo-ambiente{
     margin-bottom: clamp(3px, 2vw, 4vw);
     margin-top: clamp(3px, 2vw, 4vw);
-    max-height: clamp(200px, 51vh, 53vh);
+    max-height: clamp(200px, 47vh, 53vh);
     overflow-y: auto;
     overflow-x: hidden;
     padding-right: clamp(2px, 3vw, 5vw);
@@ -42,7 +46,7 @@
 }
 
 .icon-ambiente{
-    height: clamp(3px, 5vh, 7vh);
+    height: clamp(3px, 6vh, 8vh);
 }
 
 .text-card{
@@ -100,10 +104,20 @@
 }
 
 .forms-novo-ambiente{
-    display: grid;
-    grid-template-rows: 1.7fr 2.3fr 2fr 1.5fr 1.5fr 1fr;
     margin-top: clamp(3px, 1.5vw, 3.5vw);
     margin-right: clamp(2px, 4vw, 6vw);
+}
+
+.forms-novo-ambiente h2{
+  margin-bottom: clamp(20px, 3vw, 5vw);
+}
+
+.input-numero{
+  margin-bottom: clamp(20px, 3vw, 500vw);
+}
+
+.input-desc{
+  margin-bottom: clamp(30px, 3vw, 700vw);
 }
 
 .btns-forms-ambiente{
@@ -136,7 +150,7 @@
 .btns-forms-criar{
     display: grid;
     grid-template-columns: 1fr 2fr;
-    margin-top: clamp(3px, 4vw, 6vw);
+    margin-top: clamp(3px, 4vw, 7vw);
     margin-left: clamp(2px, 14.2vw, 16.2vw);
     text-wrap: nowrap;
 }
@@ -175,7 +189,7 @@
 }
 
 .forms-tipo-ambiente h2{
-    margin-right: clamp(2px, 11vw, 13vw);
+    margin-right: clamp(2px, 13vw, 1300vw);
     margin-bottom: clamp(20px, 3.5vw, 5.5vw);
     text-wrap: nowrap;
     font-size: clamp(20px, 30px, 32px);
@@ -183,5 +197,5 @@
 
 .erro-small{
   color: red;
+  margin-left: clamp(2px, 0.5vw, 2.5vw);
 }
-
