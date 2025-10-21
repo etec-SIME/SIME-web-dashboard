@@ -6,7 +6,6 @@ import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 import { chamadosAmbienteDTO } from '../../DTOs/chamadosAmbienteDTO';
 
-
 @Component({
   selector: 'app-chamados-locais-cards',
   standalone: true,
@@ -26,19 +25,22 @@ export class ChamadosLocaisCardsComponent {
     }
 
     return this.chamados.map(chamado => ({
-        /*const tipo = this.tiposChamado.find(t => 
+        /*const tipo = this.tiposChamado.find(t =>
           Number(t.idTipoChamado) === Number(chamado.TipoChamado.idTipoChamado));
-        
+
         return {};*/
           ...chamado,
           dataAberturaFormatada: this.formatarData(chamado.dataAbertura),
           nomeTipoChamado: chamado.tipoChamado?.nomeTipoChamado || "Tipo do Chamado não encontrado."
-        
+
       }));
   }
 
   public formatarData(data: string): string {
-    if (!data) return '';
+    if (!data){
+      console.log("Data vazia");
+      return '';
+    }
     return data.split('T')[0].split('-').reverse().join('/');
   }
 
