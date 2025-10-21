@@ -1,14 +1,16 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { ChamadoService } from '../../services/chamado/chamado.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ChamadoResponseDTO } from '../../DTOs/ChamadoResponseDTO';
 import { CommonModule } from '@angular/common';
 import { ChamadoStatusResponseDTO } from '../../DTOs/ChamadoStatusResponseDTO';
 import { forkJoin } from 'rxjs';
+import { error } from 'console';
 
 @Component({
   selector: 'app-chamado-detalhe',
   imports: [RouterModule, CommonModule],
+  standalone: true,
   templateUrl: './chamado-detalhe.component.html',
   styleUrl: './chamado-detalhe.component.css'
 })
@@ -45,6 +47,8 @@ export class ChamadoDetalheComponent {
     private route: ActivatedRoute,
   ) {}
 
+  @ViewChild('')
+
   ngOnInit(): void {
     this.idChamado = +this.route.snapshot.paramMap.get('id')!;
     this.carregarChamado(this.idChamado);
@@ -74,6 +78,12 @@ export class ChamadoDetalheComponent {
           this.chamadoService.atualizarStatusGeral(this.idChamado, 'PENDENTE').subscribe({
             next: res => console.log('Status geral atualizado para PENDENTE:', res),
             error: err => console.error('Erro ao atualizar status geral:', err)
+          });
+        }
+        else if (progresso.statusAtualProgressoChamado === 'Em_analise') {
+          this.chamadoService.atualizarStatusGeral(this.idChamado, 'AGUARDANDO_APROVACAO').subscribe({
+            next: res => console.log('Status geral atualizado para AGUARDANDO_APROVACAO', res),
+            error: err => console.error('Erro ao atualizar status geral', err)
           });
         }
 
@@ -128,6 +138,18 @@ export class ChamadoDetalheComponent {
     const index = this.imagensUrl.indexOf(this.imagemModal!);
     const nextIndex = (index + 1) % this.imagensUrl.length;
     this.imagemModal = this.imagensUrl[nextIndex];
+  }
+
+  nextStatus(event: Event) {
+
+  }
+
+  prevStatus(event: Event) {
+
+  }
+
+  atualizarStatus() {
+    this.chamadoService.atualizarStatusGeral(this.chamado?.idChamado, this.progresso.)
   }
 
   voltar() {
