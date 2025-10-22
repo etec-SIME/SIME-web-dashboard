@@ -5,6 +5,7 @@
 }
 
 .home-layout {
+  font-family: var(--font-montserrat);
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -22,7 +23,6 @@
 }
 
 .filtrar{
-  font-family: var(--font-instrument-sans);
   display: flex;
   align-items: flex-start;
   gap: clamp(15px, 1.2vw, 3.2vw);
