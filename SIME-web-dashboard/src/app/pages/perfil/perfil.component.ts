@@ -19,6 +19,17 @@ export class PerfilComponent {
   permissaoTipoPerfilDTO: permissaoTipoPerfilDTO[] = [];
   idPermissoes: number = 0;
 
+  mostrarModal = false;
+  departamentos = ['TI', 'Administração', 'Manutenção', 'Direção'];
+
+  abrirModal() {
+    this.mostrarModal = true;
+  }
+
+  fecharModal() {
+    this.mostrarModal = false;
+  }
+
   perfis = [
       { nome: 'Usuário', permissoesCount: 2 },
       { nome: 'Gestor Geral', permissoesCount: 7 },
