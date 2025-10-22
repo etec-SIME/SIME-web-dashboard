@@ -1,4 +1,4 @@
-export interface usuarioProjection {
+export interface UsuarioProjection {
     rmUsuario: string;
     chamadosAbertos: string;
     chamadosConcluidos: string;

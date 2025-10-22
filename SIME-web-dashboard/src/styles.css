@@ -126,6 +126,6 @@
 
 /* Estilo global */
 body {
-    font-family: var(--font-instrument-sans);
+    font-family: var(--font-montserrat);
     font-weight: var(--fw-semibold);
 }

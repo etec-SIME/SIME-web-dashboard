@@ -1,0 +1,135 @@
+<!-- Voltar -->
+<button id="btn-back" (click)="voltar()">
+    <img src="images/iconeFlecha.svg" alt="ícone de flecha">Voltar
+</button>
+
+<div class="container">
+
+    <!-- Infos -->
+    <div class="content">
+        <div class="content-preview">
+            
+            @if(imagensUrl.length > 0) {
+                <!-- Miniaturas -->
+                <div class="sub-previews">
+                    @for (imagem of imagensUrl; let i = $index; track i) {
+                        <img [src]="imagem" alt="Pré-visualização" (click)="imagemSelecionada = imagem" [class.active]="imagem === imagemSelecionada">
+                    }
+                </div>
+    
+                <!-- Imagem principal com botão -->
+                <div class="preview-container">
+                    <img class="preview" [src]="imagemSelecionada || imagensUrl[0]" alt="Pré-visualização principal">
+                    <button class="btn-ampliar" (click)="abrirModal(imagemSelecionada || imagensUrl[0])">
+                        <img src="/images/iconeAmpliar.svg" alt="">
+                    </button>
+                </div>
+            } @else {            
+                <div class="fallback-image">
+                    <h2>Sem imagens</h2>
+                </div>
+            }
+
+            <!-- Modal -->
+            @if(modalAberto) {
+                <div class="modal" (click)="fecharModal()">
+                    <!-- Botão anterior -->
+                    <button class="btn-nav prev" (click)="prevImagem($event)">❮</button>
+
+                    <!-- Imagem ampliada -->
+                    <img class="modal-img" [src]="imagemModal" alt="Imagem ampliada">
+
+                    <!-- Botão próximo -->
+                    <button class="btn-nav next" (click)="nextImagem($event)">❯</button>
+
+                    <!-- Miniaturas no modal -->
+                    <div class="modal-sub-previews">
+                    @for (imagem of imagensUrl; let i = $index; track i) {
+                        <img [src]="imagem" [class.active]="imagem === imagemModal" (click)="abrirModal(imagem); $event.stopPropagation()" alt="Miniatura">
+                    }
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="details">
+        <h2>{{ chamado?.tituloChamado }}</h2>
+
+        <!-- Barra de progresso -->
+        <div class="progress">
+            <button class="btn-nav-progress progress-prev" 
+                    (click)="prevStatus($event)"
+                    [class.disabled]="isEmAnalise"
+                    [disabled]="isEmAnalise">
+                    <img [src]="isEmAnalise ? 'images/navLeftDisabled.svg' : 'images/navLeft.svg'" alt="">
+            </button>
+            @for (etapa of etapas; let i = $index; track i) {
+                <div class="progress-step">
+                    <div class="circle-line">
+                        <div class="circle"
+                            [class.active]="i < etapaAtualIndex+1"
+                            [class.current]="i === etapaAtualIndex+1">
+
+                            @if (i < etapaAtualIndex+1) {
+                                <img src="images/iconeCorreto.svg" alt="">
+                            }
+                        </div>
+                        @if (i < etapas.length - 1) {
+                            <div class="line" 
+                                [class.completed]="i < etapaAtualIndex" 
+                                [class.animating]="i === etapaAtualIndex"></div>
+                        }
+                    </div>
+
+                    <div class="label">
+                        <p class="title">{{ etapa.nome }}</p>
+                        <p class="date">{{ etapa.data }}</p>
+                    </div>    
+                </div>
+            }
+            <button class="btn-nav-progress progress-next"
+                    [class.disabled]="isConcluido"
+                    [disabled]="isConcluido"
+                    (click)="nextStatus($event)">
+                    <img [src]="isConcluido ? 'images/navRightDisabled.svg' : 'images/navRight.svg'" alt="">
+            </button>
+        </div>
+
+        <div class="details-info">
+
+            <div class="details-header">
+                <p>Descrição</p>
+                <p>Departamento</p>
+                <p>Prioridade</p>
+            </div>
+
+            <div class="details-body">
+            <div>
+                <p>{{ chamado?.descChamado }}</p>
+            </div>
+
+            <div>
+                <p>{{ chamado?.nomeTipoChamado }}</p>
+            </div>
+
+            <div>
+                <p [class.alta]="chamado?.prioridadeChamado === 'Alta Prioridade'"
+                    [class.media]="chamado?.prioridadeChamado === 'Média Prioridade'"
+                    [class.baixa]="chamado?.prioridadeChamado === 'Baixa Prioridade'">
+                {{ chamado?.prioridadeChamado }}
+                <img [src]="iconePrioridade[chamado?.prioridadeChamado || 'Padrão']"
+                     [alt]="chamado?.prioridadeChamado || 'Sem prioridade'"/>
+                </p>
+            </div>
+            </div>
+        </div>
+
+        <p id="details-date">Emitido {{ chamado?.dtAberturaChamado | date:'dd/MM/yyyy - HH:mm' }}</p>
+        </div>
+    </div>
+
+    <div class="actions">
+        <button class="btn-approve" (click)="aprovar()">Aprovar</button>
+        <button class="btn-reject" (click)="recusar()">Recusar</button>
+    </div>
+</div>

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-import { usuarioProjection } from '../../DTOs/Projections/usuarioProjection';
+import { UsuarioProjection } from '../../DTOs/Projections/UsuarioProjection';
 import { chamadoProjection } from '../../DTOs/Projections/chamadoProjection';
 
 @Injectable({ providedIn: 'root' })
 export class FuncionarioService {
-  private apiUrl = 'http://localhost:8081/funcionarios';
+  private apiUrl = 'http://localhost:8080/funcionarios';
 
   constructor( private http: HttpClient ) { }
 
@@ -21,10 +21,10 @@ export class FuncionarioService {
     };
   }
 
-  getAllFuncionarios(): Observable<usuarioProjection[]> {
+  getAllFuncionarios(): Observable<UsuarioProjection[]> {
     //console.log('[FuncionariosService] Token usado:', token);
 
-    return this.http.get<usuarioProjection[]>(this.apiUrl, this.getAuthHeaders());
+    return this.http.get<UsuarioProjection[]>(this.apiUrl, this.getAuthHeaders());
   }
 
   getAllChamadosPendentes(): Observable<chamadoProjection[]>{
