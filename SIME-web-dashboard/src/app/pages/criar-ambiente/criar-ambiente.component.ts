@@ -61,7 +61,7 @@ export class CriarAmbienteComponent {
   }
 
   getElementos(): Observable<any>{
-    
+
     return forkJoin({
         tiposEquipamento: this.escolaService.getAllTipoEquipamento(),
         tiposAmbiente: this.escolaService.getAllTipoAmbiente(),
