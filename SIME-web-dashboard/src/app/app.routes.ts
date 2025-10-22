@@ -27,13 +27,14 @@ export const routes: Routes = [
         { path: 'perfil', component: PerfilComponent, data: { titulo: 'Perfil' } },
         { path: 'criar', component: CriarComponent, data: { titulo: "Criar" } },
         { path: 'criar-chamado', component: CriarChamadoComponent, data: { titulo: 'Criar Chamado' } },
+        { path: 'chamado/:id', component: ChamadoDetalheComponent, data: { titulo: 'Detalhes do Chamado' } }
       ]
     },
     { path: 'dashboard', component: DashboardComponent },
     { path: 'funcionarios', component: FuncionariosComponent },
     { path: 'escola', component: EscolaComponent },
-    {path: 'gestor-geral', component: GestorGeralComponent},
+    { path: 'gestor-geral', component: GestorGeralComponent},
     { path: 'pagina-de-fundo', component: PaginaDeFundoComponent },
-    {path: 'cadastro-funcionario', component: CadastroFuncionarioComponent},
+    { path: 'cadastro-funcionario', component: CadastroFuncionarioComponent},
     { path: '**', redirectTo: 'login' }
 ];

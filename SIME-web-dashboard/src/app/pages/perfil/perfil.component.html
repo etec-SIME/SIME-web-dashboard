@@ -1,2 +1,93 @@
-<p>perfil works!</p>
-<!-- <img src="images/Group.svg" alt="Descricao da imagem"> -->
+<!-- Voltar -->
+<button id="btn-back" (click)="voltar()">
+    <img src="images/iconeFlecha.svg" alt="ícone de flecha">Voltar
+</button>
+
+<div class="container">
+    <div class="perfil-container">
+        <div class="perfil-list">
+            <div class="perfil-item">
+                <button class="perfil-btn">
+                    <img class="perfil-avatar" src="images/Group.svg" alt="avatar"/>
+                    <div class="perfil-text">
+                        <p id="nome">Usuário</p>
+                        <p id="count">2 permissões</p>
+                    </div>
+                </button>
+            </div>
+
+            <div class="perfil-item">
+                <button class="perfil-btn">
+                    <img class="perfil-avatar" src="images/Group.svg" alt="avatar"/>
+                    <div class="perfil-text">
+                        <p id="nome">Gestor Geral</p>
+                        <p id="count">7 permissões</p>
+                    </div>
+                </button>
+            </div>
+
+            <div class="perfil-item selected">
+                <button class="perfil-btn">
+                    <img class="perfil-avatar" src="images/Group.svg" alt="avatar"/>
+                    <div class="perfil-text">
+                        <p id="nome">Administrador</p>
+                        <p id="count">9 permissões</p>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <button class="btn btn-create">Criar</button>
+    </div>
+
+    <div class="permissoes-panel">
+        <div class="divider"></div>
+        
+        <form class="permissoes-form">
+            <h2>ADICIONAR PERMISSÕES</h2>
+            <label class="perm-item">
+                <input type="checkbox" name="criar-chamado" />
+                <span>Criar chamado</span>
+            </label>
+    
+            <label class="perm-item">
+                <input type="checkbox" name="aprovar-chamado" checked />
+                <span>Aprovar chamado</span>
+            </label>
+    
+            <label class="perm-item">
+                <input type="checkbox" name="criar-perfil" checked />
+                <span>Criar novo perfil</span>
+            </label>
+    
+            <label class="perm-item">
+                <input type="checkbox" name="criar-tipo-perfil" />
+                <span>Criar novo tipo de perfil</span>
+            </label>
+    
+            <label class="perm-item">
+                <input type="checkbox" name="definir-prioridade" />
+                <span>Definir prioridade</span>
+            </label>
+    
+            <label class="perm-item">
+                <input type="checkbox" name="comentar-chamado" checked />
+                <span>Comentar no chamado</span>
+            </label>
+    
+            <label class="perm-item">
+                <input type="checkbox" name="reprovar-chamado" />
+                <span>Reprovar chamado</span>
+            </label>
+    
+            <label class="perm-item">
+                <input type="checkbox" name="visualizar-tipos" />
+                <span>Visualizar todos os tipos de chamados</span>
+            </label>
+    
+        </form>
+    </div>
+    <!-- <div class="panel-actions">
+        <button type="button" class="btn btn-save">Salvar</button>
+    </div> -->
+</div>
