@@ -20,11 +20,7 @@
             <div class="forms-novo-ambiente">
                 <h2>{{nomeTipoAmbiente}}</h2>
                 <div class="input-numero">
-<<<<<<< HEAD
                   <input type="number" placeholder="Número" formControlName="numeroLocal" class="inputs-forms-ambiente"/>
-=======
-                  <input type="number" placeholder="Número" formControlName="numeroLocal"/>
->>>>>>> b50b466a4d17d440a703d9b6ca6f20adefd9f530
                   @if(ambienteForm.get('numeroLocal')?.touched && ambienteForm.get('numeroLocal')?.invalid){
                       <div>
                           @if (ambienteForm.get('numeroLocal')?.errors?.['required']) {
@@ -47,7 +43,7 @@
                     <div id="modal-backdrop">
                         <div class="modal-codigos">
                             <div class="header-modal">
-                                <img src="/images/engrenagem-modal.png" class="icon-engrenagem"/>
+                                 <img src="/images/engrenagem-modal.png" class="icon-engrenagem"/>
                                 <p>Códigos dos equipamentos</p>
                             </div>
                             <div class="linha-modal"></div>
@@ -178,11 +174,6 @@
             </div>
         </form>
        }
-       <div id="modal-codigos">
-          <div>
-            <img src="/images/engrenagem-modal.png"/>
-          </div>
-        </div>
         <div class="btns-forms-criar">
             <button class="btn-cancelar" (click)="onCancelar()">Cancelar</button>
             <button class="btn-concluir" (click)="onCriar()">Concluir</button>
