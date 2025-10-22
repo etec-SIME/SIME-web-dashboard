@@ -25,14 +25,16 @@ export class CriarAmbienteComponent {
   qtdAmbientes: number[] = [];
 
   criarLocal: boolean = true;
+  modalCodigos: boolean = false;
+
   idTipoAmbiente: number = 0;
   nomeTipoAmbiente: string = "CRIAR AMBIENTE";
 
   constructor(private fb: FormBuilder, private escolaService: EscolaService, private router: Router){
     this.ambienteForm = this.fb.group({
-      nomeLocal: ['', Validators.required],
       numeroLocal: [ , Validators.required],
-      tipoEquipamento: ['', Validators.required]
+      descricaoLocal: ['', Validators.required],
+      codEquipamento: ['', Validators.required]
     }),
     this.tipoAmbienteForm = this.fb.group({
       nomeTipoLocal: ['', Validators.required]
@@ -83,8 +85,11 @@ export class CriarAmbienteComponent {
   }
 
   btnCriar(){
-    this.criarLocal =! this.criarLocal;
-    console.log(this.criarLocal);
+    this.criarLocal = !this.criarLocal;
+  }
+
+  mostrarModal(){
+    this.modalCodigos = !this.modalCodigos;
   }
 
   mandarIdNomeTipoAmbiente(id: number, nome: string){
@@ -107,7 +112,7 @@ export class CriarAmbienteComponent {
 
       const ambienteRequestDTO = {
         numAmbiente: this.ambienteForm.value.numeroLocal,
-        descricaoAmbiente: this.ambienteForm.value.nomeLocal,
+        descricaoAmbiente: '',
         idTipoAmbiente: this.idTipoAmbiente
       }
 
