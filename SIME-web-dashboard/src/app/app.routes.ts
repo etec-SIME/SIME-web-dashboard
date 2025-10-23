@@ -26,7 +26,7 @@ export const routes: Routes = [
         { path: 'criar', component: CriarComponent, data: { titulo: "Criar" } },
         { path: 'criar-chamado', component: CriarChamadoComponent, data: { titulo: 'Criar Chamado' } },
         { path: 'criar-ambiente', component: CriarAmbienteComponent, data: { titulo: 'Criar Local' } },
-        { path: 'chamado-detalhe', component: ChamadoDetalheComponent, data: { titulo: 'Chamado 1' } },
+        { path: 'chamado-detalhe', component: ChamadoDetalheComponent, data: { titulo: 'Chamado 1' } }
       ]
     },
     { path: 'dashboard', component: DashboardComponent },

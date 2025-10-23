@@ -4,9 +4,9 @@ import { EscolaService } from '../../services/escola/escola.service';
 import { tipoEquipamento } from '../../models/tipoEquipamento';
 import { Router, RouterModule } from '@angular/router';
 import { tipoAmbiente } from '../../models/tipoAmbiente';
-import { ambienteRequestDTO } from '../../DTOs/ambienteRequestDTO';
-import { forkJoin, Observable } from 'rxjs';
-import { tipoAmbienteRequestDTO } from '../../DTOs/tipoAmbienteRequestDTO';
+import { forkJoin} from 'rxjs';
+import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
+import { codEquipamentoResponseDTO } from '../../DTOs/codEquipamentoResponseDTO';
 
 @Component({
   selector: 'app-criar-ambiente',
@@ -21,14 +21,17 @@ export class CriarAmbienteComponent {
 
   tiposEquipamento: tipoEquipamento[] = [];
   tiposAmbiente: tipoAmbiente[] = [];
-  ambientes: ambienteRequestDTO[] = [];
+  ambientes: AmbienteSelectDTO[] = [];
   qtdAmbientes: number[] = [];
+  codsEquipamentos: codEquipamentoResponseDTO[] = []
+  listarCods: codEquipamentoResponseDTO[] = []
 
   criarLocal: boolean = true;
   modalCodigos: boolean = false;
 
   idTipoAmbiente: number = 0;
   nomeTipoAmbiente: string = "CRIAR AMBIENTE";
+  nomeListagemEquipamentos: string = "Todos equipamentos"
 
   constructor(private fb: FormBuilder, private escolaService: EscolaService, private router: Router){
     this.ambienteForm = this.fb.group({
@@ -42,31 +45,30 @@ export class CriarAmbienteComponent {
   }
 
   ngOnInit(): void{
-    this.getElementos().subscribe(
-        (data) => {
-            // 1. Atribua os resultados APENAS quando todos chegarem
+    this.getElementos();
+
+    this.contagemAmbiente();
+  }
+
+  getElementos(): void{
+    forkJoin({
+        tiposEquipamento: this.escolaService.getAllTipoEquipamento(),
+        tiposAmbiente: this.escolaService.getAllTipoAmbiente(),
+        ambientes: this.escolaService.getAllAmbiente(),
+        codsEquipamentos: this.escolaService.getAllEquipamentosSemAmbiente()
+    }).subscribe(
+          (data) => {
             this.tiposEquipamento = data.tiposEquipamento;
             this.tiposAmbiente = data.tiposAmbiente;
             this.ambientes = data.ambientes;
-
-            // 2. Agora os arrays estão preenchidos, então a contagem funciona!
+            this.codsEquipamentos = data.codsEquipamentos;
+            this.listarCods = this.codsEquipamentos;
             this.contagemAmbiente();
         },
         (error) => {
             console.error('Erro ao carregar dados:', error);
         }
-    );
-
-    this.contagemAmbiente();
-  }
-
-  getElementos(): Observable<any>{
-
-    return forkJoin({
-        tiposEquipamento: this.escolaService.getAllTipoEquipamento(),
-        tiposAmbiente: this.escolaService.getAllTipoAmbiente(),
-        ambientes: this.escolaService.getAllAmbiente()
-    });
+      );
 
   }
 
@@ -80,8 +82,6 @@ export class CriarAmbienteComponent {
       }
       this.qtdAmbientes.push(qtd)
     }
-
-    console.log(this.qtdAmbientes);
   }
 
   btnCriar(){
@@ -154,6 +154,23 @@ export class CriarAmbienteComponent {
 
   onCancelar(){
     this.router.navigate(['/layout/criar']);
+  }
+
+  listarCodigosTipoEquipamento(id: number){
+   
+
+    for(let i = 0; i < this.codsEquipamentos.length; i++){
+      console.log(this.codsEquipamentos[i]);
+      if(this.codsEquipamentos[i].idTipoEquipamento == id){
+        this.listarCods.push(this.codsEquipamentos[i])
+      }
+    } 
+
+    for(let j = 0; j < this.tiposEquipamento.length; j++){
+      if(this.tiposEquipamento[j].idTipoEquipamento == id){
+        this.nomeListagemEquipamentos = this.tiposEquipamento[j].nomeTipoEquipamento;
+      }
+    }
   }
 
 }

@@ -1,11 +1,13 @@
 import { chamadoProjection } from './../../DTOs/Projections/chamadoProjection';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ChamadoCardDTO } from '../../DTOs/ChamadoCardDTO';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
-import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
+import { ChamadoResponseDTO } from '../../DTOs/ChamadoResponseDTO';
+import { ChamadoRequestDTO } from '../../DTOs/chamadoRequestDTO';
+import { ChamadoStatusResponseDTO } from '../../DTOs/ChamadoStatusResponseDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -15,19 +17,8 @@ export class ChamadoService {
 
   constructor( private http: HttpClient ) { }
 
-  token : String = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMDAwMDIiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiR2VyZW5jaWFyIFBlcmZpcyJ9LHsiYXV0aG9yaXR5IjoiR2VyZW5jaWFyIERlcGFydGFtZW50b3MifSx7ImF1dGhvcml0eSI6IkdlcmVuY2lhciBDaGFtYWRvcyJ9LHsiYXV0aG9yaXR5IjoiQ3JpYXIgQ2hhbWFkbyJ9LHsiYXV0aG9yaXR5IjoiVmlzdWFsaXphciBSZWxhdMOzcmlvcyJ9XSwiZW50aWRhZGUiOiJVU1VBUklPIiwiaWF0IjoxNzYwMjAxNzAwLCJleHAiOjE3NjAyODgxMDB9.-HCgdMoN_KpRDpnzAlLio8tuAkytJt9UCEMkI0xnpCo';
-  // Inserir o Token manualmente para testar
-
-  private getAuthHeaders() {
-    return {
-      headers: new HttpHeaders({
-        Authorization: `Bearer ${this.token}`
-      })
-    };
-  }
-
-  getAllChamados(): Observable<ChamadoRequestDTO[]> { // mudar de chamadoProjetcion para ChamadoRequestDTO
-    return this.http.get<ChamadoRequestDTO[]>(this.apiUrl, this.getAuthHeaders());
+  getAllChamados(): Observable<ChamadoRequestDTO[]> {
+    return this.http.get<ChamadoRequestDTO[]>(this.apiUrl);
   }
 
   getChamadosByPrioridade(prioridade: 'ALTA_PRIORIDADE' | 'MEDIA_PRIORIDADE' | 'BAIXA_PRIORIDADE'): Observable<ChamadoCardDTO[]> {
@@ -48,5 +39,24 @@ export class ChamadoService {
 
   criarChamado(formData: FormData): Observable<any> {
     return this.http.post(`${this.apiUrl}/criar-chamado`, formData, { withCredentials: true });
+  }
+
+  getDetalheChamado(id: number): Observable<ChamadoResponseDTO> {
+    return this.http.get<ChamadoResponseDTO>(`${this.apiUrl}/${id}`, { withCredentials: true });
+  }
+
+  getStatusChamado(id: number): Observable<ChamadoStatusResponseDTO> {
+    return this.http.get<ChamadoStatusResponseDTO>(`${this.apiUrl}/${id}/status`, { withCredentials: true });
+  }
+
+  atualizarStatusGeral(id: number, novoStatus: string): Observable<ChamadoStatusResponseDTO> {
+    const param = new HttpParams().set('novoStatus', novoStatus);
+
+    return this.http.put<ChamadoStatusResponseDTO>(`${this.apiUrl}/${id}/atualizar-status-geral`, {}, { params: param, withCredentials: true });
+  }
+
+  atualizarStatusProgresso(id: number, novoStatusProgresso: string): Observable<ChamadoStatusResponseDTO> {
+    const param = new HttpParams().set('novoStatus', novoStatusProgresso);
+    return this.http.put<ChamadoStatusResponseDTO>(`${this.apiUrl}/${id}/atualizar-status-progresso`, {}, { params: param, withCredentials: true });
   }
 }

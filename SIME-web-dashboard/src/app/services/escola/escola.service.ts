@@ -21,6 +21,8 @@ import { permissaoTipoPerfilDTO } from '../../DTOs/permissaoTipoPerfilDTO';
 import { tipoEquipamentoAmbienteDTO } from '../../DTOs/tipoEquipamentoAmbienteDTO';
 import { tipoPerfilProjection } from '../../DTOs/Projections/tipoPerfilProjection';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
+import { equipamentoCodigosResponseDTO } from '../../DTOs/EquipamentoCodigosResponseDTO';
+import { codEquipamentoResponseDTO } from '../../DTOs/codEquipamentoResponseDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -82,6 +84,9 @@ export class EscolaService {
     return this.http.get<tipoEquipamento[]>(`${this.apiUrl}/ambiente/${idAmbiente}/tipo-equipamento`, this.getAuthHeaders());
   }
 
+  getAllEquipamentosSemAmbiente(): Observable<codEquipamentoResponseDTO[]>{
+    return this.http.get<codEquipamentoResponseDTO[]>(`${this.apiUrl}/equipamento/sem-ambiente`, this.getAuthHeaders());
+  }
 
   //MÉTODOS CRIAÇÃO/CADASTRO -------------
 

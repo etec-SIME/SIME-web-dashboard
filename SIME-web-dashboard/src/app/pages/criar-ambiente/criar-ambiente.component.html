@@ -39,7 +39,7 @@
                       </div>
                   }
                 </div>
-                @if(!modalCodigos){
+                @if(modalCodigos){
                     <div id="modal-backdrop">
                         <div class="modal-codigos">
                             <div class="header-modal">
@@ -48,102 +48,27 @@
                             </div>
                             <div class="linha-modal"></div>
                             <div class="tipos-equipamentos">
-                                <div class="tipo-equipamento" tabindex="0" >
-                                    <p>CADEIRAS</p>
-                                </div>
-                                <div class="tipo-equipamento">
-                                    <p>MESAS</p>
-                                </div>
-                                <div class="tipo-equipamento">
-                                    <p>VENTILADORES</p>
-                                </div>
-                                <div class="tipo-equipamento">
-                                    <p>COMPUTADORES</p>
-                                </div>
+                                @for(tipoEquipamento of tiposEquipamento; track tipoEquipamento.idTipoEquipamento){
+                                    <div class="tipo-equipamento" tabindex="0" (click)="listarCodigosTipoEquipamento(tipoEquipamento.idTipoEquipamento)">
+                                        <p>{{tipoEquipamento.nomeTipoEquipamento}}</p>
+                                    </div>
+                                }
                             </div>
                             <div class="modal-content">
-                                <h3>Cadeiras</h3>
+                                <h3>{{nomeListagemEquipamentos}}</h3>
                                 <div class="lista-codigos">
-                                    <div class="codigo-card">
-                                        <p>PC-LAB-01</p>
-                                        <div class="items-cod">
-                                            <button><img src="/images/icon_lapis.png"></button>
-                                            <button><img src="/images/icon_lixeira.png"></button>
-                                            <input type="checkbox" formControlName="codEquipamento"class="cod-checkbox">
-                                        </div>
-                                    </div>
-                                    <div class="codigo-card">
-                                        <p>PROJ-101</p>
-                                        <div class="items-cod">
-                                            <button><img src="/images/icon_lapis.png" alt=""></button>
-                                            <button><img src="/images/icon_lixeira.png" alt=""></button>
-                                            <input type="checkbox" formControlName="codEquipamento" class="cod-checkbox">
-                                        </div>
-                                    </div>
-                                    <div class="codigo-card">
-                                        <p>PROJ-101</p>
-                                        <div class="items-cod">
-                                            <button><img src="/images/icon_lapis.png" alt=""></button>
-                                            <button><img src="/images/icon_lixeira.png" alt=""></button>
-                                            <input type="checkbox" formControlName="codEquipamento" class="cod-checkbox">
-                                        </div>
-                                    </div>
-                                    <div class="codigo-card">
-                                        <p>PROJ-101</p>
-                                        <div class="items-cod">
-                                            <button><img src="/images/icon_lapis.png" alt=""></button>
-                                            <button><img src="/images/icon_lixeira.png" alt=""></button>
-                                            <input type="checkbox" formControlName="codEquipamento" class="cod-checkbox">
-                                        </div>
-                                    </div>
-                                    <div class="codigo-card">
-                                        <p>PROJ-101</p>
-                                        <div class="items-cod">
-                                            <button><img src="/images/icon_lapis.png" alt=""></button>
-                                            <button><img src="/images/icon_lixeira.png" alt=""></button>
-                                            <input type="checkbox" formControlName="codEquipamento" class="cod-checkbox">
-                                        </div>
-                                    </div>
-                                     <div class="codigo-card">
-                                        <p>PC-LAB-01</p>
-                                        <div class="items-cod">
-                                            <button><img src="/images/icon_lapis.png" alt=""></button>
-                                            <button><img src="/images/icon_lixeira.png" alt=""></button>
-                                            <input type="checkbox" formControlName="codEquipamento" class="cod-checkbox">
-                                        </div>
-                                    </div>
-                                    <div class="codigo-card">
-                                        <p>PROJ-101</p>
-                                        <div class="items-cod">
-                                            <button><img src="/images/icon_lapis.png" alt=""></button>
-                                            <button><img src="/images/icon_lixeira.png" alt=""></button>
-                                            <input type="checkbox" formControlName="codEquipamento" class="cod-checkbox">
-                                        </div>
-                                    </div>
-                                    <div class="codigo-card">
-                                        <p>PROJ-101</p>
-                                        <div class="items-cod">
-                                            <button><img src="/images/icon_lapis.png" alt=""></button>
-                                            <button><img src="/images/icon_lixeira.png" alt=""></button>
-                                            <input type="checkbox" formControlName="codEquipamento" class="cod-checkbox">
-                                        </div>
-                                    </div>
-                                    <div class="codigo-card">
-                                        <p>PROJ-101</p>
-                                        <div class="items-cod">
-                                            <button><img src="/images/icon_lapis.png" alt=""></button>
-                                            <button><img src="/images/icon_lixeira.png" alt=""></button>
-                                            <input type="checkbox" formControlName="codEquipamento" class="cod-checkbox">
-                                        </div>
-                                    </div>
-                                    <div class="codigo-card">
-                                        <p>PROJ-101</p>
-                                        <div class="items-cod">
-                                            <button><img src="/images/icon_lapis.png" alt=""></button>
-                                            <button><img src="/images/icon_lixeira.png" alt=""></button>
-                                            <input type="checkbox" formControlName="codEquipamento" class="cod-checkbox">
-                                        </div>
-                                    </div>
+                                    @if(listarCods.length != 0){
+                                        @for(codEquipamento of listarCods; track codEquipamento.codEquipamento){
+                                            <div class="codigo-card">
+                                                <p>{{codEquipamento.codEquipamento}}</p>
+                                                <div class="items-cod">
+                                                    <button><img src="/images/icon_lapis.png"></button>
+                                                    <button><img src="/images/icon_lixeira.png"></button>
+                                                    <input type="checkbox" formControlName="codEquipamento"class="cod-checkbox">
+                                                </div>
+                                            </div>
+                                        }
+                                    }@else {<p>Sem equipamentos</p>}
                                 </div>
                             </div>
                             <div class="btns-modal">

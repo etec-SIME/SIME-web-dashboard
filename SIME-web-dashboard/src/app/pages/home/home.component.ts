@@ -7,7 +7,7 @@ import { forkJoin } from 'rxjs';
 import { EscolaService } from '../../services/escola/escola.service';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 import { CommonModule } from '@angular/common';
-import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
+import { ChamadoRequestDTO } from '../../DTOs/chamadoRequestDTO';
 import { ChamadoService } from '../../services/chamado/chamado.service';
 
 @Component({

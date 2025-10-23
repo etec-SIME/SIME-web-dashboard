@@ -288,6 +288,7 @@
     padding-top: clamp(5px, 0.2vw, 2.2vw);
     margin-left: clamp(10px, 0.7vw, 2.7vw);
     margin-right: clamp(10px, 0.7vw, 2.7vw);
+    text-wrap: nowrap;
 }
 
 .modal-content{
