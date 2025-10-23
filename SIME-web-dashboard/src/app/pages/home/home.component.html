@@ -14,17 +14,19 @@
             </div>
         </div>
 
-        <!-- <div *ngIf="!carregado" class="loading">
-          <p>Carregando locais...</p>
-        </div> -->
-
-        <div *ngIf="modoAtual === 'locais'">
-
-          <div *ngIf="carregado && cards.length === 0" class="sem-dados">
-            <p>Nenhum ambiente encontrado.</p>
-          </div>
+        <div *ngIf="modoAtual === 'chamados'" class="titulo-botao-pagina-chamado">
+            <p class="titulo-pagina-chamado">Chamados {{ambienteSelecionado}}</p>
+            <img src="/images/iconeSetaVoltar.png" class="retornaLocais" (click)="retornarLocais()">
+        </div>
           
-          <div class="locais-cards-wrapper">
+        <div class="cards-wrapper" [class.chamados-mode]="modoAtual === 'chamados'">
+
+          <ng-container *ngIf="modoAtual === 'locais'">
+
+            <div *ngIf="carregado && cards.length === 0" class="sem-dados">
+              <p>Nenhum ambiente encontrado.</p>
+            </div>
+
             <div class="locais-cards">
               <div class="card" *ngFor="let card of cards" (click)="exibirChamados(card.nome)">
                 <p>{{ card.nome }}</p>
@@ -34,20 +36,16 @@
                 </div>
               </div>
             </div>
-          </div>
+          </ng-container>
 
-        </div>
-
-        <div *ngIf="modoAtual === 'chamados'">
-          <app-chamados-locais-cards
-          [ambiente]="ambienteSelecionado!"
-          [chamados]="chamadosAmbiente"
-          [ambientes]="ambientes"
-          [tiposChamado]="tiposChamado"
-          >
-          </app-chamados-locais-cards>
-
-          <button class="retornaLocais" (click)="retornarLocais()">Voltar</button>
+          <ng-container *ngIf="modoAtual === 'chamados'">
+            <app-chamados-locais-cards
+              [ambiente]="ambienteSelecionado!"
+              [chamados]="chamadosAmbiente"
+              [ambientes]="ambientes"
+              [tiposChamado]="tiposChamado">
+            </app-chamados-locais-cards>
+          </ng-container>
 
         </div>
 

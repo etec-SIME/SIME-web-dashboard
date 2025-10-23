@@ -114,17 +114,44 @@
   padding-right: 0.5vw;
 }
 
+/* Acionar ao selecionar um local*/
+
+.titulo-botao-pagina-chamado {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: clamp(10px, 4vh, 6vh);
+  padding-left: 2vw;
+  padding-right: 2vw;
+}
+
+.titulo-pagina-chamado{
+  font-weight: var(--fw-semibold);
+  font-size: clamp(20px, 1.5vw, 4vw);
+}
+
+.retornaLocais{
+  width: 7vw;
+}
+
 /* Card de locais */
 
 .sem-dados{
   margin-top: clamp(20px, 4vh, 6vh);
 }
 
-.locais-cards-wrapper{
+.cards-wrapper{
   /*max-height: clamp(400px, 72.5vh, 74.5vh);*/
-  height: calc(100vh - clamp(220px, 30vh, 32vh));
+  max-height: calc(100vh - clamp(220px, 30vh, 32vh));
   overflow-y: auto;
   padding-right: 1rem;
+  margin-bottom: clamp(20px, 6vh, 8vh);
+}
+
+.cards-wrapper.chamados-mode {
+  height: calc(100vh - clamp(240px, 35vh, 37vh)); /* Alterar depois? */
   margin-bottom: clamp(20px, 6vh, 8vh);
 }
 
