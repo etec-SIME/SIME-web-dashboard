@@ -3,7 +3,7 @@ import { ChamadoService } from '../../services/chamado/chamado.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ChamadoResponseDTO } from '../../DTOs/ChamadoResponseDTO';
 import { CommonModule } from '@angular/common';
-import { ChamadoStatusResponseDTO } from '../../DTOs/ChamadoStatusResponseDTO';
+import { ChamadoStatusResponseDTO, historicoChamadoList } from '../../DTOs/ChamadoStatusResponseDTO';
 import { forkJoin } from 'rxjs';
 import { error } from 'console';
 
@@ -35,6 +35,9 @@ export class ChamadoDetalheComponent {
   modalAberto: boolean = false;
   imagemModal: string | null = null;
 
+  isConcluido: boolean = false;
+  isEmAnalise: boolean = false;
+
   iconePrioridade: any = {
     'Alta': "/images/pendentes/altaPrioridade.svg",
     'Média': "/images/pendentes/mediaPrioridade.svg",
@@ -46,8 +49,6 @@ export class ChamadoDetalheComponent {
     private router: Router,
     private route: ActivatedRoute,
   ) {}
-
-  @ViewChild('')
 
   ngOnInit(): void {
     this.idChamado = +this.route.snapshot.paramMap.get('id')!;
@@ -66,23 +67,25 @@ export class ChamadoDetalheComponent {
 
         this.progresso = progresso;
 
-        console.log(progresso.historicoChamadoList);
+        //console.log(progresso.historicoChamadoList);
 
         if (progresso.statusAtualProgressoChamado === 'Concluído') {
+          this.isConcluido = true;
           this.chamadoService.atualizarStatusGeral(this.idChamado, 'CONCLUIDO').subscribe({
-            next: res => console.log('Status geral atualizado para CONCLUIDO:', res),
+            //next: res => console.log('Status geral atualizado para CONCLUIDO:', res),
             error: err => console.error('Erro ao atualizar status geral:', err)
           });
         } 
         else if (progresso.statusAtualProgressoChamado === 'Aprovado') {
           this.chamadoService.atualizarStatusGeral(this.idChamado, 'PENDENTE').subscribe({
-            next: res => console.log('Status geral atualizado para PENDENTE:', res),
+            //next: res => console.log('Status geral atualizado para PENDENTE:', res),
             error: err => console.error('Erro ao atualizar status geral:', err)
           });
         }
-        else if (progresso.statusAtualProgressoChamado === 'Em_analise') {
+        else if (progresso.statusAtualProgressoChamado === 'Em análise') {
+          this.isEmAnalise = true;
           this.chamadoService.atualizarStatusGeral(this.idChamado, 'AGUARDANDO_APROVACAO').subscribe({
-            next: res => console.log('Status geral atualizado para AGUARDANDO_APROVACAO', res),
+            //next: res => console.log('Status geral atualizado para AGUARDANDO_APROVACAO', res),
             error: err => console.error('Erro ao atualizar status geral', err)
           });
         }
@@ -92,12 +95,15 @@ export class ChamadoDetalheComponent {
             const dataAbertura = chamado.dtAberturaChamado;
             etapa.data = `${this.obterDiaSemana(dataAbertura)}, ${this.formatarData(dataAbertura)}`;
           } else {
-              const itemHistorico = progresso.historicoChamadoList.find(
-              (h: any) => h.statusProgresso === etapa.nome
-            );
-            if (itemHistorico) {
-              etapa.data = `${itemHistorico.diaSemana}, ${this.formatarData(itemHistorico.dtAlteracao)}`;
-            }
+              const itemHistorico = progresso.historicoChamadoList
+                .filter(h => h.statusProgresso === etapa.nome)
+                .reduce<historicoChamadoList | null>((latest, current) => 
+                  !latest || new Date(current.dtAlteracao) > new Date(latest.dtAlteracao) ? current : latest
+                , null);
+
+              if (itemHistorico) {
+                etapa.data = `${itemHistorico.diaSemana}, ${this.formatarData(itemHistorico.dtAlteracao)}`;
+              }
           }
         });
 
@@ -106,9 +112,17 @@ export class ChamadoDetalheComponent {
         );
         if (this.etapaAtualIndex === -1) this.etapaAtualIndex = 0;
 
-        console.log('Detalhe do chamado recebido: ', chamado);
-        console.log('Imagens URLs: ', this.imagensUrl);
-        console.log('Progresso do chamado recebido: ', progresso);
+        //Apaga datas das etapas futuras
+        this.etapas = this.etapas.map((etapa, index) => {
+        if (index > this.etapaAtualIndex) {
+          return { ...etapa, data: undefined };
+        }
+          return etapa;
+        });
+
+        // console.log('Detalhe do chamado recebido: ', chamado);
+        // console.log('Imagens URLs: ', this.imagensUrl);
+        // console.log('Progresso do chamado recebido: ', progresso);
       },
       error: (err) => {
         console.error('Erro ao carregar detalhes do chamado ou progresso:', err);
@@ -141,15 +155,63 @@ export class ChamadoDetalheComponent {
   }
 
   nextStatus(event: Event) {
+    event.stopPropagation();
+    if (this.etapaAtualIndex < this.etapas.length - 1) {
+      this.isEmAnalise = false;
 
+      const novoIndex = this.etapaAtualIndex + 1;
+      let novoStatus = this.etapas[novoIndex].nome
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toUpperCase()
+        .replace(/\s+/g, '_');
+
+      this.etapas = this.etapas.map((etapa, index) => {
+      if (index > novoIndex) {
+        return { ...etapa, data: undefined };
+      }
+        return etapa;
+      });
+
+      this.atualizarStatusChamado(novoStatus);
+    } else {
+      console.log('Já está na última etapa.');
+    }
   }
 
   prevStatus(event: Event) {
+    event.stopPropagation();
+    if (this.etapaAtualIndex > 0) {
+      this.isConcluido = false;
 
+      const novoIndex = this.etapaAtualIndex - 1;
+      let novoStatus = this.etapas[novoIndex].nome
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .toUpperCase()
+          .replace(/\s+/g, '_');
+
+      this.etapas = this.etapas.map((etapa, index) => {
+      if (index > novoIndex) {
+        return { ...etapa, data: undefined };
+      }
+        return etapa;
+      });
+
+      this.atualizarStatusChamado(novoStatus);
+    } else {
+      console.log('Já está na primeira etapa.');
+    }
   }
 
-  atualizarStatus() {
-    this.chamadoService.atualizarStatusGeral(this.chamado?.idChamado, this.progresso.)
+  atualizarStatusChamado(novoStatus: string) {
+    this.chamadoService.atualizarStatusProgresso(this.idChamado, novoStatus).subscribe({
+      next: res => {
+        //console.log('Status do chamado atualizado:', res);
+        this.carregarChamado(this.idChamado);
+      },
+      error: err => console.error('Erro ao atualizar status do chamado:', err)
+    });
   }
 
   voltar() {

@@ -255,19 +255,6 @@
   background-color: #44A1A0;
 }
 
-/* Linha que cresce animada */
-.line.animating {
-  width: 0;
-  background-color: #44A1A0;
-  transition: width 1.5s ease-in-out;
-  animation: growLine 1.5s forwards;
-}
-
-@keyframes growLine {
-  from { width: 0; }
-  to   { width: 100%; }
-}
-
 .label {
   margin-top: 8px;
 }
@@ -293,6 +280,12 @@
 
 .progress-prev:hover { transform: translateX(-20%); }
 .progress-next:hover { transform: translateX(20%); }
+
+.btn-nav-progress.disabled,
+.btn-nav-progress:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
 
 .details p {
   margin: 8px 0;
