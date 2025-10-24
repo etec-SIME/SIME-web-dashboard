@@ -8,7 +8,7 @@
         <div class="perfil-list">
             <div class="perfil-item">
                 <button class="perfil-btn">
-                    <img class="perfil-avatar" src="images/Group.svg" alt="avatar"/>
+                    <img class="perfil-avatar" src="images/userIcon.svg" alt="avatar"/>
                     <div class="perfil-text">
                         <p id="nome">Usuário</p>
                         <p id="count">2 permissões</p>
@@ -18,7 +18,7 @@
 
             <div class="perfil-item">
                 <button class="perfil-btn">
-                    <img class="perfil-avatar" src="images/Group.svg" alt="avatar"/>
+                    <img class="perfil-avatar" src="images/userIcon.svg" alt="avatar"/>
                     <div class="perfil-text">
                         <p id="nome">Gestor Geral</p>
                         <p id="count">7 permissões</p>
@@ -28,7 +28,7 @@
 
             <div class="perfil-item selected">
                 <button class="perfil-btn">
-                    <img class="perfil-avatar" src="images/Group.svg" alt="avatar"/>
+                    <img class="perfil-avatar" src="images/userIcon.svg" alt="avatar"/>
                     <div class="perfil-text">
                         <p id="nome">Administrador</p>
                         <p id="count">9 permissões</p>
@@ -42,36 +42,45 @@
         <!-- Modal -->
         @if (mostrarModal) {
             <div class="modal-overlay" style="background-color: rgba(0, 0, 0, 0.5);">
-                <div class="modal-content">
-                    <header class="modal-header">
-                        <img src="assets/icons/user.svg" alt="ícone usuário" />
-                        <h3>Criar novo tipo de perfil</h3>
-                    </header>
-
-                    <h4 class="modal-subtitle">Adicione</h4>
-
-                    <form class="modal-form">
-                        <label>
-                        <input type="text" placeholder="NOME" />
-                        </label>
-
-                        <label class="select-wrapper">
-                            <select>
-                                <option value="" selected>DEPARTAMENTO (OPCIONAL)</option>
-                                @for (dep of departamentos; track dep) {
-                                    <option [value]="dep">{{ dep }}</option>
-                                }
-                            </select>
-                        </label>
-
+                <div class="modal-container">
+                    <div class="modal-header">
+                        <div class="row">
+                            <img src="images/userIcon2.svg" alt="ícone usuário" />
+                            <h3>Criar novo tipo de perfil</h3>
+                        </div>
+                        <div class="modal-divider"></div>
+                    </div>
+                    
+                    <div class="modal-content">
+                        <h4 class="modal-subtitle">Adicione</h4>
+    
+                        <form class="modal-form">
+                            <div class="modal-input">
+                                <img src="images/docIcon.svg"/>
+                                <input type="text" placeholder="NOME" />
+                            </div>
+    
+                            <div class="modal-input">
+                                <img src="images/depIcon.svg"/>
+                                <div class="select-wrapper">
+                                    <select>
+                                        <option value="" selected>DEPARTAMENTO (OPCIONAL)</option>
+                                        @for (dep of departamentos; track dep) {
+                                            <option [value]="dep">{{ dep }}</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+    
+                        </form>
                         <div class="modal-actions">
                             <button type="button" class="btn-cancelar" (click)="fecharModal()">Cancelar</button>
                             <button type="submit" class="btn-criar">
-                                <img src="assets/icons/add.svg" alt="ícone criar" />
+                                <img src="images/iconeCriar.png" alt="ícone criar" />
                                 Criar
                             </button>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         }
