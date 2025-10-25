@@ -34,6 +34,7 @@ export class HomeComponent implements OnInit{
   modoAtual: 'locais' | 'chamados' = 'locais';
   ambienteSelecionado: string | null = null;
   carregado: boolean = false;
+  bloqueado: boolean = false;
   localPesquisa: string = '';
 
   // Estrutura de exibição dos cards no html
@@ -47,6 +48,7 @@ export class HomeComponent implements OnInit{
   }
 
   setOpcao(opcao: 'salas' | 'labs' | 'outros') {
+    if (this.bloqueado) return;
     this.opcaoAtual = opcao;
     this.localPesquisa = ''; // Vai limpar o campo quando mudar de aba
     this.carregarDados();
@@ -136,26 +138,24 @@ export class HomeComponent implements OnInit{
   exibirChamados(nomeAmbiente: string){
     this.ambienteSelecionado = nomeAmbiente;
     this.modoAtual = 'chamados';
+    this.bloqueado = true;
 
     const numeroAmbiente = parseInt(nomeAmbiente.match(/\d+$/)?.[0] || '')
     if (!numeroAmbiente) return;
 
-    const ambiente = this.ambientes.find( a =>
-      a.numAmbiente === numeroAmbiente
-    );
+    const ambiente = this.ambientes.find( a => a.numAmbiente === numeroAmbiente );
     if (!ambiente) return;
 
-    this.chamadosAmbiente = this.chamados.filter(
-      c => c.tipoAmbiente.idTipoAmbiente === ambiente.idTipoAmbiente
-    );
+    this.chamadosAmbiente = this.chamados.filter( c => c.tipoAmbiente.idTipoAmbiente === ambiente.idTipoAmbiente );
 
-    console.log('Chamados filtrados:', this.chamadosAmbiente);
+    //console.log('Chamados filtrados:', this.chamadosAmbiente);
 
   }
   
   retornarLocais(){
     this.modoAtual = 'locais';
     this.ambienteSelecionado = null;
+    this.bloqueado = false;
   }
 
 }

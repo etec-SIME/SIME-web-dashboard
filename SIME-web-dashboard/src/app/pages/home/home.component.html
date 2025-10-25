@@ -16,7 +16,11 @@
 
         <div *ngIf="modoAtual === 'chamados'" class="titulo-botao-pagina-chamado">
             <p class="titulo-pagina-chamado">Chamados {{ambienteSelecionado}}</p>
-            <img src="/images/iconeSetaVoltar.png" class="retornaLocais" (click)="retornarLocais()">
+            
+            <div class="retornarLocais" (click)="retornarLocais()">
+              <img src="/images/iconeSetaVoltar.png" class="iconeSetaVoltar">
+              <p class="voltar">Voltar</p>
+            </div>
         </div>
           
         <div class="cards-wrapper" [class.chamados-mode]="modoAtual === 'chamados'">

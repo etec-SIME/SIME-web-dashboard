@@ -5,7 +5,7 @@ import { TipoChamadoSelectDTO } from "./TipoChamadoSelectDTO";
 export interface ChamadosAmbienteDTO {
     tituloChamado: string;
     descChamado: string;
-    dataAbertura: string;
+    dtAberturaChamado: string;
     codEquipamento: string;
     ambiente: AmbienteSelectDTO;
     tipoChamado: TipoChamadoSelectDTO;

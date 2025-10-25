@@ -21,7 +21,7 @@
 
 .card{
   background-color: #EEEEEE; /*#EAEAEA*/
-  width: clamp(450px, 40vw, 47vw);
+  width: clamp(450px, 42vw, 44vw);
   height: clamp(75px, 12vh, 14vh);
   max-height: 88px;
   border-width: 10vw;
@@ -30,32 +30,38 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-inline: clamp(15px, 2vw, 4vw);
+  padding-inline: clamp(20px, 2vw, 4vw);
 }
 
 .card-esquerda{
   display: flex;
   align-items: center;
-  gap: clamp(10px, 1.5vw, 3vw);
+  gap: clamp(20px, 1.6vw, 3.6vw);
 
+}
+
+.iconeDocumento{
+  width: clamp(26px, 2vw, 4vw);
+}
+
+.chamado-info{
+  display: flex;
+  flex-direction: column;
+  gap: clamp(5px, 0.5vw, 2.5vw);
 }
 
 .titulo-chamado{
   color: #3B8C8B;
   font-weight: var(--fw-medium);
-  font-size: clamp(15px, 1.3vw, 3.3vw);
+  font-size: clamp(15px, 1.2vw, 3.2vw);
 }
 
 .data-tipo-chamado{
   font-weight: var(--fw-regular);
   color: #464646;
-  font-size: clamp(10px, 1.1vw, 3.1vw);
-}
-
-.iconeDocumento{
-  width: clamp(20px, 2vw, 4vw);
+  font-size: clamp(12px, 0.96vw, 2.96vw);
 }
 
 .iconeSeta{
-  width: clamp(15px, 2vw, 4vw);
+  width: clamp(23px, 2vw, 4vw);
 }
