@@ -6,17 +6,17 @@
 <div class="container">
     <div class="perfil-container">
         <div class="perfil-list">
-            @for (perfil of tiposPerfis; track perfil.idTipoPerfil) {
+        @for (perfil of tiposPerfis; track perfil.idTipoPerfil) {
             <div class="perfil-item">
-                <button class="perfil-btn">
-                <img class="perfil-avatar" src="images/userIcon.svg" alt="avatar" />
-                <div class="perfil-text">
-                    <p id="nome">{{ perfil.nomeTipoPerfil }}</p>
-                    <p id="count">{{ perfil.permissaoList.length }} permissões</p>
-                </div>
+                <button class="perfil-btn" (click)="selecionarTipoPerfil(perfil)">
+                    <img class="perfil-avatar" src="images/userIcon.svg" alt="avatar" />
+                    <div class="perfil-text">
+                        <p id="nome">{{ perfil.nomeTipoPerfil }}</p>
+                        <p id="count">{{ perfil.permissaoList.length }} permissões</p>
+                    </div>
                 </button>
             </div>
-            }
+        }
         </div>
 
         <button class="btn btn-create" (click)="abrirModal()">Criar</button>
@@ -39,26 +39,14 @@
                         <form class="modal-form">
                             <div class="modal-input">
                                 <img src="images/docIcon.svg"/>
-                                <input type="text" placeholder="NOME" />
-                            </div>
-    
-                            <div class="modal-input">
-                                <img src="images/depIcon.svg"/>
-                                <div class="select-wrapper">
-                                    <select>
-                                        <option value="" selected>DEPARTAMENTO (OPCIONAL)</option>
-                                        @for (dep of departamentos; track dep) {
-                                            <option [value]="dep">{{ dep }}</option>
-                                        }
-                                    </select>
-                                </div>
+                                <input type="text" placeholder="NOME" name="nomeModal" [(ngModel)]="nomeModal"/>
                             </div>
     
                         </form>
                         <div class="modal-actions">
                             <button type="button" class="btn-cancelar" (click)="fecharModal()">Cancelar</button>
-                            <button type="submit" class="btn-criar">
-                                <img src="images/iconeCriar.png" alt="ícone criar" />
+                            <button type="submit" class="btn-criar" (click)="criarTipoPerfil()">
+                                <img src="images/iconeCriar.png" alt="ícone criar"/>
                                 Criar
                             </button>
                         </div>
@@ -79,6 +67,8 @@
                         <input
                             type="checkbox"
                             [name]="perm.nomePermissao.toLowerCase().replaceAll(' ', '-')"
+                            [checked]="isPermissaoSelecionada(perm)"
+                            (change)="togglePermissao(perm, $event)"
                         />
                         <span>{{ perm.nomePermissao }}</span>
                     </label>
@@ -86,7 +76,7 @@
             </div>
 
             <div class="panel-actions">
-                <button type="button" class="btn btn-save">Salvar</button>
+                <button type="submit" class="btn btn-save" (click)="salvarAlteracoes()">Salvar</button>
             </div>
         </form>
     </div>

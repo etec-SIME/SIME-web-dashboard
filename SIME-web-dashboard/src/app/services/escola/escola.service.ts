@@ -88,7 +88,7 @@ export class EscolaService {
     return this.http.post<usuarioRequestDTO>(`${this.apiUrl}/usuario`, dto);
   }
 
-  cadastrarTipoPerfil(dto:tipoPerfilRequestDTO ): Observable<any>{
+  cadastrarTipoPerfil(dto: tipoPerfilRequestDTO): Observable<any>{
     return this.http.post<tipoPerfil>(`${this.apiUrl}/tipo-perfil`, dto);
   }
 
