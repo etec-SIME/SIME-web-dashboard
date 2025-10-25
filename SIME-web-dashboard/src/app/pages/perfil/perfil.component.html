@@ -6,35 +6,17 @@
 <div class="container">
     <div class="perfil-container">
         <div class="perfil-list">
+            @for (perfil of tiposPerfis; track perfil.idTipoPerfil) {
             <div class="perfil-item">
                 <button class="perfil-btn">
-                    <img class="perfil-avatar" src="images/userIcon.svg" alt="avatar"/>
-                    <div class="perfil-text">
-                        <p id="nome">Usuário</p>
-                        <p id="count">2 permissões</p>
-                    </div>
+                <img class="perfil-avatar" src="images/userIcon.svg" alt="avatar" />
+                <div class="perfil-text">
+                    <p id="nome">{{ perfil.nomeTipoPerfil }}</p>
+                    <p id="count">{{ perfil.permissaoList.length }} permissões</p>
+                </div>
                 </button>
             </div>
-
-            <div class="perfil-item">
-                <button class="perfil-btn">
-                    <img class="perfil-avatar" src="images/userIcon.svg" alt="avatar"/>
-                    <div class="perfil-text">
-                        <p id="nome">Gestor Geral</p>
-                        <p id="count">7 permissões</p>
-                    </div>
-                </button>
-            </div>
-
-            <div class="perfil-item selected">
-                <button class="perfil-btn">
-                    <img class="perfil-avatar" src="images/userIcon.svg" alt="avatar"/>
-                    <div class="perfil-text">
-                        <p id="nome">Administrador</p>
-                        <p id="count">9 permissões</p>
-                    </div>
-                </button>
-            </div>
+            }
         </div>
 
         <button class="btn btn-create" (click)="abrirModal()">Criar</button>
@@ -92,46 +74,17 @@
             <h2>ADICIONAR PERMISSÕES</h2>
 
             <div class="perm-list">
-                <label class="perm-item">
-                    <input type="checkbox" name="criar-chamado" />
-                    <span>Criar chamado</span>
-                </label>
-        
-                <label class="perm-item">
-                    <input type="checkbox" name="aprovar-chamado" checked />
-                    <span>Aprovar chamado</span>
-                </label>
-        
-                <label class="perm-item">
-                    <input type="checkbox" name="criar-perfil" checked />
-                    <span>Criar novo perfil</span>
-                </label>
-        
-                <label class="perm-item">
-                    <input type="checkbox" name="criar-tipo-perfil" />
-                    <span>Criar novo tipo de perfil</span>
-                </label>
-        
-                <label class="perm-item">
-                    <input type="checkbox" name="definir-prioridade" />
-                    <span>Definir prioridade</span>
-                </label>
-        
-                <label class="perm-item">
-                    <input type="checkbox" name="comentar-chamado" checked />
-                    <span>Comentar no chamado</span>
-                </label>
-        
-                <label class="perm-item">
-                    <input type="checkbox" name="reprovar-chamado" />
-                    <span>Reprovar chamado</span>
-                </label>
-        
-                <label class="perm-item">
-                    <input type="checkbox" name="visualizar-tipos" />
-                    <span>Visualizar todos os tipos de chamados</span>
-                </label>
+                @for (perm of permissoes; track perm.idPermissao) {
+                    <label class="perm-item">
+                        <input
+                            type="checkbox"
+                            [name]="perm.nomePermissao.toLowerCase().replaceAll(' ', '-')"
+                        />
+                        <span>{{ perm.nomePermissao }}</span>
+                    </label>
+                }
             </div>
+
             <div class="panel-actions">
                 <button type="button" class="btn btn-save">Salvar</button>
             </div>
