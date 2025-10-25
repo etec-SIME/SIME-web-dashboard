@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChange } from '@angular/core';
 import { Location } from '@angular/common';
 import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
 import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
-import { chamadosAmbienteDTO } from '../../DTOs/chamadosAmbienteDTO';
+import { ChamadosAmbienteDTO } from '../../DTOs/ChamadosAmbienteDTO';
 
 
 @Component({
@@ -16,30 +16,33 @@ import { chamadosAmbienteDTO } from '../../DTOs/chamadosAmbienteDTO';
 })
 export class ChamadosLocaisCardsComponent {
   @Input() ambiente!: string | null;
-  @Input() chamados: chamadosAmbienteDTO[] = [];
+  @Input() chamados: ChamadosAmbienteDTO[] = [];
   @Input() ambientes: AmbienteSelectDTO[] = [];
   @Input() tiposChamado: TipoChamadoSelectDTO[] = [];
 
-  get chamadosFiltrados(){
-    if (!this.chamados || !this.tiposChamado){ //|| !this.ambientes || !this.tiposChamado || !this.ambiente
-      return [];
-    }
+  chamadosFiltrados: any[] = [];
 
-    return this.chamados.map(chamado => ({
-        /*const tipo = this.tiposChamado.find(t => 
-          Number(t.idTipoChamado) === Number(chamado.TipoChamado.idTipoChamado));
-        
-        return {};*/
-          ...chamado,
-          dataAberturaFormatada: this.formatarData(chamado.dataAbertura),
-          nomeTipoChamado: chamado.tipoChamado?.nomeTipoChamado || "Tipo do Chamado não encontrado."
-        
-      }));
+  ngOnChanges(changes: SimpleChange): void{
+    if (changes['chamados' && this.chamados?.length > 0]){
+      this.processarChamados();
+    }
   }
+
+  public processarChamados(): void{
+    this.chamadosFiltrados = this.chamados.map( chamado => ({
+      ...chamado,
+      dataAberturaFormatada: this.formatarData(chamado.dataAbertura) || "Sem data",
+      nomeTipoChamado: chamado.tipoChamado?.nomeTipoChamado || "Tipo do Chamado não encontrado."
+      }))
+  };
 
   public formatarData(data: string): string {
     if (!data) return '';
-    return data.split('T')[0].split('-').reverse().join('/');
+    const partes = data.split('T')[0].split('-').reverse().join('/');
+    if (partes.length !== 3) return '';
+    const dataFormatada = `${partes[2]}/${partes[1]}/${partes[0]}`;
+    console.log("Data formatada:", dataFormatada);
+    return dataFormatada;
   }
 
 }

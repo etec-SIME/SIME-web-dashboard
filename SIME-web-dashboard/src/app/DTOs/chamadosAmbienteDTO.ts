@@ -1,13 +1,13 @@
+import { AmbienteSelectDTO } from "./AmbienteSelectDTO";
 import { tipoAmbienteRequestDTO } from "./tipoAmbienteRequestDTO";
 import { TipoChamadoSelectDTO } from "./TipoChamadoSelectDTO";
 
-export interface chamadosAmbienteDTO {
+export interface ChamadosAmbienteDTO {
     tituloChamado: string;
     descChamado: string;
     dataAbertura: string;
-    emailUsuario: string;
     codEquipamento: string;
-    idAmbiente: number;
+    ambiente: AmbienteSelectDTO;
     tipoChamado: TipoChamadoSelectDTO;
     tipoAmbiente: tipoAmbienteRequestDTO;
 }
