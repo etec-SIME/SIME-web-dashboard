@@ -1,11 +1,13 @@
 import { chamadoProjection } from './../../DTOs/Projections/chamadoProjection';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ChamadoCardDTO } from '../../DTOs/ChamadoCardDTO';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
-import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
+import { ChamadoResponseDTO } from '../../DTOs/ChamadoResponseDTO';
+import { ChamadoStatusResponseDTO } from '../../DTOs/ChamadoStatusResponseDTO';
+import { ChamadoRequestDTO } from '../../DTOs/chamadoRequestDTO';
 import { ChamadosAmbienteDTO } from '../../DTOs/ChamadosAmbienteDTO';
 
 @Injectable({
@@ -53,5 +55,24 @@ export class ChamadoService {
 
   criarChamado(formData: FormData): Observable<any> {
     return this.http.post(`${this.apiUrl}/criar-chamado`, formData, { withCredentials: true });
+  }
+
+  getDetalheChamado(id: number): Observable<ChamadoResponseDTO> {
+    return this.http.get<ChamadoResponseDTO>(`${this.apiUrl}/${id}`, { withCredentials: true });
+  }
+
+  getStatusChamado(id: number): Observable<ChamadoStatusResponseDTO> {
+    return this.http.get<ChamadoStatusResponseDTO>(`${this.apiUrl}/${id}/status`, { withCredentials: true });
+  }
+
+  atualizarStatusGeral(id: number, novoStatus: string): Observable<ChamadoStatusResponseDTO> {
+    const param = new HttpParams().set('novoStatus', novoStatus);
+
+    return this.http.put<ChamadoStatusResponseDTO>(`${this.apiUrl}/${id}/atualizar-status-geral`, {}, { params: param, withCredentials: true });
+  }
+
+  atualizarStatusProgresso(id: number, novoStatusProgresso: string): Observable<ChamadoStatusResponseDTO> {
+    const param = new HttpParams().set('novoStatus', novoStatusProgresso);
+    return this.http.put<ChamadoStatusResponseDTO>(`${this.apiUrl}/${id}/atualizar-status-progresso`, {}, { params: param, withCredentials: true });
   }
 }

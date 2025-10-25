@@ -1,5 +1,6 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-chamado-card',
@@ -13,4 +14,11 @@ export class ChamadoCardComponent {
   @Input() descricao!: string;
   @Input() local!: string;
   @Input() prioridade!: 'ALTA_PRIORIDADE' | 'MEDIA_PRIORIDADE' | 'BAIXA_PRIORIDADE';
+  @Input() idChamado!: number;
+
+  constructor(private router: Router) {}
+
+  navigate() {
+    this.router.navigate(['/layout/chamado', this.idChamado]);
+  }
 }

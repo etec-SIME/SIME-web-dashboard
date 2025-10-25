@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ChamadoService } from '../../services/chamado/chamado.service';
-import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
+import { ChamadoRequestDTO } from '../../DTOs/chamadoRequestDTO';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
 import { forkJoin } from 'rxjs';
@@ -17,7 +17,7 @@ export class CriarChamadoComponent {
   ambientes: AmbienteSelectDTO[] = [];
 
   chamadoForm: FormGroup;
-  selectedFiles: File[] = []; // Changed from a single File to an array of Files
+  selectedFiles: File[] = [];
 
   constructor(private fb: FormBuilder, private chamadoService: ChamadoService) {
     this.chamadoForm = this.fb.group({
@@ -65,11 +65,19 @@ export class CriarChamadoComponent {
     if (event.target.files && event.target.files.length > 0) {
       const files: File[] = Array.from(event.target.files);
   
-      this.selectedFiles = files.filter(file => file.type.startsWith('image/'));
-  
-      if (this.selectedFiles.length !== files.length) {
-        alert('Apenas arquivos de imagem são permitidos!');
-      }
+      const imageFiles: File[] = files.filter(file => file.type.startsWith('image/'));
+
+      this.selectedFiles.push(...imageFiles);
+
+      this.selectedFiles = this.selectedFiles.filter(
+        (file, index, self) => index === self.findIndex(f => f.name === file.name)
+      );
+    
+    if (imageFiles.length !== files.length) {
+      alert('Apenas arquivos de imagem são permitidos!');
+    }
+
+      console.log('Arquivos selecionados:', this.selectedFiles);
     }
   }
 
@@ -114,9 +122,7 @@ export class CriarChamadoComponent {
     formData.append('chamado', new Blob([JSON.stringify(chamadoRequestDTO)], { type: 'application/json' }));
 
     if (this.selectedFiles && this.selectedFiles.length > 0) {
-      for (let file of this.selectedFiles) {
-        formData.append('files', file);
-      }
+      this.selectedFiles.forEach(file => formData.append('files', file));
     }
     
     this.chamadoService.criarChamado(formData).subscribe({
