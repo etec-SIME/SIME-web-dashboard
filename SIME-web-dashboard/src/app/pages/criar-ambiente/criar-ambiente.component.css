@@ -241,8 +241,8 @@
 .modal-codigos{
   background-color: white;
   z-index: 101;
-  width: clamp(20px, 28vw, 30vw);
-  height: clamp(100px, 82vh, 85vh);
+  width: clamp(25px, 33vw, 300vw);
+  height: clamp(45px, 80vh, 85vh);
   border-radius: 15px;
   padding-top: clamp(10px, 2vw, 4vw);
   position: relative;
@@ -282,7 +282,7 @@
     gap: clamp(20px, 1vw, 3.5vw);
     overflow-y: hidden;
     overflow-x: auto;
-    max-width: clamp(20px, 23.5vw, 25.5vw);
+    max-width: clamp(20px, 29vw, 31vw);
     padding-bottom: clamp(2px, 0.6vw, 2.6vw);
     margin-top: clamp(2px, 1.5vw, 3.5vw);
     margin-left: clamp(5px, 2vw, 4vw);
@@ -378,7 +378,7 @@
 }
 
 .footer-modal button{
-    width: clamp(20px, 7vw, 9vw);
+    width: clamp(20px, 10vw, 12vw);
     height: clamp(10px, 4.7vh, 6.7vh);
     margin-right: clamp(5px, 2vw, 50vw);
 }
