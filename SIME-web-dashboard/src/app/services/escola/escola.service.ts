@@ -21,7 +21,6 @@ import { permissaoTipoPerfilDTO } from '../../DTOs/permissaoTipoPerfilDTO';
 import { tipoEquipamentoAmbienteDTO } from '../../DTOs/tipoEquipamentoAmbienteDTO';
 import { tipoPerfilProjection } from '../../DTOs/Projections/tipoPerfilProjection';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
-import { equipamentoCodigosResponseDTO } from '../../DTOs/EquipamentoCodigosResponseDTO';
 import { codEquipamentoResponseDTO } from '../../DTOs/codEquipamentoResponseDTO';
 
 @Injectable({

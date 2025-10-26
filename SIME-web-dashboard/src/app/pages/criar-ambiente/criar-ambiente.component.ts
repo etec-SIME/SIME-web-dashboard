@@ -6,7 +6,7 @@ import { Router, RouterModule } from '@angular/router';
 import { tipoAmbiente } from '../../models/tipoAmbiente';
 import { forkJoin} from 'rxjs';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
-import { codEquipamentoResponseDTO } from '../../DTOs/codEquipamentoResponseDTO';
+import { codEquipamentoResponseDTO, equipamentoEnvioRequestDTO } from '../../DTOs/codEquipamentoResponseDTO';
 
 @Component({
   selector: 'app-criar-ambiente',
@@ -25,6 +25,8 @@ export class CriarAmbienteComponent {
   qtdAmbientes: number[] = [];
   codsEquipamentos: codEquipamentoResponseDTO[] = []
   listarCods: codEquipamentoResponseDTO[] = []
+  equipamentosParaEnvio: equipamentoEnvioRequestDTO[] = []
+  
 
   criarLocal: boolean = true;
   modalCodigos: boolean = false;
@@ -36,8 +38,7 @@ export class CriarAmbienteComponent {
   constructor(private fb: FormBuilder, private escolaService: EscolaService, private router: Router){
     this.ambienteForm = this.fb.group({
       numeroLocal: [ , Validators.required],
-      descricaoLocal: ['', Validators.required],
-      codEquipamento: ['', Validators.required]
+      descricaoLocal: ['', Validators.required]
     }),
     this.tipoAmbienteForm = this.fb.group({
       nomeTipoLocal: ['', Validators.required]
@@ -62,7 +63,11 @@ export class CriarAmbienteComponent {
             this.tiposAmbiente = data.tiposAmbiente;
             this.ambientes = data.ambientes;
             this.codsEquipamentos = data.codsEquipamentos;
-            this.listarCods = this.codsEquipamentos;
+
+            for(let i = 0; i < this.codsEquipamentos.length; i++){
+              this.listarCods.push(this.codsEquipamentos[i])
+            }
+
             this.contagemAmbiente();
         },
         (error) => {
@@ -84,12 +89,50 @@ export class CriarAmbienteComponent {
     }
   }
 
-  btnCriar(){
-    this.criarLocal = !this.criarLocal;
-  }
-
   mostrarModal(){
     this.modalCodigos = !this.modalCodigos;
+    this.listarCodigosTipoEquipamento(0);
+  }
+
+  listarCodigosTipoEquipamento(id: number){
+    this.listarCods.splice(0, this.listarCods.length);
+
+    if(id >= 1){
+      
+      this.listarCods = this.codsEquipamentos.filter(equip => equip.idTipoEquipamento === id);
+
+      for(let j = 0; j < this.tiposEquipamento.length; j++){
+        if(this.tiposEquipamento[j].idTipoEquipamento == id){
+          this.nomeListagemEquipamentos = this.tiposEquipamento[j].nomeTipoEquipamento;
+        }
+      }
+    }else{
+        for(let i = 0; i < this.codsEquipamentos.length; i++){
+          this.listarCods.push(this.codsEquipamentos[i]);
+        }
+        this.nomeListagemEquipamentos = "Todos equipamentos";
+    } 
+  }
+
+  desmarcarEquipamento(equipamento: codEquipamentoResponseDTO){
+    equipamento.selecionado = !equipamento.selecionado;
+  }
+
+  getEquipamentosSelecionados(){
+    const equipamentosSelecionados = this.codsEquipamentos.filter(equip => equip.selecionado);
+
+    const equipamentoOrganizados = equipamentosSelecionados.map(({ codEquipamento, idTipoEquipamento }) => ({
+      codEquipamento, 
+      idTipoEquipamento 
+    }));
+
+    this.equipamentosParaEnvio = equipamentoOrganizados;
+    
+    this.mostrarModal();
+  }
+
+  btnCriar(){
+    this.criarLocal = !this.criarLocal;
   }
 
   mandarIdNomeTipoAmbiente(id: number, nome: string){
@@ -112,11 +155,12 @@ export class CriarAmbienteComponent {
 
       const ambienteRequestDTO = {
         numAmbiente: this.ambienteForm.value.numeroLocal,
-        descricaoAmbiente: '',
-        idTipoAmbiente: this.idTipoAmbiente
+        descricaoAmbiente: this.ambienteForm.value.descricaoLocal,
+        idTipoAmbiente: this.idTipoAmbiente,
+        equipamentoList: this.equipamentosParaEnvio
       }
 
-      if(ambienteRequestDTO.numAmbiente != null && ambienteRequestDTO.descricaoAmbiente != ""){
+      if(ambienteRequestDTO.numAmbiente != null && ambienteRequestDTO.descricaoAmbiente != "" && ambienteRequestDTO.equipamentoList.length > 0){
         this.escolaService.cadastrarAmbiente(ambienteRequestDTO).subscribe({
           next: () => {
             alert("Ambiente criado com sucesso!")
@@ -154,23 +198,6 @@ export class CriarAmbienteComponent {
 
   onCancelar(){
     this.router.navigate(['/layout/criar']);
-  }
-
-  listarCodigosTipoEquipamento(id: number){
-   
-
-    for(let i = 0; i < this.codsEquipamentos.length; i++){
-      console.log(this.codsEquipamentos[i]);
-      if(this.codsEquipamentos[i].idTipoEquipamento == id){
-        this.listarCods.push(this.codsEquipamentos[i])
-      }
-    } 
-
-    for(let j = 0; j < this.tiposEquipamento.length; j++){
-      if(this.tiposEquipamento[j].idTipoEquipamento == id){
-        this.nomeListagemEquipamentos = this.tiposEquipamento[j].nomeTipoEquipamento;
-      }
-    }
   }
 
 }

@@ -58,13 +58,14 @@
                                 <h3>{{nomeListagemEquipamentos}}</h3>
                                 <div class="lista-codigos">
                                     @if(listarCods.length != 0){
-                                        @for(codEquipamento of listarCods; track codEquipamento.codEquipamento){
+                                        @for(equipamento of listarCods; track equipamento.codEquipamento){
                                             <div class="codigo-card">
-                                                <p>{{codEquipamento.codEquipamento}}</p>
+                                                <p>{{equipamento.codEquipamento}}</p>
                                                 <div class="items-cod">
                                                     <button><img src="/images/icon_lapis.png"></button>
                                                     <button><img src="/images/icon_lixeira.png"></button>
-                                                    <input type="checkbox" formControlName="codEquipamento"class="cod-checkbox">
+                                                    <input type="checkbox" class="cod-checkbox" [checked]="equipamento.selecionado"
+                                                    (change)="desmarcarEquipamento(equipamento)">
                                                 </div>
                                             </div>
                                         }
@@ -73,7 +74,7 @@
                             </div>
                             <div class="btns-modal">
                                 <button class="btn-cancelar" (click)="mostrarModal()">Cancelar</button>
-                                <button class="btn-concluir">Concluir</button>
+                                <button class="btn-concluir" (click)="getEquipamentosSelecionados()">Concluir</button>
                             </div>
                         </div>
                     </div>
@@ -88,7 +89,7 @@
         <form [formGroup]="tipoAmbienteForm">
             <div class="forms-tipo-ambiente" >
                 <h2>CRIAR NOVO TIPO DE LOCAL</h2>
-                <input type="text" placeholder="Tipo do local" formControlName="nomeTipoLocal"/>
+                <input type="text" placeholder="Tipo do local" formControlName="nomeTipoLocal" class="input-tipo-ambiente"/>
                 @if(tipoAmbienteForm.get('nomeTipoLocal')?.touched && tipoAmbienteForm.get('nomeTipoLocal')?.invalid){
                     <div>
                         @if (tipoAmbienteForm.get('nomeTipoLocal')?.errors?.['required']) {

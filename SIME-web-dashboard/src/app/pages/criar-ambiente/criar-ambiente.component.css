@@ -101,12 +101,32 @@
     border-color: #999999;
     color: #999999;
     width: clamp(2px, 33.5vw, 35.5vw);
-    height: clamp(2px, 6.5vh, 8.5vh);
     border-radius: 0.4vw;
     font-size: 20px;
     font-weight: 600;
     padding-left: clamp(3px, 1vw, 3vw);
     border-style: solid;
+}
+
+.input-tipo-ambiente{
+    border-color: #999999;
+    color: #999999;
+    width: clamp(2px, 33.5vw, 35.5vw);
+    border-radius: 0.4vw;
+    font-size: 20px;
+    font-weight: 600;
+    padding-left: clamp(3px, 1vw, 3vw);
+    border-style: solid;
+}
+
+.input-numero input{
+  height: clamp(2px, 6.5vh, 8.5vh);
+  margin-bottom: clamp(20px, 3vw, 5vw);
+}
+
+.input-desc input{
+  height: clamp(2px, 6.5vh, 8.5vh);
+  margin-bottom: clamp(30px, 3vw, 5vw);
 }
 
 .forms-ambiente h2, h3{
@@ -131,14 +151,6 @@
 
 .forms-novo-ambiente h2{
   margin-bottom: clamp(20px, 3vw, 5vw);
-}
-
-.input-numero{
-  margin-bottom: clamp(20px, 3vw, 500vw);
-}
-
-.input-desc{
-  margin-bottom: clamp(30px, 3vw, 700vw);
 }
 
 .btns-forms-ambiente{
