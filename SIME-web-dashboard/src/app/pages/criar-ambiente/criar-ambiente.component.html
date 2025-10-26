@@ -1,6 +1,6 @@
 <div id="content">
     <div class="tipo-ambiente">
-        <div class="cards-tipo-ambiente">
+        <div class="lista-cards-tipo-ambiente">
             @for(tipoAmbiente of tiposAmbiente; track tipoAmbiente.idTipoAmbiente; let index = $index){
                 <div class="card-tipo-ambiente" tabindex="0" (click)="mandarIdNomeTipoAmbiente(tipoAmbiente.idTipoAmbiente, tipoAmbiente.nomeTipoAmbiente)">
                     <img class="icon-ambiente" src="/images/icon_livro.png">
@@ -72,7 +72,7 @@
                                     }@else {<p>Sem equipamentos</p>}
                                 </div>
                             </div>
-                            <div class="btns-modal">
+                            <div class="footer-modal">
                                 <button class="btn-cancelar" (click)="mostrarModal()">Cancelar</button>
                                 <button class="btn-concluir" (click)="getEquipamentosSelecionados()">Concluir</button>
                             </div>
@@ -93,7 +93,7 @@
                 @if(tipoAmbienteForm.get('nomeTipoLocal')?.touched && tipoAmbienteForm.get('nomeTipoLocal')?.invalid){
                     <div>
                         @if (tipoAmbienteForm.get('nomeTipoLocal')?.errors?.['required']) {
-                            <small class="erro-small">O nome é obrigatório!</small>
+                            <small class="erro-small">Nome do tipo ambiente é obrigatório!</small>
                         }
                     </div>
                 }

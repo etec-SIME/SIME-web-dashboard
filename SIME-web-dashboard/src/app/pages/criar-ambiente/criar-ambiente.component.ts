@@ -160,18 +160,22 @@ export class CriarAmbienteComponent {
         equipamentoList: this.equipamentosParaEnvio
       }
 
-      if(ambienteRequestDTO.numAmbiente != null && ambienteRequestDTO.descricaoAmbiente != "" && ambienteRequestDTO.equipamentoList.length > 0){
-        this.escolaService.cadastrarAmbiente(ambienteRequestDTO).subscribe({
-          next: () => {
-            alert("Ambiente criado com sucesso!")
-            window.location.reload();
-          },
-          error: () => {
-            alert("Erro, ambiente não criado!")
-          }
-        });
+      if(ambienteRequestDTO.numAmbiente != null && ambienteRequestDTO.descricaoAmbiente != ""){
+        if(ambienteRequestDTO.equipamentoList.length > 0){
+          this.escolaService.cadastrarAmbiente(ambienteRequestDTO).subscribe({
+            next: () => {
+              alert("Ambiente criado com sucesso!");
+              window.location.reload();
+            },
+            error: () => {
+              alert("Erro, ambiente não criado!");
+            }
+          });
+        }else{
+          alert("Selecione os códigos dos equipamentos!");
+        }
       }else{
-        alert("Preencha todos os campos obrigatórios!")
+        alert("Preencha todos os campos obrigatórios!");
       }
     }else{
       alert("Selecione um tipo de ambiente!");
