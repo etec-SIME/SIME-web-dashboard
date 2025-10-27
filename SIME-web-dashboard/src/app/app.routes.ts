@@ -24,7 +24,8 @@ export const routes: Routes = [
         { path: 'chamados-concluidos', component: ChamadosConcluidosComponent, data: { titulo: 'Chamados Concluídos' } },
         { path: 'criar', component: CriarComponent, data: { titulo: "Criar" } },
         { path: 'criar-chamado', component: CriarChamadoComponent, data: { titulo: 'Criar Chamado' } },
-        { path: 'chamado/:id', component: ChamadoDetalheComponent, data: { titulo: 'Detalhes do Chamado' } }
+        { path: 'chamado/:id', component: ChamadoDetalheComponent, data: { titulo: 'Detalhes do Chamado' } },
+        { path: 'cadastro-funcionario', component: CadastroFuncionarioComponent, data: { titulo: 'Cadastro de Funcionário' } }
       ]
     },
     { path: 'dashboard', component: DashboardComponent },
@@ -32,6 +33,5 @@ export const routes: Routes = [
     { path: 'escola', component: EscolaComponent },
     {path: 'gestor-geral', component: GestorGeralComponent},
     { path: 'pagina-de-fundo', component: PaginaDeFundoComponent },
-    {path: 'cadastro-funcionario', component: CadastroFuncionarioComponent},
     { path: '**', redirectTo: 'login' }
 ];
