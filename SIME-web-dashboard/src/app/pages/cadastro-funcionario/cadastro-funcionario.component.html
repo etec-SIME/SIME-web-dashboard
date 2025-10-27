@@ -1,6 +1,7 @@
 
+<!--
+
 <div class="content-box">
-  <h3>CADASTRAR FUNCIONÁRIOS</h3>  
   <div class="card-post">
     <form [formGroup]="formCadastrarUsuario">
         <input placeholder="NOME" formControlName="nomeUsuario">
@@ -69,4 +70,96 @@
     </form>
   </div>
 </div>
+
+-->
+
+
+<div class="cadastro-layout">
+
+  <div class="back-link">
+    <img  width="25px" src="/images/iconeSeta.png" alt="">
+    <a href="">Voltar</a>
+  </div>
+
+  <form [formGroup]="formCadastrarUsuario">
+  <div class="input-container">
+
+  <div class="input-side">
+
+    <div class="input-icon">
+      <img src="/images/iconeUser.png" width="20px">
+      <input type="text" placeholder="Nome" formControlName="nomeUsuario">
+    </div>
+
+    @if(formCadastrarUsuario.get('nomeUsuario')?.touched && formCadastrarUsuario.get('nomeUsuario')?.invalid){
+        <div>
+          @if (formCadastrarUsuario.get('nomeUsuario')?.errors?.['required']) {
+            <small>NOME é obrigatório!</small>
+          }
+        </div>
+      }
+
+    <div class="input-icon">
+      <img class="icone-RM" src="/images/icone_RM.png" width="45px">
+      <input type="text" placeholder="RM" formControlName="rmUsuario">
+    </div>
+
+    <div class="input-icon">
+      <img src="/images/Icone_TipoPerfil.png" width="20px">
+      <input type="text" placeholder="Tipo de perfil" formControlName="tipoPerfil">
+      <img width="20px" src="/images/icone_TipoPerfis.png" alt="">
+      <select id="perfil" formControlName="tipoPerfil" (change)="loadSelectTipoPerfil()">
+          @for (tipoPerfil of tiposPerfil; track tipoPerfil.idTipoPerfil) {
+            <option [ngValue]="tipoPerfil">{{ tipoPerfil.nomeTipoPerfil }}</option>
+          }
+        </select>
+    </div>
+
+  </div>
+
+  <div class="input-side">
+
+    <div class="input-icon">
+      <img src="/images/icone_Email.png" width="20px">
+      <input type="text" placeholder="Email" formControlName="emailUsuario">
+    </div>
+
+    <div class="input-icon">
+      <img src="/images/icone_CPF.png" width="20px">
+      <input type="text" placeholder="CPF" formControlName="cpfUsuario">
+    </div>
+
+    <div class="input-icon">
+      <img src="/images/icone_Senha.png" width="30px">
+      <input type="password" placeholder="Senha" formControlName="senhaUsuario">
+      <img
+          src="{{ showPassword ? 'images/iconeOlhoAberto.png' : 'images/iconeOlhoFechado.png' }}"
+          class="input-eye"
+          (click)="showPassword = !showPassword"
+          alt="Mostrar/Esconder senha">
+    </div>
+
+  </div>
+
+</div>
+</form>
+
+<div class="button-container">
+  <a href="">Cancelar</a>
+  <button (click)="onCadastrarUsuario()">Concluir</button>
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
 
