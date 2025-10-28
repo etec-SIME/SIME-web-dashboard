@@ -64,7 +64,7 @@ export class EscolaComponent implements OnInit{
           descricaoAmbiente: ambienteReq ? ambienteReq.descricaoAmbiente : 'Sem descrição'
         };
       }) // Arrumar aqui
-      
+
     );
 
     // departamentos
@@ -480,7 +480,7 @@ export class EscolaComponent implements OnInit{
     const idTipoAmbiente = this.formEditarTipoAmbiente.value.id;
 
     const tipoAmbienteEditado = {
-        idTipoAmbiente: idTipoAmbiente, 
+        idTipoAmbiente: idTipoAmbiente,
         nomeTipoAmbiente: this.formEditarTipoAmbiente.value.nomeTipoAmbiente
     }
 

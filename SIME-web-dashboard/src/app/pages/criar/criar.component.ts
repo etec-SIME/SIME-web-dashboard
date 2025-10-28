@@ -1,5 +1,4 @@
 import { forkJoin } from 'rxjs';
-import { ambienteRequestDTO } from '../../DTOs/ambienteRequestDTO';
 import { UsuarioProjection } from '../../DTOs/Projections/UsuarioProjection';
 import { EscolaService } from '../../services/escola/escola.service';
 import { UsuarioService } from '../../services/usuario/usuario.service';
@@ -66,6 +65,10 @@ export class CriarComponent{
     //this.escolaService.getAllAmbiente().subscribe((resp) => { this.locais = resp })
   }
 
+  navCadastroFuncionario(){
+    this.router.navigate(['/layout/cadastro-funcionario']);
+  }
+  
   navCriarLocal(){
     this.router.navigate(['/layout/criar-ambiente']);
   }

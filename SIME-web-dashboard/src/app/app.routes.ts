@@ -28,8 +28,9 @@ export const routes: Routes = [
         { path: 'perfil', component: PerfilComponent, data: { titulo: 'Perfil' } },
         { path: 'criar', component: CriarComponent, data: { titulo: "Criar" } },
         { path: 'criar-chamado', component: CriarChamadoComponent, data: { titulo: 'Criar Chamado' } },
+        { path: 'chamado/:id', component: ChamadoDetalheComponent, data: { titulo: 'Detalhes do Chamado' } },
+        { path: 'cadastro-funcionario', component: CadastroFuncionarioComponent, data: { titulo: 'Cadastro de Funcionário' } },
         { path: 'criar-ambiente', component: CriarAmbienteComponent, data: { titulo: 'Criar Local' } },
-        { path: 'chamado/:id', component: ChamadoDetalheComponent, data: { titulo: 'Detalhes do Chamado' } }
       ]
     },
     { path: 'dashboard', component: DashboardComponent },
