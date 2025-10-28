@@ -32,7 +32,7 @@ export class CadastroFuncionarioComponent {
   }
   tiposPerfil: TipoPerfilResponseDTO[] = [];
    showPassword = false;
-   
+
 
   cadastrarUsuario(){
     this.formCadastrarUsuario =  this.fb.group({
@@ -40,9 +40,7 @@ export class CadastroFuncionarioComponent {
       nomeUsuario: ['', Validators.required],
       senhaUsuario: ['', Validators.required],
       cpfUsuario: ['', Validators.required],
-      emailUsuario: ['', Validators.required],
-      telefoneUsuario: ['', Validators.required],
-  })
+      emailUsuario: ['', Validators.required]  })
   }
 
   onCadastrarUsuario(){
@@ -54,7 +52,7 @@ export class CadastroFuncionarioComponent {
       senhaUsuario: String(formValue.senhaUsuario),
       emailUsuario: String(formValue.emailUsuario),
       cpfUsuario: String(formValue.cpfUsuario),
-      telefoneUsuario: String(formValue.telefoneUsuario),
+      telefoneUsuario: String(formValue.cpfUsuario)
     };
 
     this.escolaService.cadastrarUsuario(novoUsuario).subscribe({
@@ -72,11 +70,11 @@ export class CadastroFuncionarioComponent {
     this.publicService.getTipoPerfilNomes().subscribe({
       next: (tiposPerfil) => {
         const tipoPadrao: TipoPerfilResponseDTO = { idTipoPerfil: 0, nomeTipoPerfil: 'Escola' };
-  
+
         this.tiposPerfil = tiposPerfil.some(t => t.idTipoPerfil === tipoPadrao.idTipoPerfil)
           ? tiposPerfil
           : [tipoPadrao, ...tiposPerfil];
-  
+
         this.formCadastrarUsuario.get('tipoPerfil')?.setValue(this.tiposPerfil[0]);
       },
       error: (err) => console.error('Erro ao buscar tipos de perfil: ', err),

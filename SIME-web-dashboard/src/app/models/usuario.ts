@@ -11,8 +11,8 @@ export interface usuario {
     cpfUsuario: string
     emailUsuario: string;
     nomeUsuario: string;
-    telefoneUsuario: string;
-    
+    telefoneUsuario?: string;
+
     tipoPerfil: tipoPerfil;
     //feedbackList: feedback[];
     chamadoList: chamado[];

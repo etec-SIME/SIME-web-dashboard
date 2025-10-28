@@ -1,5 +1,4 @@
 import { forkJoin } from 'rxjs';
-import { ambienteRequestDTO } from '../../DTOs/ambienteRequestDTO';
 import { UsuarioProjection } from '../../DTOs/Projections/UsuarioProjection';
 import { EscolaService } from '../../services/escola/escola.service';
 import { UsuarioService } from '../../services/usuario/usuario.service';
@@ -9,6 +8,7 @@ import { tipoPerfilRequestDTO } from '../../DTOs/tipoPerfilRequestDTO';
 import { departamentoRequestDTO } from '../../DTOs/departamentoRequestDTO';
 import { equipamentoRequestDTO } from '../../DTOs/equipamentoRequestDTO';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-criar',
@@ -32,7 +32,8 @@ export class CriarComponent{
   qtdDepartamentos: number = 0;
   qtdEquipamentos: number = 0;
 
-  constructor(private escolaService: EscolaService, private usuarioService: UsuarioService) {}
+  constructor(private escolaService: EscolaService, private usuarioService: UsuarioService, private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.carregarElementos();
@@ -63,6 +64,10 @@ export class CriarComponent{
     this.qtdTiposChamado = this.tiposChamado.length;
   });
     //this.escolaService.getAllAmbiente().subscribe((resp) => { this.locais = resp })
+  }
+
+  navCadastroFuncionario(){
+    this.router.navigate(['/layout/cadastro-funcionario']);
   }
 
 }

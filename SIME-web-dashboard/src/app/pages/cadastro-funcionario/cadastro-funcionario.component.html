@@ -75,12 +75,6 @@
 
 
 <div class="cadastro-layout">
-
-  <div class="back-link">
-    <img  width="25px" src="/images/iconeSeta.png" alt="">
-    <a href="">Voltar</a>
-  </div>
-
   <form [formGroup]="formCadastrarUsuario">
   <div class="input-container">
 
@@ -106,9 +100,7 @@
 
     <div class="input-icon">
       <img src="/images/Icone_TipoPerfil.png" width="20px">
-      <input type="text" placeholder="Tipo de perfil" formControlName="tipoPerfil">
-      <img width="20px" src="/images/icone_TipoPerfis.png" alt="">
-      <select id="perfil" formControlName="tipoPerfil" (change)="loadSelectTipoPerfil()">
+      <select id="tipo-perfil-select" formControlName="tipoPerfil" (change)="loadSelectTipoPerfil()">
           @for (tipoPerfil of tiposPerfil; track tipoPerfil.idTipoPerfil) {
             <option [ngValue]="tipoPerfil">{{ tipoPerfil.nomeTipoPerfil }}</option>
           }
@@ -131,9 +123,9 @@
 
     <div class="input-icon">
       <img src="/images/icone_Senha.png" width="30px">
-      <input type="password" placeholder="Senha" formControlName="senhaUsuario">
+      <input class="senha-input" [type]="showPassword ? 'text' : 'password'" placeholder="Senha" formControlName="senhaUsuario">
       <img
-          src="{{ showPassword ? 'images/iconeOlhoAberto.png' : 'images/iconeOlhoFechado.png' }}"
+          src="{{ showPassword ? 'images/iconeOlhoFechado.png' : 'images/iconeOlhoAberto.png' }}"
           class="input-eye"
           (click)="showPassword = !showPassword"
           alt="Mostrar/Esconder senha">
