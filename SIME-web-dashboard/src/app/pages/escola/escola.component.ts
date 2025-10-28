@@ -13,7 +13,7 @@ import { tipoEquipamento } from '../../models/tipoEquipamento';
 import { tipoAmbienteRequestDTO } from '../../DTOs/tipoAmbienteRequestDTO';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { usuarioRequestDTO } from '../../DTOs/usuarioRequestDTO';
-import { permissaoTipoPerfilDTO } from '../../DTOs/permissaoTipoPerfilDTO';
+import { PermissaoTipoPerfilRequestDTO } from '../../DTOs/PermissaoTipoPerfilRequestDTO';
 import { tipoEquipamentoAmbienteDTO } from '../../DTOs/tipoEquipamentoAmbienteDTO';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
@@ -292,7 +292,7 @@ export class EscolaComponent implements OnInit{
 
       const listaPermissoes = idsPermissao.split(',').map((id: string) => Number(id.trim()));
 
-      const payload: permissaoTipoPerfilDTO = {idPermissoes: listaPermissoes};
+      const payload: PermissaoTipoPerfilRequestDTO = {idPermissoes: listaPermissoes};
 
       this.escolaService.atribuirPermissoesTipoPerfil(idTipoPerfil, payload).subscribe({
         next: (resp) => {
