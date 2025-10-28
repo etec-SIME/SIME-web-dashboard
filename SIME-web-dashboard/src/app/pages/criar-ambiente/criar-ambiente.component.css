@@ -6,7 +6,7 @@
 }
 
 #modal-backdrop{
-   position: fixed;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -14,14 +14,14 @@
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 100;
     display: flex;
-    justify-content: flex-start; 
+    justify-content: flex-start;
     align-items: center;
 }
 
 .linha{
   background-color: #808080;
   width: 1px;
-  margin-left: clamp(20px, 4vw, 6vw);
+  margin-left: clamp(20px, 2vw, 4vw);
   margin-right: clamp(10px, 3vw, 5vw);
   height: 65vh;
 }
@@ -42,7 +42,7 @@
     border-radius: 0.5vw;
     padding: clamp(2px, 1.5vw, 3.5vw);
     margin-bottom: clamp(2px, 3vw, 5vw);
-    width: clamp(5px, 29vw, 31vw);
+    width: clamp(5px, 27vw, 31vw);
 }
 
 .card-tipo-ambiente:hover{
@@ -241,7 +241,7 @@
 .modal-codigos{
   background-color: white;
   z-index: 101;
-  width: clamp(25px, 33vw, 300vw);
+  width: clamp(25px, 30vw, 32vw);
   height: clamp(45px, 80vh, 85vh);
   border-radius: 15px;
   padding-top: clamp(10px, 2vw, 4vw);
@@ -292,7 +292,7 @@
 .tipo-equipamento{
     background-color: #E4E4E4;
     border-radius: 1000px;
-    height: clamp(10px, 2.5vh, 5vh);
+    height: clamp(10px, 3.2vh, 5.2vh);
     width: clamp(3px, 50vw, 52vw);
     cursor: pointer;
 }
@@ -336,9 +336,10 @@
     align-items: center;
     border-radius: 5px;
     background-color: #F0F0F0;
-    height: clamp(20px, 6.3vh, 8.3vh);
+    height: clamp(20px, 7.5vh, 9.5vh);
     margin-bottom: clamp(20px, 1vw, 3vw);
-    padding: clamp(10px, 1.5vw, 2vw) clamp(5px, 2vw, 4vw);
+    padding: clamp(10px, 1.5vw, 3.5vw) clamp(5px, 2vw, 4vw);
+    width: clamp(20px, 25vw, 27vw);
 }
 
 .codigo-card p{
@@ -370,15 +371,15 @@
 }
 
 .footer-modal{
-    margin-left: clamp(20px, 10vw, 13.5vw);
+    margin-left: clamp(20px, 10vw, 12.5vw);
     flex-shrink: 0;
     display: flex;
     justify-content: flex-end;
-    margin-bottom: clamp(20px, 2vw, 30vw);
+    margin-bottom: clamp(20px, 2vw, 4vw);
 }
 
 .footer-modal button{
     width: clamp(20px, 10vw, 12vw);
-    height: clamp(10px, 4.7vh, 6.7vh);
-    margin-right: clamp(5px, 2vw, 50vw);
+    height: clamp(10px, 6vh, 8vh);
+    margin-right: clamp(5px, 2vw, 4vw);
 }
