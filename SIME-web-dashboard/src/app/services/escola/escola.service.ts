@@ -21,6 +21,7 @@ import { permissaoTipoPerfilDTO } from '../../DTOs/permissaoTipoPerfilDTO';
 import { tipoEquipamentoAmbienteDTO } from '../../DTOs/tipoEquipamentoAmbienteDTO';
 import { tipoPerfilProjection } from '../../DTOs/Projections/tipoPerfilProjection';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
+import { codEquipamentoResponseDTO } from '../../DTOs/codEquipamentoResponseDTO';
 import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
 
 @Injectable({
@@ -32,7 +33,7 @@ export class EscolaService {
 
   constructor(private http: HttpClient) { }
 
-  token : String = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMDAwMDIiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiR2VyZW5jaWFyIFBlcmZpcyJ9LHsiYXV0aG9yaXR5IjoiR2VyZW5jaWFyIERlcGFydGFtZW50b3MifSx7ImF1dGhvcml0eSI6IkdlcmVuY2lhciBDaGFtYWRvcyJ9LHsiYXV0aG9yaXR5IjoiQ3JpYXIgQ2hhbWFkbyJ9LHsiYXV0aG9yaXR5IjoiVmlzdWFsaXphciBSZWxhdMOzcmlvcyJ9XSwiZW50aWRhZGUiOiJVU1VBUklPIiwiaWF0IjoxNzYxNDA3MTU0LCJleHAiOjE3NjE0OTM1NTR9.nhu0aG5LEJgXz88HID7NiPIiWjgjJSpFYlvlAncozD0';
+  token : String = '';
   // Inserir o Token manualmente para testar
 
   private getAuthHeaders() {
@@ -87,6 +88,9 @@ export class EscolaService {
     return this.http.get<tipoEquipamento[]>(`${this.apiUrl}/ambiente/${idAmbiente}/tipo-equipamento`, this.getAuthHeaders());
   }
 
+  getAllEquipamentosSemAmbiente(): Observable<codEquipamentoResponseDTO[]>{
+    return this.http.get<codEquipamentoResponseDTO[]>(`${this.apiUrl}/equipamento/sem-ambiente`, this.getAuthHeaders());
+  }
 
   //MÉTODOS CRIAÇÃO/CADASTRO -------------
 

@@ -392,13 +392,13 @@ export class EscolaComponent implements OnInit{
     }
 
 
-    onCadastrarAmbiente(){
+    /*onCadastrarAmbiente(){
       const formValue = this.formCadastrarAmbiente.value;
 
       const novoAmbiente: ambienteRequestDTO = {
         numAmbiente: Number(formValue.numAmbiente),
         descricaoAmbiente: formValue.descricaoAmbiente,
-        idTipoAmbiente: Number(formValue.idTipoAmbiente)
+        idTipoAmbiente: Number(formValue.idTipoAmbiente),
       };
 
 
@@ -410,7 +410,7 @@ export class EscolaComponent implements OnInit{
           alert("Erro ao criar Ambiente!!");
         }
       })
-    }
+    }*/
 
     onCadastrarUsuario(){
       const formValue = this.formCadastrarUsuario.value;
@@ -552,7 +552,7 @@ export class EscolaComponent implements OnInit{
     }
 
 
-    onEditarAmbiente(){
+    /*onEditarAmbiente(){
       const idAmbiente = this.formEditarAmbiente.value.id;
 
       const ambienteEditado = {
@@ -570,7 +570,7 @@ export class EscolaComponent implements OnInit{
           alert("erro ao editar ambiente")
         }
       });
-    }
+    }*/
 
 
 

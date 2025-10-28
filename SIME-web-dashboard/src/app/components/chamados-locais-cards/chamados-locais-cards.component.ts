@@ -1,10 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, SimpleChange, SimpleChanges } from '@angular/core';
-import { Location } from '@angular/common';
-import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
 import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
-import { ChamadosAmbienteDTO } from '../../DTOs/ChamadosAmbienteDTO';
+import { ChamadosAmbienteDTO } from '../../DTOs/chamadosAmbienteDTO';
 
 
 @Component({

@@ -1,4 +1,3 @@
-import { chamadoProjection } from './../../DTOs/Projections/chamadoProjection';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -8,7 +7,7 @@ import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
 import { ChamadoResponseDTO } from '../../DTOs/ChamadoResponseDTO';
 import { ChamadoStatusResponseDTO } from '../../DTOs/ChamadoStatusResponseDTO';
 import { ChamadoRequestDTO } from '../../DTOs/chamadoRequestDTO';
-import { ChamadosAmbienteDTO } from '../../DTOs/ChamadosAmbienteDTO';
+import { ChamadosAmbienteDTO } from '../../DTOs/chamadosAmbienteDTO';
 
 @Injectable({
   providedIn: 'root'
