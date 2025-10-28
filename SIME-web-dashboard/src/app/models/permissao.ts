@@ -1,6 +1,4 @@
-import { tipoPerfil } from "./tipoPerfil";
-
-export interface permissao{
+export interface permissao {
   idPermissao: number;
   nomePermissao: string;
   descricaoPermissao: string;

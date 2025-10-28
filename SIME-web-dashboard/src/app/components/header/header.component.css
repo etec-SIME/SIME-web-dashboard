@@ -45,3 +45,9 @@
     font-size: 1.3rem;
     font-family: var(--font-plus-jakarta-sans);
 }
+
+button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}

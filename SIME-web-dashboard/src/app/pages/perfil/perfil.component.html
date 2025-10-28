@@ -1,0 +1,84 @@
+<!-- Voltar -->
+<button id="btn-back" (click)="voltar()">
+    <img src="images/iconeFlecha.svg" alt="ícone de flecha">Voltar
+</button>
+
+<div class="container">
+    <div class="perfil-container">
+        <div class="perfil-list">
+        @for (perfil of tiposPerfis; track perfil.idTipoPerfil) {
+            <div class="perfil-item">
+                <button class="perfil-btn" (click)="selecionarTipoPerfil(perfil)">
+                    <img class="perfil-avatar" src="images/userIcon.svg" alt="avatar" />
+                    <div class="perfil-text">
+                        <p id="nome">{{ perfil.nomeTipoPerfil }}</p>
+                        <p id="count">{{ perfil.permissaoList.length }} permissões</p>
+                    </div>
+                </button>
+            </div>
+        }
+        </div>
+
+        <button class="btn btn-create" (click)="abrirModal()">Criar</button>
+
+        <!-- Modal -->
+        @if (mostrarModal) {
+            <div class="modal-overlay" style="background-color: rgba(0, 0, 0, 0.5);">
+                <div class="modal-container">
+                    <div class="modal-header">
+                        <div class="row">
+                            <img src="images/userIcon2.svg" alt="ícone usuário" />
+                            <h3>Criar novo tipo de perfil</h3>
+                        </div>
+                        <div class="modal-divider"></div>
+                    </div>
+                    
+                    <div class="modal-content">
+                        <h4 class="modal-subtitle">Adicione</h4>
+    
+                        <form class="modal-form">
+                            <div class="modal-input">
+                                <img src="images/docIcon.svg"/>
+                                <input type="text" placeholder="NOME" name="nomeModal" [(ngModel)]="nomeModal"/>
+                            </div>
+    
+                        </form>
+                        <div class="modal-actions">
+                            <button type="button" class="btn-cancelar" (click)="fecharModal()">Cancelar</button>
+                            <button type="submit" class="btn-criar" (click)="criarTipoPerfil()">
+                                <img src="images/iconeCriar.png" alt="ícone criar"/>
+                                Criar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="permissoes-panel">
+        <div class="divider"></div>
+        <form class="permissoes-form">
+            <h2>ADICIONAR PERMISSÕES</h2>
+
+            <div class="perm-list">
+                @for (perm of permissoes; track perm.idPermissao) {
+                    <label class="perm-item">
+                        <input
+                            type="checkbox"
+                            [name]="perm.nomePermissao.toLowerCase().replaceAll(' ', '-')"
+                            [checked]="isPermissaoSelecionada(perm)"
+                            (change)="togglePermissao(perm, $event)"
+                        />
+                        <span>{{ perm.nomePermissao }}</span>
+                    </label>
+                }
+            </div>
+
+            <div class="panel-actions">
+                <button type="submit" class="btn btn-save" (click)="salvarAlteracoes()">Salvar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
