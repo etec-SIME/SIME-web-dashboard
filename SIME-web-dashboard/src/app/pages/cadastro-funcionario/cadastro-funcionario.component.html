@@ -1,79 +1,3 @@
-
-<!--
-
-<div class="content-box">
-  <div class="card-post">
-    <form [formGroup]="formCadastrarUsuario">
-        <input placeholder="NOME" formControlName="nomeUsuario">
-
-      @if(formCadastrarUsuario.get('nomeUsuario')?.touched && formCadastrarUsuario.get('nomeUsuario')?.invalid){
-        <div>
-          @if (formCadastrarUsuario.get('nomeUsuario')?.errors?.['required']) {
-            <small>NOME é obrigatório!</small>
-          }
-        </div>
-      }
-
-        <input placeholder="RM" formControlName="rmUsuario">
-
-        @if(formCadastrarUsuario.get('rmUsuario')?.touched && formCadastrarUsuario.get('rmUsuario')?.invalid){
-        <div>
-          @if (formCadastrarUsuario.get('rmUsuario')?.errors?.['required']) {
-            <small>RM é obrigatório!</small>
-          }
-        </div>
-      }
-
-        <input placeholder="CPF" formControlName="cpfUsuario">
-
-        @if(formCadastrarUsuario.get('cpfUsuario')?.touched && formCadastrarUsuario.get('cpfUsuario')?.invalid){
-        <div>
-          @if (formCadastrarUsuario.get('cpfUsuario')?.errors?.['required']) {
-            <small>CPF é obrigatório!</small>
-          }
-        </div>
-      }
-
-        <input placeholder="EMAIL" formControlName="emailUsuario">
-
-        @if(formCadastrarUsuario.get('emailUsuario')?.touched && formCadastrarUsuario.get('emailUsuario')?.invalid){
-        <div>
-          @if (formCadastrarUsuario.get('emailUsuario')?.errors?.['required']) {
-            <small>EMAIL é obrigatório!</small>
-          }
-        </div>
-      }
-
-        <input placeholder="TELEFONE" formControlName="telefoneUsuario">
-
-        @if(formCadastrarUsuario.get('telefoneUsuario')?.touched && formCadastrarUsuario.get('telefoneUsuario')?.invalid){
-        <div>
-          @if (formCadastrarUsuario.get('telefoneUsuario')?.errors?.['required']) {
-            <small>TELEFONE é obrigatório!</small>
-          }
-        </div>
-      }
-
-        <input type="password" placeholder="SENHA" formControlName="senhaUsuario">
-
-        @if(formCadastrarUsuario.get('senhaUsuario')?.touched && formCadastrarUsuario.get('senhaUsuario')?.invalid){
-        <div>
-          @if (formCadastrarUsuario.get('senhaUsuario')?.errors?.['required']) {
-            <small>SENHA é obrigatório!</small>
-          }
-        </div>
-      }
-
-      <div>
-        <button (click)="onCadastrarUsuario()">Concluir</button>
-      </div>
-    </form>
-  </div>
-</div>
-
--->
-
-
 <div class="cadastro-layout">
   <form [formGroup]="formCadastrarUsuario">
   <div class="input-container">
@@ -85,13 +9,13 @@
       <input type="text" placeholder="Nome" formControlName="nomeUsuario">
     </div>
 
-    @if(formCadastrarUsuario.get('nomeUsuario')?.touched && formCadastrarUsuario.get('nomeUsuario')?.invalid){
-        <div>
-          @if (formCadastrarUsuario.get('nomeUsuario')?.errors?.['required']) {
-            <small>NOME é obrigatório!</small>
-          }
-        </div>
-      }
+  <!-- @if(formCadastrarUsuario.get('nomeUsuario')?.touched && formCadastrarUsuario.get('nomeUsuario')?.invalid){
+      <div>
+        @if (formCadastrarUsuario.get('nomeUsuario')?.errors?.['required']) {
+          <small>NOME é obrigatório!</small>
+        }
+      </div>
+    } -->
 
     <div class="input-icon">
       <img class="icone-RM" src="/images/icone_RM.png" width="45px">
@@ -100,7 +24,7 @@
 
     <div class="input-icon">
       <img src="/images/Icone_TipoPerfil.png" width="20px">
-      <select id="tipo-perfil-select" formControlName="tipoPerfil" (change)="loadSelectTipoPerfil()">
+      <select id="tipo-perfil-select" formControlName="tipoPerfil">
           @for (tipoPerfil of tiposPerfil; track tipoPerfil.idTipoPerfil) {
             <option [ngValue]="tipoPerfil">{{ tipoPerfil.nomeTipoPerfil }}</option>
           }
@@ -137,7 +61,9 @@
 </form>
 
 <div class="button-container">
-  <a href="">Cancelar</a>
+  <div class="button-cancel" tabindex="0" (click)="navCancelar()">
+    <p>Cancelar</p>
+  </div>
   <button (click)="onCadastrarUsuario()">Concluir</button>
 
 </div>

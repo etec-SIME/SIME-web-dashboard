@@ -91,7 +91,7 @@ body{
   margin-left: clamp(0.1rem, 0.5rem, 2rem);
   font-family: var(--font-montserrat);
   font-weight: var(--fw-semibold);
-  margin-top: 10rem;
+  margin-top: 8rem;
 }
 .input-container{
   display: flex;
@@ -180,15 +180,15 @@ button{
 }
 
 #tipo-perfil-select{
-  width: 340px;
+  width: clamp(10rem, 30rem, 35rem);
   margin-left: 2rem;
   background-color: transparent;
   border: transparent;
   box-shadow: none;
   outline: none;
-  height: 10vh;
-  font-size: 1rem;
-
+  height: 9vh;
+  font-size: 1.2rem;
+  color: #868686;
 }
 
 .senha-input{
@@ -202,4 +202,9 @@ button{
   letter-spacing: 1px;
   font-size: 1.3rem;
   width: 18rem;
+}
+
+.button-cancel{
+  color: #868686;
+  cursor: pointer;
 }

@@ -5,7 +5,7 @@ import { usuarioRequestDTO } from '../../DTOs/usuarioRequestDTO';
 import { TipoPerfilResponseDTO } from '../../DTOs/TipoPerfilResponseDTO';
 import { PublicService } from '../../services/public-routes/public.service';
 import { AuthService } from '../../services/auth/auth.service';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -20,28 +20,26 @@ export class CadastroFuncionarioComponent {
     private escolaService: EscolaService,
      private fb: FormBuilder,
      private authService: AuthService,
-     private publicService: PublicService
+     private publicService: PublicService,
+     private router: Router
     ){
-    this.loadSelectTipoPerfil();
-    this.cadastrarUsuario();
     this.formCadastrarUsuario = this.fb.group({
-      tipoPerfil: [this.tiposPerfil[0] || null],
-      codigoEtec: ['', Validators.required],
-      senha: ['', Validators.required],
+      tipoPerfil: [this.tiposPerfil[1] || null],
+      rmUsuario: ['', Validators.required],
+      nomeUsuario: ['', Validators.required],
+      senhaUsuario: ['', Validators.required],
+      cpfUsuario: ['', Validators.required],
+      emailUsuario: ['', Validators.required]
     });
   }
   tiposPerfil: TipoPerfilResponseDTO[] = [];
    showPassword = false;
 
 
-  cadastrarUsuario(){
-    this.formCadastrarUsuario =  this.fb.group({
-      rmUsuario: ['', Validators.required],
-      nomeUsuario: ['', Validators.required],
-      senhaUsuario: ['', Validators.required],
-      cpfUsuario: ['', Validators.required],
-      emailUsuario: ['', Validators.required]  })
+ngOnInit() {
+    this.loadSelectTipoPerfil();
   }
+
 
   onCadastrarUsuario(){
     const formValue = this.formCadastrarUsuario.value;
@@ -69,17 +67,20 @@ export class CadastroFuncionarioComponent {
     loadSelectTipoPerfil() {
     this.publicService.getTipoPerfilNomes().subscribe({
       next: (tiposPerfil) => {
-        const tipoPadrao: TipoPerfilResponseDTO = { idTipoPerfil: 0, nomeTipoPerfil: 'Escola' };
+        const tipoPadrao: TipoPerfilResponseDTO = { idTipoPerfil: 1, nomeTipoPerfil: 'Gestor Departamento' };
 
         this.tiposPerfil = tiposPerfil.some(t => t.idTipoPerfil === tipoPadrao.idTipoPerfil)
           ? tiposPerfil
           : [tipoPadrao, ...tiposPerfil];
 
-        this.formCadastrarUsuario.get('tipoPerfil')?.setValue(this.tiposPerfil[0]);
+        this.formCadastrarUsuario.get('tipoPerfil')?.setValue(this.tiposPerfil[1]);
       },
       error: (err) => console.error('Erro ao buscar tipos de perfil: ', err),
     });
   }
 
+  navCancelar(){
+    this.router.navigate(['/layout/criar']);
+  }
 
 }
