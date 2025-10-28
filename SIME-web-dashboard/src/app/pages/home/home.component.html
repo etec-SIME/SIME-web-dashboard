@@ -13,26 +13,44 @@
                 </div>
             </div>
         </div>
-    <!-- Criar aqui -->
 
-        <!-- <div *ngIf="!carregado" class="loading">
-          <p>Carregando locais...</p>
-        </div> -->
-
-        <div *ngIf="carregado && cards.length === 0" class="sem-dados">
-          <p>Nenhum ambiente encontrado.</p>
+        <div *ngIf="modoAtual === 'chamados'" class="titulo-botao-pagina-chamado">
+            <p class="titulo-pagina-chamado">Chamados {{ambienteSelecionado}}</p>
+            
+            <div class="retornarLocais" (click)="retornarLocais()">
+              <img src="/images/iconeSetaVoltar.png" class="iconeSetaVoltar">
+              <p class="voltar">Voltar</p>
+            </div>
         </div>
-        
-        <div class="locais-cards-wrapper">
-          <div class="locais-cards">
-            <div class="card" *ngFor="let card of cards">
-              <p>{{ card.nome }}</p>
-              <div class="chamados">
-                <p>{{ card.chamados }}</p>
-                <p class="text-chamado">Chamados</p>
+          
+        <div class="cards-wrapper" [class.chamados-mode]="modoAtual === 'chamados'">
+
+          <ng-container *ngIf="modoAtual === 'locais'">
+
+            <div *ngIf="carregado && cards.length === 0" class="sem-dados">
+              <p>Nenhum ambiente encontrado.</p>
+            </div>
+
+            <div class="locais-cards">
+              <div class="card" *ngFor="let card of cards" (click)="exibirChamados(card.nome)">
+                <p>{{ card.nome }}</p>
+                <div class="chamados">
+                  <p>{{ card.chamados }}</p>
+                  <p class="text-chamado">Chamados</p>
+                </div>
               </div>
             </div>
-          </div>
+          </ng-container>
+
+          <ng-container *ngIf="modoAtual === 'chamados'">
+            <app-chamados-locais-cards
+              [ambiente]="ambienteSelecionado!"
+              [chamados]="chamadosAmbiente"
+              [ambientes]="ambientes"
+              [tiposChamado]="tiposChamado">
+            </app-chamados-locais-cards>
+          </ng-container>
+
         </div>
 
     </div>

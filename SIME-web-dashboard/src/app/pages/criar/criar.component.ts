@@ -4,22 +4,23 @@ import { UsuarioProjection } from '../../DTOs/Projections/UsuarioProjection';
 import { EscolaService } from '../../services/escola/escola.service';
 import { UsuarioService } from '../../services/usuario/usuario.service';
 import { Component} from '@angular/core';
-import { tipoChamadoRequestDTO } from '../../DTOs/tipoChamadoRequestDTO';
 import { tipoPerfilRequestDTO } from '../../DTOs/tipoPerfilRequestDTO';
 import { departamentoRequestDTO } from '../../DTOs/departamentoRequestDTO';
 import { equipamentoRequestDTO } from '../../DTOs/equipamentoRequestDTO';
+import { RouterModule, Router } from '@angular/router';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
+import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
 
 @Component({
   selector: 'app-criar',
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './criar.component.html',
   styleUrl: './criar.component.css'
 })
 export class CriarComponent{
 
   locais: AmbienteSelectDTO[] = []; //ambienteRequestDTO
-  tiposChamado: tipoChamadoRequestDTO[] = [];
+  tiposChamado: TipoChamadoSelectDTO[] = []; //tipoChamadoRequestDTO
   tiposPerfis: tipoPerfilRequestDTO[] = [];
   perfis: UsuarioProjection[] = [];
   departamentos: departamentoRequestDTO[] = [];
@@ -32,7 +33,7 @@ export class CriarComponent{
   qtdDepartamentos: number = 0;
   qtdEquipamentos: number = 0;
 
-  constructor(private escolaService: EscolaService, private usuarioService: UsuarioService) {}
+  constructor(private escolaService: EscolaService, private usuarioService: UsuarioService, private router: Router) {}
 
   ngOnInit(): void {
     this.carregarElementos();
@@ -63,6 +64,10 @@ export class CriarComponent{
     this.qtdTiposChamado = this.tiposChamado.length;
   });
     //this.escolaService.getAllAmbiente().subscribe((resp) => { this.locais = resp })
+  }
+
+  navCriarLocal(){
+    this.router.navigate(['/layout/criar-ambiente']);
   }
 
 }

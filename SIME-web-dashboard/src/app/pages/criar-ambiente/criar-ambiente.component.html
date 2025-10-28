@@ -1,0 +1,108 @@
+<div id="content">
+    <div class="tipo-ambiente">
+        <div class="lista-cards-tipo-ambiente">
+            @for(tipoAmbiente of tiposAmbiente; track tipoAmbiente.idTipoAmbiente; let index = $index){
+                <div class="card-tipo-ambiente" tabindex="0" (click)="mandarIdNomeTipoAmbiente(tipoAmbiente.idTipoAmbiente, tipoAmbiente.nomeTipoAmbiente)">
+                    <img class="icon-ambiente" src="/images/icon_livro.png">
+                    <div class="text-card">
+                        <p>{{tipoAmbiente.nomeTipoAmbiente}}</p>
+                        <small>{{qtdAmbientes[index]}} {{tipoAmbiente.nomeTipoAmbiente}}</small>
+                    </div>
+                </div>
+            }
+        </div>
+        <button class="btn-criar" [innerText]="criarLocal === true ? 'Criar tipo de local' : 'Criar local'" (click)="btnCriar()"></button>
+    </div>
+    <div class="linha"></div>
+    <div class="forms-ambiente">
+       @if(criarLocal){
+         <form [formGroup]="ambienteForm">
+            <div class="forms-novo-ambiente">
+                <h2>{{nomeTipoAmbiente}}</h2>
+                <div class="input-numero">
+                  <input type="number" placeholder="Número" formControlName="numeroLocal" class="inputs-forms-ambiente"/>
+                  @if(ambienteForm.get('numeroLocal')?.touched && ambienteForm.get('numeroLocal')?.invalid){
+                      <div>
+                          @if (ambienteForm.get('numeroLocal')?.errors?.['required']) {
+                            <small class="erro-small">Número do local é obrigatório!</small>
+                          }
+                      </div>
+                  }
+                </div>
+                <div class="input-desc">
+                  <input type="text" placeholder="Descrição" formControlName="descricaoLocal" class="inputs-forms-ambiente"/>
+                  @if(ambienteForm.get('descricaoLocal')?.touched && ambienteForm.get('descricaoLocal')?.invalid){
+                      <div>
+                          @if (ambienteForm.get('descricaoLocal')?.errors?.['required']) {
+                            <small class="erro-small">Descrição do local é obrigatória!</small>
+                          }
+                      </div>
+                  }
+                </div>
+                @if(modalCodigos){
+                    <div id="modal-backdrop">
+                        <div class="modal-codigos">
+                            <div class="header-modal">
+                                 <img src="/images/engrenagem-modal.png" class="icon-engrenagem"/>
+                                <p>Códigos dos equipamentos</p>
+                            </div>
+                            <div class="linha-modal"></div>
+                            <div class="tipos-equipamentos">
+                                @for(tipoEquipamento of tiposEquipamento; track tipoEquipamento.idTipoEquipamento){
+                                    <div class="tipo-equipamento" tabindex="0" (click)="listarCodigosTipoEquipamento(tipoEquipamento.idTipoEquipamento)">
+                                        <p>{{tipoEquipamento.nomeTipoEquipamento}}</p>
+                                    </div>
+                                }
+                            </div>
+                            <div class="modal-content">
+                                <h3>{{nomeListagemEquipamentos}}</h3>
+                                <div class="lista-codigos">
+                                    @if(listarCods.length != 0){
+                                        @for(equipamento of listarCods; track equipamento.codEquipamento){
+                                            <div class="codigo-card">
+                                                <p>{{equipamento.codEquipamento}}</p>
+                                                <div class="items-cod">
+                                                    <button><img src="/images/icon_lapis.png"></button>
+                                                    <button><img src="/images/icon_lixeira.png"></button>
+                                                    <input type="checkbox" class="cod-checkbox" [checked]="equipamento.selecionado"
+                                                    (change)="desmarcarEquipamento(equipamento)">
+                                                </div>
+                                            </div>
+                                        }
+                                    }@else {<p>Sem equipamentos</p>}
+                                </div>
+                            </div>
+                            <div class="footer-modal">
+                                <button class="btn-cancelar" (click)="mostrarModal()">Cancelar</button>
+                                <button class="btn-concluir" (click)="getEquipamentosSelecionados()">Concluir</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="btns-forms-ambiente">
+                    <button>Criar equipamento</button>
+                    <button (click)="mostrarModal()">Selecionar códigos</button>
+                </div>
+            </div>
+         </form>
+       }@else{
+        <form [formGroup]="tipoAmbienteForm">
+            <div class="forms-tipo-ambiente" >
+                <h2>CRIAR NOVO TIPO DE LOCAL</h2>
+                <input type="text" placeholder="Tipo do local" formControlName="nomeTipoLocal" class="input-tipo-ambiente"/>
+                @if(tipoAmbienteForm.get('nomeTipoLocal')?.touched && tipoAmbienteForm.get('nomeTipoLocal')?.invalid){
+                    <div>
+                        @if (tipoAmbienteForm.get('nomeTipoLocal')?.errors?.['required']) {
+                            <small class="erro-small">Nome do tipo ambiente é obrigatório!</small>
+                        }
+                    </div>
+                }
+            </div>
+        </form>
+       }
+        <div class="btns-forms-criar">
+            <button class="btn-cancelar" (click)="onCancelar()">Cancelar</button>
+            <button class="btn-concluir" (click)="onCriar()">Concluir</button>
+        </div>
+    </div>
+</div>

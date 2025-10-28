@@ -16,6 +16,8 @@ import { usuarioRequestDTO } from '../../DTOs/usuarioRequestDTO';
 import { PermissaoTipoPerfilRequestDTO } from '../../DTOs/PermissaoTipoPerfilRequestDTO';
 import { tipoEquipamentoAmbienteDTO } from '../../DTOs/tipoEquipamentoAmbienteDTO';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
+import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-escola',
@@ -32,7 +34,8 @@ export class EscolaComponent implements OnInit{
   departamentos: departamentoRequestDTO[] = []
   equipamentos: equipamentoRequestDTO[] = []
   tipoPerfis: tipoPerfilRequestDTO[] = []
-  tipoChamados: tipoChamadoRequestDTO[] = []
+  //tipoChamados: tipoChamadoRequestDTO[] = []
+  tipoChamados: TipoChamadoSelectDTO[] = []
   tipoEquipamentos: tipoEquipamento[] = []
   tipoAmbientes: tipoAmbienteRequestDTO[] = []
 
@@ -82,7 +85,7 @@ export class EscolaComponent implements OnInit{
       this.carregado = true
     })
 
-    // tipo de chamados
+    //tipo de chamados
     this.escolaService.getAllTipoChamado().subscribe((resp) => {
       this.tipoChamados = resp
       this.carregado = true
@@ -173,7 +176,8 @@ export class EscolaComponent implements OnInit{
     })
 
     this.formCriarTipoChamado = this.fb.group({
-      idDepartamento: [''],
+      //idDepartamento: [''],
+      idTipoChamado: [''],
       nomeTipoChamado: ['']
     })
 
@@ -388,13 +392,13 @@ export class EscolaComponent implements OnInit{
     }
 
 
-    onCadastrarAmbiente(){
+    /*onCadastrarAmbiente(){
       const formValue = this.formCadastrarAmbiente.value;
 
       const novoAmbiente: ambienteRequestDTO = {
         numAmbiente: Number(formValue.numAmbiente),
         descricaoAmbiente: formValue.descricaoAmbiente,
-        idTipoAmbiente: Number(formValue.idTipoAmbiente)
+        idTipoAmbiente: Number(formValue.idTipoAmbiente),
       };
 
 
@@ -406,7 +410,7 @@ export class EscolaComponent implements OnInit{
           alert("Erro ao criar Ambiente!!");
         }
       })
-    }
+    }*/
 
     onCadastrarUsuario(){
       const formValue = this.formCadastrarUsuario.value;
@@ -548,7 +552,7 @@ export class EscolaComponent implements OnInit{
     }
 
 
-    onEditarAmbiente(){
+    /*onEditarAmbiente(){
       const idAmbiente = this.formEditarAmbiente.value.id;
 
       const ambienteEditado = {
@@ -566,7 +570,7 @@ export class EscolaComponent implements OnInit{
           alert("erro ao editar ambiente")
         }
       });
-    }
+    }*/
 
 
 

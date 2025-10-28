@@ -22,6 +22,8 @@ import { tipoEquipamentoAmbienteDTO } from '../../DTOs/tipoEquipamentoAmbienteDT
 import { tipoPerfilProjection } from '../../DTOs/Projections/tipoPerfilProjection';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 import { TipoPerfilPermissoesResponseDTO } from '../../DTOs/TipoPerfilPermissoesResponseDTO';
+import { codEquipamentoResponseDTO } from '../../DTOs/codEquipamentoResponseDTO';
+import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +34,6 @@ export class EscolaService {
 
   constructor(private http: HttpClient) { }
 
-
   getAllEscolas(): Observable<escolaProjection[]>{
     return this.http.get<escolaProjection[]>(this.apiUrl);
   }
@@ -41,17 +42,25 @@ export class EscolaService {
     return this.http.get<tipoPerfilRequestDTO[]>(`${this.apiUrl}/tipo-perfil`);
   }
 
-  getAllAmbiente(): Observable<AmbienteSelectDTO[]>{ //ambienteRequestDTO
-    return this.http.get<AmbienteSelectDTO[]>(`${this.apiUrl}/ambiente`); //ambienteRequestDTO
+  getAllAmbiente(): Observable<AmbienteSelectDTO[]>{
+    return this.http.get<AmbienteSelectDTO[]>(`${this.apiUrl}/ambiente`);
   }
 
   getAllDepartamento(): Observable<departamentoRequestDTO[]>{
     return this.http.get<departamentoRequestDTO[]>(`${this.apiUrl}/departamento`);
   }
 
-  getAllTipoChamado(): Observable<tipoChamadoRequestDTO[]>{
+  getAllTipoChamadoDepartamento(): Observable<tipoChamadoRequestDTO[]>{
     return this.http.get<tipoChamadoRequestDTO[]>(`${this.apiUrl}/tipo-chamado`);
   }
+
+  getAllTipoChamado(): Observable<TipoChamadoSelectDTO[]>{
+    return this.http.get<TipoChamadoSelectDTO[]>(`${this.apiUrl}/tipo-chamado`);
+  }
+
+  getAllTipoChamadoRequest() {
+  return this.http.get<tipoChamadoRequestDTO[]>(`${this.apiUrl}/tipo-chamado`);
+}
 
   getAllEquipamento(): Observable<equipamentoRequestDTO[]>{
     return this.http.get<equipamentoRequestDTO[]>(`${this.apiUrl}/equipamento`);
@@ -81,6 +90,9 @@ export class EscolaService {
     return this.http.get<tipoEquipamento[]>(`${this.apiUrl}/ambiente/${idAmbiente}/tipo-equipamento`);
   }
 
+  getAllEquipamentosSemAmbiente(): Observable<codEquipamentoResponseDTO[]>{
+    return this.http.get<codEquipamentoResponseDTO[]>(`${this.apiUrl}/equipamento/sem-ambiente`);
+  }
 
   //MÉTODOS CRIAÇÃO/CADASTRO -------------
 

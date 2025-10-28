@@ -120,6 +120,6 @@ export class PerfilComponent {
   }
 
   voltar() {
-    this.router.navigate(['/layout/chamados-pendentes']);
+    this.router.navigate(['/layout/home']);
   }
 }
