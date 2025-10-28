@@ -9,11 +9,14 @@ import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 import { CommonModule } from '@angular/common';
 import { ChamadoRequestDTO } from '../../DTOs/chamadoRequestDTO';
 import { ChamadoService } from '../../services/chamado/chamado.service';
+import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
+import { ChamadosLocaisCardsComponent } from "../../components/chamados-locais-cards/chamados-locais-cards.component";
+import { ChamadosAmbienteDTO } from '../../DTOs/chamadosAmbienteDTO';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule, CalendarioMensalComponent, CalendarioSemanalComponent],
+  imports: [CommonModule, FormsModule, CalendarioMensalComponent, CalendarioSemanalComponent, ChamadosLocaisCardsComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
@@ -21,11 +24,16 @@ export class HomeComponent implements OnInit{
 
   tipoAmbientes: tipoAmbienteRequestDTO[] = [];
   ambientes: AmbienteSelectDTO[] = []; //ambienteRequestDTO
-  chamados: ChamadoRequestDTO[] = [];
+  chamados: ChamadosAmbienteDTO[] = [];
+  tiposChamado: TipoChamadoSelectDTO[] = [];
+  chamadosAmbiente: ChamadosAmbienteDTO[] = [];
 
   opcaoAtual: 'salas' | 'labs' | 'outros' = 'salas';
-  localPesquisa: string = '';
+  modoAtual: 'locais' | 'chamados' = 'locais';
+  ambienteSelecionado: string | null = null;
   carregado: boolean = false;
+  bloqueado: boolean = false;
+  localPesquisa: string = '';
 
   // Estrutura de exibição dos cards no html
   cards: {nome: string; chamados: string}[] = [];
@@ -38,38 +46,41 @@ export class HomeComponent implements OnInit{
   }
 
   setOpcao(opcao: 'salas' | 'labs' | 'outros') {
+    if (this.bloqueado) return;
     this.opcaoAtual = opcao;
     this.localPesquisa = ''; // Vai limpar o campo quando mudar de aba
     this.carregarDados();
   }
 
   carregarDados(): void {
-    this.carregado = false;
-
-    // Fazer as duas requisições paralelas
     forkJoin({
       tipos: this.escolaService.getAllTipoAmbiente(),
-      ambientes: this.escolaService.getAllAmbiente(),
-      chamados: this.chamadoService.getAllChamados()
+      ambientes: this.chamadoService.getAmbienteChamadoSelect(), //Usa AmbienteSelectDTO
+      chamados: this.chamadoService.getChamadosByAmbiente(),
+      tipoChamados: this.escolaService.getAllTipoChamado()
     }).subscribe({
       next: (res) => {
         this.tipoAmbientes = res.tipos;
         this.ambientes = res.ambientes;
         this.chamados = res.chamados;
- 
+        this.tiposChamado = res.tipoChamados;
+        this.chamadosAmbiente = [...this.chamados]
+
+        /*console.log('Ambientes recebidos:', this.ambientes);
+        console.log('Chamados recebidos:', this.chamados.slice(0, 5));*/
+
         // Filtrar ambiente pelos tipos de ambientes
         let tiposFiltrados: tipoAmbienteRequestDTO[] = [];
 
         if (this.opcaoAtual === 'salas'){
-          tiposFiltrados = this.tipoAmbientes.filter(t => 
+          tiposFiltrados = this.tipoAmbientes.filter(t =>
             t.nomeTipoAmbiente.toLowerCase().includes('sala')
           );
         } else if (this.opcaoAtual === 'labs'){
-          tiposFiltrados = this.tipoAmbientes.filter(t => 
+          tiposFiltrados = this.tipoAmbientes.filter(t =>
             t.nomeTipoAmbiente.toLowerCase().includes('laboratório')
           );
         } else {
-          // "outros" pega tudo que não for sala nem laboratório
           tiposFiltrados = this.tipoAmbientes.filter( t =>
             !t.nomeTipoAmbiente.toLowerCase().includes('sala') &&
             !t.nomeTipoAmbiente.toLowerCase().includes('laboratório')
@@ -81,7 +92,7 @@ export class HomeComponent implements OnInit{
           .filter(a => tiposFiltrados.some(t => t.idTipoAmbiente === a.idTipoAmbiente))
           .map(a =>{
             const tipo = tiposFiltrados.find(t => t.idTipoAmbiente === a.idTipoAmbiente);
-            const qtdChamados = this.chamados.filter(c => c.idAmbiente === a.idAmbiente).length;
+            const qtdChamados = this.chamados.filter(c => c.ambiente?.idAmbiente === a.idAmbiente).length;
 
             // Simplificar o nome se for um laboratório
             let nomeTipo = tipo?.nomeTipoAmbiente || '';
@@ -89,7 +100,7 @@ export class HomeComponent implements OnInit{
 
             return{
               nome: `${nomeTipo} ${a.numAmbiente}`, // Usar crase
-              chamados: qtdChamados.toString()
+              chamados: qtdChamados.toString().padStart(2, '0')
             };
           });
 
@@ -120,6 +131,29 @@ export class HomeComponent implements OnInit{
     this.cards = this.cardsOriginais.filter(card =>
       card.nome.toLowerCase().includes(local)
     );
+  }
+
+  exibirChamados(nomeAmbiente: string){
+    this.ambienteSelecionado = nomeAmbiente;
+    this.modoAtual = 'chamados';
+    this.bloqueado = true;
+
+    const numeroAmbiente = parseInt(nomeAmbiente.match(/\d+$/)?.[0] || '')
+    if (!numeroAmbiente) return;
+
+    const ambiente = this.ambientes.find( a => a.numAmbiente === numeroAmbiente );
+    if (!ambiente) return;
+
+    this.chamadosAmbiente = this.chamados.filter( c => c.tipoAmbiente.idTipoAmbiente === ambiente.idTipoAmbiente );
+
+    //console.log('Chamados filtrados:', this.chamadosAmbiente);
+
+  }
+
+  retornarLocais(){
+    this.modoAtual = 'locais';
+    this.ambienteSelecionado = null;
+    this.bloqueado = false;
   }
 
 }

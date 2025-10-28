@@ -22,6 +22,7 @@ import { tipoEquipamentoAmbienteDTO } from '../../DTOs/tipoEquipamentoAmbienteDT
 import { tipoPerfilProjection } from '../../DTOs/Projections/tipoPerfilProjection';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 import { codEquipamentoResponseDTO } from '../../DTOs/codEquipamentoResponseDTO';
+import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -51,7 +52,7 @@ export class EscolaService {
     return this.http.get<tipoPerfilRequestDTO[]>(`${this.apiUrl}/tipo-perfil`, this.getAuthHeaders());
   }
 
-  getAllAmbiente(): Observable<AmbienteSelectDTO[]>{ //ambienteRequestDTO
+  getAllAmbiente(): Observable<AmbienteSelectDTO[]>{ //ambienteRequestDTO não tinha id do ambiente
     return this.http.get<AmbienteSelectDTO[]>(`${this.apiUrl}/ambiente`, this.getAuthHeaders()); //ambienteRequestDTO
   }
 
@@ -59,9 +60,13 @@ export class EscolaService {
     return this.http.get<departamentoRequestDTO[]>(`${this.apiUrl}/departamento`, this.getAuthHeaders());
   }
 
-  getAllTipoChamado(): Observable<tipoChamadoRequestDTO[]>{
-    return this.http.get<tipoChamadoRequestDTO[]>(`${this.apiUrl}/tipo-chamado`, this.getAuthHeaders());
+  getAllTipoChamado(): Observable<TipoChamadoSelectDTO[]>{ //tipoChamadoRequestDTO não tinha id do tipoChamado
+    return this.http.get<TipoChamadoSelectDTO[]>(`${this.apiUrl}/tipo-chamado`, this.getAuthHeaders()); //tipoChamadoRequestDTO
   }
+
+  getAllTipoChamadoRequest() {
+  return this.http.get<tipoChamadoRequestDTO[]>(`${this.apiUrl}/tipo-chamado`);
+}
 
   getAllEquipamento(): Observable<equipamentoRequestDTO[]>{
     return this.http.get<equipamentoRequestDTO[]>(`${this.apiUrl}/equipamento`, this.getAuthHeaders());

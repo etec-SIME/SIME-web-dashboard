@@ -16,6 +16,8 @@ import { usuarioRequestDTO } from '../../DTOs/usuarioRequestDTO';
 import { permissaoTipoPerfilDTO } from '../../DTOs/permissaoTipoPerfilDTO';
 import { tipoEquipamentoAmbienteDTO } from '../../DTOs/tipoEquipamentoAmbienteDTO';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
+import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-escola',
@@ -32,7 +34,8 @@ export class EscolaComponent implements OnInit{
   departamentos: departamentoRequestDTO[] = []
   equipamentos: equipamentoRequestDTO[] = []
   tipoPerfis: tipoPerfilRequestDTO[] = []
-  tipoChamados: tipoChamadoRequestDTO[] = []
+  //tipoChamados: tipoChamadoRequestDTO[] = []
+  tipoChamados: TipoChamadoSelectDTO[] = []
   tipoEquipamentos: tipoEquipamento[] = []
   tipoAmbientes: tipoAmbienteRequestDTO[] = []
 
@@ -82,7 +85,7 @@ export class EscolaComponent implements OnInit{
       this.carregado = true
     })
 
-    // tipo de chamados
+    //tipo de chamados
     this.escolaService.getAllTipoChamado().subscribe((resp) => {
       this.tipoChamados = resp
       this.carregado = true
@@ -173,7 +176,8 @@ export class EscolaComponent implements OnInit{
     })
 
     this.formCriarTipoChamado = this.fb.group({
-      idDepartamento: [''],
+      //idDepartamento: [''],
+      idTipoChamado: [''],
       nomeTipoChamado: ['']
     })
 

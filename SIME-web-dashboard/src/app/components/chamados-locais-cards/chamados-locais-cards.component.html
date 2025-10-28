@@ -1,0 +1,22 @@
+<div class="chamados-local-container">
+
+    <div *ngIf="chamadosFiltrados.length > 0; else nenhumChamado">
+        <div class="chamados-cards">
+          <div class="card" *ngFor="let chamado of chamadosFiltrados">
+            <div class="card-esquerda">
+              <img class="iconeDocumento" src="/images/iconeDocs.png">
+              <div class="chamado-info">
+                <p class="titulo-chamado">{{ chamado.tituloChamado }}</p>
+                <p class="data-tipo-chamado">{{ chamado.dataAberturaFormatada }} - {{ chamado.nomeTipoChamado }}</p>
+              </div>
+            </div>
+              <img class="iconeSeta" src="/images/iconeSeta.png">
+          </div>
+        </div>
+    </div>
+
+    <ng-template #nenhumChamado class="nenhum-chamado">
+        <p>Nenhum chamado encontrado neste local.</p>
+    </ng-template>
+
+</div>
