@@ -6,8 +6,9 @@ import { ChamadoCardDTO } from '../../DTOs/ChamadoCardDTO';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
 import { ChamadoResponseDTO } from '../../DTOs/ChamadoResponseDTO';
-import { ChamadoRequestDTO } from '../../DTOs/chamadoRequestDTO';
 import { ChamadoStatusResponseDTO } from '../../DTOs/ChamadoStatusResponseDTO';
+import { ChamadoRequestDTO } from '../../DTOs/chamadoRequestDTO';
+import { ChamadosAmbienteDTO } from '../../DTOs/ChamadosAmbienteDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,23 @@ export class ChamadoService {
 
   constructor( private http: HttpClient ) { }
 
-  getAllChamados(): Observable<ChamadoRequestDTO[]> {
-    return this.http.get<ChamadoRequestDTO[]>(this.apiUrl);
+  token : String = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMDAwMDIiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiR2VyZW5jaWFyIFBlcmZpcyJ9LHsiYXV0aG9yaXR5IjoiR2VyZW5jaWFyIERlcGFydGFtZW50b3MifSx7ImF1dGhvcml0eSI6IkdlcmVuY2lhciBDaGFtYWRvcyJ9LHsiYXV0aG9yaXR5IjoiQ3JpYXIgQ2hhbWFkbyJ9LHsiYXV0aG9yaXR5IjoiVmlzdWFsaXphciBSZWxhdMOzcmlvcyJ9XSwiZW50aWRhZGUiOiJVU1VBUklPIiwiaWF0IjoxNzYxNDA3MTU0LCJleHAiOjE3NjE0OTM1NTR9.nhu0aG5LEJgXz88HID7NiPIiWjgjJSpFYlvlAncozD0';
+  // Inserir o Token manualmente para testar
+
+  private getAuthHeaders() {
+    return {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${this.token}`
+      })
+    };
+  }
+
+  getAllChamados(): Observable<ChamadoRequestDTO[]> { // mudar de chamadoProjetcion para ChamadoRequestDTO
+    return this.http.get<ChamadoRequestDTO[]>(this.apiUrl, this.getAuthHeaders());
+  }
+
+  getChamadosByAmbiente(): Observable<ChamadosAmbienteDTO[]> {
+    return this.http.get<ChamadosAmbienteDTO[]>(this.apiUrl, this.getAuthHeaders());
   }
 
   getChamadosByPrioridade(prioridade: 'ALTA_PRIORIDADE' | 'MEDIA_PRIORIDADE' | 'BAIXA_PRIORIDADE'): Observable<ChamadoCardDTO[]> {
@@ -30,7 +46,7 @@ export class ChamadoService {
   }
 
   getAmbienteChamadoSelect(): Observable<AmbienteSelectDTO[]> {
-    return this.http.get<AmbienteSelectDTO[]>(`${this.apiUrl}/ambientes`, { withCredentials: true });
+    return this.http.get<AmbienteSelectDTO[]>(`${this.apiUrl}/ambientes`, this.getAuthHeaders()); //{ withCredentials: true }
   }
 
   getTipoChamadoSelect(): Observable<TipoChamadoSelectDTO[]> {

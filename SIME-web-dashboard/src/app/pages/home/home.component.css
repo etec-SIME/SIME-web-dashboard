@@ -5,6 +5,7 @@
 }
 
 .home-layout {
+  font-family: var(--font-montserrat);
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -22,7 +23,7 @@
 }
 
 .filtrar{
-  font-family: var(--font-instrument-sans);
+  font-family: var(--font-montserrat);
   display: flex;
   align-items: flex-start;
   gap: clamp(15px, 1.2vw, 3.2vw);
@@ -38,6 +39,7 @@
 
 .filtrar.opcoes{
   display: flex;
+  align-items: center;
   gap: clamp(15px, 1.2vw, 3.2vw);
 }
 
@@ -90,14 +92,12 @@
 
   /* Texto digitado */
   color: black;
-  font-family: var(--font-instrument-sans);
   font-size: clamp(13px, 1vw, 3vw);
   font-weight: 500;
 }
 
 .input-pesquisa::placeholder {
   color: black;
-  font-family: var(--font-instrument-sans);
   font-size: clamp(13px, 1vw, 3vw);
   font-weight: 400;
   opacity: 1; /* Garante que a cor fique visível em alguns navegadores*/
@@ -105,13 +105,50 @@
 
 .separacao{
   background-color: black;
-  width: clamp(1px, 0.05vw, 2.12vw);
-  height: clamp(2px, 2.8vh, 7vh);
+  width: clamp(1px, 0.05vw, 2.05vw);
+  height: clamp(2px, 2.9vh, 4.8vh);
+  max-height: 20px;
 }
 
 .lupa-img{
   width: clamp(20px, 1.9vw, 3.9vw);
   padding-right: 0.5vw;
+}
+
+/* Aciona ao selecionar um local */
+
+.titulo-botao-pagina-chamado {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: clamp(20px, 4vh, 6vh);
+  padding-left: clamp(11px, 0.8vw, 1.8vw);
+  padding-right: clamp(40px, 3vw, 5vw);
+}
+
+.titulo-pagina-chamado{
+  font-weight: var(--fw-semibold);
+  font-size: clamp(18px, 1.5vw, 3.5vw);
+}
+
+.retornarLocais{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.iconeSetaVoltar{
+  width: clamp(32px, 2.6vw, 4.6vw);
+}
+
+.voltar{
+  font-family: var(--font-instrument-sans);
+  font-weight: var(--fw-semibold);
+  font-size: clamp(15px, 1.2vw, 3.2vw);
+  color: #808080;
+  user-select: none
 }
 
 /* Card de locais */
@@ -120,11 +157,16 @@
   margin-top: clamp(20px, 4vh, 6vh);
 }
 
-.locais-cards-wrapper{
+.cards-wrapper{
   /*max-height: clamp(400px, 72.5vh, 74.5vh);*/
-  height: calc(100vh - 232px);
+  max-height: calc(100vh - clamp(220px, 30vh, 32vh));
   overflow-y: auto;
   padding-right: 1rem;
+  margin-bottom: clamp(20px, 6vh, 8vh);
+}
+
+.cards-wrapper.chamados-mode {
+  height: calc(100vh - clamp(240px, 35vh, 37vh)); /* Alterar depois? */
   margin-bottom: clamp(20px, 6vh, 8vh);
 }
 
@@ -160,7 +202,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-inline: clamp(15px, 2vw, 4vw);
+  padding-inline: clamp(20px, 2vw, 4vw);
 }
 
 .card > p{
