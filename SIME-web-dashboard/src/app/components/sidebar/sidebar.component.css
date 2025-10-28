@@ -17,15 +17,15 @@
     align-self: center;
     /*display: block;
     margin: 0 auto;*/
-    padding-top: 7vh;
-    padding-bottom: 4vh;
+    padding-top: clamp(40px, 6vh, 7vh);
+    padding-bottom: clamp(40px, 3vh, 5vh);
 }
 
 .menu{
     display: flex;
     flex-direction: column;
-    gap: clamp(30px, 4vh, 6vh);
-    padding-top: clamp(10px, 1.5vh, 3.5vh);
+    gap: clamp(25px, 4vh, 6vh);
+    padding-bottom: clamp(40px, 3vh, 5vh);
 }
 
 .home, .pendentes, .concluidos, .criar {
@@ -34,7 +34,6 @@
     align-items: center;
     gap: clamp(12px, 1vw, 3vw);
     padding-left: clamp(35px, 1vw, 3vw);
-    /*padding-top: clamp(15px, 1vh, 25px);*/
 }
 
 .home.ativo, .pendentes.ativo, .concluidos.ativo, .criar.ativo {
@@ -80,11 +79,12 @@ p{
     width: clamp(160px, 12vw, 14vw);
     height: clamp(40px, 6.8vh, 8.8vh);
     max-height: 50px; /* Pode alterar se for necessário*/
+    min-height: 40px;
     border-radius: clamp(10px, 0.7vw, 2.7vw);
     border: none;
     color: #44A1A0;
     align-self: center;
     margin-top: auto;
-    margin-bottom: clamp(60px, 7vh, 9vh);
+    margin-bottom: clamp(50px, 8vh, 10vh);
     cursor: pointer;
 }

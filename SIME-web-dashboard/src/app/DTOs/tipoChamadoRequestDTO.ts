@@ -1,5 +1,4 @@
-
-export interface tipoChamadoRequestDTO{
+export interface tipoChamadoRequestDTO {
   idDepartamento: number
   nomeTipoChamado: string
 }

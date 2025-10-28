@@ -1,7 +1,7 @@
 export interface ChamadoRequestDTO {
     tituloChamado: string;
     descChamado: string;
-    dataAbertura: Date;
+    dataAbertura: string;
     emailUsuario: string;
     idTipoChamado: number;
     codEquipamento: string;

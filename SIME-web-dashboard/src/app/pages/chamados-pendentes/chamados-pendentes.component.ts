@@ -19,31 +19,26 @@ export class ChamadosPendentesComponent {
 
   ngOnInit(): void {
     this.carregarChamados();
+    console.log('Chamados de alta prioridade: ', this.chamadosAlta);
+    console.log('Chamados de média prioridade: ', this.chamadosMedia);
+    console.log('Chamados de baixa prioridade: ', this.chamadosBaixa);
   }
 
   carregarChamados(): void {
     this.chamadoService.getChamadosByPrioridade('ALTA_PRIORIDADE')
       .subscribe(res => {
-        this.chamadosAlta = res;
+        this.chamadosAlta = res.filter(chamado => chamado.statusAtualGeralChamado != 'Concluído');
         console.log('Chamados recebidos: ', res);
       });
 
     this.chamadoService.getChamadosByPrioridade('MEDIA_PRIORIDADE')
-      .subscribe(res => this.chamadosMedia = res);
+      .subscribe(res => {
+        this.chamadosMedia = res.filter(chamado => chamado.statusAtualGeralChamado != 'Concluído');
+      });
 
     this.chamadoService.getChamadosByPrioridade('BAIXA_PRIORIDADE')
-      .subscribe(res => this.chamadosBaixa = res);
+      .subscribe(res => {
+        this.chamadosBaixa = res.filter(chamado => chamado.statusAtualGeralChamado != 'Concluído');
+      });
   }
-
-  //implements OnInit {
-  // chamadosConcluidos: chamadoProjection[] = [];
-
-  //   constructor(private funcionarioService: FuncionarioService) {}
-
-  //   ngOnInit(): void {
-  //     this.funcionarioService.getAllChamadosPendentes().subscribe((resp) => {
-  //       console.log('Chamados pendentes:', resp);
-  //       this.chamadosConcluidos = resp;
-  //     });
-  //   }
 }

@@ -215,7 +215,7 @@ export class ChamadoDetalheComponent {
   }
 
   voltar() {
-    this.router.navigate(['/layout/chamados-pendentes']);
+    this.router.navigate(['/layout/home']);
   }
 
   aprovar() {

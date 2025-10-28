@@ -58,7 +58,8 @@
  <ng-container *ngIf="carregado; else carregando" >
   <div *ngIf="tipoChamados.length > 0; else nenhum" class="card-get">
     <div *ngFor="let tc of tipoChamados">
-      <p><strong>Id Departamento: {{tc.idDepartamento}}</strong></p>
+      <!--<p><strong>Id Departamento: {{tc.idDepartamento}}</strong></p> -->
+      <p><strong>Id do Tipo Chamado: {{tc.idTipoChamado}}</strong></p>
       <p><strong>Nome: </strong> {{ tc.nomeTipoChamado}}</p>
     </div>
   </div>
@@ -214,7 +215,7 @@
         <input formControlName="descricaoAmbiente">
         <p>Id tipo ambiente:</p>
         <input formControlName="idTipoAmbiente">
-        <button (click)="onCadastrarAmbiente()">Criar</button>
+        <!--<button (click)="onCadastrarAmbiente()">Criar</button>-->
       </label>
     </form>
   </div>
@@ -339,7 +340,7 @@
       <input formControlName="descricaoAmbiente">
       <p>Id tipo ambiente:</p>
       <input formControlName="idTipoAmbiente">
-      <button (click)="onEditarAmbiente()">Editar</button>
+      <!--<button (click)="onEditarAmbiente()">Editar</button>-->
     </label>
   </form>
   </div>

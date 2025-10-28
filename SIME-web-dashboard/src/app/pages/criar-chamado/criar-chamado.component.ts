@@ -127,9 +127,11 @@ export class CriarChamadoComponent {
     
     this.chamadoService.criarChamado(formData).subscribe({
       next: (res) => {
+        alert('Chamado criado com sucesso!');
         console.log('Chamado criado com sucesso:', res);
       },
       error: (err) => {
+        alert('Erro ao criar chamado. Por favor, tente novamente.');
         console.error('Erro ao criar chamado:', err);
       }
     });
