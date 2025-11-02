@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ChamadoService } from '../../services/chamado/chamado.service';
-import { ChamadoRequestDTO } from '../../DTOs/chamadoRequestDTO';
+import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
 import { forkJoin } from 'rxjs';

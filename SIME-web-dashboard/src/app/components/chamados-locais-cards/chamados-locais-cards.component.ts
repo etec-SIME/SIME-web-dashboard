@@ -15,10 +15,7 @@ import { ChamadosAmbienteDTO } from '../../DTOs/ChamadosAmbienteDTO';
   styleUrl: './chamados-locais-cards.component.css'
 })
 export class ChamadosLocaisCardsComponent {
-  @Input() ambiente!: string | null;
   @Input() chamados: ChamadosAmbienteDTO[] = [];
-  @Input() ambientes: AmbienteSelectDTO[] = [];
-  @Input() tiposChamado: TipoChamadoSelectDTO[] = [];
 
   chamadosFiltrados: any[] = [];
 
