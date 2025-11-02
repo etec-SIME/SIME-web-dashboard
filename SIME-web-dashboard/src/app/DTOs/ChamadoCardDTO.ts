@@ -4,5 +4,5 @@ export interface ChamadoCardDTO {
     descChamado: string;
     localChamado: string;
     prioridadeChamado: 'ALTA_PRIORIDADE' | 'MEDIA_PRIORIDADE' | 'BAIXA_PRIORIDADE';
-    statusChamado: 'CONCLUIDO'
+    statusAtualGeralChamado: string;
 }

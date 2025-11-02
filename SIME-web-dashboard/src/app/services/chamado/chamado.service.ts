@@ -1,4 +1,3 @@
-import { chamadoProjection } from './../../DTOs/Projections/chamadoProjection';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -7,8 +6,8 @@ import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
 import { ChamadoResponseDTO } from '../../DTOs/ChamadoResponseDTO';
 import { ChamadoStatusResponseDTO } from '../../DTOs/ChamadoStatusResponseDTO';
-import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
-import { ChamadosAmbienteDTO } from '../../DTOs/ChamadosAmbienteDTO';
+import { chamadoRequestDTO } from '../../DTOs/chamadoRequestDTO';
+import { chamadosAmbienteDTO } from '../../DTOs/chamadosAmbienteDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -29,12 +28,12 @@ export class ChamadoService {
     };
   }
 
-  getAllChamados(): Observable<ChamadoRequestDTO[]> { // mudar de chamadoProjetcion para ChamadoRequestDTO
-    return this.http.get<ChamadoRequestDTO[]>(this.apiUrl, this.getAuthHeaders());
+  getAllChamados(): Observable<chamadoRequestDTO[]> { // mudar de chamadoProjetcion para ChamadoRequestDTO
+    return this.http.get<chamadoRequestDTO[]>(this.apiUrl, this.getAuthHeaders());
   }
 
-  getChamadosByAmbiente(): Observable<ChamadosAmbienteDTO[]> {
-    return this.http.get<ChamadosAmbienteDTO[]>(this.apiUrl, this.getAuthHeaders());
+  getChamadosByAmbiente(): Observable<chamadosAmbienteDTO[]> {
+    return this.http.get<chamadosAmbienteDTO[]>(this.apiUrl, this.getAuthHeaders());
   }
 
   getChamadosByPrioridade(prioridade: 'ALTA_PRIORIDADE' | 'MEDIA_PRIORIDADE' | 'BAIXA_PRIORIDADE'): Observable<ChamadoCardDTO[]> {

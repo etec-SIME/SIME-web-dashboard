@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ChamadoService } from '../../services/chamado/chamado.service';
-import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
+import { ChamadoRequestDTO } from '../../DTOs/chamadoRequestDTO';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
 import { forkJoin } from 'rxjs';
@@ -127,9 +127,11 @@ export class CriarChamadoComponent {
     
     this.chamadoService.criarChamado(formData).subscribe({
       next: (res) => {
+        alert('Chamado criado com sucesso!');
         console.log('Chamado criado com sucesso:', res);
       },
       error: (err) => {
+        alert('Erro ao criar chamado. Por favor, tente novamente.');
         console.error('Erro ao criar chamado:', err);
       }
     });

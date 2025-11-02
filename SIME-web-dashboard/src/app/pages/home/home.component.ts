@@ -2,19 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CalendarioMensalComponent } from "../../components/calendario-mensal/calendario-mensal.component";
 import { CalendarioSemanalComponent } from "../../components/calendario-semanal/calendario-semanal.component";
-import { tipoAmbiente } from '../../models/tipoAmbiente';
 import { tipoAmbienteRequestDTO } from '../../DTOs/tipoAmbienteRequestDTO';
 import { forkJoin } from 'rxjs';
 import { EscolaService } from '../../services/escola/escola.service';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
-import { ambienteRequestDTO } from '../../DTOs/ambienteRequestDTO';
 import { CommonModule } from '@angular/common';
-import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
+import { chamadoRequestDTO } from '../../DTOs/chamadoRequestDTO';
 import { ChamadoService } from '../../services/chamado/chamado.service';
 import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
 import { ChamadosLocaisCardsComponent } from "../../components/chamados-locais-cards/chamados-locais-cards.component";
-import { ChamadosAmbienteDTO } from '../../DTOs/ChamadosAmbienteDTO';
-import { parse } from 'path';
+import { chamadosAmbienteDTO } from '../../DTOs/chamadosAmbienteDTO';
 
 @Component({
   selector: 'app-home',
@@ -27,9 +24,9 @@ export class HomeComponent implements OnInit{
 
   tipoAmbientes: tipoAmbienteRequestDTO[] = [];
   ambientes: AmbienteSelectDTO[] = []; //ambienteRequestDTO
-  chamados: ChamadosAmbienteDTO[] = [];
+  chamados: chamadosAmbienteDTO[] = [];
   tiposChamado: TipoChamadoSelectDTO[] = [];
-  chamadosAmbiente: ChamadosAmbienteDTO[] = [];
+  chamadosAmbiente: chamadosAmbienteDTO[] = [];
 
   opcaoAtual: 'salas' | 'labs' | 'outros' = 'salas';
   modoAtual: 'locais' | 'chamados' = 'locais';
@@ -76,11 +73,11 @@ export class HomeComponent implements OnInit{
         let tiposFiltrados: tipoAmbienteRequestDTO[] = [];
 
         if (this.opcaoAtual === 'salas'){
-          tiposFiltrados = this.tipoAmbientes.filter(t => 
+          tiposFiltrados = this.tipoAmbientes.filter(t =>
             t.nomeTipoAmbiente.toLowerCase().includes('sala')
           );
         } else if (this.opcaoAtual === 'labs'){
-          tiposFiltrados = this.tipoAmbientes.filter(t => 
+          tiposFiltrados = this.tipoAmbientes.filter(t =>
             t.nomeTipoAmbiente.toLowerCase().includes('laboratório')
           );
         } else {
@@ -155,7 +152,7 @@ export class HomeComponent implements OnInit{
     //c => c.tipoAmbiente.idTipoAmbiente === ambiente.idTipoAmbiente
 
   }
-  
+
   retornarLocais(){
     this.modoAtual = 'locais';
     this.ambienteSelecionado = null;

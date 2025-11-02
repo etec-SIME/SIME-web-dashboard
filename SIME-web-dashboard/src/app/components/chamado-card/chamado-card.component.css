@@ -1,22 +1,22 @@
 .btn-card {
-    font-family: var(--font-instrument-sans);
-    font-weight: var(--fw-semibold);
+  font-family: var(--font-instrument-sans);
+  font-weight: var(--fw-semibold);
 
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    width: 100%;
-    padding: 16px 67px 20px 20px;
-    gap: 10px;
+  width: 100%;
+  padding: 16px 67px 20px 20px;
+  gap: 10px;
 
-    border: 1px solid rgba(0, 0, 0, 0.27);
-    border-radius: 0.8rem;
-    background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.27);
+  border-radius: 0.8rem;
+  background-color: #fff;
 
-    text-align: justify;
-    text-wrap: nowrap;
-    cursor: pointer;
-    transition: 0.3s;
+  text-align: justify;
+  text-wrap: nowrap;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 .btn-card:hover {
@@ -29,10 +29,10 @@
 }
 
 #card-title {
-    font-size: clamp(10px, 1.2vw, 24px);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  font-size: clamp(10px, 1.2vw, 24px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .card-link {
