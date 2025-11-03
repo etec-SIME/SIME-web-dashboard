@@ -1,4 +1,4 @@
-export interface ChamadoRequestDTO {
+export interface chamadoRequestDTO {
     tituloChamado: string;
     descChamado: string;
     dataAbertura: string;

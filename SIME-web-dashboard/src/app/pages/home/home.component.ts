@@ -7,11 +7,11 @@ import { forkJoin } from 'rxjs';
 import { EscolaService } from '../../services/escola/escola.service';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 import { CommonModule } from '@angular/common';
-import { ChamadoRequestDTO } from '../../DTOs/chamadoRequestDTO';
+import { chamadoRequestDTO } from '../../DTOs/chamadoRequestDTO';
 import { ChamadoService } from '../../services/chamado/chamado.service';
 import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
 import { ChamadosLocaisCardsComponent } from "../../components/chamados-locais-cards/chamados-locais-cards.component";
-import { ChamadosAmbienteDTO } from '../../DTOs/chamadosAmbienteDTO';
+import { chamadosAmbienteDTO } from '../../DTOs/chamadosAmbienteDTO';
 
 @Component({
   selector: 'app-home',
@@ -24,9 +24,9 @@ export class HomeComponent implements OnInit{
 
   tipoAmbientes: tipoAmbienteRequestDTO[] = [];
   ambientes: AmbienteSelectDTO[] = []; //ambienteRequestDTO
-  chamados: ChamadosAmbienteDTO[] = [];
+  chamados: chamadosAmbienteDTO[] = [];
   tiposChamado: TipoChamadoSelectDTO[] = [];
-  chamadosAmbiente: ChamadosAmbienteDTO[] = [];
+  chamadosAmbiente: chamadosAmbienteDTO[] = [];
 
   opcaoAtual: 'salas' | 'labs' | 'outros' = 'salas';
   modoAtual: 'locais' | 'chamados' = 'locais';
@@ -139,14 +139,17 @@ export class HomeComponent implements OnInit{
     this.bloqueado = true;
 
     const numeroAmbiente = parseInt(nomeAmbiente.match(/\d+$/)?.[0] || '')
-    if (!numeroAmbiente) return;
 
-    const ambiente = this.ambientes.find( a => a.numAmbiente === numeroAmbiente );
+    const nomeTipoAmbiente = nomeAmbiente.replace(/\d+$/, '').trim();
+
+    const ambiente = this.ambientes.find( a => a.numAmbiente === numeroAmbiente &&
+      a.nomeTipoAmbiente.toLowerCase().includes(nomeTipoAmbiente.toLowerCase()));
     if (!ambiente) return;
 
-    this.chamadosAmbiente = this.chamados.filter( c => c.tipoAmbiente.idTipoAmbiente === ambiente.idTipoAmbiente );
+    this.chamadosAmbiente = this.chamados.filter(c => c.tipoAmbiente.idTipoAmbiente === ambiente.idTipoAmbiente &&
+      c.ambiente.idAmbiente === ambiente.idAmbiente);
 
-    //console.log('Chamados filtrados:', this.chamadosAmbiente);
+    //c => c.tipoAmbiente.idTipoAmbiente === ambiente.idTipoAmbiente
 
   }
 

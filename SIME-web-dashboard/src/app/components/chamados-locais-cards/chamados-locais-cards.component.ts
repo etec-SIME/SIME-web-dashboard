@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, SimpleChange, SimpleChanges } from '@angular/core';
 import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
-import { ChamadosAmbienteDTO } from '../../DTOs/chamadosAmbienteDTO';
+import { chamadosAmbienteDTO } from '../../DTOs/chamadosAmbienteDTO';
 
 
 @Component({
@@ -13,10 +13,7 @@ import { ChamadosAmbienteDTO } from '../../DTOs/chamadosAmbienteDTO';
   styleUrl: './chamados-locais-cards.component.css'
 })
 export class ChamadosLocaisCardsComponent {
-  @Input() ambiente!: string | null;
-  @Input() chamados: ChamadosAmbienteDTO[] = [];
-  @Input() ambientes: AmbienteSelectDTO[] = [];
-  @Input() tiposChamado: TipoChamadoSelectDTO[] = [];
+  @Input() chamados: chamadosAmbienteDTO[] = [];
 
   chamadosFiltrados: any[] = [];
 
