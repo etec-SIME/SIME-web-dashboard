@@ -17,23 +17,12 @@ export class ChamadoService {
 
   constructor( private http: HttpClient ) { }
 
-  token : String = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMDAwMDIiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiR2VyZW5jaWFyIFBlcmZpcyJ9LHsiYXV0aG9yaXR5IjoiR2VyZW5jaWFyIERlcGFydGFtZW50b3MifSx7ImF1dGhvcml0eSI6IkdlcmVuY2lhciBDaGFtYWRvcyJ9LHsiYXV0aG9yaXR5IjoiQ3JpYXIgQ2hhbWFkbyJ9LHsiYXV0aG9yaXR5IjoiVmlzdWFsaXphciBSZWxhdMOzcmlvcyJ9XSwiZW50aWRhZGUiOiJVU1VBUklPIiwiaWF0IjoxNzYyMDk5ODgyLCJleHAiOjE3NjIxODYyODJ9.lFgT-zUU5WNozUJaqL51Q7x5kKG8UUfuY9ZmtOPLel8';
-  // Inserir o Token manualmente para testar
-
-  private getAuthHeaders() {
-    return {
-      headers: new HttpHeaders({
-        Authorization: `Bearer ${this.token}`
-      })
-    };
-  }
-
-  getAllChamados(): Observable<chamadoRequestDTO[]> { // mudar de chamadoProjetcion para ChamadoRequestDTO
-    return this.http.get<chamadoRequestDTO[]>(this.apiUrl, this.getAuthHeaders());
+  getAllChamados(): Observable<chamadoRequestDTO[]> {
+    return this.http.get<chamadoRequestDTO[]>(this.apiUrl);
   }
 
   getChamadosByAmbiente(): Observable<chamadosAmbienteDTO[]> {
-    return this.http.get<chamadosAmbienteDTO[]>(this.apiUrl, this.getAuthHeaders());
+    return this.http.get<chamadosAmbienteDTO[]>(this.apiUrl);
   }
 
   getChamadosByPrioridade(prioridade: 'ALTA_PRIORIDADE' | 'MEDIA_PRIORIDADE' | 'BAIXA_PRIORIDADE'): Observable<ChamadoCardDTO[]> {
@@ -45,7 +34,7 @@ export class ChamadoService {
   }
 
   getAmbienteChamadoSelect(): Observable<AmbienteSelectDTO[]> {
-    return this.http.get<AmbienteSelectDTO[]>(`${this.apiUrl}/ambientes`, this.getAuthHeaders()); //{ withCredentials: true }
+    return this.http.get<AmbienteSelectDTO[]>(`${this.apiUrl}/ambientes`); //{ withCredentials: true }
   }
 
   getTipoChamadoSelect(): Observable<TipoChamadoSelectDTO[]> {
