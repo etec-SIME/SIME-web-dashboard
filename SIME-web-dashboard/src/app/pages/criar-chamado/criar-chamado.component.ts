@@ -133,18 +133,6 @@ ngOnInit() {
     console.log(`numAmbiente: ${ambienteSelecionado.numAmbiente}`);
     console.log(`nomeTipoAmbiente: ${ambienteSelecionado.nomeTipoAmbiente}`);
 
-    // const chamadoRequestDTO: ChamadoRequestDTO = {
-    //   tituloChamado: "dawdwa", //formValues.problema,
-    //   descChamado: "dawdwa",//formValues.descricao,
-    //   dataAbertura: formValues.data,
-    //   emailUsuario: "raphael@gmail.com", //formValues.email,
-    //   imgChamado: 'abc.png', //formValues.imgChamado,
-    //   idTipoChamado: 1, //formValues.tipoChamado,
-    //   codEquipamento: "123", //formValues.codigoEquipamento,
-    //   idAmbiente: 1, //ambienteSelecionado?.idAmbiente ?? 0,
-    //   idTipoAmbiente: 1, //ambienteSelecionado?.idTipoAmbiente ?? 0
-    // };
-
     const chamadoRequestDTO: chamadoRequestDTO = {
       tituloChamado: formValues.problema,
       descChamado: formValues.descricao,
