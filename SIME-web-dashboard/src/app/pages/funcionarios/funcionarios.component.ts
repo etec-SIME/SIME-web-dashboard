@@ -3,11 +3,12 @@ import { FuncionarioService } from '../../services/funcionario/funcionario.servi
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { UsuarioProjection } from '../../DTOs/Projections/UsuarioProjection';
+import { sharedImports } from '../../shared/shared-imports';
 
 @Component({
   selector: 'app-funcionarios',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, sharedImports],
   templateUrl: './funcionarios.component.html',
   styleUrl: './funcionarios.component.css'
 })

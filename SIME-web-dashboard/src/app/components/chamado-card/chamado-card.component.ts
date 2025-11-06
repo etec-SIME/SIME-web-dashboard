@@ -12,7 +12,9 @@ import { Router } from '@angular/router';
 export class ChamadoCardComponent {
   @Input() data!: string;
   @Input() descricao!: string;
+  @Input() titulo!: string;
   @Input() local!: string;
+  @Input() numLocal!: number;
   @Input() prioridade!: 'ALTA_PRIORIDADE' | 'MEDIA_PRIORIDADE' | 'BAIXA_PRIORIDADE';
   @Input() idChamado!: number;
 

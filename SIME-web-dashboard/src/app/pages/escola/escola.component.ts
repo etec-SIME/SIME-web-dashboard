@@ -18,10 +18,11 @@ import { tipoEquipamentoAmbienteDTO } from '../../DTOs/tipoEquipamentoAmbienteDT
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
 import { forkJoin } from 'rxjs';
+import { sharedImports } from '../../shared/shared-imports';
 
 @Component({
   selector: 'app-escola',
-  imports: [CommonModule, RouterModule, ReactiveFormsModule ],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule, sharedImports ],
   templateUrl: './escola.component.html',
   styleUrl: './escola.component.css'
 })

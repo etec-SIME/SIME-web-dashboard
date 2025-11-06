@@ -5,11 +5,12 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 import { AuthService } from '../../services/auth/auth.service';
 import { TipoPerfilResponseDTO } from '../../DTOs/TipoPerfilResponseDTO';
 import { PublicService } from '../../services/public-routes/public.service';
+import { sharedImports } from '../../shared/shared-imports';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterModule, ReactiveFormsModule, CommonModule],
+  imports: [RouterModule, ReactiveFormsModule, CommonModule, sharedImports],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })

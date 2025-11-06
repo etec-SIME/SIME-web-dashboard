@@ -5,11 +5,11 @@ import { ChamadoResponseDTO } from '../../DTOs/ChamadoResponseDTO';
 import { CommonModule } from '@angular/common';
 import { ChamadoStatusResponseDTO, historicoChamadoList } from '../../DTOs/ChamadoStatusResponseDTO';
 import { forkJoin } from 'rxjs';
-import { HasPermissionDirective } from '../../shared/directives/has-permission.directive';
+import { sharedImports } from '../../shared/shared-imports';
 
 @Component({
   selector: 'app-chamado-detalhe',
-  imports: [RouterModule, CommonModule, HasPermissionDirective],
+  imports: [RouterModule, CommonModule, sharedImports],
   standalone: true,
   templateUrl: './chamado-detalhe.component.html',
   styleUrl: './chamado-detalhe.component.css'
@@ -76,7 +76,7 @@ export class ChamadoDetalheComponent {
             error: err => console.error('Erro ao atualizar status geral:', err)
           });
         } 
-        else if (progresso.statusAtualProgressoChamado === 'Aprovado') {
+        else if (progresso.statusAtualProgressoChamado !== 'Concluído' && progresso.statusAtualProgressoChamado !== 'Em análise') {
           this.chamadoService.atualizarStatusGeral(this.idChamado, 'PENDENTE').subscribe({
             //next: res => console.log('Status geral atualizado para PENDENTE:', res),
             error: err => console.error('Erro ao atualizar status geral:', err)

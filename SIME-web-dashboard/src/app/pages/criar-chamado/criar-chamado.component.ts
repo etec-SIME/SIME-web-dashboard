@@ -7,10 +7,11 @@ import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
 import { forkJoin } from 'rxjs';
 import { AmbienteChamadoSelectDTO } from '../../DTOs/AmbienteChamadoSelectDTO';
 import { CodEquipamentoList, TipoEquipamentoSelectDTO } from '../../DTOs/TipoEquipamentoSelectDTO';
+import { sharedImports } from '../../shared/shared-imports';
 
 @Component({
   selector: 'app-criar-chamado',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, sharedImports],
   templateUrl: './criar-chamado.component.html',
   styleUrl: './criar-chamado.component.css'
 })

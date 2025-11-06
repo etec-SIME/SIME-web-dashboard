@@ -4,15 +4,16 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { GestorGeralService } from '../../services/gestor-geral/gestor-geral.service';
 import { chamadoProjection } from '../../DTOs/Projections/chamadoProjection';
+import { sharedImports } from '../../shared/shared-imports';
 
 @Component({
   selector: 'app-gestor-geral',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, sharedImports],
   templateUrl: './gestor-geral.component.html',
   styleUrls: ['./gestor-geral.component.css']
 })
-export class GestorGeralComponent implements OnInit{
+export class GestorGeralComponent implements OnInit {
 
   PrioridadeChamadoEnum = PrioridadeChamadoEnum;
 

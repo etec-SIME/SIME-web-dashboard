@@ -1,7 +1,5 @@
 <!-- Voltar -->
-<button id="btn-back" (click)="voltar()">
-    <img src="images/iconeFlecha.svg" alt="ícone de flecha">Voltar
-</button>
+<app-botao-voltar></app-botao-voltar>
 
 <div class="container">
     <div class="perfil-container">
@@ -75,7 +73,7 @@
                 }
             </div>
 
-            <div class="panel-actions">
+            <div class="panel-actions" *appHasPermission="'dwaodwa'">
                 <button type="submit" class="btn btn-save" (click)="salvarAlteracoes()">Salvar</button>
             </div>
         </form>

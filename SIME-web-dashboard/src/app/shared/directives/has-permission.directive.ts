@@ -3,6 +3,7 @@ import { AuthService } from '../../services/auth/auth.service';
 
 @Directive({
   selector: '[appHasPermission]',
+  standalone: true
 })
 export class HasPermissionDirective {
   private permissoesNecessarias: string[] = [];
