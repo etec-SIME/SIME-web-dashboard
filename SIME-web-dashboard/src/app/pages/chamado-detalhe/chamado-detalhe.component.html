@@ -128,7 +128,7 @@
         </div>
     </div>
 
-    <div class="actions">
+    <div class="actions" *appHasPermission="'Gerenciar Perfis'">
         <button class="btn-approve" (click)="aprovar()">Aprovar</button>
         <button class="btn-reject" (click)="recusar()">Recusar</button>
     </div>

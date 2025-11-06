@@ -5,11 +5,11 @@ import { ChamadoResponseDTO } from '../../DTOs/ChamadoResponseDTO';
 import { CommonModule } from '@angular/common';
 import { ChamadoStatusResponseDTO, historicoChamadoList } from '../../DTOs/ChamadoStatusResponseDTO';
 import { forkJoin } from 'rxjs';
-import { error } from 'console';
+import { HasPermissionDirective } from '../../shared/directives/has-permission.directive';
 
 @Component({
   selector: 'app-chamado-detalhe',
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, HasPermissionDirective],
   standalone: true,
   templateUrl: './chamado-detalhe.component.html',
   styleUrl: './chamado-detalhe.component.css'

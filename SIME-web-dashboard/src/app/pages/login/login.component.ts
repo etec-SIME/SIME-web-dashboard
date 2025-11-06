@@ -126,11 +126,4 @@ export class LoginComponent {
       error: (err) => console.log('Erro ao fazer login com Escola: ', err)
     })
   }
-
-  // getAllUsuarios() {
-  //   this.usuarioService.getAllUsuarios().subscribe({
-  //     next: (usuarios) => console.log('Usuários recebidos: ', usuarios),
-  //     error: (err) => console.error('Erro ao buscar usuários: ', err),
-  //   });
-  // }
 }
