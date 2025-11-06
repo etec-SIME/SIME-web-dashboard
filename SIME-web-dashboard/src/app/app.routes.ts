@@ -20,7 +20,7 @@ import { AuthGuard } from './services/auth/guard/auth.guard';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
-    { path: 'layout', component: LayoutComponent,
+    { path: 'layout', component: LayoutComponent, canActivate: [AuthGuard],
       children: [
         { path: 'home', component: HomeComponent, data: { titulo: 'Home - Locais' } },
         { path: 'chamados-pendentes', component: ChamadosPendentesComponent, data: { titulo: 'Chamados Pendentes' } },
