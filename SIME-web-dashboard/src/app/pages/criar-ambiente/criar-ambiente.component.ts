@@ -7,10 +7,11 @@ import { tipoAmbiente } from '../../models/tipoAmbiente';
 import { forkJoin} from 'rxjs';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 import { codEquipamentoResponseDTO, equipamentoEnvioRequestDTO } from '../../DTOs/codEquipamentoResponseDTO';
+import { sharedImports } from '../../shared/shared-imports';
 
 @Component({
   selector: 'app-criar-ambiente',
-  imports: [ReactiveFormsModule, RouterModule],
+  imports: [ReactiveFormsModule, RouterModule, sharedImports],
   templateUrl: './criar-ambiente.component.html',
   styleUrl: './criar-ambiente.component.css'
 })

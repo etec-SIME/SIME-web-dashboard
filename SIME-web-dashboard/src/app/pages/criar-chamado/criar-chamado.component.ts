@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ChamadoService } from '../../services/chamado/chamado.service';
-import { ChamadoRequestDTO } from '../../DTOs/chamadoRequestDTO';
+import { chamadoRequestDTO } from '../../DTOs/chamadoRequestDTO';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
 import { forkJoin } from 'rxjs';
@@ -107,7 +107,7 @@ export class CriarChamadoComponent {
     //   idTipoAmbiente: 1, //ambienteSelecionado?.idTipoAmbiente ?? 0
     // };
 
-    const chamadoRequestDTO: ChamadoRequestDTO = {
+    const chamadoRequestDTO: chamadoRequestDTO = {
       tituloChamado: formValues.problema,
       descChamado: formValues.descricao,
       dataAbertura: formValues.data,

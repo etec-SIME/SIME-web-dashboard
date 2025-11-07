@@ -34,64 +34,75 @@ export class EscolaService {
 
   constructor(private http: HttpClient) { }
 
+  token : String = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODAwMDE5NSIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX0VTQ09MQSJ9XSwiZW50aWRhZGUiOiJFU0NPTEEiLCJpYXQiOjE3NjI1Mzk1OTIsImV4cCI6MTc2MjYyNTk5Mn0.eeWpPloAj-DEqVxPIxxtLI0J27rs4sTYHssE7ajsa5c';
+  // Inserir o Token manualmente para testar
+
+  private getAuthHeaders() {
+    return {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${this.token}`
+      })
+    };
+  }
+
   getAllEscolas(): Observable<escolaProjection[]>{
-    return this.http.get<escolaProjection[]>(this.apiUrl);
+    return this.http.get<escolaProjection[]>(this.apiUrl, this.getAuthHeaders());
   }
 
   getAllTipoPerfil(): Observable<tipoPerfilRequestDTO[]>{
-    return this.http.get<tipoPerfilRequestDTO[]>(`${this.apiUrl}/tipo-perfil`);
+    return this.http.get<tipoPerfilRequestDTO[]>(`${this.apiUrl}/tipo-perfil`, this.getAuthHeaders());
   }
 
   getAllAmbiente(): Observable<AmbienteSelectDTO[]>{
-    return this.http.get<AmbienteSelectDTO[]>(`${this.apiUrl}/ambiente`);
+    return this.http.get<AmbienteSelectDTO[]>(`${this.apiUrl}/ambiente`, this.getAuthHeaders());
   }
 
   getAllDepartamento(): Observable<departamentoRequestDTO[]>{
-    return this.http.get<departamentoRequestDTO[]>(`${this.apiUrl}/departamento`);
+    return this.http.get<departamentoRequestDTO[]>(`${this.apiUrl}/departamento`, this.getAuthHeaders());
   }
 
   getAllTipoChamadoDepartamento(): Observable<tipoChamadoRequestDTO[]>{
-    return this.http.get<tipoChamadoRequestDTO[]>(`${this.apiUrl}/tipo-chamado`);
+    return this.http.get<tipoChamadoRequestDTO[]>(`${this.apiUrl}/tipo-chamado`, this.getAuthHeaders());
   }
 
   getAllTipoChamado(): Observable<TipoChamadoSelectDTO[]>{
-    return this.http.get<TipoChamadoSelectDTO[]>(`${this.apiUrl}/tipo-chamado`);
+    return this.http.get<TipoChamadoSelectDTO[]>(`${this.apiUrl}/tipo-chamado`, this.getAuthHeaders());
   }
 
   getAllTipoChamadoRequest() {
-  return this.http.get<tipoChamadoRequestDTO[]>(`${this.apiUrl}/tipo-chamado`);
+  return this.http.get<tipoChamadoRequestDTO[]>(`${this.apiUrl}/tipo-chamado`, this.getAuthHeaders());
 }
 
   getAllEquipamento(): Observable<equipamentoRequestDTO[]>{
-    return this.http.get<equipamentoRequestDTO[]>(`${this.apiUrl}/equipamento`);
+    return this.http.get<equipamentoRequestDTO[]>(`${this.apiUrl}/equipamento`, this.getAuthHeaders());
   }
 
   getAllTipoEquipamento(): Observable<tipoEquipamento[]>{
-    return this.http.get<tipoEquipamento[]>(`${this.apiUrl}/tipo-equipamento`);
+    return this.http.get<tipoEquipamento[]>(`${this.apiUrl}/tipo-equipamento`, this.getAuthHeaders());
   }
 
   getAllTipoAmbiente(): Observable<tipoAmbiente[]>{
-    return this.http.get<tipoAmbiente[]>(`${this.apiUrl}/tipo-ambiente`);
+    return this.http.get<tipoAmbiente[]>(`${this.apiUrl}/tipo-ambiente`, this.getAuthHeaders());
   }
 
   getAllPermissoes(): Observable<permissao[]>{
-    return this.http.get<permissao[]>(`${this.apiUrl}/permissoes`);
+    return this.http.get<permissao[]>(`${this.apiUrl}/permissoes`, this.getAuthHeaders());
   }
 
   getAllPermissaoTipoPerfil(idTipoPerfil: number): Observable<permissao[]>{
-    return this.http.get<permissao[]>(`${this.apiUrl}/tipo-perfil/${idTipoPerfil}/permissoes`);
+    return this.http.get<permissao[]>(`${this.apiUrl}/tipo-perfil/${idTipoPerfil}/permissoes`, this.getAuthHeaders());
   }
 
   getTipoPerfilPermissoes(): Observable<TipoPerfilPermissoesResponseDTO[]>{
-    return this.http.get<TipoPerfilPermissoesResponseDTO[]>(`${this.apiUrl}/tipo-perfil/permissoes`);
+    return this.http.get<TipoPerfilPermissoesResponseDTO[]>(`${this.apiUrl}/tipo-perfil/permissoes`, this.getAuthHeaders());
   }
 
   getAllTipoEquipamentoAmbiente(idAmbiente: number): Observable<tipoEquipamento[]>{
-    return this.http.get<tipoEquipamento[]>(`${this.apiUrl}/ambiente/${idAmbiente}/tipo-equipamento`);
+    return this.http.get<tipoEquipamento[]>(`${this.apiUrl}/ambiente/${idAmbiente}/tipo-equipamento`, this.getAuthHeaders());
   }
 
   getAllEquipamentosSemAmbiente(): Observable<codEquipamentoResponseDTO[]>{
-    return this.http.get<codEquipamentoResponseDTO[]>(`${this.apiUrl}/equipamento/sem-ambiente`);
+    return this.http.get<codEquipamentoResponseDTO[]>(`${this.apiUrl}/equipamento/sem-ambiente`, this.getAuthHeaders());
   }
 
   //MÉTODOS CRIAÇÃO/CADASTRO -------------
