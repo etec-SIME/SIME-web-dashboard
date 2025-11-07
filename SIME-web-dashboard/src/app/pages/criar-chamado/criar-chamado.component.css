@@ -6,6 +6,22 @@
 
 .rows {
   grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.ambiente,
+.data,
+.email,
+.tipoChamado,
+.problema,
+.descricao,
+.equipamento,
+.codigoEquipamento {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .form-row {
@@ -16,7 +32,6 @@
 .form-row input,
 .form-row select,
 .form-row textarea {
-  margin-bottom: 2rem;
   flex: 1;
   padding: 15px;
 
@@ -28,6 +43,11 @@
   background-color: #fff;
 
   resize: none;
+}
+
+.error-message {
+  color: red;
+  font-size: clamp(10px, 1vw + 8px, 14px);
 }
 
 .upload {
@@ -79,4 +99,3 @@ button {
   font-family: var(--font-instrument-sans);
   font-size: clamp(14px, 1vw + 12px, 18px);
 }
-
