@@ -55,6 +55,7 @@
   cursor: pointer;
   user-select: none; /* Não permite a seleção do texto, útil para botões */
   transition: background-color 0.3s ease;
+  cursor: pointer;
 }
 
 .opcao:hover {
@@ -137,6 +138,7 @@
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  cursor: pointer;
 }
 
 .iconeSetaVoltar{
@@ -157,16 +159,31 @@
   margin-top: clamp(20px, 4vh, 6vh);
 }
 
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  font-weight: 500;
+  color: #666;
+}
+
 .cards-wrapper{
   /*max-height: clamp(400px, 72.5vh, 74.5vh);*/
   max-height: calc(100vh - clamp(220px, 30vh, 32vh));
   overflow-y: auto;
   padding-right: 1rem;
   margin-bottom: clamp(20px, 6vh, 8vh);
+  /*transition: opacity 0.3s ease;
+  opacity: 1;*/
 }
 
+/*.cards-wrapper.loading {
+  opacity: 0;
+}*/
+
 .cards-wrapper.chamados-mode {
-  height: calc(100vh - clamp(240px, 35vh, 37vh)); /* Alterar depois? */
+  height: calc(100vh - clamp(258px, 40.5vh, 42.5vh)); /* Alterar depois? */
   margin-bottom: clamp(20px, 6vh, 8vh);
 }
 

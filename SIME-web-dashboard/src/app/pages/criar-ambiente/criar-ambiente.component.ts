@@ -61,6 +61,7 @@ export class CriarAmbienteComponent {
         codsEquipamentos: this.escolaService.getAllEquipamentosSemAmbiente()
     }).subscribe(
           (data) => {
+            console.log('Equipamentos sem ambiente:', data.codsEquipamentos);
             this.tiposEquipamento = data.tiposEquipamento;
             this.tiposAmbiente = data.tiposAmbiente;
             this.ambientes = data.ambientes;
@@ -173,8 +174,6 @@ export class CriarAmbienteComponent {
               alert("Erro, ambiente não criado!");
             }
           });
-        }else{
-          alert("Selecione os códigos dos equipamentos!");
         }
       }else{
         alert("Preencha todos os campos obrigatórios!");
