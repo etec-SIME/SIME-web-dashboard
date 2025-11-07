@@ -5,16 +5,21 @@ import { chamadoRequestDTO } from '../../DTOs/chamadoRequestDTO';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
 import { forkJoin } from 'rxjs';
+import { AmbienteChamadoSelectDTO } from '../../DTOs/AmbienteChamadoSelectDTO';
+import { CodEquipamentoList, TipoEquipamentoSelectDTO } from '../../DTOs/TipoEquipamentoSelectDTO';
+import { sharedImports } from '../../shared/shared-imports';
 
 @Component({
   selector: 'app-criar-chamado',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, sharedImports],
   templateUrl: './criar-chamado.component.html',
   styleUrl: './criar-chamado.component.css'
 })
 export class CriarChamadoComponent {
   tiposChamado: TipoChamadoSelectDTO[] = [];
-  ambientes: AmbienteSelectDTO[] = [];
+  ambientes: AmbienteChamadoSelectDTO[] = [];
+  equipamentos: TipoEquipamentoSelectDTO[] = [];
+  codigosEquipamento: CodEquipamentoList[] = [];
 
   chamadoForm: FormGroup;
   selectedFiles: File[] = [];
@@ -41,9 +46,41 @@ export class CriarChamadoComponent {
     });
   }
 
-  ngOnInit() {
-    this.loadSelects();
-  }
+ngOnInit() {
+  this.loadSelects();
+
+  // Quando o ambiente é selecionado
+  this.chamadoForm.get('ambiente')?.valueChanges.subscribe((ambienteSelecionado: AmbienteChamadoSelectDTO) => {
+    if (ambienteSelecionado && ambienteSelecionado.tipoEquipamentoList) {
+      const equipamentos = ambienteSelecionado.tipoEquipamentoList.map(tipo => ({
+        idTipoEquipamento: tipo.idTipoEquipamento,
+        nomeTipoEquipamento: tipo.nomeTipoEquipamento,
+        idTipoChamado: tipo.idTipoChamado,
+        nomeTipoChamado: tipo.nomeTipoChamado,
+        equipamentoList: tipo.equipamentoList
+      }));
+
+      this.equipamentos = equipamentos;
+    } else {
+      this.equipamentos = [];
+    }
+
+    this.codigosEquipamento = [];
+    this.chamadoForm.get('equipamento')?.setValue('Selecione um equipamento');
+    this.chamadoForm.get('codigoEquipamento')
+  });
+
+  this.chamadoForm.get('equipamento')?.valueChanges.subscribe((equipamentoSelecionado: any) => {
+    if (equipamentoSelecionado && equipamentoSelecionado.equipamentoList) {
+      this.codigosEquipamento = equipamentoSelecionado.equipamentoList.map((e: { codEquipamento: any; }) => e.codEquipamento);
+    } else {
+      this.codigosEquipamento = [];
+    }
+
+    // limpa código ao mudar tipo
+    this.chamadoForm.get('codigoEquipamento')?.reset();
+  });
+}
 
   loadSelects() {
     forkJoin({
@@ -53,12 +90,14 @@ export class CriarChamadoComponent {
       next: ({ambientes, tiposChamado}) => {
         this.ambientes = ambientes.map(a => ({
           ...a, // pega todas as propriedades do objeto 'a' (idAmbiente, numAmbiente, nomeTipoAmbiente, etc.)
+          numAmbiente: String(a.numAmbiente),
+          tipoEquipamentoList: (a as any).tipoEquipamentoList ?? [],
           displayName: `${a.nomeTipoAmbiente} - ${a.numAmbiente}`
-        }))
+        }));
         this.tiposChamado = tiposChamado;
       },
       error: (err) => console.error('Erro ao carregar ambientes:', err)
-    });
+    }); 
   }
 
   onFileSelected(event: any) {
@@ -95,6 +134,7 @@ export class CriarChamadoComponent {
     console.log(`numAmbiente: ${ambienteSelecionado.numAmbiente}`);
     console.log(`nomeTipoAmbiente: ${ambienteSelecionado.nomeTipoAmbiente}`);
 
+<<<<<<< HEAD
     // const chamadoRequestDTO: ChamadoRequestDTO = {
     //   tituloChamado: "dawdwa", //formValues.problema,
     //   descChamado: "dawdwa",//formValues.descricao,
@@ -107,6 +147,8 @@ export class CriarChamadoComponent {
     //   idTipoAmbiente: 1, //ambienteSelecionado?.idTipoAmbiente ?? 0
     // };
 
+=======
+>>>>>>> 0ed34b846d3ebc7425241bb1e54425a2151651d7
     const chamadoRequestDTO: chamadoRequestDTO = {
       tituloChamado: formValues.problema,
       descChamado: formValues.descricao,
@@ -129,6 +171,7 @@ export class CriarChamadoComponent {
       next: (res) => {
         alert('Chamado criado com sucesso!');
         console.log('Chamado criado com sucesso:', res);
+        this.chamadoForm.reset();
       },
       error: (err) => {
         alert('Erro ao criar chamado. Por favor, tente novamente.');

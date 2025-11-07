@@ -16,10 +16,11 @@ import { LoginComponent } from './pages/login/login.component';
 import { ChamadoDetalheComponent } from './pages/chamado-detalhe/chamado-detalhe.component';
 import { PaginaDeFundoComponent } from './components/pagina-de-fundo/pagina-de-fundo.component';
 import { CadastroFuncionarioComponent } from './pages/cadastro-funcionario/cadastro-funcionario.component';
+import { AuthGuard } from './services/auth/guard/auth.guard';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
-    { path: 'layout', component: LayoutComponent,
+    { path: 'layout', component: LayoutComponent, canActivate: [AuthGuard],
       children: [
         { path: 'home', component: HomeComponent, data: { titulo: 'Home - Locais' } },
         { path: 'chamados-pendentes', component: ChamadosPendentesComponent, data: { titulo: 'Chamados Pendentes' } },
@@ -33,7 +34,7 @@ export const routes: Routes = [
         { path: 'criar-ambiente', component: CriarAmbienteComponent, data: { titulo: 'Criar Local' } },
       ]
     },
-    { path: 'dashboard', component: DashboardComponent },
+    { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], data: { permissions: ['guigass'] } },
     { path: 'funcionarios', component: FuncionariosComponent },
     { path: 'escola', component: EscolaComponent },
     { path: 'gestor-geral', component: GestorGeralComponent},

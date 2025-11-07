@@ -9,10 +9,11 @@ import { equipamentoRequestDTO } from '../../DTOs/equipamentoRequestDTO';
 import { RouterModule, Router } from '@angular/router';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
+import { sharedImports } from '../../shared/shared-imports';
 
 @Component({
   selector: 'app-criar',
-  imports: [RouterModule],
+  imports: [RouterModule, sharedImports],
   templateUrl: './criar.component.html',
   styleUrl: './criar.component.css'
 })
@@ -71,6 +72,10 @@ export class CriarComponent{
   
   navCriarLocal(){
     this.router.navigate(['/layout/criar-ambiente']);
+  }
+
+  navCriarTipoPerfil() {
+    this.router.navigate(['/layout/perfil']);
   }
 
 }

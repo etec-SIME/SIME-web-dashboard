@@ -1,5 +1,7 @@
 <div class="sidebar">
-    <img class="logo" src="/images/logoSIME.png">
+    <button (click)="navegarHome()">
+        <img class="logo" src="/images/logoSIME.png">
+    </button>
 
     <div class="menu">
         <div class="home"
@@ -25,7 +27,8 @@
 
         <div class="criar"
             [class.ativo]="opcaoAtual === 'criar'"
-            (click)="opcaoAtual = 'criar'; navegarCriar()">
+            (click)="opcaoAtual = 'criar'; navegarCriar()"
+            *appHasPermission="['Cadastrar Tipo de Perfil','Cadastrar Local', 'Cadastrar Tipo de Chamado', 'Cadastrar Perfil', 'Cadastrar Departamento', 'Cadastrar Equipamento']">
             <img class="iconeCriar" src="/images/iconeCriar.png">
             <p>Criar</p>
         </div>

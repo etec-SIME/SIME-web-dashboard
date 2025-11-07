@@ -8,10 +8,11 @@ import { permissao } from '../../models/permissao';
 import { forkJoin } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { tipoPerfilRequestDTO } from '../../DTOs/tipoPerfilRequestDTO';
+import { sharedImports } from '../../shared/shared-imports';
 
 @Component({
   selector: 'app-perfil',
-  imports: [RouterModule, CommonModule, FormsModule],
+  imports: [RouterModule, CommonModule, FormsModule, sharedImports],
   standalone: true,
   templateUrl: './perfil.component.html',
   styleUrls: ['./perfil.component.css']

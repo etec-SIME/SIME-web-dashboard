@@ -10,8 +10,9 @@
               <div class="chamado-wrapper">
                 <app-chamado-card
                     [data]="chamado.dtAberturaChamado"
-                    [descricao]="chamado.descChamado"
-                    [local]="chamado.localChamado"
+                    [titulo]="chamado.tituloChamado"
+                    [local]="chamado.nomeTipoAmbiente"
+                    [numLocal]="chamado.numAmbiente"
                     [idChamado]="chamado.idChamado">
                 </app-chamado-card>
               </div>
@@ -29,8 +30,9 @@
             @for (chamado of chamadosMedia; track chamado.idChamado) {
                 <app-chamado-card
                     [data]="chamado.dtAberturaChamado"
-                    [descricao]="chamado.descChamado"
-                    [local]="chamado.localChamado"
+                    [titulo]="chamado.tituloChamado"
+                    [local]="chamado.nomeTipoAmbiente"
+                    [numLocal]="chamado.numAmbiente"
                     [idChamado]="chamado.idChamado">
                 </app-chamado-card>
             }
@@ -47,8 +49,9 @@
             @for (chamado of chamadosBaixa; track chamado.idChamado) {
                 <app-chamado-card
                     [data]="chamado.dtAberturaChamado"
-                    [descricao]="chamado.descChamado"
-                    [local]="chamado.localChamado"
+                    [titulo]="chamado.tituloChamado"
+                    [local]="chamado.nomeTipoAmbiente"
+                    [numLocal]="chamado.numAmbiente"
                     [idChamado]="chamado.idChamado">
                 </app-chamado-card>
             }

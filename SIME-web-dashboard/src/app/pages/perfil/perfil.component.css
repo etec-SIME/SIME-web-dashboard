@@ -24,7 +24,6 @@
 .perfil-container {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
 }
 
 .perfil-list {
@@ -32,7 +31,7 @@
   flex-direction: column;
   gap: 2.8rem;
   overflow-y: auto;
-  padding-right: 2.5rem;
+  padding-right: 1rem;
   height: 60vh;
 }
 
@@ -262,14 +261,13 @@
 .permissoes-form {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 1.5rem;
 }
 
 .permissoes-form h2 {
   font-size: clamp(18px, 1.8vw, 32px);
   font-weight: var(--fw-semibold);
   color: #44A1A0;
-  margin-bottom: 1.5rem;
 }
 
 .perm-list {

@@ -7,10 +7,11 @@ import { PublicService } from '../../services/public-routes/public.service';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { sharedImports } from '../../shared/shared-imports';
 
 @Component({
   selector: 'app-cadastro-funcionario',
-  imports: [ReactiveFormsModule, RouterModule, CommonModule],
+  imports: [ReactiveFormsModule, RouterModule, CommonModule, sharedImports],
   templateUrl: './cadastro-funcionario.component.html',
   styleUrl: './cadastro-funcionario.component.css'
 })

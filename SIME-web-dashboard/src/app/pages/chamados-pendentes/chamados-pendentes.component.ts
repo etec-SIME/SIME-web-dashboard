@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { QuadroChamadosComponent } from '../../components/quadro-chamados/quadro-chamados.component';
 import { ChamadoCardDTO } from '../../DTOs/ChamadoCardDTO';
 import { ChamadoService } from '../../services/chamado/chamado.service';
+import { sharedImports } from '../../shared/shared-imports';
 
 @Component({
   selector: 'app-chamados-pendentes',
-  imports: [QuadroChamadosComponent],
+  imports: [QuadroChamadosComponent, sharedImports],
   templateUrl: './chamados-pendentes.component.html',
   styleUrls: ['./chamados-pendentes.component.css']
 })

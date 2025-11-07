@@ -4,10 +4,11 @@ import { FuncionarioService } from '../../services/funcionario/funcionario.servi
 import { QuadroChamadosComponent } from '../../components/quadro-chamados/quadro-chamados.component';
 import { ChamadoCardDTO } from '../../DTOs/ChamadoCardDTO';
 import { ChamadoService } from '../../services/chamado/chamado.service';
+import { sharedImports } from '../../shared/shared-imports';
 
 @Component({
   selector: 'app-chamados-concluidos',
-  imports: [RouterModule, QuadroChamadosComponent],
+  imports: [RouterModule, QuadroChamadosComponent, sharedImports],
   templateUrl: './chamados-concluidos.component.html',
   styleUrl: './chamados-concluidos.component.css'
 })

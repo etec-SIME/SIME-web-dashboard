@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { sharedImports } from '../../shared/shared-imports';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, sharedImports],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })

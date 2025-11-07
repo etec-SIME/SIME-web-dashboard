@@ -7,16 +7,16 @@ import { forkJoin } from 'rxjs';
 import { EscolaService } from '../../services/escola/escola.service';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 import { CommonModule } from '@angular/common';
-import { chamadoRequestDTO } from '../../DTOs/chamadoRequestDTO';
 import { ChamadoService } from '../../services/chamado/chamado.service';
 import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
 import { ChamadosLocaisCardsComponent } from "../../components/chamados-locais-cards/chamados-locais-cards.component";
 import { chamadosAmbienteDTO } from '../../DTOs/chamadosAmbienteDTO';
+import { sharedImports } from '../../shared/shared-imports';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule, CalendarioMensalComponent, CalendarioSemanalComponent, ChamadosLocaisCardsComponent],
+  imports: [CommonModule, FormsModule, CalendarioMensalComponent, CalendarioSemanalComponent, ChamadosLocaisCardsComponent, sharedImports],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

@@ -44,8 +44,24 @@
         
         <!-- Linha 5 -->
         <div class="form-row">
-            <input type="text" formControlName="equipamento" placeholder="Equipamento" />
-            <input type="text" formControlName="codigoEquipamento" placeholder="Código do equipamento" />
+
+            <select formControlName="equipamento" placeholder="Equipamento">
+                <option value="">Selecione um equipamento</option>
+                @for (equipamento of equipamentos; track equipamento.idTipoEquipamento) {
+                    <option [ngValue]="equipamento">{{ equipamento.nomeTipoEquipamento }}</option>
+                } @empty {
+                    <option [ngValue]="null" disabled>Nenhum equipamento disponível</option>
+                }
+            </select>
+
+            <select formControlName="codigoEquipamento" placeholder="Código do equipamento">
+                <option value="">Selecione um código</option>
+                @for (codigo of codigosEquipamento; track codigo) {
+                    <option [value]="codigo">{{ codigo }}</option>
+                } @empty {
+                    <option [ngValue]="null" disabled>Nenhum código disponível</option>
+                }
+            </select>
         </div>
     </div>
 

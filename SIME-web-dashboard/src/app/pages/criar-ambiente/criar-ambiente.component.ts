@@ -8,10 +8,11 @@ import { forkJoin} from 'rxjs';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 import { codEquipamentoResponseDTO, equipamentoEnvioRequestDTO } from '../../DTOs/codEquipamentoResponseDTO';
 import { sharedImports } from '../../shared/shared-imports';
+import { BotaoVoltarComponent } from "../../components/botao-voltar/botao-voltar.component";
 
 @Component({
   selector: 'app-criar-ambiente',
-  imports: [ReactiveFormsModule, RouterModule, sharedImports],
+  imports: [ReactiveFormsModule, RouterModule, sharedImports, BotaoVoltarComponent],
   templateUrl: './criar-ambiente.component.html',
   styleUrl: './criar-ambiente.component.css'
 })

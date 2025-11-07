@@ -5,11 +5,11 @@ import { ChamadoResponseDTO } from '../../DTOs/ChamadoResponseDTO';
 import { CommonModule } from '@angular/common';
 import { ChamadoStatusResponseDTO, historicoChamadoList } from '../../DTOs/ChamadoStatusResponseDTO';
 import { forkJoin } from 'rxjs';
-import { error } from 'console';
+import { sharedImports } from '../../shared/shared-imports';
 
 @Component({
   selector: 'app-chamado-detalhe',
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, sharedImports],
   standalone: true,
   templateUrl: './chamado-detalhe.component.html',
   styleUrl: './chamado-detalhe.component.css'
@@ -76,7 +76,7 @@ export class ChamadoDetalheComponent {
             error: err => console.error('Erro ao atualizar status geral:', err)
           });
         } 
-        else if (progresso.statusAtualProgressoChamado === 'Aprovado') {
+        else if (progresso.statusAtualProgressoChamado !== 'Concluído' && progresso.statusAtualProgressoChamado !== 'Em análise') {
           this.chamadoService.atualizarStatusGeral(this.idChamado, 'PENDENTE').subscribe({
             //next: res => console.log('Status geral atualizado para PENDENTE:', res),
             error: err => console.error('Erro ao atualizar status geral:', err)
@@ -129,6 +129,28 @@ export class ChamadoDetalheComponent {
       }
     })
   }
+
+  mudarEtapa(index: number) {
+  if (index === this.etapaAtualIndex) return;
+
+  this.isConcluido = false;
+  this.isEmAnalise = false;
+
+  const novaEtapa = this.etapas[index];
+  let novoStatus = novaEtapa.nome
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toUpperCase()
+    .replace(/\s+/g, '_');
+
+  // Atualiza datas — remove das etapas futuras
+  this.etapas = this.etapas.map((etapa, i) => {
+    if (i > index) return { ...etapa, data: undefined };
+    return etapa;
+  });
+
+  this.atualizarStatusChamado(novoStatus);
+}
 
   abrirModal(imagem: string) {
     this.imagemModal = imagem;

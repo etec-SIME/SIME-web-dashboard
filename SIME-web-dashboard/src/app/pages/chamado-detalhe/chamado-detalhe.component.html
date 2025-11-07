@@ -1,7 +1,5 @@
 <!-- Voltar -->
-<button id="btn-back" (click)="voltar()">
-    <img src="images/iconeFlecha.svg" alt="ícone de flecha">Voltar
-</button>
+<app-botao-voltar></app-botao-voltar>
 
 <div class="container">
 
@@ -60,7 +58,8 @@
                 <button class="btn-nav-progress progress-prev" 
                         (click)="prevStatus($event)"
                         [class.disabled]="isEmAnalise"
-                        [disabled]="isEmAnalise">
+                        [disabled]="isEmAnalise"
+                        *appHasPermission="'Atualizar Barra de Progresso de Chamado'">
                         <img [src]="isEmAnalise ? 'images/navLeftDisabled.svg' : 'images/navLeft.svg'" alt="">
                 </button>
                 @for (etapa of etapas; let i = $index; track i) {
@@ -68,7 +67,9 @@
                         <div class="circle-line">
                             <div class="circle"
                                 [class.active]="i < etapaAtualIndex+1"
-                                [class.current]="i === etapaAtualIndex+1">
+                                [class.current]="i === etapaAtualIndex+1"
+                                (click)="mudarEtapa(i)"
+                                *appHasPermissionDisable="'Atualizar Barra de Progresso de Chamado'">
 
                                 @if (i < etapaAtualIndex+1) {
                                     <img src="images/iconeCorreto.svg" alt="">
@@ -90,7 +91,8 @@
                 <button class="btn-nav-progress progress-next"
                         [class.disabled]="isConcluido"
                         [disabled]="isConcluido"
-                        (click)="nextStatus($event)">
+                        (click)="nextStatus($event)"
+                        *appHasPermission="'Atualizar Barra de Progresso de Chamado'">
                         <img [src]="isConcluido ? 'images/navRightDisabled.svg' : 'images/navRight.svg'" alt="">
                 </button>
             </div>
@@ -128,7 +130,7 @@
         </div>
     </div>
 
-    <div class="actions">
+    <div class="actions" *appHasPermission="'Aprovar ou Reprovar Chamado'">
         <button class="btn-approve" (click)="aprovar()">Aprovar</button>
         <button class="btn-reject" (click)="recusar()">Recusar</button>
     </div>
