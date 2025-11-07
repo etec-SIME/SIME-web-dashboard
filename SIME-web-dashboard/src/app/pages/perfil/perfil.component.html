@@ -17,7 +17,7 @@
         }
         </div>
 
-        <button class="btn btn-create" (click)="abrirModal()">Criar</button>
+        <button class="btn btn-create" (click)="abrirModal()" *appHasPermission="'Cadastrar Tipo de Perfil'">Criar</button>
 
         <!-- Modal -->
         @if (mostrarModal) {
@@ -73,7 +73,7 @@
                 }
             </div>
 
-            <div class="panel-actions" *appHasPermission="'dwaodwa'">
+            <div class="panel-actions" *appHasPermission="'Atribuir Permissões Tipo de Perfil'">
                 <button type="submit" class="btn btn-save" (click)="salvarAlteracoes()">Salvar</button>
             </div>
         </form>

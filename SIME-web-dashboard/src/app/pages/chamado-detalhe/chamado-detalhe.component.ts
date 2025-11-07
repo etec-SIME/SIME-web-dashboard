@@ -130,6 +130,28 @@ export class ChamadoDetalheComponent {
     })
   }
 
+  mudarEtapa(index: number) {
+  if (index === this.etapaAtualIndex) return;
+
+  this.isConcluido = false;
+  this.isEmAnalise = false;
+
+  const novaEtapa = this.etapas[index];
+  let novoStatus = novaEtapa.nome
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toUpperCase()
+    .replace(/\s+/g, '_');
+
+  // Atualiza datas — remove das etapas futuras
+  this.etapas = this.etapas.map((etapa, i) => {
+    if (i > index) return { ...etapa, data: undefined };
+    return etapa;
+  });
+
+  this.atualizarStatusChamado(novoStatus);
+}
+
   abrirModal(imagem: string) {
     this.imagemModal = imagem;
     this.modalAberto = true;

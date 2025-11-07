@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { sharedImports } from '../../shared/shared-imports';
 
 @Component({
   selector: 'app-header',
-  imports: [],
+  imports: [sharedImports],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
