@@ -34,17 +34,6 @@ export class EscolaService {
 
   constructor(private http: HttpClient) { }
 
-  /*token : String = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODAwMDE5NSIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX0VTQ09MQSJ9XSwiZW50aWRhZGUiOiJFU0NPTEEiLCJpYXQiOjE3NjI1Mzk1OTIsImV4cCI6MTc2MjYyNTk5Mn0.eeWpPloAj-DEqVxPIxxtLI0J27rs4sTYHssE7ajsa5c';
-  // Inserir o Token manualmente para testar
-
-  private getAuthHeaders() {
-    return {
-      headers: new HttpHeaders({
-        Authorization: `Bearer ${this.token}`
-      })
-    };
-  }*/
-
   getAllEscolas(): Observable<escolaProjection[]>{
     return this.http.get<escolaProjection[]>(this.apiUrl);
   }
