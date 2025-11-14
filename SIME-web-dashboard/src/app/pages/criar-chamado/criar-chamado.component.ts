@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ChamadoService } from '../../services/chamado/chamado.service';
 import { chamadoRequestDTO } from '../../DTOs/chamadoRequestDTO';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
@@ -15,7 +15,7 @@ import { sharedImports } from '../../shared/shared-imports';
   templateUrl: './criar-chamado.component.html',
   styleUrl: './criar-chamado.component.css'
 })
-export class CriarChamadoComponent {
+export class CriarChamadoComponent implements OnInit {
   tiposChamado: TipoChamadoSelectDTO[] = [];
   ambientes: AmbienteChamadoSelectDTO[] = [];
   equipamentos: TipoEquipamentoSelectDTO[] = [];
@@ -26,74 +26,60 @@ export class CriarChamadoComponent {
 
   constructor(private fb: FormBuilder, private chamadoService: ChamadoService) {
     this.chamadoForm = this.fb.group({
-      // data: ['', Validators.required],
-      // ambiente: ['', Validators.required],
-      // email: ['', [Validators.required, Validators.email]],
-      // tipoChamado: ['', Validators.required],
-      // problema: ['', Validators.required],
-      // descricao: ['', Validators.required],
-      // equipamento: [''],
-      // codigoEquipamento: ['']
-
-      data: [''],
-      ambiente: [''],
-      email: [''],
-      tipoChamado: [''],
-      problema: [''],
-      descricao: [''],
-      equipamento: [''],
-      codigoEquipamento: ['']
+      data: ['', Validators.required],
+      ambiente: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      tipoChamado: ['', Validators.required],
+      problema: ['', Validators.required],
+      descricao: ['', Validators.required],
+      equipamento: ['', Validators.required],
+      codigoEquipamento: ['', Validators.required],
+      anexo: ['', Validators.required]
     });
   }
 
-ngOnInit() {
-  this.loadSelects();
+  ngOnInit() {
+    this.loadSelects();
 
-  // Quando o ambiente é selecionado
-  this.chamadoForm.get('ambiente')?.valueChanges.subscribe((ambienteSelecionado: AmbienteChamadoSelectDTO) => {
-    console.log('Ambiente selecionado:', ambienteSelecionado);
-    if (ambienteSelecionado && ambienteSelecionado.tipoEquipamentoList) {
-      console.log('Lista de tipos de equipamento:', ambienteSelecionado.tipoEquipamentoList);
-      const equipamentos = ambienteSelecionado.tipoEquipamentoList.map(tipo => ({
-        idTipoEquipamento: tipo.idTipoEquipamento,
-        nomeTipoEquipamento: tipo.nomeTipoEquipamento,
-        idTipoChamado: tipo.idTipoChamado,
-        nomeTipoChamado: tipo.nomeTipoChamado,
-        equipamentoList: tipo.equipamentoList
-      }));
+    this.chamadoForm.get('ambiente')?.valueChanges.subscribe((ambienteSelecionado: AmbienteChamadoSelectDTO) => {
+      if (ambienteSelecionado && ambienteSelecionado.tipoEquipamentoList) {
+        this.equipamentos = ambienteSelecionado.tipoEquipamentoList.map(tipo => ({
+          idTipoEquipamento: tipo.idTipoEquipamento,
+          nomeTipoEquipamento: tipo.nomeTipoEquipamento,
+          idTipoChamado: tipo.idTipoChamado,
+          nomeTipoChamado: tipo.nomeTipoChamado,
+          equipamentoList: tipo.equipamentoList
+        }));
+      } else {
+        this.equipamentos = [];
+      }
 
-      this.equipamentos = equipamentos;
-    } else {
-      this.equipamentos = [];
-    }
-
-    this.codigosEquipamento = [];
-    this.chamadoForm.get('equipamento')?.setValue('Selecione um equipamento');
-    this.chamadoForm.get('codigoEquipamento')
-  });
-
-  this.chamadoForm.get('equipamento')?.valueChanges.subscribe((equipamentoSelecionado: any) => {
-    if (equipamentoSelecionado && equipamentoSelecionado.equipamentoList) {
-      this.codigosEquipamento = equipamentoSelecionado.equipamentoList.map((e: { codEquipamento: any; }) => e.codEquipamento);
-    } else {
       this.codigosEquipamento = [];
-    }
+      this.chamadoForm.get('equipamento')?.reset();
+      this.chamadoForm.get('codigoEquipamento')?.reset();
+    });
 
-    // limpa código ao mudar tipo
-    this.chamadoForm.get('codigoEquipamento')?.reset();
-  });
-}
+    this.chamadoForm.get('equipamento')?.valueChanges.subscribe((equipamentoSelecionado: any) => {
+      if (equipamentoSelecionado && equipamentoSelecionado.equipamentoList) {
+        this.codigosEquipamento = equipamentoSelecionado.equipamentoList.map(
+          (e: { codEquipamento: any }) => e.codEquipamento
+        );
+      } else {
+        this.codigosEquipamento = [];
+      }
+
+      this.chamadoForm.get('codigoEquipamento')?.reset();
+    });
+  }
 
   loadSelects() {
     forkJoin({
       ambientes: this.chamadoService.getAmbienteChamadoSelect(),
       tiposChamado: this.chamadoService.getTipoChamadoSelect()
     }).subscribe({
-      next: ({ambientes, tiposChamado}) => {
-        //console.log('Ambientes retornados:', ambientes);
-        //console.log('Tipos de chamado retornados:', tiposChamado);
+      next: ({ ambientes, tiposChamado }) => {
         this.ambientes = ambientes.map(a => ({
-          ...a, // pega todas as propriedades do objeto 'a' (idAmbiente, numAmbiente, nomeTipoAmbiente, etc.)
+          ...a,
           numAmbiente: String(a.numAmbiente),
           tipoEquipamentoList: (a as any).tipoEquipamentoList ?? [],
           displayName: `${a.nomeTipoAmbiente} - ${a.numAmbiente}`,
@@ -103,42 +89,40 @@ ngOnInit() {
         
       },
       error: (err) => console.error('Erro ao carregar ambientes:', err)
-    }); 
+    });
   }
 
   onFileSelected(event: any) {
     if (event.target.files && event.target.files.length > 0) {
       const files: File[] = Array.from(event.target.files);
-  
       const imageFiles: File[] = files.filter(file => file.type.startsWith('image/'));
 
       this.selectedFiles.push(...imageFiles);
-
       this.selectedFiles = this.selectedFiles.filter(
         (file, index, self) => index === self.findIndex(f => f.name === file.name)
       );
-    
-    if (imageFiles.length !== files.length) {
-      alert('Apenas arquivos de imagem são permitidos!');
-    }
+
+      if (imageFiles.length !== files.length) {
+        alert('Apenas arquivos de imagem são permitidos!');
+      }
 
       console.log('Arquivos selecionados:', this.selectedFiles);
     }
   }
 
+  campoInvalido(campo: string): boolean {
+    const control = this.chamadoForm.get(campo);
+    return !!(control && control.invalid && (control.dirty || control.touched));
+  }
+
   onSubmit() {
-    if(this.chamadoForm.invalid) {
+    if (this.chamadoForm.invalid) {
+      this.chamadoForm.markAllAsTouched();
       return;
     }
 
     const formValues = this.chamadoForm.value;
-
     const ambienteSelecionado: AmbienteSelectDTO = formValues.ambiente;
-
-    console.log(`idAmbiente: ${ambienteSelecionado.idAmbiente}`);
-    console.log(`idTipoAmbiente: ${ambienteSelecionado.idTipoAmbiente}`);
-    console.log(`numAmbiente: ${ambienteSelecionado.numAmbiente}`);
-    console.log(`nomeTipoAmbiente: ${ambienteSelecionado.nomeTipoAmbiente}`);
 
     const chamadoRequestDTO: chamadoRequestDTO = {
       tituloChamado: formValues.problema,
@@ -154,18 +138,18 @@ ngOnInit() {
     const formData = new FormData();
     formData.append('chamado', new Blob([JSON.stringify(chamadoRequestDTO)], { type: 'application/json' }));
 
-    if (this.selectedFiles && this.selectedFiles.length > 0) {
+    if (this.selectedFiles.length > 0) {
       this.selectedFiles.forEach(file => formData.append('files', file));
     }
-    
+
     this.chamadoService.criarChamado(formData).subscribe({
       next: (res) => {
         alert('Chamado criado com sucesso!');
-        console.log('Chamado criado com sucesso:', res);
+        console.log('Chamado criado:', res);
         this.chamadoForm.reset();
       },
       error: (err) => {
-        alert('Erro ao criar chamado. Por favor, tente novamente.');
+        alert('Erro ao criar chamado. Tente novamente.');
         console.error('Erro ao criar chamado:', err);
       }
     });
