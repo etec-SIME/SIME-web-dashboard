@@ -1,5 +1,5 @@
 import { forkJoin } from 'rxjs';
-import { UsuarioProjection } from '../../DTOs/Projections/UsuarioProjection';
+import { UsuarioProjection } from '../../DTOs/Projections/usuarioProjection';
 import { EscolaService } from '../../services/escola/escola.service';
 import { UsuarioService } from '../../services/usuario/usuario.service';
 import { Component} from '@angular/core';
