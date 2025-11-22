@@ -20,7 +20,7 @@
 }
 
 .btn-card:hover {
-    background-color: rgba(199, 234, 234, 0.5); /* hover no botão inteiro */
+  background-color: rgba(199, 234, 234, 0.5); /* hover no botão inteiro */
 }
 
 #card-date {

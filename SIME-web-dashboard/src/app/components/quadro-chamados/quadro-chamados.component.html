@@ -1,14 +1,19 @@
 <div class="prioridades">
     <!-- Alta -->
-    <div class="coluna">
+    <div class="coluna"
+        cdkDropList
+        #altaList="cdkDropList"
+        [cdkDropListData]="chamadosAlta"
+        [cdkDropListConnectedTo]="[mediaList, baixaList]"
+        (cdkDropListDropped)="drop($event, 'ALTA_PRIORIDADE')">
         <h3>
             Alta Prioridade
             <img [src]="imgAlta" alt="Alta Prioridade">
         </h3>
         <div class="scrollview">
             @for (chamado of chamadosAlta; track chamado.idChamado) {
-              <div class="chamado-wrapper">
-                <app-chamado-card
+              <div class="chamado-wrapper" cdkDrag [cdkDragData]="chamado">
+                <app-chamado-card 
                     [data]="chamado.dtAberturaChamado"
                     [titulo]="chamado.tituloChamado"
                     [local]="chamado.nomeTipoAmbiente"
@@ -21,14 +26,19 @@
     </div>
 
     <!-- Média -->
-    <div class="coluna">
+    <div class="coluna"
+        cdkDropList
+        #mediaList="cdkDropList"
+        [cdkDropListData]="chamadosMedia"
+        [cdkDropListConnectedTo]="[altaList, baixaList]"
+        (cdkDropListDropped)="drop($event, 'MEDIA_PRIORIDADE')">
         <h3>
             Média Prioridade
             <img [src]="imgMedia" alt="Média Prioridade">
         </h3>
         <div class="scrollview">
             @for (chamado of chamadosMedia; track chamado.idChamado) {
-                <div class="chamado-wrapper">
+                <div class="chamado-wrapper" cdkDrag [cdkDragData]="chamado">
                     <app-chamado-card
                         [data]="chamado.dtAberturaChamado"
                         [titulo]="chamado.tituloChamado"
@@ -42,14 +52,19 @@
     </div>
 
     <!-- Baixa -->
-    <div class="coluna">
+    <div class="coluna"            
+        cdkDropList
+        #baixaList="cdkDropList"
+        [cdkDropListData]="chamadosBaixa"
+        [cdkDropListConnectedTo]="[altaList, mediaList]"
+        (cdkDropListDropped)="drop($event, 'BAIXA_PRIORIDADE')">
         <h3>
             Baixa Prioridade
             <img [src]="imgBaixa" alt="Baixa Prioridade">
         </h3>
         <div class="scrollview">
             @for (chamado of chamadosBaixa; track chamado.idChamado) {
-                <div class="chamado-wrapper">
+                <div class="chamado-wrapper" cdkDrag [cdkDragData]="chamado">
                     <app-chamado-card
                         [data]="chamado.dtAberturaChamado"
                         [titulo]="chamado.tituloChamado"

@@ -38,6 +38,8 @@ export class ChamadoDetalheComponent {
   isConcluido: boolean = false;
   isEmAnalise: boolean = false;
 
+  pickerAberto = false;
+
   iconePrioridade: any = {
     'Alta': "/images/pendentes/altaPrioridade.svg",
     'Média': "/images/pendentes/mediaPrioridade.svg",
@@ -260,6 +262,21 @@ export class ChamadoDetalheComponent {
     const dias = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
     const data = new Date(dataISO);
     return dias[data.getDay()];
+  }
+
+  prioridades = [
+  { label: 'Alta Prioridade' },
+  { label: 'Média Prioridade' },
+  { label: 'Baixa Prioridade' }
+  ];
+
+  selecionarPrioridade(nova: string) {
+    if (!this.chamado) return;
+    
+    this.chamado.prioridadeChamado = nova;
+    this.pickerAberto = false;
+
+    this.chamadoService.atualizarPrioridadeChamado(this.chamado.idChamado, nova).subscribe();
   }
 
 }

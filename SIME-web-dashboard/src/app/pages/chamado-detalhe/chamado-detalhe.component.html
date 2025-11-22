@@ -106,23 +106,23 @@
                 </div>
 
                 <div class="details-body">
-                <div>
-                    <p>{{ chamado?.descChamado }}</p>
-                </div>
+                    <div>
+                        <p>{{ chamado?.descChamado }}</p>
+                    </div>
 
-                <div>
-                    <p>{{ chamado?.nomeTipoChamado }}</p>
-                </div>
+                    <div>
+                        <p>{{ chamado?.nomeTipoChamado }}</p>
+                    </div>
 
-                <div>
-                    <p [class.alta]="chamado?.prioridadeChamado === 'Alta Prioridade'"
-                        [class.media]="chamado?.prioridadeChamado === 'Média Prioridade'"
-                        [class.baixa]="chamado?.prioridadeChamado === 'Baixa Prioridade'">
-                    {{ chamado?.prioridadeChamado }}
-                    <img [src]="iconePrioridade[chamado?.prioridadeChamado || 'Padrão']"
-                        [alt]="chamado?.prioridadeChamado || 'Sem prioridade'"/>
-                    </p>
-                </div>
+                    <div>
+                        <p [class.alta]="chamado?.prioridadeChamado === 'Alta Prioridade'"
+                            [class.media]="chamado?.prioridadeChamado === 'Média Prioridade'"
+                            [class.baixa]="chamado?.prioridadeChamado === 'Baixa Prioridade'">
+                        {{ chamado?.prioridadeChamado }}
+                        <img [src]="iconePrioridade[chamado?.prioridadeChamado || 'Padrão']"
+                            [alt]="chamado?.prioridadeChamado || 'Sem prioridade'"/>
+                        </p>
+                    </div>
                 </div>
             </div>
 
