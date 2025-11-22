@@ -87,9 +87,11 @@ export class CriarChamadoComponent implements OnInit {
           ...a,
           numAmbiente: String(a.numAmbiente),
           tipoEquipamentoList: (a as any).tipoEquipamentoList ?? [],
-          displayName: `${a.nomeTipoAmbiente} - ${a.numAmbiente}`
+          displayName: `${a.nomeTipoAmbiente} - ${a.numAmbiente}`,
         }));
+        //console.log('Ambientes após mapeamento:', this.ambientes);
         this.tiposChamado = tiposChamado;
+        
       },
       error: (err) => console.error('Erro ao carregar ambientes:', err)
     });
