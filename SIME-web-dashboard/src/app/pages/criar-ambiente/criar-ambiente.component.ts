@@ -8,10 +8,11 @@ import { forkJoin} from 'rxjs';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 import { codEquipamentoResponseDTO, equipamentoEnvioRequestDTO } from '../../DTOs/codEquipamentoResponseDTO';
 import { sharedImports } from '../../shared/shared-imports';
+import { BotaoVoltarComponent } from "../../components/botao-voltar/botao-voltar.component";
 
 @Component({
   selector: 'app-criar-ambiente',
-  imports: [ReactiveFormsModule, RouterModule, sharedImports],
+  imports: [ReactiveFormsModule, RouterModule, sharedImports, BotaoVoltarComponent],
   templateUrl: './criar-ambiente.component.html',
   styleUrl: './criar-ambiente.component.css'
 })
@@ -60,6 +61,7 @@ export class CriarAmbienteComponent {
         codsEquipamentos: this.escolaService.getAllEquipamentosSemAmbiente()
     }).subscribe(
           (data) => {
+            console.log('Equipamentos sem ambiente:', data.codsEquipamentos);
             this.tiposEquipamento = data.tiposEquipamento;
             this.tiposAmbiente = data.tiposAmbiente;
             this.ambientes = data.ambientes;
@@ -172,8 +174,6 @@ export class CriarAmbienteComponent {
               alert("Erro, ambiente não criado!");
             }
           });
-        }else{
-          alert("Selecione os códigos dos equipamentos!");
         }
       }else{
         alert("Preencha todos os campos obrigatórios!");

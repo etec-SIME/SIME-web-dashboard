@@ -32,7 +32,6 @@ export class HomeComponent implements OnInit{
   modoAtual: 'locais' | 'chamados' = 'locais';
   ambienteSelecionado: string | null = null;
   carregado: boolean = false;
-  bloqueado: boolean = false;
   localPesquisa: string = '';
 
   // Estrutura de exibição dos cards no html
@@ -46,9 +45,14 @@ export class HomeComponent implements OnInit{
   }
 
   setOpcao(opcao: 'salas' | 'labs' | 'outros') {
-    if (this.bloqueado) return;
+    if(this.opcaoAtual !== opcao){
+      this.modoAtual = 'locais';
+      this.ambienteSelecionado = null;
+    }
+
     this.opcaoAtual = opcao;
     this.localPesquisa = ''; // Vai limpar o campo quando mudar de aba
+    this.carregado = false;
     this.carregarDados();
   }
 
@@ -60,6 +64,7 @@ export class HomeComponent implements OnInit{
       tipoChamados: this.escolaService.getAllTipoChamado()
     }).subscribe({
       next: (res) => {
+        //console.log("Dados recebidos da API:", res);
         this.tipoAmbientes = res.tipos;
         this.ambientes = res.ambientes;
         this.chamados = res.chamados;
@@ -136,7 +141,6 @@ export class HomeComponent implements OnInit{
   exibirChamados(nomeAmbiente: string){
     this.ambienteSelecionado = nomeAmbiente;
     this.modoAtual = 'chamados';
-    this.bloqueado = true;
 
     const numeroAmbiente = parseInt(nomeAmbiente.match(/\d+$/)?.[0] || '')
 
@@ -146,7 +150,9 @@ export class HomeComponent implements OnInit{
       a.nomeTipoAmbiente.toLowerCase().includes(nomeTipoAmbiente.toLowerCase()));
     if (!ambiente) return;
 
-    this.chamadosAmbiente = this.chamados.filter(c => c.tipoAmbiente.idTipoAmbiente === ambiente.idTipoAmbiente &&
+
+    this.chamadosAmbiente = this.chamados.filter(
+      c => c.tipoAmbiente.idTipoAmbiente === ambiente.idTipoAmbiente &&
       c.ambiente.idAmbiente === ambiente.idAmbiente);
 
     //c => c.tipoAmbiente.idTipoAmbiente === ambiente.idTipoAmbiente
@@ -156,7 +162,6 @@ export class HomeComponent implements OnInit{
   retornarLocais(){
     this.modoAtual = 'locais';
     this.ambienteSelecionado = null;
-    this.bloqueado = false;
   }
 
 }

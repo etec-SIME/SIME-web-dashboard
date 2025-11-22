@@ -64,4 +64,5 @@
 
 .iconeSeta{
   width: clamp(23px, 2vw, 4vw);
+  cursor: pointer;
 }

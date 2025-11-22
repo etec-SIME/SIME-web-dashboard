@@ -22,12 +22,16 @@
               <p class="voltar">Voltar</p>
             </div>
         </div>
+
+        <div *ngIf="!carregado" class="loading">
+          <p>Carregando...</p>
+        </div>
           
-        <div class="cards-wrapper" [class.chamados-mode]="modoAtual === 'chamados'">
+        <div *ngIf="carregado" class="cards-wrapper" [class.chamados-mode]="modoAtual === 'chamados'"> <!--[class.loading]="!carregado"-->
 
           <ng-container *ngIf="modoAtual === 'locais'">
 
-            <div *ngIf="carregado && cards.length === 0" class="sem-dados">
+            <div *ngIf="cards.length === 0" class="sem-dados">
               <p>Nenhum ambiente encontrado.</p>
             </div>
 
