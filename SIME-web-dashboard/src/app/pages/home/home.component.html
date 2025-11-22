@@ -17,10 +17,9 @@
         <div *ngIf="modoAtual === 'chamados'" class="titulo-botao-pagina-chamado">
             <p class="titulo-pagina-chamado">Chamados {{ambienteSelecionado}}</p>
             
-            <div class="retornarLocais" (click)="retornarLocais()">
-              <img src="/images/iconeSetaVoltar.png" class="iconeSetaVoltar">
-              <p class="voltar">Voltar</p>
-            </div>
+            <button class="retornarLocais" (click)="retornarLocais()">
+              <img src="/images/iconeSetaVoltar.png" class="iconeSetaVoltar">Voltar
+            </button>
         </div>
 
         <div *ngIf="!carregado" class="loading">

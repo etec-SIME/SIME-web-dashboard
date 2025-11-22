@@ -23,7 +23,7 @@ import { sharedImports } from '../../shared/shared-imports';
 export class HomeComponent implements OnInit{
 
   tipoAmbientes: tipoAmbienteRequestDTO[] = [];
-  ambientes: AmbienteSelectDTO[] = []; //ambienteRequestDTO
+  ambientes: AmbienteSelectDTO[] = [];
   chamados: chamadosAmbienteDTO[] = [];
   tiposChamado: TipoChamadoSelectDTO[] = [];
   chamadosAmbiente: chamadosAmbienteDTO[] = [];
@@ -97,7 +97,7 @@ export class HomeComponent implements OnInit{
           .filter(a => tiposFiltrados.some(t => t.idTipoAmbiente === a.idTipoAmbiente))
           .map(a =>{
             const tipo = tiposFiltrados.find(t => t.idTipoAmbiente === a.idTipoAmbiente);
-            const qtdChamados = this.chamados.filter(c => c.ambiente?.idAmbiente === a.idAmbiente).length;
+            const qtdChamados = this.chamados.filter(c => c.ambiente?.idAmbiente === a.idAmbiente && c.statusAtualGeralChamado != "Concluído").length;
 
             // Simplificar o nome se for um laboratório
             let nomeTipo = tipo?.nomeTipoAmbiente || '';
@@ -153,7 +153,7 @@ export class HomeComponent implements OnInit{
 
     this.chamadosAmbiente = this.chamados.filter(
       c => c.tipoAmbiente.idTipoAmbiente === ambiente.idTipoAmbiente &&
-      c.ambiente.idAmbiente === ambiente.idAmbiente);
+      c.ambiente.idAmbiente === ambiente.idAmbiente && c.statusAtualGeralChamado != "Concluído");
 
     //c => c.tipoAmbiente.idTipoAmbiente === ambiente.idTipoAmbiente
 
