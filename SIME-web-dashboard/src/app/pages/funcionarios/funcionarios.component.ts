@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FuncionarioService } from '../../services/funcionario/funcionario.service';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { UsuarioProjection } from '../../DTOs/Projections/UsuarioProjection';
+import { UsuarioProjection } from '../../DTOs/Projections/usuarioProjection';
 import { sharedImports } from '../../shared/shared-imports';
 
 @Component({

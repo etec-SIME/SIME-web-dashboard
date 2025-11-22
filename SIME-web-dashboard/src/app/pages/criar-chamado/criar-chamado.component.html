@@ -112,12 +112,12 @@
             <div id="anexo">
                 <span id="file-name">Carregar do dispositivo</span>
                 <label for="fileUpload" id="upload-btn">Navegar</label>
-                <input type="file" id="fileUpload" multiple (change)="onFileSelected($event)" (blur)="chamadoForm.get('anexo')?.markAsTouched()" formControlName="anexo" hidden>
+                <input type="file" id="fileUpload" multiple (change)="onFileSelected($event)" formControlName="anexo" hidden>
             </div>
             
             <!-- Mensagem de erro -->
              @if (chamadoForm.get('anexo')?.hasError('required') && chamadoForm.get('anexo')?.touched) {
-                <small class="error">O anexo é obrigatório.</small>
+                <small class="error-message">O anexo é obrigatório.</small>
             }
         </div>
 
@@ -125,5 +125,32 @@
         <div class="form-actions">
             <button type="submit" [disabled]="chamadoForm.invalid">Enviar</button>
         </div>
+
+        <!-- Pré-Visualizações -->
+        @if (imagensUrl[0]) {
+            <button type="button" (click)="abrirModal(imagensUrl[0])">Ver Anexos</button>
+        }
+
+        @if(modalAberto) {
+            <div class="modal" (click)="fecharModal($event)">
+
+                <button class="btn-nav prev" (click)="prevImagem($event)">❮</button>
+
+                <img class="modal-img" [src]="imagemModal" alt="Imagem ampliada">
+
+                <button class="btn-nav next" (click)="nextImagem($event)">❯</button>
+
+                <div class="modal-sub-previews">
+                    @for (imagem of imagensUrl; let i = $index; track i) {
+                        <img [src]="imagem" 
+                            [class.active]="imagem === imagemModal"
+                            (click)="abrirModal(imagem); $event.stopPropagation()"
+                            alt="Miniatura">
+
+                        <button class="btn-remover" (click)="removerImagemSelecionada($event)">Remover</button>
+                    }
+                </div>
+            </div>
+        }
     </div>
 </form>

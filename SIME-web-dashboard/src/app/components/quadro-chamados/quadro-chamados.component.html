@@ -28,13 +28,15 @@
         </h3>
         <div class="scrollview">
             @for (chamado of chamadosMedia; track chamado.idChamado) {
-                <app-chamado-card
-                    [data]="chamado.dtAberturaChamado"
-                    [titulo]="chamado.tituloChamado"
-                    [local]="chamado.nomeTipoAmbiente"
-                    [numLocal]="chamado.numAmbiente"
-                    [idChamado]="chamado.idChamado">
-                </app-chamado-card>
+                <div class="chamado-wrapper">
+                    <app-chamado-card
+                        [data]="chamado.dtAberturaChamado"
+                        [titulo]="chamado.tituloChamado"
+                        [local]="chamado.nomeTipoAmbiente"
+                        [numLocal]="chamado.numAmbiente"
+                        [idChamado]="chamado.idChamado">
+                    </app-chamado-card>
+                </div>
             }
         </div>
     </div>
@@ -47,13 +49,15 @@
         </h3>
         <div class="scrollview">
             @for (chamado of chamadosBaixa; track chamado.idChamado) {
-                <app-chamado-card
-                    [data]="chamado.dtAberturaChamado"
-                    [titulo]="chamado.tituloChamado"
-                    [local]="chamado.nomeTipoAmbiente"
-                    [numLocal]="chamado.numAmbiente"
-                    [idChamado]="chamado.idChamado">
-                </app-chamado-card>
+                <div class="chamado-wrapper">
+                    <app-chamado-card
+                        [data]="chamado.dtAberturaChamado"
+                        [titulo]="chamado.tituloChamado"
+                        [local]="chamado.nomeTipoAmbiente"
+                        [numLocal]="chamado.numAmbiente"
+                        [idChamado]="chamado.idChamado">
+                    </app-chamado-card>
+                </div>
             }
         </div>
     </div>
