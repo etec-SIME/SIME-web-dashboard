@@ -24,6 +24,11 @@ export class CriarChamadoComponent implements OnInit {
   chamadoForm: FormGroup;
   selectedFiles: File[] = [];
 
+  imagensUrl: string[] = [];
+  modalAberto = false;
+  imagemModal: string = "";
+  imagemIndex: number = 0;
+
   constructor(private fb: FormBuilder, private chamadoService: ChamadoService) {
     this.chamadoForm = this.fb.group({
       data: ['', Validators.required],
@@ -95,7 +100,10 @@ export class CriarChamadoComponent implements OnInit {
       const files: File[] = Array.from(event.target.files);
       const imageFiles: File[] = files.filter(file => file.type.startsWith('image/'));
 
+      // Adiciona os novos arquivos ao array
       this.selectedFiles.push(...imageFiles);
+
+      // Remove duplicatas pelo nome
       this.selectedFiles = this.selectedFiles.filter(
         (file, index, self) => index === self.findIndex(f => f.name === file.name)
       );
@@ -104,7 +112,20 @@ export class CriarChamadoComponent implements OnInit {
         alert('Apenas arquivos de imagem são permitidos!');
       }
 
+      this.imagensUrl = [];
+
+      this.selectedFiles.forEach(file => {
+        const reader = new FileReader();
+
+        reader.onload = (e: any) => {
+          this.imagensUrl.push(e.target.result); // base64 da imagem
+        };
+
+        reader.readAsDataURL(file);
+      });
+
       console.log('Arquivos selecionados:', this.selectedFiles);
+      console.log('Pré-visualizações:', this.imagensUrl);
     }
   }
 
@@ -151,5 +172,60 @@ export class CriarChamadoComponent implements OnInit {
         console.error('Erro ao criar chamado:', err);
       }
     });
+  }
+
+  abrirModal(img: string) {
+    this.imagemModal = img;
+    this.imagemIndex = this.imagensUrl.indexOf(img);
+    this.modalAberto = true;
+  }
+
+  fecharModal(event?: Event) {
+    event?.stopPropagation();
+    this.modalAberto = false;
+  }
+
+  prevImagem(event: Event) {
+    event.stopPropagation();
+    this.imagemIndex =
+        (this.imagemIndex - 1 + this.imagensUrl.length) % this.imagensUrl.length;
+    this.imagemModal = this.imagensUrl[this.imagemIndex];
+  }
+
+  nextImagem(event: Event) {
+    event.stopPropagation();
+    this.imagemIndex =
+        (this.imagemIndex + 1) % this.imagensUrl.length;
+    this.imagemModal = this.imagensUrl[this.imagemIndex];
+  }
+
+  removerImagemSelecionada(event: Event) {
+    event.stopPropagation();
+
+    const index = this.imagensUrl.indexOf(this.imagemModal);
+    if (index === -1) return;
+
+    this.imagensUrl.splice(index, 1);
+    this.selectedFiles.splice(index, 1);
+
+    if (this.imagensUrl.length === 0) {
+      this.fecharModal();
+
+      const fileInput = document.getElementById('fileUpload') as HTMLInputElement;
+      if (fileInput) fileInput.value = '';
+
+      return;
+    }
+
+    if (index >= this.imagensUrl.length) {
+      this.imagemIndex = this.imagensUrl.length - 1;
+    } else {
+      this.imagemIndex = index;
+    }
+
+    this.imagemModal = this.imagensUrl[this.imagemIndex];
+
+    const fileInput = document.getElementById('fileUpload') as HTMLInputElement;
+    if (fileInput) fileInput.value = '';
   }
 }
