@@ -7,6 +7,7 @@ export interface chamadosAmbienteDTO {
     descChamado: string;
     dtAberturaChamado: string;
     codEquipamento: string;
+    statusAtualGeralChamado: string;
     ambiente: AmbienteSelectDTO;
     tipoChamado: TipoChamadoSelectDTO;
     tipoAmbiente: tipoAmbienteRequestDTO;
