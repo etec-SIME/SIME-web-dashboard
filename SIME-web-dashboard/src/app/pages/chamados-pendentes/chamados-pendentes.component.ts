@@ -1,24 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { QuadroChamadosComponent } from '../../components/quadro-chamados/quadro-chamados.component';
 import { ChamadoCardDTO } from '../../DTOs/ChamadoCardDTO';
 import { ChamadoService } from '../../services/chamado/chamado.service';
 import { sharedImports } from '../../shared/shared-imports';
+import { QuadroChamadosKanbanComponent } from '../../components/quadro-chamados-kanban/quadro-chamados-kanban.component';
+import { QuadroChamadosComponent } from '../../components/quadro-chamados/quadro-chamados.component';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-chamados-pendentes',
-  imports: [QuadroChamadosComponent, sharedImports],
+  imports: [QuadroChamadosKanbanComponent, QuadroChamadosComponent, sharedImports],
   templateUrl: './chamados-pendentes.component.html',
   styleUrls: ['./chamados-pendentes.component.css']
 })
 export class ChamadosPendentesComponent {
+  constructor(private chamadoService: ChamadoService, private authService: AuthService) {}
+
+  temPermissao: boolean = false;
 
   chamadosAlta: ChamadoCardDTO[] = [];
   chamadosMedia: ChamadoCardDTO[] = [];
   chamadosBaixa: ChamadoCardDTO[] = [];
 
-  constructor(private chamadoService: ChamadoService) {}
-
   ngOnInit(): void {
+    this.temPermissao = this.authService.hasAlguma(['Atualizar Prioridade de Chamado']);
     this.carregarChamados();
     console.log('Chamados de alta prioridade: ', this.chamadosAlta);
     console.log('Chamados de média prioridade: ', this.chamadosMedia);

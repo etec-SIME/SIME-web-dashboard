@@ -1,8 +1,18 @@
-<app-quadro-chamados
+<app-quadro-chamados-kanban
+    *ngIf="temPermissao"
     [imgAlta]="'images/pendentes/altaPrioridade.svg'"
     [imgMedia]="'images/pendentes/mediaPrioridade.svg'"
     [imgBaixa]="'images/pendentes/baixaPrioridade.svg'"
+    [chamadosAlta]="chamadosAlta"
+    [chamadosMedia]="chamadosMedia"
+    [chamadosBaixa]="chamadosBaixa">
+</app-quadro-chamados-kanban>
 
+<app-quadro-chamados
+    *ngIf="!temPermissao"
+    [imgAlta]="'images/pendentes/altaPrioridade.svg'"
+    [imgMedia]="'images/pendentes/mediaPrioridade.svg'"
+    [imgBaixa]="'images/pendentes/baixaPrioridade.svg'"
     [chamadosAlta]="chamadosAlta"
     [chamadosMedia]="chamadosMedia"
     [chamadosBaixa]="chamadosBaixa">

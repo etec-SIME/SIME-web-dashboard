@@ -19,12 +19,16 @@ export class HasPermissionDirective {
     this.updateView();
   }
 
+  @Input() appHasPermissionElse?: TemplateRef<any>;
+
   private updateView(): void {
     const hasPermissao = this.authService.hasAlguma(this.permissoesNecessarias);
     this.viewContainer.clear();
 
     if (hasPermissao) {
       this.viewContainer.createEmbeddedView(this.templateRef);
+    } else if (this.appHasPermissionElse) {
+      this.viewContainer.createEmbeddedView(this.appHasPermissionElse);
     }
   }
 }
