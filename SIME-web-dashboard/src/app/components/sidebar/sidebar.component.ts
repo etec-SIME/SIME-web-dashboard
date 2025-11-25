@@ -11,23 +11,8 @@ import { sharedImports } from '../../shared/shared-imports';
 })
 export class SidebarComponent {
   constructor(private router: Router) {}
-  opcoes = ['home', 'pendentes', 'concluidos', 'criar'];
 
   navegarHome() {
     this.router.navigate(['/layout/home']);
   }
-
-  navegarPendentes() {
-    this.router.navigate(['/layout/chamados-pendentes']);
-  }
-
-  navegarConcluidos() {
-    this.router.navigate(['/layout/chamados-concluidos']);
-  }
-
-  navegarCriar() {
-    this.router.navigate(['/layout/criar']);
-  }
-
-  opcaoAtual: 'home' | 'pendentes' | 'concluidos' | 'criar' | '' = '';
 }
