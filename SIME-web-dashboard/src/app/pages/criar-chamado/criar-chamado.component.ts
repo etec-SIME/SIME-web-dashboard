@@ -168,6 +168,8 @@ export class CriarChamadoComponent implements OnInit {
         alert('Chamado criado com sucesso!');
         console.log('Chamado criado:', res);
         this.chamadoForm.reset();
+        this.imagensUrl = [];
+        this.selectedFiles = [];
       },
       error: (err) => {
         alert('Erro ao criar chamado. Tente novamente.');
