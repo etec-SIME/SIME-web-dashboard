@@ -1,0 +1,57 @@
+<div id="cardsCriar">
+  <div class="card" tabindex="0" (click)="navCriarLocal()" *appHasPermission="'Cadastrar Local'">
+    <div class="cardContent">
+      <img class="icon" src="/images/predio_icon.png"/>
+      <div class="cardText">
+        <p>Local</p>
+        <small>{{qtdLocais}} locais</small>
+      </div>
+    </div>
+  </div>
+   <div class="card">
+    <div class="cardContent">
+      <img class="icon" src="/images/list_icon.png"/>
+      <div class="cardText">
+        <p>Tipos de Chamado</p>
+        <small>{{qtdTiposChamado}} tipos de chamado</small>
+      </div>
+    </div>
+  </div>
+  <div class="card tipo-perfil-card" *appHasPermission="'Cadastrar Tipo de Perfil'">
+    <div class="cardContent" (click)="navCriarTipoPerfil()">
+      <img class="icon tipo-perfil" src="images/users_icon.svg"/>
+      <div class="cardText tipo-perfil-text">
+        <p>Tipos de Perfil</p>
+        <small>{{qtdTipoPerfis}} tipos de perfil</small>
+      </div>
+    </div>
+  </div>
+  <div class="card" tabindex="0" (click)="navCadastroFuncionario()" *appHasPermission="'Cadastrar Perfil'">
+    <div class="cardContent">
+      <img class="icon" src="/images/user_icon.png"/>
+      <div class="cardText">
+        <p>Perfil</p>
+        <small>{{qtdPerfis}} perfis</small>
+      </div>
+    </div>
+  </div>
+   <div class="card" *appHasPermission="'Cadastrar Departamento'">
+    <div class="cardContent">
+      <img class="icon departamento" src="/images/predio2_icon.png"/>
+      <div class="cardText">
+        <p>Departamento</p>
+        <small>{{qtdDepartamentos}} departamentos</small>
+      </div>
+    </div>
+  </div>
+  <div class="card" *appHasPermission="'Cadastrar Equipamento'">
+    <div class="cardContent">
+      <img class="icon" src="/images/pc_icon.png"/>
+      <div class="cardText">
+        <p>Equipamento</p>
+        <small>{{qtdEquipamentos}} equipamentos</small>
+      </div>
+    </div>
+  </div>
+  
+</div>

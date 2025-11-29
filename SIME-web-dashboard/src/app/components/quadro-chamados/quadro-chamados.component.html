@@ -5,15 +5,19 @@
             Alta Prioridade
             <img [src]="imgAlta" alt="Alta Prioridade">
         </h3>
-        @for (chamado of chamadosAlta; track chamado.idChamado) {
-          <div class="chamado-wrapper">
-            <app-chamado-card
-                [data]="chamado.dtAberturaChamado"
-                [descricao]="chamado.descChamado"
-                [local]="chamado.localChamado">
-            </app-chamado-card>
-          </div>
-        }
+        <div class="scrollview">
+            @for (chamado of chamadosAlta; track chamado.idChamado) {
+              <div class="chamado-wrapper">
+                <app-chamado-card
+                    [data]="chamado.dtAberturaChamado"
+                    [titulo]="chamado.tituloChamado"
+                    [local]="chamado.nomeTipoAmbiente"
+                    [numLocal]="chamado.numAmbiente"
+                    [idChamado]="chamado.idChamado">
+                </app-chamado-card>
+              </div>
+            }
+        </div>
     </div>
 
     <!-- Média -->
@@ -22,13 +26,19 @@
             Média Prioridade
             <img [src]="imgMedia" alt="Média Prioridade">
         </h3>
-        @for (chamado of chamadosMedia; track chamado.idChamado) {
-            <app-chamado-card
-                [data]="chamado.dtAberturaChamado"
-                [descricao]="chamado.descChamado"
-                [local]="chamado.localChamado">
-            </app-chamado-card>
-        }
+        <div class="scrollview">
+            @for (chamado of chamadosMedia; track chamado.idChamado) {
+                <div class="chamado-wrapper">
+                    <app-chamado-card
+                        [data]="chamado.dtAberturaChamado"
+                        [titulo]="chamado.tituloChamado"
+                        [local]="chamado.nomeTipoAmbiente"
+                        [numLocal]="chamado.numAmbiente"
+                        [idChamado]="chamado.idChamado">
+                    </app-chamado-card>
+                </div>
+            }
+        </div>
     </div>
 
     <!-- Baixa -->
@@ -37,12 +47,18 @@
             Baixa Prioridade
             <img [src]="imgBaixa" alt="Baixa Prioridade">
         </h3>
-        @for (chamado of chamadosBaixa; track chamado.idChamado) {
-            <app-chamado-card
-                [data]="chamado.dtAberturaChamado"
-                [descricao]="chamado.descChamado"
-                [local]="chamado.localChamado">
-            </app-chamado-card>
-        }
+        <div class="scrollview">
+            @for (chamado of chamadosBaixa; track chamado.idChamado) {
+                <div class="chamado-wrapper">
+                    <app-chamado-card
+                        [data]="chamado.dtAberturaChamado"
+                        [titulo]="chamado.tituloChamado"
+                        [local]="chamado.nomeTipoAmbiente"
+                        [numLocal]="chamado.numAmbiente"
+                        [idChamado]="chamado.idChamado">
+                    </app-chamado-card>
+                </div>
+            }
+        </div>
     </div>
 </div>

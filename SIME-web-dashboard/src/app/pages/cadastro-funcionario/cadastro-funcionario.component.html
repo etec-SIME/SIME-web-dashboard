@@ -1,0 +1,86 @@
+<!-- Voltar -->
+<app-botao-voltar></app-botao-voltar>
+
+<div class="cadastro-layout">
+  <form [formGroup]="formCadastrarUsuario">
+  <div class="input-container">
+
+  <div class="input-side">
+
+    <div class="input-icon">
+      <img src="/images/iconeUser.png" width="20px">
+      <input type="text" placeholder="Nome" formControlName="nomeUsuario">
+    </div>
+
+  <!-- @if(formCadastrarUsuario.get('nomeUsuario')?.touched && formCadastrarUsuario.get('nomeUsuario')?.invalid){
+      <div>
+        @if (formCadastrarUsuario.get('nomeUsuario')?.errors?.['required']) {
+          <small>NOME é obrigatório!</small>
+        }
+      </div>
+    } -->
+
+    <div class="input-icon">
+      <img class="icone-RM" src="/images/icone_RM.png" width="45px">
+      <input type="text" placeholder="RM" formControlName="rmUsuario">
+    </div>
+
+    <div class="input-icon">
+      <img src="/images/Icone_TipoPerfil.png" width="20px">
+      <select id="tipo-perfil-select" formControlName="tipoPerfil">
+          @for (tipoPerfil of tiposPerfil; track tipoPerfil.idTipoPerfil) {
+            <option [ngValue]="tipoPerfil">{{ tipoPerfil.nomeTipoPerfil }}</option>
+          }
+        </select>
+    </div>
+
+  </div>
+
+  <div class="input-side">
+
+    <div class="input-icon">
+      <img src="/images/icone_Email.png" width="20px">
+      <input type="text" placeholder="Email" formControlName="emailUsuario">
+    </div>
+
+    <div class="input-icon">
+      <img src="/images/icone_CPF.png" width="20px">
+      <input type="text" placeholder="CPF" formControlName="cpfUsuario">
+    </div>
+
+    <div class="input-icon">
+      <img src="/images/icone_Senha.png" width="30px">
+      <input class="senha-input" [type]="showPassword ? 'text' : 'password'" placeholder="Senha" formControlName="senhaUsuario">
+      <img
+          src="{{ showPassword ? 'images/iconeOlhoFechado.png' : 'images/iconeOlhoAberto.png' }}"
+          class="input-eye"
+          (click)="showPassword = !showPassword"
+          alt="Mostrar/Esconder senha">
+    </div>
+
+  </div>
+
+</div>
+</form>
+
+<div class="button-container">
+  <div class="button-cancel" tabindex="0" (click)="navCancelar()">
+    <p>Cancelar</p>
+  </div>
+  <button (click)="onCadastrarUsuario()">Concluir</button>
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,4 +1,7 @@
-<button class="btn-card" [ngClass]="prioridade">
-    <p id="card-date">{{ data }}</p>
-    <p id="card-title">{{ descricao }} - {{ local }}</p>
+<button class="btn-card" [ngClass]="prioridade" (click)="navigate()">
+    <div class="card-subtitle">
+        <p>{{ data }}</p>
+        <p>{{ local }} {{ numLocal }}</p>
+    </div>
+    <p id="card-title">{{ titulo }}</p>
 </button>

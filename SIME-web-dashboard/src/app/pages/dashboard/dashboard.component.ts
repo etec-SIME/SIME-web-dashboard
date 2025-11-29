@@ -1,13 +1,13 @@
 import { ChamadoService } from './../../services/chamado/chamado.service';
-import { ChamadoRequestDTO } from '../../DTOs/ChamadoRequestDTO';
 import { Component } from '@angular/core';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
+import { sharedImports } from '../../shared/shared-imports';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [RouterModule , SidebarComponent],
+  imports: [RouterModule, SidebarComponent, sharedImports],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })

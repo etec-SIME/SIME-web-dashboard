@@ -1,27 +1,42 @@
 <div class="sidebar">
-    <img class="logo" src="/images/logoSIME.png">
+    <button (click)="navegarHome()">
+        <img class="logo" src="/images/logoSIME.png">
+    </button>
 
     <div class="menu">
-        <div class="home">
+        <div class="home"
+            routerLink="/layout/home"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }">
             <img class="iconeHome" src="/images/iconeHome.png">
             <p>Home</p>
         </div>
 
-        <div class="pendentes">
+        <div class="pendentes"
+            routerLink="/layout/chamados-pendentes"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }">
             <img class="iconePendentes" src="/images/iconePendentes.png">
             <p>Pendentes</p>
         </div>
-        
-        <div class="concluidos">
+
+        <div class="concluidos"
+            routerLink="/layout/chamados-concluidos"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }">
             <img class="iconeConcluidos" src="/images/iconeConcluidos.png">
             <p>Concluídos</p>
         </div>
 
-        <div class="criar">
+        <div class="criar"
+            routerLink="/layout/criar"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            *appHasPermission="['Cadastrar Tipo de Perfil','Cadastrar Local', 'Cadastrar Tipo de Chamado', 'Cadastrar Perfil', 'Cadastrar Departamento', 'Cadastrar Equipamento']">
             <img class="iconeCriar" src="/images/iconeCriar.png">
             <p>Criar</p>
         </div>
     </div>
 
-    <button class="buttonCriar">Criar Chamado</button>
+    <button class="buttonCriar" [routerLink]="['/layout/criar-chamado']">Criar Chamado</button>
 </div>

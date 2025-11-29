@@ -1,10 +1,10 @@
-export interface ChamadoRequestDTO {
+export interface chamadoRequestDTO {
     tituloChamado: string;
     descChamado: string;
-    dataAbertura: Date;
+    dataAbertura: string;
     emailUsuario: string;
     idTipoChamado: number;
     codEquipamento: string;
-    idAmbiente: any;
-    idTipoAmbiente: any;
+    idAmbiente: number;
+    idTipoAmbiente: number;
 }

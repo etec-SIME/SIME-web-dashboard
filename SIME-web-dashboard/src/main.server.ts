@@ -7,6 +7,6 @@ import { ApplicationRef } from '@angular/core';
 
 export default bootstrap;*/
 
-export default async function (): Promise<ApplicationRef> {
-  return bootstrapApplication(AppComponent, config);
+export default async function (context : any): Promise<ApplicationRef> {
+  return bootstrapApplication(AppComponent, config, context);
 } // forma mais robusta, segura e compatível com SSR moderno do Angular com Vite

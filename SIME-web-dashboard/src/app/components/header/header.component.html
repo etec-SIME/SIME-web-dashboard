@@ -3,9 +3,9 @@
 
     <div class="acoes">
         <img src="/images/iconeNotificacao.svg" alt="Notificações" id="icone-notificacao">
-        <div class="perfil">
+        <button class="perfil" (click)="navegarParaPerfis()" *appHasPermission="['Atribuir Permissões Tipo de Perfil', 'Cadastrar Tipo de Perfil']">
             <p id="titulo-perfil">Perfis</p>
             <img src="/images/iconePerfil.svg" alt="Perfil" id="icone-perfil">
-        </div>
+        </button>
     </div>
 </header>

@@ -1,26 +1,55 @@
 import { Injectable } from '@angular/core';
-import { loginDTO } from '../../DTOs/LoginDTO';
-import { tokenDTO } from '../../DTOs/TokenDTO';
+import { tokenDTO } from '../../DTOs/tokenDTO';
+import { LoginDTO } from '../../DTOs/loginDTO';
+import { LoginEscolaDTO } from '../../DTOs/loginEscolaDTO';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { UserInfoDTO } from '../../DTOs/UserInfoDTO';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080/usuarios';
+  private apiUrl = 'http://localhost:8080';
+
+  private userInfoSubject = new BehaviorSubject<UserInfoDTO | null>(null);
+  userInfo$ = this.userInfoSubject.asObservable();
+
+  private permissoes: string[] = [];
   
   constructor( private http: HttpClient ) { }
 
-  login(credentials: loginDTO) : Observable<tokenDTO> {
-    return this.http.post<any>(`${this.apiUrl}/login`, credentials, { withCredentials: true });
+  loginUsuario(credentials: LoginDTO) : Observable<tokenDTO> {
+    return this.http.post<any>(`${this.apiUrl}/usuarios/login`, credentials, { withCredentials: true });
   }
 
-  // getToken(): string | null {
-  //   return localStorage.getItem('token'); // retorna o token do localStorage
-  // }
+  loginEscola(credentials: LoginEscolaDTO) : Observable<tokenDTO> {
+    return this.http.post<any>(`${this.apiUrl}/escola/login`, credentials, { withCredentials: true });
+  }
 
-  // logout(): void {
-  //   localStorage.removeItem('token');  // remove o token do localStorage
-  // }
+  getUserInfo(): Observable<UserInfoDTO> {
+    return this.http.get<UserInfoDTO>(`${this.apiUrl}/usuarios/user-info`, { withCredentials: true }).pipe(
+      tap(userInfo => {
+        this.userInfoSubject.next(userInfo);
+        this.setPermissoes(userInfo.permissoes);
+      })
+    );
+  }
+
+  setPermissoes(permissoes: string[]) {
+    this.permissoes = permissoes;
+  }
+
+  getPermissoes(): string[] {
+    return this.permissoes;
+  }
+
+  hasPermissao(permissao: string): boolean {
+    return this.permissoes.includes(permissao);
+  }
+
+  hasAlguma(permissoesNecessarias: string[]): boolean {
+    return this.permissoes.includes('ROLE_ESCOLA') ||
+          permissoesNecessarias.some(p => this.permissoes.includes(p));
+  }
 }

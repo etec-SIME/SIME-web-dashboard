@@ -1,49 +1,49 @@
 import { Component, OnInit } from '@angular/core';
-import { QuadroChamadosComponent } from '../../components/quadro-chamados/quadro-chamados.component';
 import { ChamadoCardDTO } from '../../DTOs/ChamadoCardDTO';
 import { ChamadoService } from '../../services/chamado/chamado.service';
+import { sharedImports } from '../../shared/shared-imports';
+import { QuadroChamadosKanbanComponent } from '../../components/quadro-chamados-kanban/quadro-chamados-kanban.component';
+import { QuadroChamadosComponent } from '../../components/quadro-chamados/quadro-chamados.component';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-chamados-pendentes',
-  imports: [QuadroChamadosComponent],
+  imports: [QuadroChamadosKanbanComponent, QuadroChamadosComponent, sharedImports],
   templateUrl: './chamados-pendentes.component.html',
   styleUrls: ['./chamados-pendentes.component.css']
 })
 export class ChamadosPendentesComponent {
+  constructor(private chamadoService: ChamadoService, private authService: AuthService) {}
+
+  temPermissao: boolean = false;
 
   chamadosAlta: ChamadoCardDTO[] = [];
   chamadosMedia: ChamadoCardDTO[] = [];
   chamadosBaixa: ChamadoCardDTO[] = [];
 
-  constructor(private chamadoService: ChamadoService) {}
-
   ngOnInit(): void {
+    this.temPermissao = this.authService.hasAlguma(['Atualizar Prioridade de Chamado']);
     this.carregarChamados();
+    console.log('Chamados de alta prioridade: ', this.chamadosAlta);
+    console.log('Chamados de média prioridade: ', this.chamadosMedia);
+    console.log('Chamados de baixa prioridade: ', this.chamadosBaixa);
   }
 
   carregarChamados(): void {
     this.chamadoService.getChamadosByPrioridade('ALTA_PRIORIDADE')
       .subscribe(res => {
-        this.chamadosAlta = res;
+        this.chamadosAlta = res.filter(chamado => chamado.statusAtualGeralChamado != 'Concluído');
         console.log('Chamados recebidos: ', res);
       });
 
     this.chamadoService.getChamadosByPrioridade('MEDIA_PRIORIDADE')
-      .subscribe(res => this.chamadosMedia = res);
+      .subscribe(res => {
+        this.chamadosMedia = res.filter(chamado => chamado.statusAtualGeralChamado != 'Concluído');
+      });
 
     this.chamadoService.getChamadosByPrioridade('BAIXA_PRIORIDADE')
-      .subscribe(res => this.chamadosBaixa = res);
+      .subscribe(res => {
+        this.chamadosBaixa = res.filter(chamado => chamado.statusAtualGeralChamado != 'Concluído');
+      });
   }
-
-  //implements OnInit {
-  // chamadosConcluidos: chamadoProjection[] = [];
-
-  //   constructor(private funcionarioService: FuncionarioService) {}
-
-  //   ngOnInit(): void {
-  //     this.funcionarioService.getAllChamadosPendentes().subscribe((resp) => {
-  //       console.log('Chamados pendentes:', resp);
-  //       this.chamadosConcluidos = resp;
-  //     });
-  //   }
 }

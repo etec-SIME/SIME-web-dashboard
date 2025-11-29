@@ -1,0 +1,159 @@
+
+.login-options select,
+.login-options input,
+.input-group input {
+  width: 100%;
+  padding: 12px 40px;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  background: #44A1A0;
+  color: #fff;
+  font-size: 10px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.login-options select::placeholder,
+.login-options input::placeholder,
+.input-group input::placeholder {
+  color: #fff;
+}
+
+.login-options select {
+  color: #fff;
+  background: #44A1A0;
+  padding-left: 12px;
+}
+
+.select-group {
+  position: relative;
+}
+
+.select-group .input-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 17px;
+  height: 17px;
+}
+
+.login-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url('/images/login-background/formas.png');
+  background-color: #44A1A0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.login-card {
+  font-family: 'Montserrat', sans-serif;
+  padding: 12px;
+  border-radius: 3px;
+  width: 350px;
+  text-align: center;
+}
+
+.login-card h1 {
+  margin-bottom: 1.5rem;
+  font-size: 1.7rem;
+  font-weight: 500;
+  color: #fff;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.login-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.input-group .input-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 17px;
+  height: 17px;
+}
+
+.input-group .input-eye {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.input-group input:focus,
+.login-options input:focus,
+.login-options select:focus {
+  outline: none;
+  border: 1px solid #c3f1ee;
+  box-shadow: 0 0 5px rgba(185, 247, 242, 0.5);
+}
+
+.btn-login {
+  background: #fff;
+  color: #44A1A0;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  padding: 12px;
+  width: 100%;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 550;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.btn-login:hover {
+  background: #CFFFFC;
+}
+
+.links {
+  margin-top: 1rem;
+  font-size: 13px;
+  font-weight: 400;
+  color: #fff;
+}
+
+.links a {
+  color: #CFFFFC;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.links a:hover {
+  text-decoration: underline;
+}
+
+.links p {
+  margin-top: 10px;
+  font-weight: 400;
+}
+
+.sime-logo {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  background: transparent;
+  border: none;
+}
+
+.sime-logo img {
+  width: 150px;
+  height: auto;
+  display: block;
+}

@@ -5,6 +5,26 @@
     margin-top: 5vh;
 }
 
+.scrollview {
+  height: calc(100vh - 232px);
+  overflow-y: auto;
+  padding-right: 1rem;
+  padding-bottom: 25px;
+}
+
+.scrollview::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollview::-webkit-scrollbar-thumb {
+  background-color: #9b9b9b;
+  border-radius: 4px;
+}
+
+.scrollview::-webkit-scrollbar-thumb:hover {
+  background-color: #7c7c7c;
+}
+
 .chamado-wrapper:not(:last-child) {
   margin-bottom: 25px;
 }
