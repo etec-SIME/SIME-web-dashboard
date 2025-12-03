@@ -64,7 +64,8 @@ export class ChamadoDetalheComponent {
     }).subscribe({
       next: ({chamado, progresso}) => {
         this.chamado = chamado;
-        this.imagensUrl = chamado.caminhoImagensList?.map((caminho) => `http://localhost:8080${caminho}`) || [];
+        this.imagensUrl = chamado.caminhoImagensList?.map((caminho) => `${caminho}`) || [];
+        console.log(this.imagensUrl);
         this.imagemSelecionada = this.imagensUrl[0] || null;
 
         this.progresso = progresso;
