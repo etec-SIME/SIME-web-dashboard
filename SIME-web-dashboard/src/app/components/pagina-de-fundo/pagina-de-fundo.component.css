@@ -6,9 +6,18 @@
 
 .main {
   background-color: #44A1A0;
-  min-height: 100vh;
-  overflow: hidden;
+  /* --- CORREÇÃO DE POSICIONAMENTO CRÍTICA --- */
+  position: fixed; /* Tira do fluxo normal do documento */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh; /* Garante que cubra a tela inteira */
+  z-index: -1; /* Manda para a camada mais baixa, atrás do recovery-container (z-index: 10) */
+  /* ----------------------------------------- */
+  overflow: hidden; /* Mantido para controle das formas */
 }
+
+/* O restante das suas regras de estilo (f1, container, logo, etc.) permanece inalterado */
 
 .f1 {
   background-color: #499d9c;
@@ -65,21 +74,20 @@
 }
 
 .logo {
-  width: clamp(160px, 18vw, 30vw);
-  height: clamp(20vh, 22vh, 35vh);
-  position: absolute;
-  z-index: 4;
-  top: 0.5%;
-  left: 27%;
-  transform: translateX(-50%);
-  margin-left: -15vw;
+  position: fixed;
+  top: 15px;
+  left: 12.5px;
+  z-index: 1000;
+  background: transparent;
+  border: none;
 }
 
 .logo img {
-  height: 100%;
-  width: 100%;
-  object-fit: contain;
+  width: 160px;
+  height: auto;
+  display: block;
 }
+
 
 @media (max-width: 830px) {
   .logo {

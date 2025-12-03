@@ -7,11 +7,30 @@
     <link rel="stylesheet" href="recuperar-senha.component.css">
 </head>
 <body>
+
     <app-pagina-de-fundo></app-pagina-de-fundo>
 
     <div class="recovery-container">
-        <h1>Recuperar Senha</h1>
-        <input type="email" class="recovery-input" placeholder="Digite seu e-mail">
+
+        <h1>RECUPERAR SENHA</h1>
+
+        <div class="input-group">
+            <img src="images/iconeEmail.png" class="input-icon">
+            <input type="email" class="recovery-input" placeholder="CÓDIGO">
+        </div>
+
+        <div class="frase">
+            <img src="images/certo.png" class="certo-icon">
+            <p>Um código foi enviado ao email institucional</p>
+        </div>
+
+        <a class="reenviar">Enviar novamente</a>
+
+        <button class="btn-enviar">ENVIAR CÓDIGO</button>
+
+        <a class="link-red">Redefinir senha</a>
+
     </div>
+
 </body>
 </html>
