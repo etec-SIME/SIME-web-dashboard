@@ -6,18 +6,14 @@
 
 .main {
   background-color: #44A1A0;
-  /* --- CORREÇÃO DE POSICIONAMENTO CRÍTICA --- */
-  position: fixed; /* Tira do fluxo normal do documento */
+  position: fixed; 
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh; /* Garante que cubra a tela inteira */
-  z-index: -1; /* Manda para a camada mais baixa, atrás do recovery-container (z-index: 10) */
-  /* ----------------------------------------- */
-  overflow: hidden; /* Mantido para controle das formas */
+  height: 100vh; 
+  z-index: -1; 
+  overflow: hidden; 
 }
-
-/* O restante das suas regras de estilo (f1, container, logo, etc.) permanece inalterado */
 
 .f1 {
   background-color: #499d9c;
