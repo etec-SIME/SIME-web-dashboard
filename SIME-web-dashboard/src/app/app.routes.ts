@@ -17,15 +17,16 @@ import { ChamadoDetalheComponent } from './pages/chamado-detalhe/chamado-detalhe
 import { PaginaDeFundoComponent } from './components/pagina-de-fundo/pagina-de-fundo.component';
 import { CadastroFuncionarioComponent } from './pages/cadastro-funcionario/cadastro-funcionario.component';
 import { AuthGuard } from './services/auth/guard/auth.guard';
+import { ChamadosLocaisCardsComponent } from './components/chamados-locais-cards/chamados-locais-cards.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'layout', component: LayoutComponent, canActivate: [AuthGuard],
       children: [
         { path: 'home', component: HomeComponent, data: { titulo: 'Home - Locais' } },
+        { path: 'home/ambiente/:id', component: HomeComponent, data: { titulo: 'Home - Locais' } },
         { path: 'chamados-pendentes', component: ChamadosPendentesComponent, data: { titulo: 'Chamados Pendentes' } },
         { path: 'chamados-concluidos', component: ChamadosConcluidosComponent, data: { titulo: 'Chamados Concluídos' } },
-        { path: 'home', component: HomeComponent, data: { titulo: 'Home - Locais' } },
         { path: 'perfil', component: PerfilComponent, data: { titulo: 'Perfil' } },
         { path: 'criar', component: CriarComponent, data: { titulo: "Criar" } },
         { path: 'criar-chamado', component: CriarChamadoComponent, data: { titulo: 'Criar Chamado' } },

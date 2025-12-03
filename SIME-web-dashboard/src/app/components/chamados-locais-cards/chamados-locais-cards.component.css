@@ -64,5 +64,10 @@
 
 .iconeSeta{
   width: clamp(23px, 2vw, 4vw);
+}
+
+.seta {
+  display: flex;
+  z-index: 10; /* garante que fica por cima */
   cursor: pointer;
 }

@@ -63,4 +63,9 @@ export class ChamadoService {
     const param = new HttpParams().set('novoStatus', novoStatusProgresso);
     return this.http.put<ChamadoStatusResponseDTO>(`${this.apiUrl}/${id}/atualizar-status-progresso`, {}, { params: param, withCredentials: true });
   }
+
+  atualizarPrioridadeChamado(id: number, novaPrioridade: string): Observable<void> {
+    const param = new HttpParams().set('novaPrioridade', novaPrioridade);
+    return this.http.put<void>(`${this.apiUrl}/${id}/atualizar-prioridade-chamado`, {}, { params: param, withCredentials: true });
+  }
 }

@@ -3,6 +3,7 @@ import { tipoAmbienteRequestDTO } from "./tipoAmbienteRequestDTO";
 import { TipoChamadoSelectDTO } from "./TipoChamadoSelectDTO";
 
 export interface chamadosAmbienteDTO {
+    idChamado: number,
     tituloChamado: string;
     descChamado: string;
     dtAberturaChamado: string;

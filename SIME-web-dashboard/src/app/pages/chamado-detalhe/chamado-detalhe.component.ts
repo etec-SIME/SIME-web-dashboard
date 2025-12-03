@@ -38,6 +38,8 @@ export class ChamadoDetalheComponent {
   isConcluido: boolean = false;
   isEmAnalise: boolean = false;
 
+  pickerAberto = false;
+
   iconePrioridade: any = {
     'Alta': "/images/pendentes/altaPrioridade.svg",
     'Média': "/images/pendentes/mediaPrioridade.svg",
@@ -62,7 +64,8 @@ export class ChamadoDetalheComponent {
     }).subscribe({
       next: ({chamado, progresso}) => {
         this.chamado = chamado;
-        this.imagensUrl = chamado.caminhoImagensList?.map((caminho) => `http://localhost:8080${caminho}`) || [];
+        this.imagensUrl = chamado.caminhoImagensList?.map((caminho) => `${caminho}`) || [];
+        console.log(this.imagensUrl);
         this.imagemSelecionada = this.imagensUrl[0] || null;
 
         this.progresso = progresso;
@@ -260,6 +263,21 @@ export class ChamadoDetalheComponent {
     const dias = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
     const data = new Date(dataISO);
     return dias[data.getDay()];
+  }
+
+  prioridades = [
+  { label: 'Alta Prioridade' },
+  { label: 'Média Prioridade' },
+  { label: 'Baixa Prioridade' }
+  ];
+
+  selecionarPrioridade(nova: string) {
+    if (!this.chamado) return;
+    
+    this.chamado.prioridadeChamado = nova;
+    this.pickerAberto = false;
+
+    this.chamadoService.atualizarPrioridadeChamado(this.chamado.idChamado, nova).subscribe();
   }
 
 }

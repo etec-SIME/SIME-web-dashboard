@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CalendarioMensalComponent } from "../../components/calendario-mensal/calendario-mensal.component";
 import { CalendarioSemanalComponent } from "../../components/calendario-semanal/calendario-semanal.component";
@@ -30,18 +31,38 @@ export class HomeComponent implements OnInit{
 
   opcaoAtual: 'salas' | 'labs' | 'outros' = 'salas';
   modoAtual: 'locais' | 'chamados' = 'locais';
+
   ambienteSelecionado: string | null = null;
   carregado: boolean = false;
   localPesquisa: string = '';
+  private rotaId: number | null = null;
 
   // Estrutura de exibição dos cards no html
-  cards: {nome: string; chamados: string}[] = [];
-  cardsOriginais: {nome: string; chamados: string}[] = [];
+  cards: {idAmbiente: number; nome: string; chamados: string}[] = [];
+  cardsOriginais: {idAmbiente: number; nome: string; chamados: string}[] = [];
 
-  constructor(private escolaService: EscolaService, private chamadoService: ChamadoService){}
+  constructor
+  (private route: ActivatedRoute,
+  private router: Router,
+  private escolaService: EscolaService, 
+  private chamadoService: ChamadoService){}
 
   ngOnInit(): void {
-    this.setOpcao('salas');
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+      this.rotaId = id ? Number(id) : null;
+
+      if (this.carregado) { // Se os dados já estiverem carregados
+        if(this.rotaId !== null){
+          this.exibirChamados(this.rotaId);
+        } else {
+          this.modoAtual = 'locais';
+          this.ambienteSelecionado = null;
+          this.chamadosAmbiente = [];
+        }
+      }
+    });
+    this.carregarDados();
   }
 
   setOpcao(opcao: 'salas' | 'labs' | 'outros') {
@@ -51,8 +72,7 @@ export class HomeComponent implements OnInit{
     }
 
     this.opcaoAtual = opcao;
-    this.localPesquisa = ''; // Vai limpar o campo quando mudar de aba
-    this.carregado = false;
+    this.localPesquisa = '';
     this.carregarDados();
   }
 
@@ -64,15 +84,11 @@ export class HomeComponent implements OnInit{
       tipoChamados: this.escolaService.getAllTipoChamado()
     }).subscribe({
       next: (res) => {
-        //console.log("Dados recebidos da API:", res);
         this.tipoAmbientes = res.tipos;
         this.ambientes = res.ambientes;
         this.chamados = res.chamados;
         this.tiposChamado = res.tipoChamados;
         this.chamadosAmbiente = [...this.chamados]
-
-        /*console.log('Ambientes recebidos:', this.ambientes);
-        console.log('Chamados recebidos:', this.chamados.slice(0, 5));*/
 
         // Filtrar ambiente pelos tipos de ambientes
         let tiposFiltrados: tipoAmbienteRequestDTO[] = [];
@@ -104,6 +120,7 @@ export class HomeComponent implements OnInit{
             if (nomeTipo.toLowerCase().includes('laboratório')){ nomeTipo = 'Laboratório'; }
 
             return{
+              idAmbiente: a.idAmbiente,
               nome: `${nomeTipo} ${a.numAmbiente}`, // Usar crase
               chamados: qtdChamados.toString().padStart(2, '0')
             };
@@ -112,6 +129,10 @@ export class HomeComponent implements OnInit{
           this.cardsOriginais = cardsMontados; // Guardar todos os cards
           this.cards = [...cardsMontados] // Exibir todos inicialmente
           this.carregado = true;
+
+          if (this.rotaId !== null) {
+            this.exibirChamados(this.rotaId);
+          }
         },
         error: (err) => {
         console.error('Erro ao carregar dados:', err);
@@ -138,30 +159,34 @@ export class HomeComponent implements OnInit{
     );
   }
 
-  exibirChamados(nomeAmbiente: string){
-    this.ambienteSelecionado = nomeAmbiente;
-    this.modoAtual = 'chamados';
-
-    const numeroAmbiente = parseInt(nomeAmbiente.match(/\d+$/)?.[0] || '')
-
-    const nomeTipoAmbiente = nomeAmbiente.replace(/\d+$/, '').trim();
-
-    const ambiente = this.ambientes.find( a => a.numAmbiente === numeroAmbiente &&
-      a.nomeTipoAmbiente.toLowerCase().includes(nomeTipoAmbiente.toLowerCase()));
-    if (!ambiente) return;
-
-
-    this.chamadosAmbiente = this.chamados.filter(
-      c => c.tipoAmbiente.idTipoAmbiente === ambiente.idTipoAmbiente &&
-      c.ambiente.idAmbiente === ambiente.idAmbiente && c.statusAtualGeralChamado != "Concluído");
-
-    //c => c.tipoAmbiente.idTipoAmbiente === ambiente.idTipoAmbiente
-
+  abrirAmbiente(card: { idAmbiente: number }){
+    this.router.navigate(['layout/home/ambiente/', card.idAmbiente]);
   }
 
-  retornarLocais(){
+  exibirChamados(id:number){
+    const ambiente = this.ambientes.find(a => a.idAmbiente === id);
+    if (!ambiente) return;
+
+    this.modoAtual = 'chamados';
+    this.ambienteSelecionado = `${ambiente.nomeTipoAmbiente} ${ambiente.numAmbiente}`;
+  
+    this.chamadosAmbiente = this.chamados.filter(
+      c => c.tipoAmbiente.idTipoAmbiente === ambiente.idTipoAmbiente &&
+      c.ambiente.idAmbiente === ambiente.idAmbiente && c.statusAtualGeralChamado != "Concluído"
+    )
+
+    this.carregado = true;
+  }
+
+  retornarLocais(navegar = true){
+    this.rotaId = null;
     this.modoAtual = 'locais';
     this.ambienteSelecionado = null;
+    this.chamadosAmbiente = [];
+
+    if (navegar){
+      this.router.navigate(['layout/home']);
+    }
   }
 
 }
