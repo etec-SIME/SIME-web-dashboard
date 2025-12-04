@@ -7,7 +7,7 @@
                 <button class="opcao" type="button" [class.ativa]="opcaoAtual === 'labs'" (click)="setOpcao('labs')">Labs</button>
                 <button class="opcao" type="button" [class.ativa]="opcaoAtual === 'outros'" (click)="setOpcao('outros')">Outros</button>
                 <div class="barra-de-pesquisa">
-                  <input class="input-pesquisa" type="text" [(ngModel)]="localPesquisa" (ngModelChange)="filtrarLocais()" placeholder="Procurar...">
+                  <input class="input-pesquisa" type="text" [(ngModel)]="localPesquisa" (ngModelChange)="pesquisarLocais()" placeholder="Procurar...">
                   <div class="separacao"></div>
                   <img src="/images/lupa.png" class="lupa-img">
                 </div>

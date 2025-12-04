@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CalendarioMensalComponent } from "../../components/calendario-mensal/calendario-mensal.component";
@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit{
 
   opcaoAtual: 'salas' | 'labs' | 'outros' = 'salas';
   modoAtual: 'locais' | 'chamados' = 'locais';
+  private STORAGE_KEY = 'opcaoAtualHome'; // Não atualizar o estado do botão sem o usuário clicar
 
   ambienteSelecionado: string | null = null;
   carregado: boolean = false;
@@ -48,24 +49,22 @@ export class HomeComponent implements OnInit{
   private chamadoService: ChamadoService){}
 
   ngOnInit(): void {
+    const salvo = localStorage.getItem(this.STORAGE_KEY);
+    if (salvo === 'salas' || salvo === 'labs' || salvo === 'outros') {
+      this.opcaoAtual = salvo as any;
+    }
+
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       this.rotaId = id ? Number(id) : null;
-
-      if (this.carregado) { // Se os dados já estiverem carregados
-        if(this.rotaId !== null){
-          this.exibirChamados(this.rotaId);
-        } else {
-          this.modoAtual = 'locais';
-          this.ambienteSelecionado = null;
-          this.chamadosAmbiente = [];
-        }
-      }
     });
+    
     this.carregarDados();
   }
 
   setOpcao(opcao: 'salas' | 'labs' | 'outros') {
+    const exibindoChamadosAmbiente = this.rotaId !== null;
+
     if(this.opcaoAtual !== opcao){
       this.modoAtual = 'locais';
       this.ambienteSelecionado = null;
@@ -73,13 +72,23 @@ export class HomeComponent implements OnInit{
 
     this.opcaoAtual = opcao;
     this.localPesquisa = '';
-    this.carregarDados();
+
+    localStorage.setItem(this.STORAGE_KEY, opcao);
+
+    if (exibindoChamadosAmbiente) {
+      this.retornarLocais();
+      return;
+    }
+
+    if(this.carregado){
+      this.aplicarFiltroPorOpcao();
+    }
   }
 
   carregarDados(): void {
     forkJoin({
       tipos: this.escolaService.getAllTipoAmbiente(),
-      ambientes: this.chamadoService.getAmbienteChamadoSelect(), //Usa AmbienteSelectDTO
+      ambientes: this.chamadoService.getAmbienteChamadoSelect(),
       chamados: this.chamadoService.getChamadosByAmbiente(),
       tipoChamados: this.escolaService.getAllTipoChamado()
     }).subscribe({
@@ -90,47 +99,11 @@ export class HomeComponent implements OnInit{
         this.tiposChamado = res.tipoChamados;
         this.chamadosAmbiente = [...this.chamados]
 
-        // Filtrar ambiente pelos tipos de ambientes
-        let tiposFiltrados: tipoAmbienteRequestDTO[] = [];
+        this.carregado = true;
 
-        if (this.opcaoAtual === 'salas'){
-          tiposFiltrados = this.tipoAmbientes.filter(t =>
-            t.nomeTipoAmbiente.toLowerCase().includes('sala')
-          );
-        } else if (this.opcaoAtual === 'labs'){
-          tiposFiltrados = this.tipoAmbientes.filter(t =>
-            t.nomeTipoAmbiente.toLowerCase().includes('laboratório')
-          );
-        } else {
-          tiposFiltrados = this.tipoAmbientes.filter( t =>
-            !t.nomeTipoAmbiente.toLowerCase().includes('sala') &&
-            !t.nomeTipoAmbiente.toLowerCase().includes('laboratório')
-          );
-        }
+        this.aplicarFiltroPorOpcao();
 
-        // Montar os cards dinâmicos para cada ambiente do tipo filtrado
-        const cardsMontados = this.ambientes
-          .filter(a => tiposFiltrados.some(t => t.idTipoAmbiente === a.idTipoAmbiente))
-          .map(a =>{
-            const tipo = tiposFiltrados.find(t => t.idTipoAmbiente === a.idTipoAmbiente);
-            const qtdChamados = this.chamados.filter(c => c.ambiente?.idAmbiente === a.idAmbiente && c.statusAtualGeralChamado != "Concluído").length;
-
-            // Simplificar o nome se for um laboratório
-            let nomeTipo = tipo?.nomeTipoAmbiente || '';
-            if (nomeTipo.toLowerCase().includes('laboratório')){ nomeTipo = 'Laboratório'; }
-
-            return{
-              idAmbiente: a.idAmbiente,
-              nome: `${nomeTipo} ${a.numAmbiente}`, // Usar crase
-              chamados: qtdChamados.toString().padStart(2, '0')
-            };
-          });
-
-          this.cardsOriginais = cardsMontados; // Guardar todos os cards
-          this.cards = [...cardsMontados] // Exibir todos inicialmente
-          this.carregado = true;
-
-          if (this.rotaId !== null) {
+        if (this.rotaId !== null) {
             this.exibirChamados(this.rotaId);
           }
         },
@@ -140,7 +113,50 @@ export class HomeComponent implements OnInit{
     });
   }
 
-  filtrarLocais(): void { // Busca dinâmica enquanto o usuário digita
+  aplicarFiltroPorOpcao(){
+    // Filtrar ambiente pelos tipos de ambientes
+    let tiposFiltrados: tipoAmbienteRequestDTO[] = [];
+
+    if (this.opcaoAtual === 'salas'){
+      tiposFiltrados = this.tipoAmbientes.filter(t =>
+        t.nomeTipoAmbiente.toLowerCase().includes('sala')
+      );
+    } else if (this.opcaoAtual === 'labs'){
+      tiposFiltrados = this.tipoAmbientes.filter(t =>
+        t.nomeTipoAmbiente.toLowerCase().includes('laboratório')
+      );
+    } else {
+      tiposFiltrados = this.tipoAmbientes.filter( t =>
+        !t.nomeTipoAmbiente.toLowerCase().includes('sala') &&
+        !t.nomeTipoAmbiente.toLowerCase().includes('laboratório')
+      );
+    }
+
+    // Montar os cards dinâmicos para cada ambiente do tipo filtrado
+    const cardsMontados = this.ambientes
+      .filter(a => tiposFiltrados.some(t => t.idTipoAmbiente === a.idTipoAmbiente))
+      .map(a =>{
+        const tipo = tiposFiltrados.find(t => t.idTipoAmbiente === a.idTipoAmbiente);
+        const qtdChamados = this.chamados.filter(c => c.ambiente?.idAmbiente === a.idAmbiente 
+          && c.statusAtualGeralChamado != "Concluído").length;
+
+        // Simplificar o nome se for um laboratório
+        let nomeTipo = tipo?.nomeTipoAmbiente || '';
+        if (nomeTipo.toLowerCase().includes('laboratório')){ nomeTipo = 'Laboratório'; }
+
+        return{
+          idAmbiente: a.idAmbiente,
+          nome: `${nomeTipo} ${a.numAmbiente}`, // Usar crase
+          chamados: qtdChamados.toString().padStart(2, '0')
+        };
+      });
+
+      this.cardsOriginais = cardsMontados; // Guardar todos os cards
+      this.cards = [...cardsMontados] // Exibir todos inicialmente
+
+  }
+
+  pesquisarLocais(): void {
     if(this.opcaoAtual === 'outros')
     {
       this.cards = [...this.cardsOriginais]; // Cards estáticos para Outros
@@ -174,8 +190,6 @@ export class HomeComponent implements OnInit{
       c => c.tipoAmbiente.idTipoAmbiente === ambiente.idTipoAmbiente &&
       c.ambiente.idAmbiente === ambiente.idAmbiente && c.statusAtualGeralChamado != "Concluído"
     )
-
-    this.carregado = true;
   }
 
   retornarLocais(navegar = true){
