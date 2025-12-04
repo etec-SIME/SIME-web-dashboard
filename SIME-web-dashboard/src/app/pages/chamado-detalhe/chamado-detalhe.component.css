@@ -305,6 +305,7 @@
 .details-body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  text-wrap: wrap;
   gap: 50px;
   align-items: center;
   padding: 36px 0;
