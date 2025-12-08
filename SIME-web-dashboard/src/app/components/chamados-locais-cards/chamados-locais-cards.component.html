@@ -3,6 +3,7 @@
     <div *ngIf="chamadosFiltrados.length > 0; else nenhumChamado">
         <div class="chamados-cards">
           <div class="card" *ngFor="let chamado of chamadosFiltrados">
+            
             <div class="card-esquerda">
               <img class="iconeDocumento" src="/images/iconeDocs.png">
               <div class="chamado-info">
@@ -10,7 +11,11 @@
                 <p class="data-tipo-chamado">{{ chamado.dataAberturaFormatada }} - {{ chamado.nomeTipoChamado }}</p>
               </div>
             </div>
-              <img class="iconeSeta" src="/images/iconeSeta.png">
+
+            <div class="seta">
+              <img class="iconeSeta" src="/images/iconeSeta.png" (click)="abrirDetalhamentoChamado(chamado)">
+            </div>
+
           </div>
         </div>
     </div>

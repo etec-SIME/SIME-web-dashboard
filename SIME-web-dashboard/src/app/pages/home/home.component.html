@@ -3,11 +3,11 @@
         <div class="filtrar">
             <p>Filtrar por:</p>
             <div class="filtrar opcoes">
-                <button class="opcao" [class.ativa]="opcaoAtual === 'salas'" (click)="setOpcao('salas')">Salas</button>
-                <button class="opcao" [class.ativa]="opcaoAtual === 'labs'" (click)="setOpcao('labs')">Labs</button>
-                <button class="opcao" [class.ativa]="opcaoAtual === 'outros'" (click)="setOpcao('outros')">Outros</button>
+                <button class="opcao" type="button" [class.ativa]="opcaoAtual === 'salas'" (click)="setOpcao('salas')">Salas</button>
+                <button class="opcao" type="button" [class.ativa]="opcaoAtual === 'labs'" (click)="setOpcao('labs')">Labs</button>
+                <button class="opcao" type="button" [class.ativa]="opcaoAtual === 'outros'" (click)="setOpcao('outros')">Outros</button>
                 <div class="barra-de-pesquisa">
-                  <input class="input-pesquisa" type="text" [(ngModel)]="localPesquisa" (ngModelChange)="filtrarLocais()" placeholder="Procurar...">
+                  <input class="input-pesquisa" type="text" [(ngModel)]="localPesquisa" (ngModelChange)="pesquisarLocais()" placeholder="Procurar...">
                   <div class="separacao"></div>
                   <img src="/images/lupa.png" class="lupa-img">
                 </div>
@@ -35,7 +35,7 @@
             </div>
 
             <div class="locais-cards">
-              <div class="card" *ngFor="let card of cards" (click)="exibirChamados(card.nome)">
+              <div class="card" *ngFor="let card of cards" (click)="abrirAmbiente(card)">
                 <p>{{ card.nome }}</p>
                 <div class="chamados">
                   <p>{{ card.chamados }}</p>
