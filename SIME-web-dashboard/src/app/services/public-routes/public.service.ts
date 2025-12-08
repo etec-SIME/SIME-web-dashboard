@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TipoPerfilResponseDTO } from '../../DTOs/TipoPerfilResponseDTO'
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PublicService {
-  private apiUrl = 'http://localhost:8080/public';
+  private apiUrl = environment.apiUrl + '/public';
 
   constructor( private http: HttpClient ) { }
 

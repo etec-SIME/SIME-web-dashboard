@@ -3,12 +3,11 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PrioridadeChamadoEnum } from '../../models/enums/prioridade-chamado-enum';
 import { chamadoProjection } from '../../DTOs/Projections/chamadoProjection';
-
+import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class GestorGeralService {
-  private apiUrl = 'http://localhost:8080/gestor-geral';
-
+  private apiUrl = environment.apiUrl + '/gestor-geral';
   constructor( private http: HttpClient ) { }
 
   getAllChamados(): Observable<chamadoProjection[]>{

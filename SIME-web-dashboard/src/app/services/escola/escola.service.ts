@@ -24,13 +24,14 @@ import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 import { TipoPerfilPermissoesResponseDTO } from '../../DTOs/TipoPerfilPermissoesResponseDTO';
 import { codEquipamentoResponseDTO } from '../../DTOs/codEquipamentoResponseDTO';
 import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EscolaService {
 
-  private apiUrl = 'http://localhost:8080/escola';
+  private apiUrl = environment.apiUrl + '/escola';
 
   constructor(private http: HttpClient) { }
 

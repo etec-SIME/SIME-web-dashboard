@@ -5,13 +5,14 @@ import { LoginEscolaDTO } from '../../DTOs/loginEscolaDTO';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { UserInfoDTO } from '../../DTOs/UserInfoDTO';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080';
-
+  private apiUrl = environment.apiUrl;
+  
   private userInfoSubject = new BehaviorSubject<UserInfoDTO | null>(null);
   userInfo$ = this.userInfoSubject.asObservable();
 

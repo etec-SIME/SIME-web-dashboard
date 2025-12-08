@@ -8,12 +8,13 @@ import { ChamadoResponseDTO } from '../../DTOs/ChamadoResponseDTO';
 import { ChamadoStatusResponseDTO } from '../../DTOs/ChamadoStatusResponseDTO';
 import { chamadoRequestDTO } from '../../DTOs/chamadoRequestDTO';
 import { chamadosAmbienteDTO } from '../../DTOs/chamadosAmbienteDTO';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChamadoService {
-  private apiUrl = 'http://localhost:8080/chamados';
+  private apiUrl = environment.apiUrl + '/chamados';
 
   constructor( private http: HttpClient ) { }
 
