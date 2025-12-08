@@ -30,5 +30,6 @@ jobs:
         with:
           action: "upload"
           app_location: "SIME-web-dashboard"
-          output_location: "SIME-web-dashboard/dist/sime-web-dashboard"
+          output_location: "SIME-web-dashboard/dist/sime-web-dashboard/browser"
           skip_deploy_on_missing_secrets: true
+
