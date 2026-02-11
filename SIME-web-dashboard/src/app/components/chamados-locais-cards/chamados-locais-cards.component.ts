@@ -5,7 +5,6 @@ import { TipoChamadoSelectDTO } from '../../DTOs/TipoChamadoSelectDTO';
 import { AmbienteSelectDTO } from '../../DTOs/AmbienteSelectDTO';
 import { chamadosAmbienteDTO } from '../../DTOs/chamadosAmbienteDTO';
 
-
 @Component({
   selector: 'app-chamados-locais-cards',
   standalone: true,

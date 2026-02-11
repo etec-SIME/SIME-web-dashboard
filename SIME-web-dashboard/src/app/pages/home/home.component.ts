@@ -140,7 +140,7 @@ export class HomeComponent implements OnInit{
         const qtdChamados = this.chamados.filter(c => c.ambiente?.idAmbiente === a.idAmbiente 
           && c.statusAtualGeralChamado != "Concluído").length;
 
-        // Simplificar o nome se for um laboratório
+        // Simplificar o nome se for um laboratório para caber dentro do card no html
         let nomeTipo = tipo?.nomeTipoAmbiente || '';
         if (nomeTipo.toLowerCase().includes('laboratório')){ nomeTipo = 'Laboratório'; }
 
